@@ -6,13 +6,14 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="App">
+    <div className="app">
       <header>
-        <div className="header" style={{ backgroundColor: "red" }}>
-          <a href="">
-            <img src={Logo} alt="" />
-          </a>
-          heading
+        <div className="header">
+          <div className="logo-container">
+            <a href="">
+              <img src={Logo} alt="" />
+            </a>
+          </div>
         </div>
       </header>
     </div>

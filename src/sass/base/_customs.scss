@@ -2,10 +2,10 @@
 
 $clr-white: hsla(0, 0%, 100%, 1);
 $clr-mid-blue: hsla(252, 94%, 67%, 1);
-$clr-dark-grey: hsla(231, 28%, 7%, 1);
 $clr-light-purple: hsla(231, 20%, 61%, 1);
 $clr-light-blue: hsla(252, 100%, 73%, 1);
 $clr-almost-black: hsla(233, 31%, 17%, 1);
+$clr-header-grey: hsla(231, 20%, 27%, 1);
 $clr-charcoal: hsla(233, 30%, 21%, 1);
 $clr-very-light-blue: hsla(231, 75%, 93%, 1);
 $clr-bluish-grey: hsla(231, 36%, 63%, 1);
@@ -16,16 +16,31 @@ $clr-pastel-white: hsla(240, 27%, 98%, 1);
 $clr-charcoal2: hsla(233, 30%, 11%, 1);
 $clr-almost-black2: hsla(231, 28%, 7%, 1);
 
+$font-family: 'League Spartan',
+sans-serif;
 
+:root {
+    font-family: $font-family;
+    line-height: 1.5;
+    font-weight: 400;
 
+    color-scheme: light dark;
+    color: $clr-almost-black;
+    background-color: $clr-pastel-white;
 
+}
 
+@media (prefers-color-scheme: light) {
+    :root {
+        color: $clr-almost-black;
+        background-color: $clr-pastel-white;
+    }
 
+    a:hover {
+        color: #747bff;
+    }
 
-
-
-
-
-
-
-
+    button {
+        background-color: #f9f9f9;
+    }
+}
