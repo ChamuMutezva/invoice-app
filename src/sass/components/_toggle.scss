@@ -1,0 +1,38 @@
+.btn-theme-control {
+    position: relative;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 1.8rem;
+    border-radius: 10px;
+}
+
+.theme-img {
+    transform: scale(1.5);
+}
+
+.check {
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    left: 15px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #151619;
+    box-shadow: #fff;
+    transition: transform .25s;
+}
+
+.hide-theme-img {
+    display: none;
+}
+
+
+
+.light-mode {
+    .check {
+        transform: translate(10px);
+    }
+}
