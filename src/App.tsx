@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Logo from "./assets/logo.svg";
-import DarkMode from "./assets/icon-moon.svg";
-import LightMode from "./assets/icon-sun.svg";
 import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
+import Toggle from "./components/Toggle";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -22,37 +21,7 @@ function App() {
             </a>
           </div>
 
-          <div className={`${theme ? "light-mode" : ""}`}>
-            <button
-              type="button"
-              role="switch"
-              className="btn btn-theme-control"
-              aria-checked={theme}
-              aria-label="toggle dark mode"
-              onClick={onChange}
-            >
-              <span className="check">
-                <span className="theme-icons">
-                  <img
-                    className={`theme-img light-theme-img ${
-                      theme ? "hide-theme-img" : ""
-                    }`}
-                    src={DarkMode}
-                    aria-hidden
-                    alt=""
-                  />
-                  <img
-                    className={`theme-img dark-theme-img ${
-                      theme ? "" : "hide-theme-img"
-                    }`}
-                    src={LightMode}
-                    aria-hidden
-                    alt=""
-                  />
-                </span>
-              </span>
-            </button>
-          </div>
+          <Toggle theme={theme} onChange={onChange} />
         </div>
         <div className="profile">
           <a href="#" className="btn-profile">
