@@ -6,6 +6,13 @@
     outline: none;
     padding: 1.8rem;
     border-radius: 10px;
+    height: 100%;
+
+    &:hover,
+    &:focus {       
+        outline: dashed currentColor;
+        outline-offset: -0.65em;
+    }
 }
 
 .theme-img {

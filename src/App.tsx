@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Logo from "./assets/logo.svg";
 import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
 import Toggle from "./components/Toggle";
-import QueryData from "./FetchData/QueryData";
+
+import ErrorPage from "./ErrorPage";
+import HomePage from "./pages/HomePage";
+
+const queryClient = new QueryClient();
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomePage />,
+      errorElement: <ErrorPage />,
+    },
+  ]);
+
   const [theme, setTheme] = useState(false);
 
   const onChange = () => {
     setTheme(!theme);
   };
-
-  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -36,7 +47,8 @@ function App() {
             </a>
           </div>
         </header>
-        <QueryData />
+        <RouterProvider router={router} />
+        <HomePage />
       </div>
     </QueryClientProvider>
   );

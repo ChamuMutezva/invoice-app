@@ -5,13 +5,13 @@
     background-color: base.$clr-header-grey;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
 }
 
 .controls {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     flex: 1 1 75%;
 }
 
@@ -38,8 +38,8 @@
 }
 
 .logo-container {
-    width: 4.5rem;
-    height: 4.5rem;
+    min-width: 4.5rem;
+    min-height: 4.5rem;
     position: relative;
     display: flex;
     justify-content: center;
