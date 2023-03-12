@@ -1,0 +1,8 @@
+.btn {
+
+    &:hover,
+    &:focus {       
+        outline: dashed currentColor;
+        outline-offset: .35em;
+    }
+}

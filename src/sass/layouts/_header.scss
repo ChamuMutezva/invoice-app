@@ -18,6 +18,17 @@
 .profile {
     padding: 1rem;
     max-width: 80px;
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: base.$clr-dark-bluish-grey;
+        left: 0;
+        top: 0;
+    }
 }
 
 .btn-profile {
