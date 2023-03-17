@@ -1,5 +1,6 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
 function HomePage() {
@@ -33,13 +34,13 @@ function HomePage() {
           clientName: string;
         }) => {
           return (
-            <div key={invoice.id} className="card">
+            <Link to={"/viewInvoice"} key={invoice.id} className="card">
               <p>{invoice.id}</p>
               <p>{invoice.clientName}</p>
               <p>{invoice.paymentDue}</p>
               <p>R: {invoice.total}</p>
               <p>{invoice.status}</p>
-            </div>
+            </Link>
           );
         }
       )}

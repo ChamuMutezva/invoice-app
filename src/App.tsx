@@ -6,8 +6,12 @@ import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
 import Toggle from "./components/Toggle";
 
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
+import ViewInvoice from "./pages/ViewInvoice";
+import NewInvoice from "./pages/NewInvoice";
+import DeleteInvoice from "./pages/DeleteInvoice";
+import EditInvoice from "./pages/EditInvoice";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +21,22 @@ function App() {
       path: "/",
       element: <HomePage />,
       errorElement: <ErrorPage />,
+    },
+    {
+      path: "/viewInvoice",
+      element: <ViewInvoice />,
+    },
+    {
+      path: "/newInvoice",
+      element: <NewInvoice />,
+    },
+    {
+      path: "deleteInvoice",
+      element: <DeleteInvoice />,
+    },
+    {
+      path: "/editInvoice",
+      element: <EditInvoice />,
     },
   ]);
 
@@ -48,7 +68,6 @@ function App() {
           </div>
         </header>
         <RouterProvider router={router} />
-        <HomePage />
       </div>
     </QueryClientProvider>
   );
