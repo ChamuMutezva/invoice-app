@@ -20,8 +20,8 @@ function HomePage() {
       <h1 className="sr-only">Preprince investments business transactions</h1>
       <div className="summary">
         <div className="summary-headings">
-          <h2>Invoices</h2>
-          <p>{data?.data.length} invoices</p>
+          <h2 className="summary-title">Invoices</h2>
+          <p aria-live="polite">{data?.data.length} invoices</p>
         </div>
         <div className="filter-edit"></div>
       </div>

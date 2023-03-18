@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Logo from "./assets/logo.svg";
 import Profile from "./assets/image-avatar.jpg";
@@ -69,6 +70,7 @@ function App() {
         </header>
         <RouterProvider router={router} />
       </div>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
     </QueryClientProvider>
   );
 }

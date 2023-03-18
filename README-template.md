@@ -60,16 +60,16 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
+- [React Query](https://react-query-v3.tanstack.com/) - Fetching data from the server
+- [React Router](https://reactrouter.com/en/main/start/tutorial) - navigation
 - [Next.js](https://nextjs.org/) - React framework
 - [Styled Components](https://styled-components.com/) - For styles
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
-
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+#### Using React Query
 
-To see how you can add code snippets, see below:
+- installation: install using npm by typing  `npm i react-query` on the terminal or yarn `yarn add react-query`
 
 ```html
 <h1>Some HTML code I'm proud of</h1>
