@@ -19,6 +19,20 @@ $clr-peach: hsla(0, 100%, 80%, 1);
 $font-family: 'League Spartan',
 sans-serif;
 
+$fs-12: utils.calculateRem(12);
+$fs-13: utils.calculateRem(13);
+$fs-14: utils.calculateRem(14);
+$fs-15: utils.calculateRem(15);
+$fs-16: utils.calculateRem(16);
+$fs-18: utils.calculateRem(18);
+$fs-20: utils.calculateRem(20);
+$fs-24: utils.calculateRem(24);
+$fs-28: utils.calculateRem(28);
+$fs-32: utils.calculateRem(32);
+$fs-36: utils.calculateRem(36);
+$fs-40: utils.calculateRem(40);
+$fs-56: utils.calculateRem(56);
+
 $spacer1: 1.5rem;
 
 :root {

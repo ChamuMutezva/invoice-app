@@ -43,7 +43,7 @@ function HomePage() {
             </select>
           </div>
           <Form>
-            <button className="btn btn-new-invoice">
+            <button className="btn flex btn-new-invoice">
               <span className="container-img">
                 <img src={AddInvoiceImg} alt="" />
               </span>
