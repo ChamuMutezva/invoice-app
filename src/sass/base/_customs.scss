@@ -19,6 +19,8 @@ $clr-peach: hsla(0, 100%, 80%, 1);
 $font-family: 'League Spartan',
 sans-serif;
 
+$spacer1: 1.5rem;
+
 :root {
     font-family: $font-family;
     line-height: 1.5;
@@ -57,4 +59,10 @@ sans-serif;
     white-space: nowrap;
     /* added line */
     border: 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

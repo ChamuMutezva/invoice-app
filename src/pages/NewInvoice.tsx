@@ -2,7 +2,7 @@ import React from 'react'
 
 function NewInvoice() {
   return (
-    <div>NewInvoice</div>
+    <div className="main">NewInvoice</div>
   )
 }
 

@@ -8,7 +8,7 @@ import "./sass/main.scss";
 import Toggle from "./components/Toggle";
 
 import ErrorPage from "./pages/ErrorPage";
-import HomePage from "./pages/HomePage";
+import HomePage  from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
 import DeleteInvoice from "./pages/DeleteInvoice";
@@ -21,10 +21,10 @@ function App() {
     {
       path: "/",
       element: <HomePage />,
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage />,         
     },
     {
-      path: "/viewInvoice",
+      path: "/viewInvoice/:id",
       element: <ViewInvoice />,
     },
     {
@@ -50,8 +50,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="app">
-        <header className="header">
-          <div className="controls">
+        <header className="flex header">
+          <div className="flex controls">
             <div className="logo-container">
               <a className="btn btn-logo" href="">
                 <img src={Logo} alt="" aria-hidden={true} />
@@ -70,7 +70,7 @@ function App() {
         </header>
         <RouterProvider router={router} />
       </div>
-      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
 }

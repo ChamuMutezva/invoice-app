@@ -2,15 +2,11 @@
 @use '../utils';
 
 .header {
-    background-color: base.$clr-header-grey;
-    display: flex;
-    justify-content: space-between;
+    background-color: base.$clr-header-grey;  
     align-items: stretch;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
+.controls {    
     align-items: stretch;
     flex: 1 1 75%;
 }
