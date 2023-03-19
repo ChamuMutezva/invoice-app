@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-// import { useQuery } from "react-query";
-// import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, Form } from "react-router-dom";
 import AddInvoiceImg from "../assets/icon-plus.svg";
-import getData from "../hooks/getData";
-
-export async function loader() {
-  const { invoices } =  getData()
-  return invoices
-}
+import getInvoices from "../hooks/getInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("name");
@@ -17,7 +10,8 @@ function HomePage() {
     return axios.get("http://localhost:4000/api/invoices");
   });
 */
-  const { isLoading, invoices, isError, error } = getData();
+
+  const { isLoading, isError, invoices, error } = getInvoices();
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -48,12 +42,14 @@ function HomePage() {
               <option value="draft"> draft</option>
             </select>
           </div>
-          <button className="btn btn-new-invoice">
-            <span className="container-img">
-              <img src={AddInvoiceImg} alt="" />
-            </span>
-            New Invoice
-          </button>
+          <Form>
+            <button className="btn btn-new-invoice">
+              <span className="container-img">
+                <img src={AddInvoiceImg} alt="" />
+              </span>
+              New Invoice
+            </button>
+          </Form>
         </div>
       </div>
       <div className="cards">

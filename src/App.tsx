@@ -9,7 +9,7 @@ import Toggle from "./components/Toggle";
 
 import ErrorPage from "./pages/ErrorPage";
 import HomePage  from "./pages/HomePage";
-import ViewInvoice from "./pages/ViewInvoice";
+import ViewInvoice  from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
 import DeleteInvoice from "./pages/DeleteInvoice";
 import EditInvoice from "./pages/EditInvoice";
@@ -20,8 +20,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomePage />,
-      errorElement: <ErrorPage />,         
+      element: <HomePage />,    
+      errorElement: <ErrorPage />,            
     },
     {
       path: "/viewInvoice/:id",
