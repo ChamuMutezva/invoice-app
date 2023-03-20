@@ -1,0 +1,24 @@
+@use '../base';
+@use '../utils';
+
+.summary-title {
+    font-size: base.$fs-24;
+    font-weight: 700;
+    color: base.$clr-almost-black;
+}
+
+.invoice-total-num {
+    font-size: base.$fs-13;
+    color: base.$clr-dark-bluish-grey;
+    font-weight: 500;
+}
+
+.filter-label {
+    font-size: base.$fs-15;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.filter-new {
+    gap: 1rem;
+}
