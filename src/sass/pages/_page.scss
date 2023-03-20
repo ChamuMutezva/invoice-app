@@ -7,5 +7,10 @@
 
 .main {
     margin: base.$spacer1;
-}
+    max-width: 45.6rem;
 
+    @include utils.mQ(40rem) {
+        //margin-inline: base.$spacer1 * 2;
+        margin-inline: auto;
+    }
+}

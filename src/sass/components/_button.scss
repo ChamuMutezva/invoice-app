@@ -38,8 +38,12 @@
         content: "";
         width: 8px;
         height: 8px;
-        z-index: 100;       
+        z-index: 100;
         border-radius: 50%;
+    }
+
+    @include utils.mQ(40rem) {
+        grid-area: 1/5/1/6;
     }
 
 }
@@ -48,7 +52,7 @@
     color: base.$clr-green;
     background-color: lighten(base.$clr-green, 45%);
 
-    &::after {      
+    &::after {
         background-color: base.$clr-green;
         left: -50px;
     }
@@ -58,7 +62,7 @@
     color: base.$clr-orange;
     background-color: lighten(base.$clr-orange, 45%);
 
-    &::after {      
+    &::after {
         background-color: base.$clr-orange;
         left: -70px;
     }
@@ -68,7 +72,7 @@
     color: base.$clr-header-grey;
     background-color: lighten(base.$clr-header-grey, 45%);
 
-    &::after {      
+    &::after {
         background-color: base.$clr-header-grey;
         left: -50px;
     }

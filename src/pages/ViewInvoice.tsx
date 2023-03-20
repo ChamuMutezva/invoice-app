@@ -21,74 +21,82 @@ function ViewInvoice() {
 
   return (
     <div className="main" aria-live="polite">
-      <button onClick={() => navigate(-1)}>
-        <img src={BackImg} alt="" />
-        Go back
-      </button>
+      <h1 className="sr-only">
+        Complete invoice details of {invoice.clientName}
+      </h1>
+      <header>
+        <button onClick={() => navigate(-1)}>
+          <img src={BackImg} alt="" aria-hidden={true} />
+          Go back
+        </button>
+      </header>
+      <main>
+        <section className="status">
+          <h2 className="sr-only">Invoice status</h2>
+          <span className="status-label">Status </span>
+          <span className="status-type">{invoice.status}</span>
+        </section>
 
-      <div className="status">
-        <span className="status-label">Status </span>
-        <span className="status-type">{invoice.status}</span>
-      </div>
-
-      <div className="invoice-details">
-        <div className="intro">
-          <p className="invoice-num">
-            <span className="sr-only">Invoice number</span> #{invoice.id}
-          </p>
-          <p className="invoice-descr">
-            <span className="sr-only">item</span>
-            {invoice.description}
-          </p>
-        </div>
-        <div className="address-sender">
-          <p className="street">{invoice.senderAddress.street}</p>
-          <p className="city">{invoice.senderAddress.city}</p>
-          <p className="postCode">{invoice.senderAddress.postCode}</p>
-          <p className="country">{invoice.senderAddress.country}</p>
-        </div>
-        <div className="invoice-dates">
-          <div className="dated">
-            <p className="invoice-dated-label">Invoice date</p>
-            <p className="invoice-date">{invoice.createdAt}</p>
+        <section className="invoice-details">
+          <h2 className="sr-only">Invoice client details</h2>
+          <div className="intro">
+            <p className="invoice-num">
+              <span className="sr-only">Invoice number</span> #{invoice.id}
+            </p>
+            <p className="invoice-descr">
+              <span className="sr-only">item</span>
+              {invoice.description}
+            </p>
           </div>
-          <div className="due-date">
-            <p className="due-date-label">Payment due</p>
-            <p className="due-date">{invoice.paymentDue}</p>
+          <div className="address-sender">
+            <p className="street">{invoice.senderAddress.street}</p>
+            <p className="city">{invoice.senderAddress.city}</p>
+            <p className="postCode">{invoice.senderAddress.postCode}</p>
+            <p className="country">{invoice.senderAddress.country}</p>
           </div>
-        </div>
-        <div className="bill-to">
-          <h3>Bill to</h3>
-          <p>{invoice.clientName}</p>
-          <div className="address-reciever">
-            <p className="street">{invoice.clientAddress.street}</p>
-            <p className="city">{invoice.clientAddress.city}</p>
-            <p className="postCode">{invoice.clientAddress.postCode}</p>
-            <p className="country">{invoice.clientAddress.country}</p>
+          <div className="invoice-dates">
+            <div className="dated">
+              <p className="invoice-dated-label">Invoice date</p>
+              <p className="invoice-date">{invoice.createdAt}</p>
+            </div>
+            <div className="due-date">
+              <p className="due-date-label">Payment due</p>
+              <p className="due-date">{invoice.paymentDue}</p>
+            </div>
           </div>
-        </div>
-        <div className="email-address">
-          <h3 className="email-title">Sent to</h3>
-          <p>{invoice.clientEmail}</p>
-        </div>
-        <div className="items">
-          {invoice.items.map(
-            (item: {
-              name: string;
-              quantity: number;
-              price: number;
-              total: number;
-            }) => (
-              <div key={item.name}>
-                <p>{item.name}</p>
-                <p>{item.quantity}</p>
-                <p>{item.price}</p>
-                <p>{item.total}</p>
-              </div>
-            )
-          )}
-        </div>
-      </div>
+          <div className="bill-to">
+            <h3>Bill to</h3>
+            <p>{invoice.clientName}</p>
+            <div className="address-reciever">
+              <p className="street">{invoice.clientAddress.street}</p>
+              <p className="city">{invoice.clientAddress.city}</p>
+              <p className="postCode">{invoice.clientAddress.postCode}</p>
+              <p className="country">{invoice.clientAddress.country}</p>
+            </div>
+          </div>
+          <div className="email-address">
+            <h3 className="email-title">Sent to</h3>
+            <p>{invoice.clientEmail}</p>
+          </div>
+          <div className="items">
+            {invoice.items.map(
+              (item: {
+                name: string;
+                quantity: number;
+                price: number;
+                total: number;
+              }) => (
+                <div key={item.name}>
+                  <p>{item.name}</p>
+                  <p>{item.quantity}</p>
+                  <p>{item.price}</p>
+                  <p>{item.total}</p>
+                </div>
+              )
+            )}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

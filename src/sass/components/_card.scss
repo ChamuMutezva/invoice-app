@@ -16,6 +16,10 @@
     padding: 1rem;
     border-radius: 8px;
     gap: 1rem;
+
+    @include utils.mQ(40rem) {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
 }
 
 .invoice-num {
