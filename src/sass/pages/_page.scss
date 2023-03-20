@@ -9,18 +9,3 @@
     margin: base.$spacer1;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-block: 1rem;
-    row-gap: 1rem;
-}
-
-.card {
-    position: relative;
-    background: base.$clr-white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 1rem;
-    border-radius: 8px;
-}

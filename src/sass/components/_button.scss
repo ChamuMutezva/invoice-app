@@ -11,7 +11,18 @@
 }
 
 .btn-link {
-    display: block;
+    position: relative;
+    display: flex;
+    grid-area: 2/2/4/3;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    text-transform: capitalize;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 0;
+    font-weight: 700;
+    font-size: base.$fs-15;
 
     &::before {
         position: absolute;
@@ -20,8 +31,34 @@
         height: 100%;
         top: 0;
         left: 0;
+        z-index: -1;
+        opacity: 0.1;
     }
 
+}
+
+.paid-status {
+    color: base.$clr-green;
+
+    &::before {
+        background-color: base.$clr-green;
+    }
+}
+
+.pending-status {
+    color: base.$clr-orange;
+
+    &::before {
+        background-color: base.$clr-orange;
+    }
+}
+
+.draft-status {
+    color: base.$clr-header-grey;
+
+    &::before {
+        background-color: base.$clr-header-grey;
+    }
 }
 
 .btn-new-invoice {

@@ -1,0 +1,37 @@
+@use '../base';
+@use '../utils';
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-block: 1rem;
+    row-gap: 1rem;
+}
+
+.card {
+    position: relative;
+    background: base.$clr-white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.invoice-num {
+    font-size: base.$fs-15;
+    font-weight: 700;
+    color: base.$clr-almost-black2;
+    text-transform: uppercase;
+}
+
+.clientname {
+    font-size: base.$fs-13;
+    font-weight: 500;
+    color: base.$clr-dark-bluish-grey;
+}
+
+.payment-date {
+    font-size: base.$fs-13;
+    font-weight: 500;
+    color: base.$clr-dark-bluish-grey;
+}

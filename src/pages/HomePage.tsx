@@ -6,11 +6,6 @@ import getInvoices from "../hooks/getInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("name");
-  /*  const { isLoading, data, isError, error } = useQuery("invoices", () => {
-    return axios.get("http://localhost:4000/api/invoices");
-  });
-*/
-
   const { isLoading, isError, invoices, error } = getInvoices();
 
   if (isLoading) {
@@ -42,7 +37,7 @@ function HomePage() {
           </p>
         </div>
         <div className="flex filter-new">
-          <div className="select-options">
+          <Form className="select-options">
             <label className="filter-label" htmlFor="filter-options">
               Filter
             </label>
@@ -56,7 +51,7 @@ function HomePage() {
               <option value="pending"> pending </option>
               <option value="draft"> draft</option>
             </select>
-          </div>
+          </Form>
           <Form>
             <button className="btn flex btn-new-invoice">
               <span className="container-img">
@@ -81,11 +76,22 @@ function HomePage() {
           }) => {
             return (
               <div key={invoice.id} className="card">
-                <p>{invoice.id}</p>
-                <p>{invoice.clientName}</p>
-                <p>Due {invoice.paymentDue}</p>
-                <p>{formatter.format(invoice.total)}</p>
-                <Link className="btn-link" to={`/viewInvoice/${invoice._id}`}>
+                <p className="invoice-num">{invoice.id}</p>
+                <p className="clientname">{invoice.clientName}</p>
+                <p className="payment-date">Due {invoice.paymentDue}</p>
+                <p className="amount-total">
+                  {formatter.format(invoice.total)}
+                </p>
+                <Link
+                  className={`btn-link ${
+                    invoice.status === "paid"
+                      ? "paid-status"
+                      : invoice.status === "draft"
+                      ? "draft-status"
+                      : "pending-status"
+                  } `}
+                  to={`/viewInvoice/${invoice._id}`}
+                >
                   {invoice.status}
                 </Link>
               </div>
