@@ -2,13 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import getInvoices from "../hooks/getInvoices";
 import getInvoice from "../hooks/getInvoice";
 import BackImg from "../assets/icon-arrow-left.svg";
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactFragment,
-  ReactPortal,
-} from "react";
 
 export async function loader() {
   const invoices = getInvoices();
@@ -27,15 +20,17 @@ function ViewInvoice() {
   }
 
   return (
-    <div className="main">
+    <div className="main" aria-live="polite">
       <button onClick={() => navigate(-1)}>
         <img src={BackImg} alt="" />
         Go back
       </button>
+
       <div className="status">
         <span className="status-label">Status </span>
         <span className="status-type">{invoice.status}</span>
       </div>
+
       <div className="invoice-details">
         <div className="intro">
           <p className="invoice-num">
