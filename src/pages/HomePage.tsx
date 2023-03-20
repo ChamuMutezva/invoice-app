@@ -10,11 +10,11 @@ function HomePage() {
   const { isLoading, isError, invoices, error } = getInvoices();
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <h2 className="pre-loading">Loading...</h2>;
   }
 
   if (isError) {
-    return <h2>Error detected</h2>;
+    return <h2 className="pre-loading">Error detected</h2>;
   }
 
   // Create our number formatter.

@@ -10,7 +10,11 @@
     max-width: 45.6rem;
 
     @include utils.mQ(40rem) {
-        //margin-inline: base.$spacer1 * 2;
         margin-inline: auto;
     }
+}
+
+.pre-loading {
+    position: relative;
+    z-index: 1;
 }
