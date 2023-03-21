@@ -104,3 +104,12 @@ span.container-img {
     font-weight: 700;
     font-size: base.$fs-15;
 }
+
+.btn-return {
+    gap: 1rem;
+    padding-block: .5rem;
+    padding-inline-end: .5rem;
+    font-weight: 700;
+    font-size: base.$fs-15;
+    border: none;
+}

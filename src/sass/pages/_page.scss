@@ -18,3 +18,12 @@
     position: relative;
     z-index: 1;
 }
+
+.address-sender-details, .address-reciever-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.38;
+    color: base.$clr-bluish-grey;
+    font-weight: 500;
+    font-size: base.$fs-13;
+}

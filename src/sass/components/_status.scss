@@ -1,0 +1,27 @@
+@use 'sass:color';
+@use '../base';
+@use '../utils';
+
+.status-label {
+    font-size: base.$fs-13;
+    font-weight: 500;
+    color: base.$clr-dark-bluish-grey;
+}
+
+.status-type {
+    font-size: base.$fs-15;
+    font-weight: 700;
+    color: base.$clr-orange;
+    text-transform: capitalize;
+    display: block;
+    background-color: lighten(base.$clr-pink, 35%);
+    // background-color: lighten(base.$clr-green, 45%);
+    padding: 0.5rem 2rem;
+}
+
+.status {
+    background: base.$clr-white;
+    padding-block: 2rem;
+    padding-inline: .5rem;
+    border-radius: 8px;
+}

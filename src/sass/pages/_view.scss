@@ -1,0 +1,43 @@
+@use '../base';
+@use '../utils';
+
+.invoice-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.5rem;
+    margin-block: 2rem;
+    background-color: base.$clr-white;
+}
+
+.address-sender {
+    grid-area: 2/1/3/2;
+}
+
+.invoice-dates {
+    grid-area: 3/1/4/2;
+}
+
+.bill-to {
+    grid-area: 3/2/3/3;
+}
+
+.email-address {
+    grid-area: 4/1;
+}
+
+.invoice-descr,
+.invoice-date-title,
+.bill-to-title {
+    color: base.$clr-bluish-grey;
+    font-weight: 500;
+    font-size: base.$fs-13;
+    line-height: 1.15;
+}
+
+.invoice-date,
+.due-date,
+.billed-name {
+    font-size: base.$fs-15;
+    font-weight: 700;
+    color: base.$clr-almost-black2;    
+}
