@@ -1,4 +1,5 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useReducer } from "react";
 import format from "date-fns/format";
 import getInvoices from "../hooks/getInvoices";
 import getInvoice from "../hooks/getInvoice";
@@ -8,6 +9,11 @@ export async function loader() {
   const invoices = getInvoices();
   return { invoices };
 }
+
+const intialState = 0;
+const reducer = (accumulator: number, currentValue: number) => {
+  return accumulator + currentValue;
+};
 
 function ViewInvoice() {
   let params = useParams();
@@ -19,6 +25,9 @@ function ViewInvoice() {
     return <h2>Loading...</h2>;
   }
 
+  const totalArray = invoice.items.map((item: { total: any }) => item.total);
+  const grandTotal = totalArray.reduce(reducer);
+  console.log(grandTotal);
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -38,11 +47,18 @@ function ViewInvoice() {
       </header>
 
       <main>
-        <section className="flex status">
-          <h2 className="sr-only">Invoice status</h2>
-          <span className="status-label">Status </span>
-          <span className="status-type">{invoice.status}</span>
-        </section>
+        <nav className="flex nav-view">
+          <div className="flex status">
+            <h2 className="sr-only">Invoice status</h2>
+            <span className="status-label">Status </span>
+            <span className="status-type">{invoice.status}</span>
+          </div>
+          <div className="mobile-hidden nav-view-btns ">
+            <Link to={`/editInvoice/:id`}>Edit</Link>
+            <Link to={`/deleteInvoice/:id`}>Delete</Link>
+            <button>Mark as paid</button>
+          </div>
+        </nav>
         <section className="container container-invoice">
           <section className="invoice-details">
             <h2 className="sr-only">Invoice client details</h2>
@@ -105,7 +121,7 @@ function ViewInvoice() {
             {/* Email */}
             <div className="email-address">
               <h3 className="email-title">Sent to</h3>
-              <p>{invoice.clientEmail}</p>
+              <p className="email-to">{invoice.clientEmail}</p>
             </div>
           </section>
 
@@ -127,24 +143,41 @@ function ViewInvoice() {
                       <h3 className="mobile-hidden quantity-title">Qty.</h3>
                       <p className="item-sold">
                         {item.quantity}{" "}
-                        <span className="tablet-hidden">x {formatter.format(item.price)} </span>
+                        <span className="tablet-hidden">
+                          x {formatter.format(item.price)}{" "}
+                        </span>
                       </p>
                     </div>
                     <div className="mobile-hidden item-price">
                       <h3 className="price-heading">Price</h3>
-                      <p className="unit-price">{formatter.format(item.price)}</p>
+                      <p className="unit-price">
+                        {formatter.format(item.price)}
+                      </p>
                     </div>
                     <div className="total">
                       <h3 className="mobile-hidden total-heading">Total</h3>
-                      <p className="gross-total">{formatter.format(item.total)}</p>
+                      <p className="gross-total">
+                        {formatter.format(item.total)}
+                      </p>
                     </div>
                   </div>
                 )
               )}
             </div>
           </section>
+          <div className="grand-total-container">
+            <h3 className="grand-total-title">Grand Total</h3>
+            <p className="grand-total">{formatter.format(grandTotal)}</p>
+          </div>
         </section>
       </main>
+      <footer className="tablet-hidden">
+        <div className="nav-view-btns ">
+          <Link to={`/editInvoice/:id`}>Edit</Link>
+          <Link to={`/deleteInvoice/:id`}>Delete</Link>
+          <button>Mark as paid</button>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -32,11 +32,11 @@ function App() {
       element: <NewInvoice />,
     },
     {
-      path: "deleteInvoice",
+      path: "/deleteInvoice/:id",
       element: <DeleteInvoice />,
     },
     {
-      path: "/editInvoice",
+      path: "/editInvoice/:id",
       element: <EditInvoice />,
     },
   ]);
