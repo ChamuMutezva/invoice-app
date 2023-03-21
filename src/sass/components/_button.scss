@@ -97,6 +97,13 @@ span.container-img {
     visibility: hidden;
     width: 0;
     height: 0;
+
+    @include utils.mQ(40rem) {
+        visibility: visible;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 0.5rem;
+    }
 }
 
 .btn-label {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useLoaderData, Form } from "react-router-dom";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
@@ -25,7 +24,7 @@ function HomePage() {
     // These options are needed to round to whole numbers if that's what you want.
     //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  });
+  }); 
 
   return (
     <div className="main">
