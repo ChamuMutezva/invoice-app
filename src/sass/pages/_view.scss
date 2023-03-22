@@ -2,7 +2,7 @@
 @use '../utils';
 
 .nav-view {
-    background: base.$clr-white;
+    background: base.$clr-white-100;
     padding-block: 2rem;
     padding-inline: .5rem;
     border-radius: 8px;
@@ -10,7 +10,7 @@
 
 
 .container-invoice {
-    background-color: base.$clr-white;
+    background-color: base.$clr-white-100;
     position: relative;
 }
 
@@ -58,7 +58,7 @@
 .invoice-date-title,
 .bill-to-title,
 .email-title {
-    color: base.$clr-bluish-grey;
+    color: base.$clr-blue-100;
     font-weight: 500;
     font-size: base.$fs-13;
     line-height: 1.15;
@@ -72,7 +72,7 @@
 .gross-total {
     font-size: base.$fs-15;
     font-weight: 700;
-    color: base.$clr-almost-black2;
+    color: base.$clr-black-100;
 }
 
 .tablet-hidden {
@@ -125,7 +125,7 @@
 .item-sold {
     font-size: base.$fs-15;
     font-weight: 700;
-    color: base.$clr-bluish-grey;
+    color: base.$clr-blue-100;
 }
 
 .item-summary {
@@ -140,8 +140,8 @@
 }
 
 .grand-total-container {
-    background-color: base.$clr-header-grey;
-    color: base.$clr-white;
+    background-color: base.$clr-black-500;
+    color: base.$clr-white-100;
     display: flex;
     justify-content: space-between;
     align-items: center;

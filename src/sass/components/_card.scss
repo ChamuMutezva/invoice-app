@@ -10,7 +10,7 @@
 
 .card {
     position: relative;
-    background: base.$clr-white;
+    background: base.$clr-white-100;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 1rem;
@@ -25,18 +25,18 @@
 .invoice-num {
     font-size: base.$fs-15;
     font-weight: 700;
-    color: base.$clr-almost-black2;
+    color: base.$clr-black-100;
     text-transform: uppercase;
 }
 
 .clientname {
     font-size: base.$fs-13;
     font-weight: 500;
-    color: base.$clr-dark-bluish-grey;
+    color: base.$clr-blue-200;
 }
 
 .payment-date {
     font-size: base.$fs-13;
     font-weight: 500;
-    color: base.$clr-dark-bluish-grey;
+    color: base.$clr-blue-200;
 }

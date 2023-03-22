@@ -49,38 +49,38 @@
 }
 
 .paid-status {
-    color: base.$clr-green;
-    background-color: lighten(base.$clr-green, 45%);
+    color: base.$clr-green-400;
+    background-color: lighten(base.$clr-green-400, 45%);
 
     &::after {
-        background-color: base.$clr-green;
+        background-color: base.$clr-green-400;
         left: -50px;
     }
 }
 
 .pending-status {
-    color: base.$clr-orange;
-    background-color: lighten(base.$clr-orange, 45%);
+    color: base.$clr-orange-100;
+    background-color: lighten(base.$clr-orange-100, 45%);
 
     &::after {
-        background-color: base.$clr-orange;
+        background-color: base.$clr-orange-100;
         left: -70px;
     }
 }
 
 .draft-status {
-    color: base.$clr-header-grey;
-    background-color: lighten(base.$clr-header-grey, 45%);
+    color: base.$clr-black-500;
+    background-color: lighten(base.$clr-black-500, 45%);
 
     &::after {
-        background-color: base.$clr-header-grey;
+        background-color: base.$clr-black-500;
         left: -50px;
     }
 }
 
 .btn-new-invoice {
     border: none;
-    background-color: base.$clr-mid-blue;
+    background-color: base.$clr-blue-400;
     border-radius: 24px;
     padding-block: 0.5rem;
     gap: 0.5rem;
@@ -89,7 +89,7 @@
 
 span.container-img {
     padding: .5rem;
-    background: base.$clr-white;
+    background: base.$clr-white-100;
     border-radius: 50%;
 }
 
@@ -107,7 +107,7 @@ span.container-img {
 }
 
 .btn-label {
-    color: base.$clr-white;
+    color: base.$clr-white-100;
     font-weight: 700;
     font-size: base.$fs-15;
 }

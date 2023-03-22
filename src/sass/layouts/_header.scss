@@ -2,7 +2,7 @@
 @use '../utils';
 
 .header {
-    background-color: base.$clr-header-grey;  
+    background-color: base.$clr-black-500;  
     align-items: stretch;
 
     @include utils.mQ(64rem) {
@@ -33,7 +33,7 @@
         content: "";
         width: 1px;
         height: 100%;
-        background-color: base.$clr-dark-bluish-grey;
+        background-color: base.$clr-blue-200;
         left: 0;
         top: 0;
     }
@@ -53,15 +53,15 @@
     justify-content: center;
     align-items: center;
     border-radius: 0 20px 20px 0;
-    // background-image: linear-gradient(to bottom, base.$clr-mid-blue 0 50%, base.$clr-light-blue 50% 100%);
-    background-color: base.$clr-mid-blue;
+    // background-image: linear-gradient(to bottom, base.$clr-blue-400 0 50%, base.$clr-blue-300 50% 100%);
+    background-color: base.$clr-blue-400;
 
     &::before {
         position: absolute;
         left: 0;
         top: 50%;
         content: "";
-        background-color: base.$clr-light-blue;
+        background-color: base.$clr-blue-300;
         width: 100%;
         height: 50%;
         border-radius: 20px 0px 20px 0px;

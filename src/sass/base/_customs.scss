@@ -1,21 +1,21 @@
 @use '../utils';
 
-$clr-white: hsla(0, 0%, 100%, 1);
-$clr-pastel-white: hsla(240, 27%, 98%, 1);
-$clr-very-light-blue: hsla(231, 75%, 93%, 1);
-$clr-bluish-grey: hsla(231, 36%, 63%, 1);
-$clr-dark-bluish-grey: hsla(231, 20%, 61%, 1);
-$clr-light-blue: hsla(252, 100%, 73%, 1);
-$clr-mid-blue: hsla(252, 94%, 67%, 1);
-$clr-header-grey: hsla(231, 20%, 27%, 1);
-$clr-charcoal: hsla(233, 30%, 21%, 1);
-$clr-charcoal2: hsla(233, 30%, 11%, 1);
-$clr-almost-black: hsla(233, 31%, 17%, 1);
-$clr-almost-black2: hsla(231, 28%, 7%, 1);
-$clr-pink: hsla(0, 80%, 63%, 1);
-$clr-peach: hsla(0, 100%, 80%, 1);
-$clr-green: hsla(160, 67%, 52%, 1);
-$clr-orange: hsla(34, 100%, 50%, 1);
+$clr-white-100: hsla(0, 0%, 100%, 1);
+$clr-white-200: hsla(240, 27%, 98%, 1);
+$clr-white-300: hsla(231, 75%, 93%, 1);
+$clr-blue-100: hsla(231, 36%, 63%, 1);
+$clr-blue-200: hsla(231, 20%, 61%, 1);
+$clr-blue-300: hsla(252, 100%, 73%, 1);
+$clr-blue-400: hsla(252, 94%, 67%, 1);
+$clr-black-500: hsla(231, 20%, 27%, 1);
+$clr-black-400: hsla(233, 30%, 21%, 1);
+$clr-black-300: hsla(233, 30%, 11%, 1);
+$clr-black-200: hsla(233, 31%, 17%, 1);
+$clr-black-100: hsla(231, 28%, 7%, 1);
+$clr-pink-200: hsla(0, 80%, 63%, 1);
+$clr-pink-300: hsla(0, 100%, 80%, 1);
+$clr-green-400: hsla(160, 67%, 52%, 1);
+$clr-orange-100: hsla(34, 100%, 50%, 1);
 
 
 $font-family: 'League Spartan',
@@ -43,15 +43,15 @@ $spacer1: 1.5rem;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: $clr-almost-black;
-    background-color: $clr-pastel-white;
+    color: $clr-black-200;
+    background-color: $clr-white-200;
 
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        color: $clr-almost-black;
-        background-color: $clr-pastel-white;
+        color: $clr-black-200;
+        background-color: $clr-white-200;
     }
 
     a:hover {
