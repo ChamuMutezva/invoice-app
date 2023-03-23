@@ -23,9 +23,7 @@
 }
 
 .invoice-num {
-    font-size: base.$fs-15;
-    font-weight: 700;
-    color: base.$clr-black-100;
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
     text-transform: uppercase;
     display: block;
     position: relative;
@@ -39,14 +37,10 @@
     }
 }
 
-.clientname {
-    font-size: base.$fs-13;
-    font-weight: 500;
-    color: base.$clr-blue-200;
+.clientname {    
+    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }
 
 .payment-date {
-    font-size: base.$fs-13;
-    font-weight: 500;
-    color: base.$clr-blue-200;
+    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }

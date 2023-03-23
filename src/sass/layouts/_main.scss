@@ -2,20 +2,15 @@
 @use '../utils';
 
 .summary-title {
-    font-size: base.$fs-24;
-    font-weight: 700;
-    color: base.$clr-black-200;
+    @include utils.fonts(base.$clr-black-200, base.$fs-24, 700);   
 }
 
 .invoice-total-num {
-    font-size: base.$fs-13;
-    color: base.$clr-blue-200;
-    font-weight: 500;
+    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);   
 }
 
-.filter-label {
-    font-size: base.$fs-15;
-    font-weight: 700;
+.filter-label {    
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700); 
     line-height: 1;
 }
 

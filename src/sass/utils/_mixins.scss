@@ -4,3 +4,9 @@
         @content;
     }
 }
+
+@mixin fonts($color, $fontsize, $fontweight) {
+    color: $color;
+    font-weight: $fontweight;
+    font-size: $fontsize;
+}

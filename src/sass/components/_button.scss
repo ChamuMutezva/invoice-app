@@ -21,8 +21,7 @@
     text-decoration: none;
     overflow: hidden;
     z-index: 0;
-    font-weight: 700;
-    font-size: base.$fs-15;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);   
 
     &::before {
         position: absolute;
@@ -107,17 +106,13 @@ span.container-img {
 }
 
 .btn-label {
-    color: base.$clr-white-100;
-    font-weight: 700;
-    font-size: base.$fs-15;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 }
 
 .btn-return {
-    gap: 1rem;
+    gap: base.$spacer1;
     padding-block: .5rem;
     padding-inline-end: .5rem;
-    font-weight: 700;
-    font-size: base.$fs-15;
-    color: base.$clr-black-100;
     border: none;
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }

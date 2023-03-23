@@ -3,19 +3,14 @@
 @use '../utils';
 
 .status-label {
-    font-size: base.$fs-13;
-    font-weight: 500;
-    color: base.$clr-black-600;
+    @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
 }
 
 .status-type {
-    font-size: base.$fs-15;
-    font-weight: 700;
-    color: base.$clr-orange-100;
+    @include utils.fonts(base.$clr-orange-100, base.$fs-15, 700);
     text-transform: capitalize;
     display: block;
     background-color: lighten(base.$clr-pink-200, 35%);
-    // background-color: lighten(base.$clr-green-400, 45%);
     padding: 0.5rem 2rem;
 }
 

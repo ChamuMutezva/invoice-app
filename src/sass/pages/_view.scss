@@ -58,9 +58,7 @@
 .invoice-date-title,
 .bill-to-title,
 .email-title {
-    color: base.$clr-blue-100;
-    font-weight: 500;
-    font-size: base.$fs-13;
+    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
     line-height: 1.15;
 }
 
@@ -70,9 +68,7 @@
 .item-descr,
 .email-to,
 .gross-total {
-    font-size: base.$fs-15;
-    font-weight: 700;
-    color: base.$clr-black-100;
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }
 
 .tablet-hidden {
@@ -126,6 +122,7 @@
     font-size: base.$fs-15;
     font-weight: 700;
     color: base.$clr-blue-100;
+    @include utils.fonts( base.$clr-blue-100, base.$fs-15, 700);
 }
 
 .item-summary {
@@ -140,22 +137,19 @@
 }
 
 .grand-total-container {
-    background-color: base.$clr-black-500;
-    color: base.$clr-white-100;
+    background-color: base.$clr-black-500;   
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
 }
 
-.grand-total {
-    font-size: base.$fs-24;
-    font-weight: 700;
+.grand-total {   
+    @include utils.fonts(  base.$clr-white-100, base.$fs-24, 700);
 }
 
 .grand-total-title {
-    font-size: base.$fs-13;
-    font-weight: 500;
+    @include utils.fonts(  base.$clr-white-100, base.$fs-13, 500);    
 }
 
 .footer-view {
@@ -173,29 +167,23 @@
 .btn-edit {
     background-color: base.$clr-white-400;
     padding: 1rem;
-    border-radius: 50%;
-    color: base.$clr-blue-100;
-    font-weight: 700;
-    font-size: base.$fs-15;
+    border-radius: 50%;   
     text-decoration: none;
+    @include utils.fonts(  base.$clr-blue-100, base.$fs-15, 700);
 }
 
 .btn-delete-view {
-    background-color: base.$clr-pink-200;
-    color: base.$clr-white-100;
+    background-color: base.$clr-pink-200;  
     padding: 1rem 2rem;
     text-decoration: none;
-    border-radius: 24px;
-    font-size: base.$fs-15;
-    font-weight: 700;
+    border-radius: 24px;    
+    @include utils.fonts(  base.$clr-white-100, base.$fs-15, 700);
 }
 
 .btn-mark {
-    background-color: base.$clr-blue-400;
-    font-size: base.$fs-15;
-    font-weight: 700;
-    color: base.$clr-white-100;
+    background-color: base.$clr-blue-400;   
     padding: 1rem 2rem;
     border-radius: 24px;
     border: none;
+    @include utils.fonts(  base.$clr-white-100, base.$fs-15, 700);
 }

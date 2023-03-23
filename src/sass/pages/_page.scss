@@ -23,7 +23,5 @@
     display: flex;
     flex-direction: column;
     line-height: 1.38;
-    color: base.$clr-blue-100;
-    font-weight: 500;
-    font-size: base.$fs-13;
+    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);     
 }
