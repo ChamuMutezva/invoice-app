@@ -67,7 +67,7 @@ function ViewInvoice() {
             <div className="intro">
               <p className="invoice-num">
                 <span className="sr-only">Invoice number</span>{" "}
-                <span className="invoice-num-num">#{invoice.id}</span>
+                <span className="invoice-num">{invoice.id}</span>
               </p>
               <p className="invoice-descr">
                 <span className="sr-only">item</span>

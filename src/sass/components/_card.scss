@@ -27,12 +27,33 @@
     font-weight: 700;
     color: base.$clr-black-100;
     text-transform: uppercase;
+    display: block;
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: "#";
+        top: 0;
+        left: -0.75rem;
+        color: base.$clr-blue-100;
+    }
 }
 
-.invoice-num-num::first-letter {
-    color: base.$clr-blue-100;
+/*
+.invoice-num-num {
     display: block;
+    position: relative;
+
+    &::before {
+        position: absolute;
+        content: "#";
+        top: 0;
+        left: -0.75rem;
+        color: base.$clr-blue-100;
+    }
 }
+*/
+
 
 .clientname {
     font-size: base.$fs-13;
