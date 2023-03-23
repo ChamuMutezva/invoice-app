@@ -39,22 +39,6 @@
     }
 }
 
-/*
-.invoice-num-num {
-    display: block;
-    position: relative;
-
-    &::before {
-        position: absolute;
-        content: "#";
-        top: 0;
-        left: -0.75rem;
-        color: base.$clr-blue-100;
-    }
-}
-*/
-
-
 .clientname {
     font-size: base.$fs-13;
     font-weight: 500;
