@@ -29,6 +29,11 @@
     text-transform: uppercase;
 }
 
+.invoice-num-num::first-letter {
+    color: base.$clr-blue-100;
+    display: block;
+}
+
 .clientname {
     font-size: base.$fs-13;
     font-weight: 500;

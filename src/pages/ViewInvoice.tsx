@@ -54,9 +54,9 @@ function ViewInvoice() {
             <span className="status-type">{invoice.status}</span>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link to={`/editInvoice/:id`}>Edit</Link>
-            <Link to={`/deleteInvoice/:id`}>Delete</Link>
-            <button>Mark as paid</button>
+            <Link className="btn-edit" to={`/editInvoice/:id`}>Edit</Link>
+            <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>Delete</Link>
+            <button className="btn-mark">Mark as paid</button>
           </div>
         </nav>
         <section className="container container-invoice">
@@ -66,7 +66,8 @@ function ViewInvoice() {
             {/* Invoice intro */}
             <div className="intro">
               <p className="invoice-num">
-                <span className="sr-only">Invoice number</span> #{invoice.id}
+                <span className="sr-only">Invoice number</span>{" "}
+                <span className="invoice-num-num">#{invoice.id}</span>
               </p>
               <p className="invoice-descr">
                 <span className="sr-only">item</span>
@@ -171,11 +172,11 @@ function ViewInvoice() {
           </div>
         </section>
       </main>
-      <footer className="tablet-hidden">
+      <footer className="footer-view tablet-hidden">
         <div className="nav-view-btns ">
-          <Link to={`/editInvoice/:id`}>Edit</Link>
-          <Link to={`/deleteInvoice/:id`}>Delete</Link>
-          <button>Mark as paid</button>
+          <Link className="btn-edit" to={`/editInvoice/:id`}>Edit</Link>
+          <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>Delete</Link>
+          <button className="btn-mark">Mark as paid</button>
         </div>
       </footer>
     </div>
