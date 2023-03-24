@@ -20,6 +20,7 @@
     text-transform: capitalize;
     text-decoration: none;
     overflow: hidden;
+    padding-block: 0.5rem;
     z-index: 0;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);   
 
@@ -43,6 +44,7 @@
 
     @include utils.mQ(40rem) {
         grid-area: 1/5/1/6;
+        padding-block: 0.75rem;
     }
 
 }
@@ -113,6 +115,8 @@ span.container-img {
     gap: base.$spacer1;
     padding-block: .5rem;
     padding-inline-end: .5rem;
+    border-radius: 8px;
     border: none;
+    margin-bottom: 1.5rem;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }

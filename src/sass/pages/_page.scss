@@ -10,6 +10,10 @@
     max-width: 45.6rem;
 
     @include utils.mQ(40rem) {
+        margin-inline: base.$spacer1 * 2;
+    }
+
+    @include utils.mQ(48rem) {
         margin-inline: auto;
     }
 }
@@ -19,9 +23,10 @@
     z-index: 1;
 }
 
-.address-sender-details, .address-reciever-details {
+.address-sender-details,
+.address-reciever-details {
     display: flex;
     flex-direction: column;
     line-height: 1.38;
-    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);     
+    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
 }
