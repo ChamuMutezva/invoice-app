@@ -1,8 +1,13 @@
 @use '../base';
 @use '../utils';
 
+.edit-form>*+* {
+    margin-block-start: 2.5rem;
+}
+
 .edit-title {
     font-size: base.$fs-24;
+    padding-inline: 1rem;
 }
 
 .invoice-num-edit {
@@ -16,6 +21,31 @@
     }
 }
 
+.edit-invoice-details {
+    border: none;
+    display: grid;
+    gap: 1rem;
+}
+
 .edit-field-title {
-    color: base.$clr-blue-400;
+    @include utils.fonts(base.$clr-blue-400, base.$fs-15, 700);
+}
+
+.address-line {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.label {
+    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
+    padding-block: 0.75rem;
+}
+
+.input {
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+    border: 1px solid base.$clr-white-300;
+    border-radius: 4px;
+    padding: 1rem;
 }
