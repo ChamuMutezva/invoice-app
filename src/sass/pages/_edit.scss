@@ -1,0 +1,21 @@
+@use '../base';
+@use '../utils';
+
+.edit-title {
+    font-size: base.$fs-24;
+}
+
+.invoice-num-edit {
+    display: inline;
+    margin-inline-start: 1.5rem;
+    font-size: inherit;
+
+    &::before {
+        top: -6px;
+        left: -1rem;
+    }
+}
+
+.edit-field-title {
+    color: base.$clr-blue-400;
+}

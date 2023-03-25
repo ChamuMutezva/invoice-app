@@ -5,7 +5,7 @@ import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/getInvoices";
 
 function HomePage() {
-  const [selectedValue, setSelectedValue] = useState("name");
+  const [selectedValue, setSelectedValue] = useState("draft");
   const { isLoading, isError, invoices, error } = getInvoices();
 
   if (isLoading) {

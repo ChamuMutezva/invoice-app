@@ -1,9 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 // import { useReducer } from "react";
 import format from "date-fns/format";
-//import getInvoices from "../hooks/getInvoices";
+
 import getInvoice from "../hooks/getInvoice";
-import BackImg from "../assets/icon-arrow-left.svg";
 import PreviousPage from "../components/PreviousPage";
 
 const reducer = (accumulator: number, currentValue: number) => {
@@ -12,7 +11,7 @@ const reducer = (accumulator: number, currentValue: number) => {
 
 function ViewInvoice() {
   let params = useParams();
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
   const invoice = getInvoice(params.id);
 
   if (invoice === undefined) {
@@ -42,7 +41,7 @@ function ViewInvoice() {
             <span className="status-type">{invoice.status}</span>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link className="btn-edit" to={`/editInvoice/:id`}>
+            <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}> 
               Edit
             </Link>
             <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
