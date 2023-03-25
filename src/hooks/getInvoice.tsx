@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useQuery } from "react-query";
 import getInvoices from "./getInvoices";
 
 export default function getInvoice(id: any) {

@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: 1fr;
     margin-block: 1rem;
-    row-gap: 1rem;    
+    row-gap: 1rem;
 }
 
 .card {
@@ -17,10 +17,25 @@
     border-radius: 8px;
     gap: 1rem;
     align-items: center;
+    box-shadow: 0px 10px 10px -10px hsla(231, 38%, 45%, 0.1);
 
     @include utils.mQ(40rem) {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        padding-inline: 2rem;
+        padding-inline: 2.5rem;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: "";
+            background-image: url("./../assets/icon-arrow-right.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            right: 6px;
+            top: 50%;
+            height: 24px;
+            width: 24px;
+            margin-top: -12px;
+        }
     }
 }
 
@@ -39,10 +54,18 @@
     }
 }
 
+.amount-total {
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+}
+
 .clientname {
     @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }
 
 .payment-date {
     @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
+
+    @include utils.mQ(40rem) {
+        grid-area: 1/2;
+    }
 }

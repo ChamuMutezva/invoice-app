@@ -49,6 +49,7 @@ function HomePage() {
               </label>
               <select
                 name="choice"
+                className="filter"
                 id="filter-options"
                 value={selectedValue}
                 onChange={(evt) => setSelectedValue(evt.target.value)}

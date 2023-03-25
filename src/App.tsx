@@ -13,6 +13,7 @@ import ViewInvoice  from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
 import DeleteInvoice from "./pages/DeleteInvoice";
 import EditInvoice from "./pages/EditInvoice";
+// import { loader  as rootLoader} from "./pages/ViewInvoice";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
     {
       path: "/viewInvoice/:id",
       element: <ViewInvoice />,
+     // loader: rootLoader,
     },
     {
       path: "/newInvoice",

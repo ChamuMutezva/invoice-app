@@ -1,16 +1,11 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useReducer } from "react";
+// import { useReducer } from "react";
 import format from "date-fns/format";
-import getInvoices from "../hooks/getInvoices";
+//import getInvoices from "../hooks/getInvoices";
 import getInvoice from "../hooks/getInvoice";
 import BackImg from "../assets/icon-arrow-left.svg";
+import PreviousPage from "../components/PreviousPage";
 
-export async function loader() {
-  const invoices = getInvoices();
-  return { invoices };
-}
-
-const intialState = 0;
 const reducer = (accumulator: number, currentValue: number) => {
   return accumulator + currentValue;
 };
@@ -18,7 +13,6 @@ const reducer = (accumulator: number, currentValue: number) => {
 function ViewInvoice() {
   let params = useParams();
   const navigate = useNavigate();
-
   const invoice = getInvoice(params.id);
 
   if (invoice === undefined) {
@@ -27,7 +21,7 @@ function ViewInvoice() {
 
   const totalArray = invoice.items.map((item: { total: any }) => item.total);
   const grandTotal = totalArray.reduce(reducer);
-  console.log(grandTotal);
+
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -36,15 +30,9 @@ function ViewInvoice() {
 
   return (
     <div className="main" aria-live="polite">
-      <h1 className="sr-only">
-        Complete invoice details of {invoice.clientName}
-      </h1>
-      <header>
-        <button className="btn flex btn-return" onClick={() => navigate(-1)}>
-          <img src={BackImg} alt="" aria-hidden={true} />
-          Go back
-        </button>
-      </header>
+      <PreviousPage
+        title={`Complete invoice details of ${invoice.clientName}`}
+      />
 
       <main>
         <nav className="flex nav-view">
@@ -54,8 +42,12 @@ function ViewInvoice() {
             <span className="status-type">{invoice.status}</span>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link className="btn-edit" to={`/editInvoice/:id`}>Edit</Link>
-            <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>Delete</Link>
+            <Link className="btn-edit" to={`/editInvoice/:id`}>
+              Edit
+            </Link>
+            <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
+              Delete
+            </Link>
             <button className="btn-mark">Mark as paid</button>
           </div>
         </nav>
@@ -97,7 +89,7 @@ function ViewInvoice() {
               </div>
               <div className="due-date">
                 <h3 className="invoice-date-title">Payment due</h3>
-                <p className="payment-date">{invoice.paymentDue}</p>
+                <p className="payment-date-view">{invoice.paymentDue}</p>
               </div>
             </div>
 
@@ -174,8 +166,12 @@ function ViewInvoice() {
       </main>
       <footer className="footer-view tablet-hidden">
         <div className="nav-view-btns ">
-          <Link className="btn-edit" to={`/editInvoice/:id`}>Edit</Link>
-          <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>Delete</Link>
+          <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>
+            Edit
+          </Link>
+          <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
+            Delete
+          </Link>
           <button className="btn-mark">Mark as paid</button>
         </div>
       </footer>

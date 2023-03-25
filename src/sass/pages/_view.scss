@@ -6,6 +6,10 @@
     padding-block: 2rem;
     padding-inline: .5rem;
     border-radius: 8px;
+
+    @include utils.mQ(40rem) {
+        padding: 1.5rem;
+    }
 }
 
 
@@ -24,6 +28,7 @@
 
     @include utils.mQ(40rem) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 1.5rem;
     }
 }
 
@@ -63,7 +68,7 @@
 }
 
 .invoice-date,
-.payment-date,
+.payment-date-view,
 .billed-name,
 .item-descr,
 .email-to,
@@ -122,7 +127,7 @@
     font-size: base.$fs-15;
     font-weight: 700;
     color: base.$clr-blue-100;
-    @include utils.fonts( base.$clr-blue-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
 }
 
 .item-summary {
@@ -137,19 +142,19 @@
 }
 
 .grand-total-container {
-    background-color: base.$clr-black-500;   
+    background-color: base.$clr-black-500;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
 }
 
-.grand-total {   
-    @include utils.fonts(  base.$clr-white-100, base.$fs-24, 700);
+.grand-total {
+    @include utils.fonts(base.$clr-white-100, base.$fs-24, 700);
 }
 
 .grand-total-title {
-    @include utils.fonts(  base.$clr-white-100, base.$fs-13, 500);    
+    @include utils.fonts(base.$clr-white-100, base.$fs-13, 500);
 }
 
 .footer-view {
@@ -162,28 +167,34 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    @include utils.mQ(40rem) {
+        flex: 1 1 70%;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
 }
 
 .btn-edit {
     background-color: base.$clr-white-400;
-    padding: 1rem;
-    border-radius: 50%;   
+    padding: 1rem 1.5rem;
+    border-radius: 50%;
     text-decoration: none;
-    @include utils.fonts(  base.$clr-blue-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
 }
 
 .btn-delete-view {
-    background-color: base.$clr-pink-200;  
-    padding: 1rem;
+    background-color: base.$clr-pink-200;
+    padding: 1rem 1.5rem;
     text-decoration: none;
-    border-radius: 24px;    
-    @include utils.fonts(  base.$clr-white-100, base.$fs-15, 700);
+    border-radius: 24px;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 }
 
 .btn-mark {
-    background-color: base.$clr-blue-400;   
+    background-color: base.$clr-blue-400;
     padding: 1rem;
     border-radius: 24px;
     border: none;
-    @include utils.fonts(  base.$clr-white-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 }
