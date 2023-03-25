@@ -83,3 +83,9 @@
 .btn-logo {
     z-index: 1;
 }
+
+.btn-profile-img {
+    @include utils.mQ(64rem) {
+        transform: rotate(280deg);
+    }
+}

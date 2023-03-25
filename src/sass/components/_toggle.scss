@@ -1,3 +1,6 @@
+@use '../base';
+@use '../utils';
+
 .btn-theme-control {
     position: relative;
     color: #fff;
@@ -9,7 +12,7 @@
     height: 100%;
 
     &:hover,
-    &:focus {       
+    &:focus {
         outline: dashed currentColor;
         outline-offset: -0.65em;
     }
@@ -27,8 +30,12 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background-color: #151619;   
+    background-color: #151619;
     transition: transform .25s;
+
+    @include utils.mQ(64rem) {
+        transform: rotate(280deg);
+    }
 }
 
 .hide-theme-img {

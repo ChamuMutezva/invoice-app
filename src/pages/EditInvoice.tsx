@@ -233,7 +233,7 @@ function EditInvoice() {
                     />
                   </div>
 
-                  <div className="qty-line">
+                  <div className="price-line">
                     <label className="label" htmlFor="price">
                       Price
                     </label>
@@ -256,14 +256,14 @@ function EditInvoice() {
                       placeholder="200.00"
                     />
                   </div>
+
+                  <button className="delete" aria-label="delete product">
+                    <img src={DeleteBtn} alt="" aria-hidden={true} />
+                  </button>
                 </div>
               </div>
             )
           )}
-
-          <button className="delete" aria-label="delete product">
-            <img src={DeleteBtn} alt="" aria-hidden={true} />
-          </button>
         </fieldset>
       </Form>
     </div>

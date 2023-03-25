@@ -65,7 +65,7 @@ function App() {
           </div>
           <div className="profile">
             <a href="#" className="btn btn-profile">
-              <img src={Profile} alt="" aria-hidden={true} />
+              <img className="btn-profile-img" src={Profile} alt="" aria-hidden={true} />
               <span className="sr-only">customer profile</span>
             </a>
           </div>
