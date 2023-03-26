@@ -1,7 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-// import { useReducer } from "react";
 import format from "date-fns/format";
-
 import getInvoice from "../hooks/getInvoice";
 import PreviousPage from "../components/PreviousPage";
 

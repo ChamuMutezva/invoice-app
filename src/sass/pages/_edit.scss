@@ -48,4 +48,39 @@
     border: 1px solid base.$clr-white-300;
     border-radius: 4px;
     padding: 1rem;
+    width: 100%;
+   // min-width: 100%;
+}
+
+.costing-line {
+    @include utils.mQ(22rem) {
+        display: grid;
+        grid-template-columns: 1fr 2fr auto auto;
+        align-items: center;
+        justify-items: center;
+        gap: 0.5rem;
+    }
+}
+/*
+.quantity {
+    min-width: 50px;
+    width: 100%;
+}
+
+.price {
+    min-width: 120px;
+    width: 100%;
+}
+*/
+.total-line {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-line,
+.qty-line {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
