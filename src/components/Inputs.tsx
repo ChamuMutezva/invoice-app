@@ -1,6 +1,9 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 
 function Inputs(props: {
+  name: string;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  value: string | number;
   divClass: string;
   htmlFor: string;
   text: string;
@@ -19,6 +22,9 @@ function Inputs(props: {
         id={props.id}
         className={`input ${props.inputClass}`}
         placeholder={props.placeholder}
+        value={props.value}
+        onChange={props.onChange}
+       name={props.name}
       />
     </div>
   );
