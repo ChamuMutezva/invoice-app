@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
 import fetchInvoice from "../hooks/fetchInvoice";
 import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
+import AddItem from "../assets/icon-plus.svg";
 import Inputs from "../components/Inputs";
 import { format } from "path";
 
@@ -47,28 +49,20 @@ function EditInvoice() {
   };
   console.log(initialState);
 
-  const [formData, setFormData] = useState(initialState);
-
-  const onChange = (evt: { target: { name: any; value: any } }) => {
-    const { name, value } = evt.target;
-    console.log(evt.target);
-    setFormData({ ...formData, [name]: value });
-  };
-
-  console.log(formData);
-
   const {
-    clientName,
-    clientEmail,
-    paymentDue,
-    paymentTerms,
-    senderAddress: { street },
-  } = formData;
-  console.log(street);
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ defaultValues: initialState });
+
   return (
     <div className="main">
       <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
-      <Form className="edit-form">
+      <Form
+        className="edit-form"
+        onSubmit={handleSubmit((data) => console.log(data))}
+      >
         <h2 className="edit-title">
           Edit
           <span className="invoice-num invoice-num-edit">{invoice.id}</span>
@@ -77,161 +71,187 @@ function EditInvoice() {
         <fieldset className="edit-invoice-details">
           <legend className="edit-field-title">Bill From</legend>
 
-          <Inputs
-            divClass="street-line"
-            htmlFor="street"
-            text="Street address"
-            type="text"
-            id="street"
-            name="street-address"
-            inputClass="street"
-            placeholder="19 street"
-            value={street}
-            onChange={onChange}
-          />
+          <div className={`address-line street-line`}>
+            <label className="label" htmlFor={`street`}>
+              street name
+            </label>
+            <input
+              type="text"
+              id={`street`}
+              className={`input street`}
+              placeholder={`116 Caledorn street`}
+              {...register("senderAddress.street", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
 
-          <Inputs
-            divClass="city-line"
-            htmlFor="city"
-            text="City"
-            type="text"
-            id="city"
-            name="city"
-            inputClass="city"
-            placeholder="Mudzi"
-            value={invoice.senderAddress.city}
-            onChange={onChange}
-          />
-          <Inputs
-            divClass="postal-line"
-            htmlFor="postal"
-            text="Postal Code"
-            type="text"
-            id="postal"
-            name="postal"
-            inputClass="postal"
-            placeholder="6009"
-            value={invoice.senderAddress.postCode}
-            onChange={onChange}
-          />
-          <Inputs
-            divClass="country-line"
-            htmlFor="country"
-            text="Country"
-            type="text"
-            id="country"
-            name="country"
-            inputClass="country"
-            placeholder="South Africa"
-            value={invoice.senderAddress.country}
-            onChange={onChange}
-          />
+          <div className={`address-line city-line`}>
+            <label className="label" htmlFor={`city`}>
+              City
+            </label>
+            <input
+              type="text"
+              id={`city`}
+              className={`input city`}
+              placeholder={`Uitenhage`}
+              {...register("senderAddress.city", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
+
+          <div className={`address-line postal-line`}>
+            <label className="label" htmlFor={`postal`}>
+              Postal code
+            </label>
+            <input
+              type="text"
+              id={`postal`}
+              className={`input postal`}
+              placeholder={`6229`}
+              {...register("senderAddress.postCode", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
+
+          <div className={`address-line country-line`}>
+            <label className="label" htmlFor={`country`}>
+              Country
+            </label>
+            <input
+              type="text"
+              id={`country`}
+              className={`input country`}
+              placeholder={`South Africa`}
+              {...register("senderAddress.country", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
         </fieldset>
         {/* Reciever details */}
         <fieldset className="edit-invoice-details">
           <legend className="edit-field-title">Bill to</legend>
-          <Inputs
-            divClass="client-line"
-            htmlFor="client-name"
-            text="Client name"
-            type="text"
-            id="client-name"
-            name="clientName"
-            inputClass="client-name"
-            placeholder="Chamu Mutezva"
-            value={clientName}
-            onChange={onChange}
-          />
 
-          <Inputs
-            divClass="email-line"
-            htmlFor="email"
-            text="Email address"
-            type="email"
-            id="email-address"
-            name="clientEmail"
-            inputClass="email-address"
-            placeholder="ckmutezva@gmail.com"
-            value={clientEmail}
-            onChange={onChange}
-          />
+          <div className={`address-line`}>
+            <label className="label" htmlFor={`client`}>
+              Client name
+            </label>
+            <input
+              type="text"
+              id={`client`}
+              className={`input`}
+              placeholder={`Chamu mutezva`}
+              {...register("clientName", { required: true, minLength: 1 })}
+            />
+          </div>
 
-          <Inputs
-            divClass="street-line"
-            htmlFor="street"
-            text="Street address"
-            type="text"
-            id="street"
-            name="street"
-            inputClass="street"
-            placeholder="19 Receiver street"
-            value={invoice.clientAddress.street}
-            onChange={onChange}
-          />
+          <div className={`address-line email-line`}>
+            <label className="label" htmlFor={`email`}>
+              Client email
+            </label>
+            <input
+              type="text"
+              id={`email`}
+              className={`input email-address`}
+              placeholder={`mutezva@gmail.com`}
+              {...register("clientEmail", { required: true, minLength: 4 })}
+            />
+          </div>
 
-          <Inputs
-            divClass="city-line"
-            htmlFor="city"
-            text="City"
-            type="text"
-            id="city"
-            name="city"
-            inputClass="city"
-            placeholder="Besa"
-            value={invoice.clientAddress.city}
-            onChange={onChange}
-          />
+          <div className={`address-line street-line`}>
+            <label className="label" htmlFor={`client-street`}>
+              street name
+            </label>
+            <input
+              type="text"
+              id={`client-street`}
+              className={`input street`}
+              placeholder="19 Receiver street"
+              {...register("clientAddress.street", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
 
-          <Inputs
-            divClass="postal-line"
-            htmlFor="postal"
-            text="Postal Code"
-            type="text"
-            id="postal"
-            name="postal"
-            inputClass="postal"
-            placeholder="6900"
-            value={invoice.clientAddress.postCode}
-            onChange={onChange}
-          />
-          <Inputs
-            divClass="country-line"
-            htmlFor="country"
-            text="Country"
-            type="text"
-            id="country"
-            name="country"
-            inputClass="country"
-            placeholder="Zimbabwe"
-            value={invoice.clientAddress.country}
-            onChange={onChange}
-          />
+          <div className={`address-line city-line`}>
+            <label className="label" htmlFor={`client-city`}>
+              City
+            </label>
+            <input
+              type="text"
+              id={`client-city`}
+              className={`input city`}
+              placeholder={`London`}
+              {...register("clientAddress.city", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
+
+          <div className={`address-line postal-line`}>
+            <label className="label" htmlFor={`client-postal`}>
+              Postal code
+            </label>
+            <input
+              type="text"
+              id={`client-postal`}
+              className={`input postal`}
+              placeholder={`AE123`}
+              {...register("clientAddress.postCode", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
+
+          <div className={`address-line country-line`}>
+            <label className="label" htmlFor={`country`}>
+              Country
+            </label>
+            <input
+              type="text"
+              id={`country`}
+              className={`input country`}
+              placeholder={`South Africa`}
+              {...register("clientAddress.country", {
+                required: true,
+                minLength: 4,
+              })}
+            />
+          </div>
         </fieldset>
-        invoice details
+        {/* invoice details  */}
         <fieldset className="edit-invoice-details">
-          <Inputs
-            divClass="invoice-date"
-            htmlFor="date"
-            text="Invoice date"
-            type="date"
-            id="date"
-            name="paymentDue"
-            inputClass="date-signed"
-            placeholder=""
-            value={paymentDue}
-            onChange={onChange}
-          />
+          <div className={`invoice-date`}>
+            <label className="label" htmlFor={`date`}>
+              Invoice date
+            </label>
+            <input
+              type="date"
+              id={`date`}
+              className={`input date-signed`}
+              placeholder={""}
+              {...register("paymentDue")}
+            />
+          </div>
 
           <div className="payment-terms">
             <label className="label" htmlFor="terms">
               Payment terms
             </label>
             <select
-              name="paymentTerms"
               className="input terms-options"
               id="terms"
-              value={paymentTerms}
-              onChange={onChange}
+              {...register("paymentTerms")}
             >
               <option value={1}>Net 1 Day</option>
               <option value={6}>Net 6 days</option>
@@ -240,63 +260,104 @@ function EditInvoice() {
               <option value={30}>Net 30 Days</option>
             </select>
           </div>
+
+          <div className={`Project name`}>
+            <label className="label" htmlFor={`project-desc`}>
+              Project Description
+            </label>
+            <input
+              type="text"
+              id={`project-desc`}
+              className={`input project-desc`}
+              placeholder={"Description"}
+              {...register("description", { required: true, minLength: 4 })}
+            />
+          </div>
         </fieldset>
         <fieldset className="edit-invoice-details">
           <legend className="edit-field-title">Item list</legend>
           {invoice.items.map(
-            (item: {
-              name: string;
-              quantity: number;
-              price: number;
-              total: number;
-            }) => (
+            (
+              item: {
+                name: string;
+                quantity: number;
+                price: number;
+                total: number;
+              },
+              index: number
+            ) => (
               <div className="item-line" key={item.name}>
-                <Inputs
-                  divClass="project-line"
-                  htmlFor="project-name"
-                  text="Project name"
-                  type="text"
-                  id="project-name"
-                  name="project-name"
-                  inputClass="project-name"
-                  placeholder="Project name"
-                  value={item.name}
-                  onChange={onChange}
-                />
-
-                <div className="costing-line">
-                  <Inputs
-                    divClass="qty-line"
-                    htmlFor="qty"
-                    text="Qty"
-                    type="number"
-                    id="qty"
-                    name="qty"
-                    inputClass="quantity"
-                    placeholder="1"
-                    value={Number(item.quantity)}
-                    onChange={onChange}
+                <div className={`project-line`}>
+                  <label className="label" htmlFor={`project-line`}>
+                    Project name
+                  </label>
+                  <input
+                    type="text"
+                    id={`project-name`}
+                    className={`input project-name`}
+                    placeholder={"Name of project"}
+                    {...register(`items.${index}.name`, {
+                      required: true,
+                      minLength: 4,
+                    })}
                   />
+                </div>
 
-                  <Inputs
-                    divClass="price-line"
-                    htmlFor="price"
-                    text="Price"
-                    type="number"
-                    id="price"
-                    name="price"
-                    inputClass="price"
-                    placeholder="200.00"
-                    value={item.price}
-                    onChange={onChange}
-                  />
+                <div className={`costing-line`}>
+                  <div className="quantity-line calculate-line-container">
+                    <label className="label" htmlFor={`qty-line`}>
+                      Qty
+                    </label>
+                    <input
+                      type="number"
+                      id={`qty`}
+                      className={`qty calculate-line`}
+                      placeholder={"1"}
+                      {...register(`items.${index}.quantity`, {
+                        required: true,
+                      })}
+                    />
+                  </div>
 
-                  <p className="total-line">
-                    <span className="label">Total</span>
-                    <span className="label">{invoice.total}</span>
-                  </p>
-                  <div className="container-delete">
-                    <button className="delete" aria-label="delete product">
+                  <div className={`price-line calculate-line-container`}>
+                    <label className="label" htmlFor={`price`}>
+                      Price
+                    </label>
+                    <input
+                      type="number"
+                      step={0.01}
+                      id={`price`}
+                      className={`price calculate-line`}
+                      placeholder={"200.00"}
+                      {...register(`items.${index}.price`, {
+                        required: true,
+                      })}
+                    />
+                  </div>
+
+                  <div className={`item-total-line calculate-line-container`}>
+                    <label className="label" htmlFor={`item-total`}>
+                      Total
+                    </label>
+                    <input
+                      type="number"
+                      id={`item-total`}
+                      className={`item-total calculate-line`}
+                      placeholder={"200.00"}
+                      readOnly
+                      {...register(`items.${index}.total`, {
+                        required: true,
+                      })}
+                    />
+                  </div>
+                  <div className="container-delete calculate-line-container">
+                    <button
+                      className="delete calculate-line"
+                      aria-label="delete product"
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                      }}
+                    >
                       <img src={DeleteBtn} alt="" aria-hidden={true} />
                     </button>
                   </div>
@@ -304,6 +365,10 @@ function EditInvoice() {
               </div>
             )
           )}
+          <button>
+            <img src={AddItem} alt="" aria-hidden={true} />
+            Add new Item
+          </button>
         </fieldset>
       </Form>
     </div>

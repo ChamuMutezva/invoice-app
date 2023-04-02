@@ -49,18 +49,33 @@
     border-radius: 4px;
     padding: 1rem;
     width: 100%;
-   // min-width: 100%;
+    // min-width: 100%;
 }
 
 .costing-line {
-    @include utils.mQ(22rem) {
+    @include utils.mQ(22.5rem) {
         display: grid;
-        grid-template-columns: 1fr 2fr auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         justify-items: center;
         gap: 0.5rem;
     }
 }
+
+.calculate-line {
+    max-width: 5rem;
+    padding-block: 0.5rem;
+    @include utils.mQ(45rem) {
+        max-width: 12rem;
+    }
+}
+
+.calculate-line-container {
+    display: flex;
+    flex-direction: column;
+    align-self: self-end;
+}
+
 /*
 .quantity {
     min-width: 50px;
