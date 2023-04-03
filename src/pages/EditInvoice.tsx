@@ -7,7 +7,6 @@ import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItem from "../assets/icon-plus.svg";
 import Inputs from "../components/Inputs";
-import { format } from "path";
 
 function EditInvoice() {
   let params = useParams();
@@ -18,13 +17,19 @@ function EditInvoice() {
     currency: "USD",
   });
 
+  // Fetch an invoice
   const invoice =
     getInvoice(params.id) === undefined
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
+  console.log(invoice);
+  if (invoice === "undefined") {
+    return <h1>Error in presenting page</h1>;
+  }
+
   const initialState = {
-    // id: invoice.id,
+    id: invoice.id,
     createdAt: invoice.createdAt,
     paymentDue: invoice.paymentDue,
     description: invoice.description,
@@ -49,10 +54,11 @@ function EditInvoice() {
   };
   console.log(initialState);
 
+  // load foam with initialstate
   const {
     register,
     handleSubmit,
-    watch,
+    watch,    
     formState: { errors },
   } = useForm({ defaultValues: initialState });
 
@@ -67,6 +73,7 @@ function EditInvoice() {
           Edit
           <span className="invoice-num invoice-num-edit">{invoice.id}</span>
         </h2>
+
         {/*Sender details */}
         <fieldset className="edit-invoice-details">
           <legend className="edit-field-title">Bill From</legend>
@@ -87,38 +94,39 @@ function EditInvoice() {
             />
           </div>
 
-          <div className={`address-line city-line`}>
-            <label className="label" htmlFor={`city`}>
-              City
-            </label>
-            <input
-              type="text"
-              id={`city`}
-              className={`input city`}
-              placeholder={`Uitenhage`}
-              {...register("senderAddress.city", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
+          <div className="flex postal-city">
+            <div className={`address-line city-line`}>
+              <label className="label" htmlFor={`city`}>
+                City
+              </label>
+              <input
+                type="text"
+                id={`city`}
+                className={`input city`}
+                placeholder={`Uitenhage`}
+                {...register("senderAddress.city", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
 
-          <div className={`address-line postal-line`}>
-            <label className="label" htmlFor={`postal`}>
-              Postal code
-            </label>
-            <input
-              type="text"
-              id={`postal`}
-              className={`input postal`}
-              placeholder={`6229`}
-              {...register("senderAddress.postCode", {
-                required: true,
-                minLength: 4,
-              })}
-            />
+            <div className={`address-line postal-line`}>
+              <label className="label" htmlFor={`postal`}>
+                Postal code
+              </label>
+              <input
+                type="text"
+                id={`postal`}
+                className={`input postal`}
+                placeholder={`6229`}
+                {...register("senderAddress.postCode", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
           </div>
-
           <div className={`address-line country-line`}>
             <label className="label" htmlFor={`country`}>
               Country
@@ -135,6 +143,7 @@ function EditInvoice() {
             />
           </div>
         </fieldset>
+
         {/* Reciever details */}
         <fieldset className="edit-invoice-details">
           <legend className="edit-field-title">Bill to</legend>
@@ -180,39 +189,39 @@ function EditInvoice() {
               })}
             />
           </div>
+          <div className="flex postal-city">
+            <div className={`address-line city-line`}>
+              <label className="label" htmlFor={`client-city`}>
+                City
+              </label>
+              <input
+                type="text"
+                id={`client-city`}
+                className={`input city`}
+                placeholder={`London`}
+                {...register("clientAddress.city", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
 
-          <div className={`address-line city-line`}>
-            <label className="label" htmlFor={`client-city`}>
-              City
-            </label>
-            <input
-              type="text"
-              id={`client-city`}
-              className={`input city`}
-              placeholder={`London`}
-              {...register("clientAddress.city", {
-                required: true,
-                minLength: 4,
-              })}
-            />
+            <div className={`address-line postal-line`}>
+              <label className="label" htmlFor={`client-postal`}>
+                Postal code
+              </label>
+              <input
+                type="text"
+                id={`client-postal`}
+                className={`input postal`}
+                placeholder={`AE123`}
+                {...register("clientAddress.postCode", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
           </div>
-
-          <div className={`address-line postal-line`}>
-            <label className="label" htmlFor={`client-postal`}>
-              Postal code
-            </label>
-            <input
-              type="text"
-              id={`client-postal`}
-              className={`input postal`}
-              placeholder={`AE123`}
-              {...register("clientAddress.postCode", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
-
           <div className={`address-line country-line`}>
             <label className="label" htmlFor={`country`}>
               Country
@@ -229,6 +238,7 @@ function EditInvoice() {
             />
           </div>
         </fieldset>
+        
         {/* invoice details  */}
         <fieldset className="edit-invoice-details">
           <div className={`invoice-date`}>

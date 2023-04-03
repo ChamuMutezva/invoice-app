@@ -44,6 +44,13 @@
 }
 
 .input {
+
+    &:hover,
+    &:focus {
+        outline: dashed currentColor;
+        outline-offset: .35em;
+    }
+
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
     border: 1px solid base.$clr-white-300;
     border-radius: 4px;
@@ -53,18 +60,26 @@
 }
 
 .costing-line {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
     @include utils.mQ(22.5rem) {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        flex-direction: row;
         align-items: center;
         justify-items: center;
-        gap: 0.5rem;
+
     }
 }
 
 .calculate-line {
-    max-width: 5rem;
     padding-block: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: none;
+
     @include utils.mQ(45rem) {
         max-width: 12rem;
     }
@@ -74,19 +89,14 @@
     display: flex;
     flex-direction: column;
     align-self: self-end;
+    flex: 1 1 25%;
 }
 
-/*
-.quantity {
-    min-width: 50px;
-    width: 100%;
+.container-delete,
+.quantity-line {
+    flex: 1 1 15%;
 }
 
-.price {
-    min-width: 120px;
-    width: 100%;
-}
-*/
 .total-line {
     display: flex;
     flex-direction: column;
