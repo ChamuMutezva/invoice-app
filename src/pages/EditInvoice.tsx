@@ -58,358 +58,337 @@ function EditInvoice() {
   const {
     register,
     handleSubmit,
-    watch,    
+    watch,
     formState: { errors },
   } = useForm({ defaultValues: initialState });
 
   return (
-    <div className="main">
-      <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
-      <Form
-        className="edit-form"
-        onSubmit={handleSubmit((data) => console.log(data))}
-      >
-        <h2 className="edit-title">
-          Edit
-          <span className="invoice-num invoice-num-edit">{invoice.id}</span>
-        </h2>
+    <>
+      <main className="main">
+        <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
+        <Form
+          className="edit-form"
+          onSubmit={handleSubmit((data) => console.log(data))}
+        >
+          <h2 className="edit-title">
+            Edit
+            <span className="invoice-num invoice-num-edit">{invoice.id}</span>
+          </h2>
 
-        {/*Sender details */}
-        <fieldset className="edit-invoice-details">
-          <legend className="edit-field-title">Bill From</legend>
+          {/*Sender details */}
+          <fieldset className="edit-invoice-details">
+            <legend className="edit-field-title">Bill From</legend>
 
-          <div className={`address-line street-line`}>
-            <label className="label" htmlFor={`street`}>
-              street name
-            </label>
-            <input
-              type="text"
-              id={`street`}
-              className={`input street`}
-              placeholder={`116 Caledorn street`}
-              {...register("senderAddress.street", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
-
-          <div className="flex postal-city">
-            <div className={`address-line city-line`}>
-              <label className="label" htmlFor={`city`}>
-                City
+            <div className={`address-line street-line`}>
+              <label className="label" htmlFor={`street`}>
+                Street Address
               </label>
               <input
                 type="text"
-                id={`city`}
-                className={`input city`}
-                placeholder={`Uitenhage`}
-                {...register("senderAddress.city", {
+                id={`street`}
+                className={`input street`}
+                placeholder={`116 Caledorn street`}
+                {...register("senderAddress.street", {
                   required: true,
                   minLength: 4,
                 })}
               />
             </div>
 
-            <div className={`address-line postal-line`}>
-              <label className="label" htmlFor={`postal`}>
-                Postal code
-              </label>
-              <input
-                type="text"
-                id={`postal`}
-                className={`input postal`}
-                placeholder={`6229`}
-                {...register("senderAddress.postCode", {
-                  required: true,
-                  minLength: 4,
-                })}
-              />
-            </div>
-          </div>
-          <div className={`address-line country-line`}>
-            <label className="label" htmlFor={`country`}>
-              Country
-            </label>
-            <input
-              type="text"
-              id={`country`}
-              className={`input country`}
-              placeholder={`South Africa`}
-              {...register("senderAddress.country", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
-        </fieldset>
-
-        {/* Reciever details */}
-        <fieldset className="edit-invoice-details">
-          <legend className="edit-field-title">Bill to</legend>
-
-          <div className={`address-line`}>
-            <label className="label" htmlFor={`client`}>
-              Client name
-            </label>
-            <input
-              type="text"
-              id={`client`}
-              className={`input`}
-              placeholder={`Chamu mutezva`}
-              {...register("clientName", { required: true, minLength: 1 })}
-            />
-          </div>
-
-          <div className={`address-line email-line`}>
-            <label className="label" htmlFor={`email`}>
-              Client email
-            </label>
-            <input
-              type="text"
-              id={`email`}
-              className={`input email-address`}
-              placeholder={`mutezva@gmail.com`}
-              {...register("clientEmail", { required: true, minLength: 4 })}
-            />
-          </div>
-
-          <div className={`address-line street-line`}>
-            <label className="label" htmlFor={`client-street`}>
-              street name
-            </label>
-            <input
-              type="text"
-              id={`client-street`}
-              className={`input street`}
-              placeholder="19 Receiver street"
-              {...register("clientAddress.street", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
-          <div className="flex postal-city">
-            <div className={`address-line city-line`}>
-              <label className="label" htmlFor={`client-city`}>
-                City
-              </label>
-              <input
-                type="text"
-                id={`client-city`}
-                className={`input city`}
-                placeholder={`London`}
-                {...register("clientAddress.city", {
-                  required: true,
-                  minLength: 4,
-                })}
-              />
-            </div>
-
-            <div className={`address-line postal-line`}>
-              <label className="label" htmlFor={`client-postal`}>
-                Postal code
-              </label>
-              <input
-                type="text"
-                id={`client-postal`}
-                className={`input postal`}
-                placeholder={`AE123`}
-                {...register("clientAddress.postCode", {
-                  required: true,
-                  minLength: 4,
-                })}
-              />
-            </div>
-          </div>
-          <div className={`address-line country-line`}>
-            <label className="label" htmlFor={`country`}>
-              Country
-            </label>
-            <input
-              type="text"
-              id={`country`}
-              className={`input country`}
-              placeholder={`South Africa`}
-              {...register("clientAddress.country", {
-                required: true,
-                minLength: 4,
-              })}
-            />
-          </div>
-        </fieldset>
-        
-        {/* invoice details  */}
-        <fieldset className="edit-invoice-details">
-          <div className={`invoice-date`}>
-            <label className="label" htmlFor={`date`}>
-              Invoice date
-            </label>
-            <input
-              type="date"
-              id={`date`}
-              className={`input date-signed`}
-              placeholder={""}
-              {...register("paymentDue")}
-            />
-          </div>
-
-          <div className="payment-terms">
-            <label className="label" htmlFor="terms">
-              Payment terms
-            </label>
-            <select
-              className="input terms-options"
-              id="terms"
-              {...register("paymentTerms")}
-            >
-              <option value={1}>Net 1 Day</option>
-              <option value={6}>Net 6 days</option>
-              <option value={7}>Net 7 days</option>
-              <option value={14}>Net 14 Days</option>
-              <option value={30}>Net 30 Days</option>
-            </select>
-          </div>
-
-          <div className={`Project name`}>
-            <label className="label" htmlFor={`project-desc`}>
-              Project Description
-            </label>
-            <input
-              type="text"
-              id={`project-desc`}
-              className={`input project-desc`}
-              placeholder={"Description"}
-              {...register("description", { required: true, minLength: 4 })}
-            />
-          </div>
-        </fieldset>
-        <fieldset className="edit-invoice-details">
-          <legend className="edit-field-title">Item list</legend>
-          {invoice.items.map(
-            (
-              item: {
-                name: string;
-                quantity: number;
-                price: number;
-                total: number;
-              },
-              index: number
-            ) => (
-              <div className="item-line" key={item.name}>
-                <div className={`project-line`}>
-                  <label className="label" htmlFor={`project-line`}>
-                    Project name
-                  </label>
-                  <input
-                    type="text"
-                    id={`project-name`}
-                    className={`input project-name`}
-                    placeholder={"Name of project"}
-                    {...register(`items.${index}.name`, {
-                      required: true,
-                      minLength: 4,
-                    })}
-                  />
-                </div>
-
-                <div className={`costing-line`}>
-                  <div className="quantity-line calculate-line-container">
-                    <label className="label" htmlFor={`qty-line`}>
-                      Qty
-                    </label>
-                    <input
-                      type="number"
-                      id={`qty`}
-                      className={`qty calculate-line`}
-                      placeholder={"1"}
-                      {...register(`items.${index}.quantity`, {
-                        required: true,
-                      })}
-                    />
-                  </div>
-
-                  <div className={`price-line calculate-line-container`}>
-                    <label className="label" htmlFor={`price`}>
-                      Price
-                    </label>
-                    <input
-                      type="number"
-                      step={0.01}
-                      id={`price`}
-                      className={`price calculate-line`}
-                      placeholder={"200.00"}
-                      {...register(`items.${index}.price`, {
-                        required: true,
-                      })}
-                    />
-                  </div>
-
-                  <div className={`item-total-line calculate-line-container`}>
-                    <label className="label" htmlFor={`item-total`}>
-                      Total
-                    </label>
-                    <input
-                      type="number"
-                      id={`item-total`}
-                      className={`item-total calculate-line`}
-                      placeholder={"200.00"}
-                      readOnly
-                      {...register(`items.${index}.total`, {
-                        required: true,
-                      })}
-                    />
-                  </div>
-                  <div className="container-delete calculate-line-container">
-                    <button
-                      className="delete calculate-line"
-                      aria-label="delete product"
-                      onClick={(evt) => {
-                        evt.preventDefault();
-                      }}
-                    >
-                      <img src={DeleteBtn} alt="" aria-hidden={true} />
-                    </button>
-                  </div>
-                </div>
+            <div className="flex postal-city">
+              <div className={`address-line city-line`}>
+                <label className="label" htmlFor={`city`}>
+                  City
+                </label>
+                <input
+                  type="text"
+                  id={`city`}
+                  className={`input city`}
+                  placeholder={`Uitenhage`}
+                  {...register("senderAddress.city", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
               </div>
-            )
-          )}
-          <button>
-            <img src={AddItem} alt="" aria-hidden={true} />
-            Add new Item
-          </button>
-        </fieldset>
-      </Form>
-    </div>
+
+              <div className={`address-line postal-line`}>
+                <label className="label" htmlFor={`postal`}>
+                  Postal code
+                </label>
+                <input
+                  type="text"
+                  id={`postal`}
+                  className={`input postal`}
+                  placeholder={`6229`}
+                  {...register("senderAddress.postCode", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
+              </div>
+            </div>
+            <div className={`address-line country-line`}>
+              <label className="label" htmlFor={`country`}>
+                Country
+              </label>
+              <input
+                type="text"
+                id={`country`}
+                className={`input country`}
+                placeholder={`South Africa`}
+                {...register("senderAddress.country", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
+          </fieldset>
+
+          {/* Reciever details */}
+          <fieldset className="edit-invoice-details">
+            <legend className="edit-field-title">Bill to</legend>
+
+            <div className={`address-line`}>
+              <label className="label" htmlFor={`client`}>
+                Client name
+              </label>
+              <input
+                type="text"
+                id={`client`}
+                className={`input`}
+                placeholder={`Chamu mutezva`}
+                {...register("clientName", { required: true, minLength: 1 })}
+              />
+            </div>
+
+            <div className={`address-line email-line`}>
+              <label className="label" htmlFor={`email`}>
+                Client email
+              </label>
+              <input
+                type="text"
+                id={`email`}
+                className={`input email-address`}
+                placeholder={`mutezva@gmail.com`}
+                {...register("clientEmail", { required: true, minLength: 4 })}
+              />
+            </div>
+
+            <div className={`address-line street-line`}>
+              <label className="label" htmlFor={`client-street`}>
+                street name
+              </label>
+              <input
+                type="text"
+                id={`client-street`}
+                className={`input street`}
+                placeholder="19 Receiver street"
+                {...register("clientAddress.street", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
+            <div className="flex postal-city">
+              <div className={`address-line city-line`}>
+                <label className="label" htmlFor={`client-city`}>
+                  City
+                </label>
+                <input
+                  type="text"
+                  id={`client-city`}
+                  className={`input city`}
+                  placeholder={`London`}
+                  {...register("clientAddress.city", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
+              </div>
+
+              <div className={`address-line postal-line`}>
+                <label className="label" htmlFor={`client-postal`}>
+                  Postal code
+                </label>
+                <input
+                  type="text"
+                  id={`client-postal`}
+                  className={`input postal`}
+                  placeholder={`AE123`}
+                  {...register("clientAddress.postCode", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
+              </div>
+            </div>
+            <div className={`address-line country-line`}>
+              <label className="label" htmlFor={`country`}>
+                Country
+              </label>
+              <input
+                type="text"
+                id={`country`}
+                className={`input country`}
+                placeholder={`South Africa`}
+                {...register("clientAddress.country", {
+                  required: true,
+                  minLength: 4,
+                })}
+              />
+            </div>
+          </fieldset>
+
+          {/* invoice details  */}
+          <fieldset className="edit-invoice-details">
+            <div className={`invoice-date`}>
+              <label className="label" htmlFor={`date`}>
+                Invoice date
+              </label>
+              <input
+                type="date"
+                id={`date`}
+                className={`input date-signed`}
+                placeholder={""}
+                {...register("paymentDue")}
+              />
+            </div>
+
+            <div className="payment-terms">
+              <label className="label" htmlFor="terms">
+                Payment terms
+              </label>
+              <select
+                className="input terms-options"
+                id="terms"
+                {...register("paymentTerms")}
+              >
+                <option value={1}>Net 1 Day</option>
+                <option value={6}>Net 6 days</option>
+                <option value={7}>Net 7 days</option>
+                <option value={14}>Net 14 Days</option>
+                <option value={30}>Net 30 Days</option>
+              </select>
+            </div>
+
+            <div className={`Project name`}>
+              <label className="label" htmlFor={`project-desc`}>
+                Project Description
+              </label>
+              <input
+                type="text"
+                id={`project-desc`}
+                className={`input project-desc`}
+                placeholder={"Description"}
+                {...register("description", { required: true, minLength: 4 })}
+              />
+            </div>
+          </fieldset>
+          <fieldset className="edit-invoice-details">
+            <legend className="edit-field-title">Item list</legend>
+            {invoice.items.map(
+              (
+                item: {
+                  name: string;
+                  quantity: number;
+                  price: number;
+                  total: number;
+                },
+                index: number
+              ) => (
+                <div className="item-line" key={item.name}>
+                  <div className={`project-line`}>
+                    <label className="label" htmlFor={`project-line`}>
+                      Project name
+                    </label>
+                    <input
+                      type="text"
+                      id={`project-name`}
+                      className={`input project-name`}
+                      placeholder={"Name of project"}
+                      {...register(`items.${index}.name`, {
+                        required: true,
+                        minLength: 4,
+                      })}
+                    />
+                  </div>
+
+                  <div className={`costing-line`}>
+                    <div className="quantity-line calculate-line-container">
+                      <label className="label" htmlFor={`qty-line`}>
+                        Qty
+                      </label>
+                      <input
+                        type="number"
+                        id={`qty`}
+                        className={`qty calculate-line`}
+                        placeholder={"1"}
+                        {...register(`items.${index}.quantity`, {
+                          required: true,
+                        })}
+                      />
+                    </div>
+
+                    <div className={`price-line calculate-line-container`}>
+                      <label className="label" htmlFor={`price`}>
+                        Price
+                      </label>
+                      <input
+                        type="number"
+                        step={0.01}
+                        id={`price`}
+                        className={`price calculate-line`}
+                        placeholder={"200.00"}
+                        {...register(`items.${index}.price`, {
+                          required: true,
+                        })}
+                      />
+                    </div>
+
+                    <div className={`item-total-line calculate-line-container`}>
+                      <label className="label" htmlFor={`item-total`}>
+                        Total
+                      </label>
+                      <input
+                        type="number"
+                        id={`item-total`}
+                        className={`item-total calculate-line`}
+                        placeholder={"200.00"}
+                        readOnly
+                        {...register(`items.${index}.total`, {
+                          required: true,
+                        })}
+                      />
+                    </div>
+                    <div className="container-delete calculate-line-container">
+                      <button
+                        className="delete calculate-line"
+                        aria-label="delete product"
+                        onClick={(evt) => {
+                          evt.preventDefault();
+                        }}
+                      >
+                        <img src={DeleteBtn} alt="" aria-hidden={true} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+            <button>
+              <img src={AddItem} alt="" aria-hidden={true} />
+              Add new Item
+            </button>
+          </fieldset>
+        </Form>
+      </main>
+      <footer className="flex footer footer-edit">
+        <button className="btn btn-cancel">Cancel</button>
+        <button className="btn btn-save">Save changes</button>
+      </footer>
+    </>
   );
 }
 
 export default EditInvoice;
-
-/*
- const initialState = {
-    // id: invoice.id,
-    createdAt: invoice.createdAt,
-    paymentDue: invoice.paymentDue,
-    description: invoice.description,
-    paymentTerms: invoice.paymentTerms,
-    clientEmail: invoice.clientEmail,
-    clientName: invoice.clientName,
-    status: invoice.status,
-    total: invoice.total,
-    senderAddress: {
-      street: invoice.senderAddress.street,
-      city: invoice.senderAddress.city,
-      postCode: invoice.senderAddress.postCode,
-      country: invoice.senderAddress.country,
-    },
-    clientAddress: {
-      street: invoice.clientAddress.street,
-      city: invoice.clientAddress.city,
-      postCode: invoice.clientAddress.postCode,
-      country: invoice.clientAddress.country,
-    },
-    items: invoice.items,
-  };
-  console.log(initialState); */

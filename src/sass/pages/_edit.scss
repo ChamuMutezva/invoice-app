@@ -2,7 +2,7 @@
 @use '../utils';
 
 .edit-form>*+* {
-    margin-block-start: 2.5rem;
+    margin-block-start: 1.5rem;
 }
 
 .edit-title {
@@ -36,6 +36,7 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    flex: 1 1 100%;
 }
 
 .label {
@@ -48,7 +49,7 @@
     &:hover,
     &:focus {
         outline: dashed currentColor;
-        outline-offset: .35em;
+        outline-offset: -0.5em;
     }
 
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
@@ -108,4 +109,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+}
+
+.postal-city {
+    gap: base.$spacer1;
+}
+
+.footer-edit {
+    justify-content: flex-end;
+    padding: base.$spacer1;
+    background-color: base.$clr-white-100;
+}
+
+.btn-cancel {
+    background-color: base.$clr-white-400;
+    padding: 1rem 1.5rem;
+    border-radius: 50%;
+    border: none;
+    text-decoration: none;
+
+    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+}
+
+.btn-save {
+    background-color: base.$clr-blue-400;
+    padding: 1rem;
+    border-radius: 24px;
+    border: none;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 }
