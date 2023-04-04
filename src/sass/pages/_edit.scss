@@ -111,8 +111,8 @@
     align-items: flex-start;
 }
 
-.postal-city {
-    gap: base.$spacer1;
+.postal-city {      
+    grid-template-columns: repeat( auto-fit, minmax(120px, 1fr) );    
 }
 
 .footer-edit {
@@ -137,4 +137,15 @@
     border-radius: 24px;
     border: none;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+}
+
+.btn-add-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: base.$clr-white-400;
+    gap: 1rem;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
@@ -6,7 +6,7 @@ import fetchInvoice from "../hooks/fetchInvoice";
 import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItem from "../assets/icon-plus.svg";
-import Inputs from "../components/Inputs";
+// import Inputs from "../components/Inputs";
 
 function EditInvoice() {
   let params = useParams();
@@ -59,6 +59,7 @@ function EditInvoice() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: initialState });
 
@@ -95,7 +96,7 @@ function EditInvoice() {
               />
             </div>
 
-            <div className="flex postal-city">
+            <div className="grid postal-city">
               <div className={`address-line city-line`}>
                 <label className="label" htmlFor={`city`}>
                   City
@@ -127,21 +128,21 @@ function EditInvoice() {
                   })}
                 />
               </div>
-            </div>
-            <div className={`address-line country-line`}>
-              <label className="label" htmlFor={`country`}>
-                Country
-              </label>
-              <input
-                type="text"
-                id={`country`}
-                className={`input country`}
-                placeholder={`South Africa`}
-                {...register("senderAddress.country", {
-                  required: true,
-                  minLength: 4,
-                })}
-              />
+              <div className={`address-line country-line`}>
+                <label className="label" htmlFor={`country`}>
+                  Country
+                </label>
+                <input
+                  type="text"
+                  id={`country`}
+                  className={`input country`}
+                  placeholder={`South Africa`}
+                  {...register("senderAddress.country", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
+              </div>
             </div>
           </fieldset>
 
@@ -190,7 +191,7 @@ function EditInvoice() {
                 })}
               />
             </div>
-            <div className="flex postal-city">
+            <div className="grid postal-city">
               <div className={`address-line city-line`}>
                 <label className="label" htmlFor={`client-city`}>
                   City
@@ -222,56 +223,58 @@ function EditInvoice() {
                   })}
                 />
               </div>
-            </div>
-            <div className={`address-line country-line`}>
-              <label className="label" htmlFor={`country`}>
-                Country
-              </label>
-              <input
-                type="text"
-                id={`country`}
-                className={`input country`}
-                placeholder={`South Africa`}
-                {...register("clientAddress.country", {
-                  required: true,
-                  minLength: 4,
-                })}
-              />
+
+              <div className={`address-line country-line`}>
+                <label className="label" htmlFor={`country`}>
+                  Country
+                </label>
+                <input
+                  type="text"
+                  id={`country`}
+                  className={`input country`}
+                  placeholder={`South Africa`}
+                  {...register("clientAddress.country", {
+                    required: true,
+                    minLength: 4,
+                  })}
+                />
+              </div>
             </div>
           </fieldset>
 
           {/* invoice details  */}
           <fieldset className="edit-invoice-details">
-            <div className={`invoice-date`}>
-              <label className="label" htmlFor={`date`}>
-                Invoice date
-              </label>
-              <input
-                type="date"
-                id={`date`}
-                className={`input date-signed`}
-                placeholder={""}
-                {...register("paymentDue")}
-              />
-            </div>
+            <div className="grid">
+              <div className={`invoice-date`}>
+                <label className="label" htmlFor={`date`}>
+                  Invoice date
+                </label>
+                <input
+                  type="date"
+                  id={`date`}
+                  className={`input date-signed`}
+                  placeholder={""}
+                  {...register("paymentDue")}
+                />
+              </div>
 
-            <div className="payment-terms">
-              <label className="label" htmlFor="terms">
-                Payment terms
-              </label>
-              <select
-                className="input terms-options"
-                id="terms"
-                {...register("paymentTerms")}
-              >
-                <option value={1}>Net 1 Day</option>
-                <option value={6}>Net 6 days</option>
-                <option value={7}>Net 7 days</option>
-                <option value={14}>Net 14 Days</option>
-                <option value={30}>Net 30 Days</option>
-              </select>
+              <div className="payment-terms">
+                <label className="label" htmlFor="terms">
+                  Payment terms
+                </label>
+                <select
+                  className="input terms-options"
+                  id="terms"
+                  {...register("paymentTerms")}
+                >
+                  <option value={1}>Net 1 Day</option>
+                  <option value={6}>Net 6 days</option>
+                  <option value={7}>Net 7 days</option>
+                  <option value={14}>Net 14 Days</option>
+                  <option value={30}>Net 30 Days</option>
+                </select>
+              </div>
             </div>
-
             <div className={`Project name`}>
               <label className="label" htmlFor={`project-desc`}>
                 Project Description
@@ -376,7 +379,7 @@ function EditInvoice() {
                 </div>
               )
             )}
-            <button>
+            <button className="btn-add-item">
               <img src={AddItem} alt="" aria-hidden={true} />
               Add new Item
             </button>

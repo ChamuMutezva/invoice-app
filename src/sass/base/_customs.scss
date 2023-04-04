@@ -85,3 +85,9 @@ $spacer1: 1.5rem;
     align-items: center;
     gap: .5rem;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    gap: $spacer1;
+}
