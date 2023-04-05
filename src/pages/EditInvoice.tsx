@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
@@ -62,6 +62,14 @@ function EditInvoice() {
     setValue,
     formState: { errors },
   } = useForm({ defaultValues: initialState });
+
+  useEffect(() => {
+    const subscription = watch((data) => {
+      // setValue( `items.${index}.total`, )
+      console.log(data);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <>
@@ -329,6 +337,14 @@ function EditInvoice() {
                         placeholder={"1"}
                         {...register(`items.${index}.quantity`, {
                           required: true,
+                          onChange: (evt) => {
+                            console.log(item.quantity * item.price);
+                            console.log(item.quantity)
+                            setValue(
+                              `items.${index}.total`,
+                              item.quantity * item.price
+                            );
+                          },
                         })}
                       />
                     </div>
@@ -345,6 +361,13 @@ function EditInvoice() {
                         placeholder={"200.00"}
                         {...register(`items.${index}.price`, {
                           required: true,
+                          onChange: (evt) => {
+                            console.log(item.quantity * item.price);
+                            setValue(
+                              `items.${index}.total`,
+                              evt.target.value * item.quantity
+                            );
+                          },
                         })}
                       />
                     </div>
@@ -358,7 +381,7 @@ function EditInvoice() {
                         id={`item-total`}
                         className={`item-total calculate-line`}
                         placeholder={"200.00"}
-                        readOnly
+                        readOnly={true}
                         {...register(`items.${index}.total`, {
                           required: true,
                         })}
