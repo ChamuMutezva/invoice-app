@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
 import fetchInvoice from "../hooks/fetchInvoice";
 import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
-import AddItem from "../assets/icon-plus.svg";
+import AddItemImg from "../assets/icon-plus.svg";
+import AddNewProject from "./AddNewProject";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
+  let [showModal, setShowModal] = useState(false)
   let params = useParams();
 
   // Create our number formatter.
@@ -63,6 +65,11 @@ function EditInvoice() {
     formState: { errors },
   } = useForm({ defaultValues: initialState });
 
+  const displayModal = (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    evt.preventDefault()
+    setShowModal(!showModal)
+  }
+
   useEffect(() => {
     const subscription = watch((data) => {
       // setValue( `items.${index}.total`, )
@@ -84,10 +91,11 @@ function EditInvoice() {
             <span className="invoice-num invoice-num-edit">{invoice.id}</span>
           </h2>
 
-          {/*Sender details */}
+          {/* SENDER DETAILS */}
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Bill From</legend>
 
+            {/* SENDER STREET DETAILS */}
             <div className={`address-line street-line`}>
               <label className="label" htmlFor={`street`}>
                 Street Address
@@ -104,6 +112,7 @@ function EditInvoice() {
               />
             </div>
 
+            {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
               <div className={`address-line city-line`}>
                 <label className="label" htmlFor={`city`}>
@@ -121,6 +130,7 @@ function EditInvoice() {
                 />
               </div>
 
+              {/* SENDER POSTAL CODE DETAILS */}
               <div className={`address-line postal-line`}>
                 <label className="label" htmlFor={`postal`}>
                   Postal code
@@ -136,6 +146,8 @@ function EditInvoice() {
                   })}
                 />
               </div>
+
+              {/* SENDER COUNTRY DETAILS */}
               <div className={`address-line country-line`}>
                 <label className="label" htmlFor={`country`}>
                   Country
@@ -154,10 +166,11 @@ function EditInvoice() {
             </div>
           </fieldset>
 
-          {/* Reciever details */}
+          {/* CLIENT DETAILS */}
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Bill to</legend>
 
+            {/* CLIENT NAME DETAILS */}
             <div className={`address-line`}>
               <label className="label" htmlFor={`client`}>
                 Client name
@@ -171,6 +184,7 @@ function EditInvoice() {
               />
             </div>
 
+            {/* CLIENT EMAIL DETAILS */}
             <div className={`address-line email-line`}>
               <label className="label" htmlFor={`email`}>
                 Client email
@@ -184,6 +198,7 @@ function EditInvoice() {
               />
             </div>
 
+            {/* CLIENT STREET DETAILS */}
             <div className={`address-line street-line`}>
               <label className="label" htmlFor={`client-street`}>
                 street name
@@ -199,7 +214,9 @@ function EditInvoice() {
                 })}
               />
             </div>
+
             <div className="grid postal-city">
+              {/* CLIENT CITY DETAILS */}
               <div className={`address-line city-line`}>
                 <label className="label" htmlFor={`client-city`}>
                   City
@@ -215,7 +232,7 @@ function EditInvoice() {
                   })}
                 />
               </div>
-
+              {/* CLIENT POSTAL DETAILS */}
               <div className={`address-line postal-line`}>
                 <label className="label" htmlFor={`client-postal`}>
                   Postal code
@@ -232,6 +249,7 @@ function EditInvoice() {
                 />
               </div>
 
+              {/* CLIENT COUNTRY DETAILS */}
               <div className={`address-line country-line`}>
                 <label className="label" htmlFor={`country`}>
                   Country
@@ -250,7 +268,7 @@ function EditInvoice() {
             </div>
           </fieldset>
 
-          {/* invoice details  */}
+          {/* INVOICE DETAILS  */}
           <fieldset className="edit-invoice-details">
             <div className="grid">
               <div className={`invoice-date`}>
@@ -266,6 +284,7 @@ function EditInvoice() {
                 />
               </div>
 
+              {/* PAYMENT DETAILS */}
               <div className="payment-terms">
                 <label className="label" htmlFor="terms">
                   Payment terms
@@ -283,7 +302,9 @@ function EditInvoice() {
                 </select>
               </div>
             </div>
-            <div className={`Project name`}>
+
+            {/* PROJECT NAME DETAILS */}
+            <div className={`project`}>
               <label className="label" htmlFor={`project-desc`}>
                 Project Description
               </label>
@@ -296,6 +317,7 @@ function EditInvoice() {
               />
             </div>
           </fieldset>
+
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Item list</legend>
             {invoice.items.map(
@@ -309,8 +331,9 @@ function EditInvoice() {
                 index: number
               ) => (
                 <div className="item-line" key={item.name}>
+                  {/* PROJECT NAME DETAILS */}
                   <div className={`project-line`}>
-                    <label className="label" htmlFor={`project-line`}>
+                    <label className="label" htmlFor={`project-name`}>
                       Project name
                     </label>
                     <input
@@ -325,6 +348,7 @@ function EditInvoice() {
                     />
                   </div>
 
+                  {/* QUANTITY DETAILS */}
                   <div className={`costing-line`}>
                     <div className="quantity-line calculate-line-container">
                       <label className="label" htmlFor={`qty-line`}>
@@ -339,7 +363,7 @@ function EditInvoice() {
                           required: true,
                           onChange: (evt) => {
                             console.log(item.quantity * item.price);
-                            console.log(item.quantity)
+                            console.log(item.quantity);
                             setValue(
                               `items.${index}.total`,
                               item.quantity * item.price
@@ -349,6 +373,7 @@ function EditInvoice() {
                       />
                     </div>
 
+                    {/* PRICE DETAILS */}
                     <div className={`price-line calculate-line-container`}>
                       <label className="label" htmlFor={`price`}>
                         Price
@@ -372,6 +397,7 @@ function EditInvoice() {
                       />
                     </div>
 
+                    {/* PROJECT TOTAL DETAILS */}
                     <div className={`item-total-line calculate-line-container`}>
                       <label className="label" htmlFor={`item-total`}>
                         Total
@@ -387,6 +413,8 @@ function EditInvoice() {
                         })}
                       />
                     </div>
+
+                    {/* DELETE PROJECT */}
                     <div className="container-delete calculate-line-container">
                       <button
                         className="delete calculate-line"
@@ -402,16 +430,17 @@ function EditInvoice() {
                 </div>
               )
             )}
-            <button className="btn-add-item">
-              <img src={AddItem} alt="" aria-hidden={true} />
+            <button className="btn-add-item" onClick={(evt) => displayModal(evt)}>
+              <img src={AddItemImg} alt="" aria-hidden={true} />
               Add new Item
             </button>
           </fieldset>
+          <AddNewProject showModal={showModal} />
         </Form>
       </main>
       <footer className="flex footer footer-edit">
-        <button className="btn btn-cancel">Cancel</button>
-        <button className="btn btn-save">Save changes</button>
+        <button className="btn btn-cancel" onClick={(evt) => displayModal(evt)} >Cancel</button>
+        <button className="btn btn-save" onClick={(evt) => displayModal(evt)}>Save changes</button>
       </footer>
     </>
   );

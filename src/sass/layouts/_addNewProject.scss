@@ -1,0 +1,10 @@
+@use '../base';
+@use '../utils';
+
+.modal {
+    display: none;
+}
+
+.showModal {
+    display: block;
+}
