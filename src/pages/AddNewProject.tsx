@@ -1,6 +1,8 @@
 import React from "react";
 
-function AddNewProject(props: { showModal: boolean; }) {
+function AddNewProject(props: {
+  click: any; showModal: boolean; 
+}) {
   return (
     <div className={`modal ${props.showModal ? "showModal" : ""}`}>
       <div className="grid project-container">
@@ -46,7 +48,7 @@ function AddNewProject(props: { showModal: boolean; }) {
         </div>
         <div className="add-item-control">
           <button className="btn btn-cancel-add">Cancel</button>
-          <button className="btn btn-add-project">Add Project</button>
+          <button className="btn btn-add-project" onClick={props.click}>Add Project</button>
         </div>
       </div>
     </div>

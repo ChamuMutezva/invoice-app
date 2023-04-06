@@ -10,7 +10,7 @@ import AddNewProject from "./AddNewProject";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
-  let [showModal, setShowModal] = useState(false)
+  let [showModal, setShowModal] = useState(false);
   let params = useParams();
 
   // Create our number formatter.
@@ -65,10 +65,16 @@ function EditInvoice() {
     formState: { errors },
   } = useForm({ defaultValues: initialState });
 
-  const displayModal = (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    evt.preventDefault()
-    setShowModal(!showModal)
-  }
+  const displayModal = (
+    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    evt.preventDefault();
+    setShowModal(!showModal);
+  };
+
+  const updateItems = (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent> ) => {
+    evt.preventDefault();
+  };
 
   useEffect(() => {
     const subscription = watch((data) => {
@@ -430,17 +436,24 @@ function EditInvoice() {
                 </div>
               )
             )}
-            <button className="btn-add-item" onClick={(evt) => displayModal(evt)}>
+            <button
+              className="btn-add-item"
+              onClick={(evt) => displayModal(evt)}
+            >
               <img src={AddItemImg} alt="" aria-hidden={true} />
               Add new Item
             </button>
           </fieldset>
-          <AddNewProject showModal={showModal} />
+          <AddNewProject showModal={showModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
         </Form>
       </main>
       <footer className="flex footer footer-edit">
-        <button className="btn btn-cancel" onClick={(evt) => displayModal(evt)} >Cancel</button>
-        <button className="btn btn-save" onClick={(evt) => displayModal(evt)}>Save changes</button>
+        <button className="btn btn-cancel" onClick={(evt) => displayModal(evt)}>
+          Cancel
+        </button>
+        <button className="btn btn-save" onClick={(evt) => displayModal(evt)}>
+          Save changes
+        </button>
       </footer>
     </>
   );
