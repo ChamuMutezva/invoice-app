@@ -62,7 +62,7 @@ function EditInvoice() {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty , isValid},
   } = useForm({ defaultValues: initialState });
 
   const displayModal = (
@@ -438,6 +438,7 @@ function EditInvoice() {
             )}
             <button
               className="btn-add-item"
+              disabled={!isDirty || !isValid}
               onClick={(evt) => displayModal(evt)}
             >
               <img src={AddItemImg} alt="" aria-hidden={true} />
