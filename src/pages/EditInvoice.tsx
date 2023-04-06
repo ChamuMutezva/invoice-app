@@ -10,7 +10,17 @@ import AddNewProject from "./AddNewProject";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
+  const newProject = {
+    name: "Project Name",
+    quantity: 1,
+    price: 0.0,
+    total: function () {
+      return this.quantity * this.price;
+    },
+  };
+
   let [showModal, setShowModal] = useState(false);
+  let [project, setProject] = useState(newProject);
   let params = useParams();
 
   // Create our number formatter.
@@ -25,7 +35,7 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
-  console.log(invoice);
+ // console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
@@ -54,7 +64,7 @@ function EditInvoice() {
     },
     items: invoice.items,
   };
-  console.log(initialState);
+ // console.log(initialState);
 
   // load foam with initialstate
   const {
@@ -62,7 +72,7 @@ function EditInvoice() {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, isDirty , isValid},
+    formState: { errors, isDirty, isValid },
   } = useForm({ defaultValues: initialState });
 
   const displayModal = (
@@ -72,14 +82,32 @@ function EditInvoice() {
     setShowModal(!showModal);
   };
 
-  const updateItems = (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent> ) => {
+  const updateItems = (
+    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    /*const newProject = {
+      name: "Project Name",
+      quantity: 1,
+      price: 0.0,
+      total: function () {
+        this.quantity * this.price;
+      },
+    }; */
+
     evt.preventDefault();
+    displayModal(evt);
+  };
+
+  const onChangeNewProject = (evt: { target: { name: any; value: any } }) => {
+    const { name, value } = evt.target;
+    console.log(evt.target);
+    setProject({ ...project, [name]: value });
   };
 
   useEffect(() => {
     const subscription = watch((data) => {
       // setValue( `items.${index}.total`, )
-      console.log(data);
+     // console.log(data);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -445,8 +473,85 @@ function EditInvoice() {
               Add new Item
             </button>
           </fieldset>
-          <AddNewProject showModal={showModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
+          {/* 
+         <AddNewProject showModal={showModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
+                      */}
         </Form>
+        <div className={`modal ${showModal ? "showModal" : ""}`}>
+          <div className="grid project-container">
+            <div className="add-container project-descr-container">
+              <label className="label" htmlFor="project-desc">
+                Project Description
+              </label>
+              <input
+                type="text"
+                className="input"
+                name="project-description"
+                id="project-desc"
+
+                // onChange={}
+              />
+            </div>
+            <div className="add-container project-name-container">
+              <label className="label" htmlFor="project-name">
+                Project name
+              </label>
+              <input
+                type="text"
+                className="input"
+                name="name"
+                id="project-name"
+                value={project.name}
+                onChange={onChangeNewProject}
+              />
+            </div>
+            <div className="add-container quantity-container">
+              <label className="label" htmlFor="quantity">
+                Quantity
+              </label>
+              <input
+                type="text"
+                className="input"
+                name="quantity"
+                id="quantity"
+                value={project.quantity}
+                onChange={onChangeNewProject}
+              />
+            </div>
+            <div className="add-container price-container">
+              <label className="label" htmlFor="price">
+                Price
+              </label>
+              <input
+                type="text"
+                className="input"
+                name="price"
+                id="price"
+                value={project.price}
+                onChange={onChangeNewProject}
+              />
+            </div>
+            <div className="add-container total-container">
+              <label className="label" htmlFor="total">
+                Total
+              </label>
+              <input
+                type="text"
+                className="input"
+                name="total"
+                id="total"
+                readOnly
+                value={project.total()}
+              />
+            </div>
+            <div className="add-item-control">
+              <button className="btn btn-cancel-add">Cancel</button>
+              <button className="btn btn-add-project" onClick={updateItems}>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
       <footer className="flex footer footer-edit">
         <button className="btn btn-cancel" onClick={(evt) => displayModal(evt)}>
