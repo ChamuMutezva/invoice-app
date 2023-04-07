@@ -35,7 +35,7 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
- // console.log(invoice);
+  // console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
@@ -64,9 +64,9 @@ function EditInvoice() {
     },
     items: invoice.items,
   };
- // console.log(initialState);
+  // console.log(initialState);
 
-  // load foam with initialstate
+  // load form with initialstate
   const {
     register,
     handleSubmit,
@@ -75,6 +75,7 @@ function EditInvoice() {
     formState: { errors, isDirty, isValid },
   } = useForm({ defaultValues: initialState });
 
+  // add another project by displaying the modal 
   const displayModal = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
@@ -98,6 +99,10 @@ function EditInvoice() {
     displayModal(evt);
   };
 
+  const submitNewProject = () => {
+    
+  }
+
   const onChangeNewProject = (evt: { target: { name: any; value: any } }) => {
     const { name, value } = evt.target;
     console.log(evt.target);
@@ -107,7 +112,7 @@ function EditInvoice() {
   useEffect(() => {
     const subscription = watch((data) => {
       // setValue( `items.${index}.total`, )
-     // console.log(data);
+      // console.log(data);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -477,8 +482,13 @@ function EditInvoice() {
          <AddNewProject showModal={showModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
                       */}
         </Form>
+
+        {/*
+        Add project layout
+                    */}
         <div className={`modal ${showModal ? "showModal" : ""}`}>
           <div className="grid project-container">
+            {/*
             <div className="add-container project-descr-container">
               <label className="label" htmlFor="project-desc">
                 Project Description
@@ -492,6 +502,7 @@ function EditInvoice() {
                 // onChange={}
               />
             </div>
+                  */}
             <div className="add-container project-name-container">
               <label className="label" htmlFor="project-name">
                 Project name
