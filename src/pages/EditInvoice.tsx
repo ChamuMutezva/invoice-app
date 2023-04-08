@@ -12,7 +12,6 @@ import { updateInvoice } from "../hooks/updateInvoice";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
-
   const newProject = {
     name: "Project Name",
     quantity: 1,
@@ -53,6 +52,18 @@ function EditInvoice() {
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.concat(project),
+    });
+  };
+
+  const deleteProject = (
+    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    name: string
+  ) => {
+    evt.preventDefault();
+    console.log(name);
+    updateInvoiceMutation.mutate({
+      ...invoice,
+      items: invoice.items.filter((item: { name: string; }) => item.name !== name),
     });
   };
 
@@ -102,7 +113,7 @@ function EditInvoice() {
   };
 
   // Updates the array of projects ITEM by diaplaying the modal with
-  // the object to be added to the array. The obj has the following 
+  // the object to be added to the array. The obj has the following
   // Name of project, quantity, price and total.
   const updateItems = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -113,7 +124,7 @@ function EditInvoice() {
     addProject();
   };
 
- // Add project component to add another project to the items array
+  // Add project component to add another project to the items array
   const onChangeNewProject = (evt: {
     target: { name: string; value: string };
   }) => {
@@ -467,9 +478,9 @@ function EditInvoice() {
                       <button
                         className="delete calculate-line"
                         aria-label="delete product"
-                        onClick={(evt) => {
-                          evt.preventDefault();
-                        }}
+                        onClick={(evt) =>
+                          deleteProject(evt, invoice.items[index].name)
+                        }
                       >
                         <img src={DeleteBtn} alt="" aria-hidden={true} />
                       </button>
