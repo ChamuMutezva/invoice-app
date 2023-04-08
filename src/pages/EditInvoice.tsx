@@ -7,15 +7,20 @@ import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import AddNewProject from "./AddNewProject";
+import { useMutation, useQueryClient } from "react-query";
+import { updateInvoice } from "../hooks/updateInvoice";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
+
   const newProject = {
     name: "Project Name",
     quantity: 1,
     price: 100.0,
-    total: 100.00
+    total: 100.0,
   };
+
+  const queryClient = useQueryClient();
 
   let [showModal, setShowModal] = useState(false);
   let [project, setProject] = useState(newProject);
@@ -33,11 +38,25 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
-  // console.log(invoice);
+  console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
 
+  const updateInvoiceMutation = useMutation(updateInvoice, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("invoices");
+    },
+  });
+
+  const addProject = () => {
+    updateInvoiceMutation.mutate({
+      ...invoice,
+      items: invoice.items.concat(project),
+    });
+  };
+
+  // load initial form data on first visit to site
   const initialState = {
     id: invoice.id,
     createdAt: invoice.createdAt,
@@ -73,7 +92,8 @@ function EditInvoice() {
     formState: { errors, isDirty, isValid },
   } = useForm({ defaultValues: initialState });
 
-  // add another project by displaying the modal 
+  // add another project by displaying the modal. This will add an edit component
+  // to add Name of project, quantity, price and total
   const displayModal = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
@@ -81,35 +101,29 @@ function EditInvoice() {
     setShowModal(!showModal);
   };
 
+  // Updates the array of projects ITEM by diaplaying the modal with
+  // the object to be added to the array. The obj has the following 
+  // Name of project, quantity, price and total.
   const updateItems = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
-    /*const newProject = {
-      name: "Project Name",
-      quantity: 1,
-      price: 0.0,
-      total: function () {
-        this.quantity * this.price;
-      },
-    }; */
-    console.log(project)
-
+    console.log(project);
     evt.preventDefault();
     displayModal(evt);
+    addProject();
   };
 
-  const submitNewProject = () => {
-    
-  }
-
-  const onChangeNewProject = (evt: { target: { name: string; value: string } }) => {
+ // Add project component to add another project to the items array
+  const onChangeNewProject = (evt: {
+    target: { name: string; value: string };
+  }) => {
     const { name, value } = evt.target;
-    console.log(evt.target);    
+    console.log(evt.target);
     setProject({ ...project, [name]: value });
   };
 
   useEffect(() => {
-    setProject({...project, total: project.price * project.quantity})
+    setProject({ ...project, total: project.price * project.quantity });
   }, [project.price, project.quantity]);
 
   return (

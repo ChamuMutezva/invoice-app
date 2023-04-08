@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+//import { useMutation } from "react-query";
 import { API_ENDPOINT_PATH } from "../config";
 
 /*export default function updateInvoice(id: any) {
@@ -12,5 +12,5 @@ import { API_ENDPOINT_PATH } from "../config";
 }
 */
 
-export const updateNote = (updatedInvoice: { id: any; })=>
-  axios.put(`${API_ENDPOINT_PATH}/${updatedInvoice.id}`, updatedInvoice).then(res => res.data)
+export const updateInvoice = (updatedInvoice: { _id: any; })=>
+  axios.patch(`${API_ENDPOINT_PATH}/${updatedInvoice._id}`, updatedInvoice).then(res => res.data)
