@@ -8,4 +8,5 @@ export default function createInvoice() {
             return axios.post(`${API_ENDPOINT_PATH}`, newInvoice)
         }
     })
+    return mutation
 }

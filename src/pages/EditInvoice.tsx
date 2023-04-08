@@ -13,10 +13,8 @@ function EditInvoice() {
   const newProject = {
     name: "Project Name",
     quantity: 1,
-    price: 0.0,
-    total: function () {
-      return this.quantity * this.price;
-    },
+    price: 100.0,
+    total: 100.00
   };
 
   let [showModal, setShowModal] = useState(false);
@@ -94,6 +92,7 @@ function EditInvoice() {
         this.quantity * this.price;
       },
     }; */
+    console.log(project)
 
     evt.preventDefault();
     displayModal(evt);
@@ -103,19 +102,15 @@ function EditInvoice() {
     
   }
 
-  const onChangeNewProject = (evt: { target: { name: any; value: any } }) => {
+  const onChangeNewProject = (evt: { target: { name: string; value: string } }) => {
     const { name, value } = evt.target;
-    console.log(evt.target);
+    console.log(evt.target);    
     setProject({ ...project, [name]: value });
   };
 
   useEffect(() => {
-    const subscription = watch((data) => {
-      // setValue( `items.${index}.total`, )
-      // console.log(data);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+    setProject({...project, total: project.price * project.quantity})
+  }, [project.price, project.quantity]);
 
   return (
     <>
@@ -552,7 +547,7 @@ function EditInvoice() {
                 name="total"
                 id="total"
                 readOnly
-                value={project.total()}
+                value={project.total}
               />
             </div>
             <div className="add-item-control">
