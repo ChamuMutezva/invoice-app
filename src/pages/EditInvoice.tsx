@@ -41,7 +41,7 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
-  console.log(invoice);
+  // console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
@@ -66,8 +66,8 @@ function EditInvoice() {
     evt.preventDefault();
     setDeleteProjectModal(!deleteProjectModal);
     setProjectName(name);
-    console.log(name);
-    console.log(deleteProjectModal);
+    // console.log(name);
+    // console.log(deleteProjectModal);
     /*
     updateInvoiceMutation.mutate({
       ...invoice,
@@ -88,7 +88,7 @@ function EditInvoice() {
         (item: { name: string }) => item.name !== projectName
       ),
     });
-    setProjectName("")
+    setProjectName("");
     setDeleteProjectModal(!deleteProjectModal);
   };
 
@@ -129,9 +129,9 @@ function EditInvoice() {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
-
+  console.log(errors);
   // add another project by displaying the modal. This will add an edit component
   // to add Name of project, quantity, price and total
   const toggleDisplayModal = (
@@ -147,7 +147,7 @@ function EditInvoice() {
   const updateItems = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
-    console.log(project);
+    // console.log(project);
     evt.preventDefault();
     toggleDisplayModal(evt);
     addProject();
@@ -158,9 +158,26 @@ function EditInvoice() {
     target: { name: string; value: string };
   }) => {
     const { name, value } = evt.target;
-    console.log(evt.target);
+    // console.log(evt.target);
     setProject({ ...project, [name]: value });
   };
+
+  function handleSubmitForm(data: {
+    id: any;
+    createdAt: any;
+    paymentDue: any;
+    description: any;
+    paymentTerms: any;
+    clientEmail: any;
+    clientName: any;
+    status: any;
+    total: any;
+    senderAddress: { street: any; city: any; postCode: any; country: any };
+    clientAddress: { street: any; city: any; postCode: any; country: any };
+    items: any;
+  }) {
+    console.log("data acceprted");
+  }
 
   useEffect(() => {
     setProject({ ...project, total: project.price * project.quantity });
@@ -171,6 +188,7 @@ function EditInvoice() {
       <main className="main">
         <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
         <Form
+          method="post"
           className="edit-form"
           onSubmit={handleSubmit((data) => console.log(data))}
         >
@@ -194,10 +212,15 @@ function EditInvoice() {
                 className={`input street`}
                 placeholder={`116 Caledorn street`}
                 {...register("senderAddress.street", {
-                  required: true,
+                  required: "Street address is required",
                   minLength: 4,
                 })}
               />
+              {errors.senderAddress?.street && (
+                <p className="form-errors">
+                  {errors.senderAddress.street.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* SENDER CITY DETAILS */}
@@ -212,10 +235,15 @@ function EditInvoice() {
                   className={`input city`}
                   placeholder={`Uitenhage`}
                   {...register("senderAddress.city", {
-                    required: true,
+                    required: "City is required",
                     minLength: 4,
                   })}
                 />
+                {errors.senderAddress?.city && (
+                  <p className="form-errors">
+                    {errors.senderAddress.city.message?.toString()}
+                  </p>
+                )}
               </div>
 
               {/* SENDER POSTAL CODE DETAILS */}
@@ -229,10 +257,15 @@ function EditInvoice() {
                   className={`input postal`}
                   placeholder={`6229`}
                   {...register("senderAddress.postCode", {
-                    required: true,
+                    required: "Enter postal code",
                     minLength: 4,
                   })}
                 />
+                {errors.senderAddress?.postCode && (
+                  <p className="form-errors">
+                    {errors.senderAddress.postCode.message?.toString()}
+                  </p>
+                )}
               </div>
 
               {/* SENDER COUNTRY DETAILS */}
@@ -246,10 +279,15 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   {...register("senderAddress.country", {
-                    required: true,
+                    required: "Country is required",
                     minLength: 4,
                   })}
                 />
+                {errors.senderAddress?.country && (
+                  <p className="form-errors">
+                    {errors.senderAddress.country.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
           </fieldset>
@@ -268,8 +306,16 @@ function EditInvoice() {
                 id={`client`}
                 className={`input`}
                 placeholder={`Chamu mutezva`}
-                {...register("clientName", { required: true, minLength: 1 })}
+                {...register("clientName", {
+                  required: "Client name is required",
+                  minLength: 1,
+                })}
               />
+              {errors.clientName && (
+                <p className="form-errors">
+                  {errors.clientName.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* CLIENT EMAIL DETAILS */}
@@ -282,8 +328,16 @@ function EditInvoice() {
                 id={`email`}
                 className={`input email-address`}
                 placeholder={`mutezva@gmail.com`}
-                {...register("clientEmail", { required: true, minLength: 4 })}
+                {...register("clientEmail", {
+                  required: "Enter valid email",
+                  minLength: 4,
+                })}
               />
+              {errors.clientEmail && (
+                <p className="form-errors">
+                  {errors.clientEmail.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* CLIENT STREET DETAILS */}
@@ -297,10 +351,15 @@ function EditInvoice() {
                 className={`input street`}
                 placeholder="19 Receiver street"
                 {...register("clientAddress.street", {
-                  required: true,
+                  required: "Client street is required",
                   minLength: 4,
                 })}
               />
+              {errors.clientAddress?.street && (
+                <p className="form-errors">
+                  {errors.clientAddress.street.message?.toString()}
+                </p>
+              )}
             </div>
 
             <div className="grid postal-city">
@@ -315,10 +374,15 @@ function EditInvoice() {
                   className={`input city`}
                   placeholder={`London`}
                   {...register("clientAddress.city", {
-                    required: true,
+                    required: "Client city is required",
                     minLength: 4,
                   })}
                 />
+                {errors.clientAddress?.city && (
+                  <p className="form-errors">
+                    {errors.clientAddress.city.message?.toString()}
+                  </p>
+                )}
               </div>
               {/* CLIENT POSTAL DETAILS */}
               <div className={`address-line postal-line`}>
@@ -331,10 +395,15 @@ function EditInvoice() {
                   className={`input postal`}
                   placeholder={`AE123`}
                   {...register("clientAddress.postCode", {
-                    required: true,
+                    required: "Postal code is required",
                     minLength: 4,
                   })}
                 />
+                {errors.clientAddress?.postCode && (
+                  <p className="form-errors">
+                    {errors.clientAddress.postCode.message?.toString()}
+                  </p>
+                )}
               </div>
 
               {/* CLIENT COUNTRY DETAILS */}
@@ -348,10 +417,15 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   {...register("clientAddress.country", {
-                    required: true,
+                    required: "Client country is required",
                     minLength: 4,
                   })}
                 />
+                {errors.clientAddress?.country && (
+                  <p className="form-errors">
+                    {errors.clientAddress.country.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
           </fieldset>
@@ -368,8 +442,15 @@ function EditInvoice() {
                   id={`date`}
                   className={`input date-signed`}
                   placeholder={""}
-                  {...register("paymentDue")}
+                  {...register("paymentDue", {
+                    required: "Select a date",
+                  })}
                 />
+                {errors.paymentDue && (
+                  <p className="form-errors">
+                    {errors.paymentDue.message?.toString()}
+                  </p>
+                )}
               </div>
 
               {/* PAYMENT DETAILS */}
@@ -380,7 +461,9 @@ function EditInvoice() {
                 <select
                   className="input terms-options"
                   id="terms"
-                  {...register("paymentTerms")}
+                  {...register("paymentTerms", {
+                    required: "Select payment option",
+                  })}
                 >
                   <option value={1}>Net 1 Day</option>
                   <option value={6}>Net 6 days</option>
@@ -388,6 +471,11 @@ function EditInvoice() {
                   <option value={14}>Net 14 Days</option>
                   <option value={30}>Net 30 Days</option>
                 </select>
+                {errors.paymentTerms && (
+                  <p className="form-errors">
+                    {errors.paymentTerms.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -401,8 +489,16 @@ function EditInvoice() {
                 id={`project-desc`}
                 className={`input project-desc`}
                 placeholder={"Description"}
-                {...register("description", { required: true, minLength: 4 })}
+                {...register("description", {
+                  required: "Project description required",
+                  minLength: 4,
+                })}
               />
+              {errors.description && (
+                <p className="form-errors">
+                  {errors.description.message?.toString()}
+                </p>
+              )}
             </div>
           </fieldset>
 
@@ -433,7 +529,7 @@ function EditInvoice() {
                         required: true,
                         minLength: 4,
                       })}
-                    />
+                    />                   
                   </div>
 
                   {/* QUANTITY DETAILS */}
@@ -530,95 +626,94 @@ function EditInvoice() {
           {/* 
          <AddNewProject showProjectModal={showProjectModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
                       */}
-        </Form>
-
-        {/*  Add project layout */}
-        <div className={`modal ${showProjectModal ? "showProjectModal" : ""}`}>
-          <div className="grid project-container">
-            {/* Name of project*/}
-            <div className="add-container project-name-container">
-              <label className="label" htmlFor="project-name">
-                Project name
-              </label>
-              <input
-                type="text"
-                className="input"
-                name="name"
-                id="project-name"
-                value={project.name}
-                onChange={onChangeNewProject}
-              />
-            </div>
-            {/* quantity required */}
-            <div className="add-container quantity-container">
-              <label className="label" htmlFor="quantity">
-                Quantity
-              </label>
-              <input
-                type="text"
-                className="input"
-                name="quantity"
-                id="quantity"
-                value={project.quantity}
-                onChange={onChangeNewProject}
-              />
-            </div>
-            {/* unit required*/}
-            <div className="add-container price-container">
-              <label className="label" htmlFor="price">
-                Price
-              </label>
-              <input
-                type="text"
-                className="input"
-                name="price"
-                id="price"
-                value={project.price}
-                onChange={onChangeNewProject}
-              />
-            </div>
-            {/* total cost */}
-            <div className="add-container total-container">
-              <label className="label" htmlFor="total">
-                Total
-              </label>
-              <input
-                type="text"
-                className="input"
-                name="total"
-                id="total"
-                readOnly
-                value={project.total}
-              />
-            </div>
-            <div className="add-item-control">
-              <button
-                className="btn btn-cancel-add"
-                onClick={(evt) => toggleDisplayModal(evt)}
-              >
-                Cancel
-              </button>
-              <button className="btn btn-add-project" onClick={updateItems}>
-                Add Project
-              </button>
+          {/*  Add project layout */}
+          <div
+            className={`modal ${showProjectModal ? "showProjectModal" : ""}`}
+          >
+            <div className="grid project-container">
+              {/* Name of project*/}
+              <div className="add-container project-name-container">
+                <label className="label" htmlFor="project-name">
+                  Project name
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  name="name"
+                  id="project-name"
+                  value={project.name}
+                  onChange={onChangeNewProject}
+                />
+              </div>
+              {/* quantity required */}
+              <div className="add-container quantity-container">
+                <label className="label" htmlFor="quantity">
+                  Quantity
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  name="quantity"
+                  id="quantity"
+                  value={project.quantity}
+                  onChange={onChangeNewProject}
+                />
+              </div>
+              {/* unit required*/}
+              <div className="add-container price-container">
+                <label className="label" htmlFor="price">
+                  Price
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  name="price"
+                  id="price"
+                  value={project.price}
+                  onChange={onChangeNewProject}
+                />
+              </div>
+              {/* total cost */}
+              <div className="add-container total-container">
+                <label className="label" htmlFor="total">
+                  Total
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  name="total"
+                  id="total"
+                  readOnly
+                  value={project.total}
+                />
+              </div>
+              <div className="add-item-control">
+                <button
+                  className="btn btn-cancel-add"
+                  onClick={(evt) => toggleDisplayModal(evt)}
+                >
+                  Cancel
+                </button>
+                <button className="btn btn-add-project" onClick={updateItems}>
+                  Add Project
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+          <div className="flex footer footer-edit">
+            <button
+              className="btn btn-cancel"
+              onClick={(evt) => toggleDisplayModal(evt)}
+            >
+              Cancel
+            </button>
+            <button className="btn btn-save" type="submit">
+              Save changes
+            </button>
+          </div>
+        </Form>
       </main>
-      <footer className="flex footer footer-edit">
-        <button
-          className="btn btn-cancel"
-          onClick={(evt) => toggleDisplayModal(evt)}
-        >
-          Cancel
-        </button>
-        <button
-          className="btn btn-save"
-          onClick={(evt) => toggleDisplayModal(evt)}
-        >
-          Save changes
-        </button>
-      </footer>
+
       <DeleteProject
         deleteModal={deleteProjectModal}
         exitWithoutDeletingProject={exitWithoutDeletingProject}

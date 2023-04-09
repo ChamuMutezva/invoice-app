@@ -17,7 +17,9 @@ function ViewInvoice() {
   }
 
   const totalArray = invoice.items.map((item: { total: any }) => item.total);
-  const grandTotal = totalArray.reduce(reducer);
+ // console.log(totalArray)  
+  const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+//  console.log(grandTotal)
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
