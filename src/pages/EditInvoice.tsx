@@ -505,7 +505,7 @@ function EditInvoice() {
                     {/* DELETE PROJECT */}
                     <div className="container-delete calculate-line-container">
                       <button
-                        className="delete calculate-line"
+                        className="btn btn-delete calculate-line"
                         aria-label="delete product"
                         onClick={(evt) =>
                           deleteProjectDialog(evt, invoice.items[index].name)
@@ -519,7 +519,7 @@ function EditInvoice() {
               )
             )}
             <button
-              className="btn-add-item"
+              className="btn btn-add-item"
               disabled={!isDirty || !isValid}
               onClick={(evt) => toggleDisplayModal(evt)}
             >
@@ -623,6 +623,7 @@ function EditInvoice() {
         deleteModal={deleteProjectModal}
         exitWithoutDeletingProject={exitWithoutDeletingProject}
         deleteProjectConfirmation={deleteProjectConfirmation}
+        name={projectName}
       />
     </>
   );

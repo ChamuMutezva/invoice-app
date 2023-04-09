@@ -3,59 +3,64 @@
 @use '../utils';
 
 .modal-wrapper {
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background: hsla(225deg,9%,9%,.75);
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: hsla(225deg, 9%, 9%, .75);
 }
 
 .show-modal {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .delete-confirmation {
-	max-width: 21.5rem;
-	width: 95%;
-	background: hsl(0deg,0%,100%);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	gap: 1.5rem;
-	padding: 1.5rem;
-	border-radius: 4px;
+.delete-confirmation {
+    max-width: 21.5rem;
+    width: 95%;
+    background: hsl(0deg, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 4px;
 }
 
 .delete-close {
-	background-color: #000;
-	border: transparent;
-	padding: .45rem;
-	border-radius: 5px;
-	align-self: flex-end;
+    background-color: #000;
+    border: transparent;
+    padding: .45rem;
+    border-radius: 5px;
+    align-self: flex-end;
 }
 
-.modal-heading {	
-	font-size: 1.25rem;
-	font-weight: 700;
-	color: #353a40;
+.modal-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #353a40;
 }
 
 .modal-text {
-	color: #7d8187;
+    color: #7d8187;
 }
 
 .btn-confirm-delete {
-	width: 100%;
-	text-align: center;
-	padding-block: 1rem;
-	background-color: #e46644;
-	color: #fff;
-	border: transparent;
-	border-radius: 4px;
-	font-weight: 400;
+    width: 100%;
+    text-align: center;
+    padding-block: 1rem;
+    background-color: base.$clr-pink-200;
+    color: base.$clr-white-100;
+    border: transparent;
+    border-radius: 4px;
+    font-weight: 400;
+
+    &:hover,
+    &:focus {
+        outline-offset: -0.5em;
+    }
 }
