@@ -63,7 +63,9 @@ function EditInvoice() {
     console.log(name);
     updateInvoiceMutation.mutate({
       ...invoice,
-      items: invoice.items.filter((item: { name: string; }) => item.name !== name),
+      items: invoice.items.filter(
+        (item: { name: string }) => item.name !== name
+      ),
     });
   };
 
@@ -105,7 +107,7 @@ function EditInvoice() {
 
   // add another project by displaying the modal. This will add an edit component
   // to add Name of project, quantity, price and total
-  const displayModal = (
+  const toggleDisplayModal = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
@@ -120,7 +122,7 @@ function EditInvoice() {
   ) => {
     console.log(project);
     evt.preventDefault();
-    displayModal(evt);
+    toggleDisplayModal(evt);
     addProject();
   };
 
@@ -492,7 +494,7 @@ function EditInvoice() {
             <button
               className="btn-add-item"
               disabled={!isDirty || !isValid}
-              onClick={(evt) => displayModal(evt)}
+              onClick={(evt) => toggleDisplayModal(evt)}
             >
               <img src={AddItemImg} alt="" aria-hidden={true} />
               Add new Item
@@ -576,7 +578,12 @@ function EditInvoice() {
               />
             </div>
             <div className="add-item-control">
-              <button className="btn btn-cancel-add">Cancel</button>
+              <button
+                className="btn btn-cancel-add"
+                onClick={(evt) => toggleDisplayModal(evt)}
+              >
+                Cancel
+              </button>
               <button className="btn btn-add-project" onClick={updateItems}>
                 Add Project
               </button>
@@ -585,10 +592,16 @@ function EditInvoice() {
         </div>
       </main>
       <footer className="flex footer footer-edit">
-        <button className="btn btn-cancel" onClick={(evt) => displayModal(evt)}>
+        <button
+          className="btn btn-cancel"
+          onClick={(evt) => toggleDisplayModal(evt)}
+        >
           Cancel
         </button>
-        <button className="btn btn-save" onClick={(evt) => displayModal(evt)}>
+        <button
+          className="btn btn-save"
+          onClick={(evt) => toggleDisplayModal(evt)}
+        >
           Save changes
         </button>
       </footer>
