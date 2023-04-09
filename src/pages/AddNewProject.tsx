@@ -1,10 +1,10 @@
 import React from "react";
 
 function AddNewProject(props: {
-  click: any; showModal: boolean; 
+  click: any; showProjectModal: boolean; 
 }) {
   return (
-    <div className={`modal ${props.showModal ? "showModal" : ""}`}>
+    <div className={`modal ${props.showProjectModal ? "showProjectModal" : ""}`}>
       <div className="grid project-container">
         <div className="add-container project-descr-container">
           <label className="label" htmlFor="project-desc">

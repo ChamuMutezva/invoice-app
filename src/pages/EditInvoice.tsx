@@ -9,6 +9,8 @@ import AddItemImg from "../assets/icon-plus.svg";
 import AddNewProject from "./AddNewProject";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
+import DeleteProject from "../components/DeleteProject";
+import { set } from "date-fns";
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
@@ -21,7 +23,9 @@ function EditInvoice() {
 
   const queryClient = useQueryClient();
 
-  let [showModal, setShowModal] = useState(false);
+  let [showProjectModal, setShowProjectModal] = useState(false);
+  let [deleteProjectModal, setDeleteProjectModal] = useState(false);
+  let [projectName, setProjectName] = useState("");
   let [project, setProject] = useState(newProject);
   let params = useParams();
 
@@ -55,18 +59,41 @@ function EditInvoice() {
     });
   };
 
-  const deleteProject = (
+  const deleteProjectDialog = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     name: string
   ) => {
     evt.preventDefault();
+    setDeleteProjectModal(!deleteProjectModal);
+    setProjectName(name);
     console.log(name);
+    console.log(deleteProjectModal);
+    /*
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.filter(
         (item: { name: string }) => item.name !== name
       ),
     });
+    */
+  };
+
+  const deleteProjectConfirmation = (
+    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    evt.preventDefault();
+    updateInvoiceMutation.mutate({
+      ...invoice,
+      items: invoice.items.filter(
+        (item: { name: string }) => item.name !== projectName
+      ),
+    });
+    setProjectName("")
+    setDeleteProjectModal(!deleteProjectModal);
+  };
+
+  const exitWithoutDeletingProject = () => {
+    setDeleteProjectModal(!deleteProjectModal);
   };
 
   // load initial form data on first visit to site
@@ -111,7 +138,7 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
-    setShowModal(!showModal);
+    setShowProjectModal(!showProjectModal);
   };
 
   // Updates the array of projects ITEM by diaplaying the modal with
@@ -481,7 +508,7 @@ function EditInvoice() {
                         className="delete calculate-line"
                         aria-label="delete product"
                         onClick={(evt) =>
-                          deleteProject(evt, invoice.items[index].name)
+                          deleteProjectDialog(evt, invoice.items[index].name)
                         }
                       >
                         <img src={DeleteBtn} alt="" aria-hidden={true} />
@@ -501,30 +528,14 @@ function EditInvoice() {
             </button>
           </fieldset>
           {/* 
-         <AddNewProject showModal={showModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
+         <AddNewProject showProjectModal={showProjectModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
                       */}
         </Form>
 
-        {/*
-        Add project layout
-                    */}
-        <div className={`modal ${showModal ? "showModal" : ""}`}>
+        {/*  Add project layout */}
+        <div className={`modal ${showProjectModal ? "showProjectModal" : ""}`}>
           <div className="grid project-container">
-            {/*
-            <div className="add-container project-descr-container">
-              <label className="label" htmlFor="project-desc">
-                Project Description
-              </label>
-              <input
-                type="text"
-                className="input"
-                name="project-description"
-                id="project-desc"
-
-                // onChange={}
-              />
-            </div>
-                  */}
+            {/* Name of project*/}
             <div className="add-container project-name-container">
               <label className="label" htmlFor="project-name">
                 Project name
@@ -538,6 +549,7 @@ function EditInvoice() {
                 onChange={onChangeNewProject}
               />
             </div>
+            {/* quantity required */}
             <div className="add-container quantity-container">
               <label className="label" htmlFor="quantity">
                 Quantity
@@ -551,6 +563,7 @@ function EditInvoice() {
                 onChange={onChangeNewProject}
               />
             </div>
+            {/* unit required*/}
             <div className="add-container price-container">
               <label className="label" htmlFor="price">
                 Price
@@ -564,6 +577,7 @@ function EditInvoice() {
                 onChange={onChangeNewProject}
               />
             </div>
+            {/* total cost */}
             <div className="add-container total-container">
               <label className="label" htmlFor="total">
                 Total
@@ -605,6 +619,11 @@ function EditInvoice() {
           Save changes
         </button>
       </footer>
+      <DeleteProject
+        deleteModal={deleteProjectModal}
+        exitWithoutDeletingProject={exitWithoutDeletingProject}
+        deleteProjectConfirmation={deleteProjectConfirmation}
+      />
     </>
   );
 }
