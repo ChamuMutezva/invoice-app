@@ -7,10 +7,10 @@ import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import AddNewProject from "./AddNewProject";
-import { useMutation, useQueryClient } from "react-query";
+import { Mutation, useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
 import DeleteProject from "../components/DeleteProject";
-import { set } from "date-fns";
+
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
@@ -41,7 +41,8 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
-  // console.log(invoice);
+  // const invoice2 = fetchInvoice(params.id).invoice;
+
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
@@ -98,6 +99,7 @@ function EditInvoice() {
 
   // load initial form data on first visit to site
   const initialState = {
+    _id: invoice._id,
     id: invoice.id,
     createdAt: invoice.createdAt,
     paymentDue: invoice.paymentDue,
@@ -162,7 +164,8 @@ function EditInvoice() {
     setProject({ ...project, [name]: value });
   };
 
-  function handleSubmitForm(data: {
+  const handleSubmitForm = (data: {
+    _id: any,
     id: any;
     createdAt: any;
     paymentDue: any;
@@ -175,9 +178,13 @@ function EditInvoice() {
     senderAddress: { street: any; city: any; postCode: any; country: any };
     clientAddress: { street: any; city: any; postCode: any; country: any };
     items: any;
-  }) {
-    console.log("data acceprted");
-  }
+  }) => {
+    const invoice = {
+      ...data
+    };
+    console.log(data);
+    updateInvoiceMutation.mutate(invoice);
+  };
 
   useEffect(() => {
     setProject({ ...project, total: project.price * project.quantity });
@@ -190,7 +197,7 @@ function EditInvoice() {
         <Form
           method="post"
           className="edit-form"
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit(handleSubmitForm)}
         >
           <h2 className="edit-title">
             Edit
@@ -529,7 +536,7 @@ function EditInvoice() {
                         required: true,
                         minLength: 4,
                       })}
-                    />                   
+                    />
                   </div>
 
                   {/* QUANTITY DETAILS */}
@@ -550,7 +557,7 @@ function EditInvoice() {
                             console.log(item.quantity);
                             setValue(
                               `items.${index}.total`,
-                              item.quantity * item.price
+                              evt.target.value * item.price
                             );
                           },
                         })}
