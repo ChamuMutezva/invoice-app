@@ -24,13 +24,13 @@ function EditInvoice() {
 
   const queryClient = useQueryClient();
 
-  let [showProjectModal, setShowProjectModal] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false);
   // let [openUpdateInvoice, setOpenUpdateInvoice] = useState(false);
   // let [saveUpdatedInvoice, setSaveUpdatedInvoice] = useState(false);
-  let [deleteProjectModal, setDeleteProjectModal] = useState(false);
-  let [projectName, setProjectName] = useState("");
-  let [project, setProject] = useState(newProject);
-  let params = useParams();
+  const [deleteProjectModal, setDeleteProjectModal] = useState(false);
+  const [projectName, setProjectName] = useState("");
+  const [project, setProject] = useState(newProject);
+  const params = useParams();
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
@@ -45,7 +45,7 @@ function EditInvoice() {
       : getInvoice(params.id);
 
   // const invoice2 = fetchInvoice(params.id).invoice;
-
+  console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
   }
