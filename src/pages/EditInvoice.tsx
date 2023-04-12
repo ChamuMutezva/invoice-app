@@ -7,9 +7,10 @@ import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import AddNewProject from "./AddNewProject";
-import { Mutation, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
 import DeleteProject from "../components/DeleteProject";
+// import SaveInvoice from "../components/SaveInvoice";
 
 // import Inputs from "../components/Inputs";
 
@@ -24,6 +25,8 @@ function EditInvoice() {
   const queryClient = useQueryClient();
 
   let [showProjectModal, setShowProjectModal] = useState(false);
+  // let [openUpdateInvoice, setOpenUpdateInvoice] = useState(false);
+  // let [saveUpdatedInvoice, setSaveUpdatedInvoice] = useState(false);
   let [deleteProjectModal, setDeleteProjectModal] = useState(false);
   let [projectName, setProjectName] = useState("");
   let [project, setProject] = useState(newProject);
@@ -60,6 +63,9 @@ function EditInvoice() {
     });
   };
 
+  // Opens the Delete Project dialog with 2 options
+  // 1. Option 1 - Cancel delete and return to previous page
+  // 2. Option 2 - Delete project and return to previous page
   const deleteProjectDialog = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     name: string
@@ -67,18 +73,9 @@ function EditInvoice() {
     evt.preventDefault();
     setDeleteProjectModal(!deleteProjectModal);
     setProjectName(name);
-    // console.log(name);
-    // console.log(deleteProjectModal);
-    /*
-    updateInvoiceMutation.mutate({
-      ...invoice,
-      items: invoice.items.filter(
-        (item: { name: string }) => item.name !== name
-      ),
-    });
-    */
   };
 
+  // Deletes a project from the invoice
   const deleteProjectConfirmation = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
@@ -93,6 +90,7 @@ function EditInvoice() {
     setDeleteProjectModal(!deleteProjectModal);
   };
 
+  // Project not deleted
   const exitWithoutDeletingProject = () => {
     setDeleteProjectModal(!deleteProjectModal);
   };
@@ -134,6 +132,7 @@ function EditInvoice() {
     formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
   console.log(errors);
+
   // add another project by displaying the modal. This will add an edit component
   // to add Name of project, quantity, price and total
   const toggleDisplayModal = (
@@ -165,7 +164,7 @@ function EditInvoice() {
   };
 
   const handleSubmitForm = (data: {
-    _id: any,
+    _id: any;
     id: any;
     createdAt: any;
     paymentDue: any;
@@ -180,10 +179,11 @@ function EditInvoice() {
     items: any;
   }) => {
     const invoice = {
-      ...data
+      ...data,
     };
-    console.log(data);
+
     updateInvoiceMutation.mutate(invoice);
+    alert("Invoice has been saved");
   };
 
   useEffect(() => {
@@ -710,7 +710,7 @@ function EditInvoice() {
           <div className="flex footer footer-edit">
             <button
               className="btn btn-cancel"
-              onClick={(evt) => toggleDisplayModal(evt)}
+              onClick={(evt) => evt.preventDefault()}
             >
               Cancel
             </button>

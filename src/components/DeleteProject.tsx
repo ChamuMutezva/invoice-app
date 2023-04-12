@@ -20,7 +20,6 @@ function DeleteProject(props: {
       <FocusTrap active={props.deleteModal}>
         <div className="delete-confirmation">
           <button
-           
             type="button"
             className="btn delete-close"
             onClick={props.exitWithoutDeletingProject}
