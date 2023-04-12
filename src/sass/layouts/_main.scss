@@ -1,6 +1,24 @@
 @use '../base';
 @use '../utils';
 
+.main {
+    margin: base.$spacer1;
+    max-width: 45.6rem;
+
+    @include utils.mQ(40rem) {
+        margin-inline: base.$spacer1 * 2;
+    }
+
+    @include utils.mQ(48rem) {
+        margin-inline: auto;
+    }
+
+    @include utils.mQ(64rem) {
+        margin-block: 0;
+        padding-block: 2.5rem
+    }
+}
+
 .summary-title {
     @include utils.fonts(base.$clr-black-200, base.$fs-24, 700);   
 }

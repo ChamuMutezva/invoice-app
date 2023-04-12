@@ -94,7 +94,7 @@ function HomePage() {
                 return (
                   <div key={invoice.id} className="card">
                     <p className="invoice-num">{invoice.id}</p>
-                    <p className="clientname">{invoice.clientName}</p>
+                    <p className="client-name">{invoice.clientName}</p>
                     <p className="payment-date">Due {invoice.paymentDue}</p>
                     <p className="amount-total">
                       {formatter.format(invoice.total)}

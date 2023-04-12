@@ -5,19 +5,6 @@
     background-color: base.$clr-white-200;
 }
 
-.main {
-    margin: base.$spacer1;
-    max-width: 45.6rem;
-
-    @include utils.mQ(40rem) {
-        margin-inline: base.$spacer1 * 2;
-    }
-
-    @include utils.mQ(48rem) {
-        margin-inline: auto;
-    }
-}
-
 .pre-loading {
     position: relative;
     z-index: 1;
@@ -29,4 +16,53 @@
     flex-direction: column;
     line-height: 1.38;
     @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
+}
+
+.dark-mode {
+    background-color: base.$clr-black-300;
+    color: base.$clr-white-100;
+
+    .summary-title,
+    .filter-label {
+        color: base.$clr-white-100;
+    }
+
+    .filter {
+        color: base.$clr-white-100;
+        background-color: base.$clr-black-200;
+    }
+
+    .card {
+        background-color: base.$clr-black-200;
+        color: base.$clr-white-100;
+    }
+
+    .invoice-num,
+    .client-name,
+    .amount-total,
+    .draft-status {
+        color: base.$clr-white-100;
+    }
+
+    .address-sender-details,
+    .address-reciever-details {
+        color: base.$clr-white-300;
+    }
+
+    .invoice-descr,
+    .invoice-date-title,
+    .bill-to-title,
+    .email-title {
+        color: base.$clr-white-300;
+    }
+
+    .invoice-date, .payment-date-view, .billed-name, .item-descr, .email-to, .gross-total {
+        color: base.$clr-white-100;       
+    }
+
+    .item-summary {
+        background-color: base.$clr-black-400;
+        color: base.$clr-white-100;
+    }
+
 }

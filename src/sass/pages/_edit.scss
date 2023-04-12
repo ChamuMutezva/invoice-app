@@ -74,16 +74,24 @@
 }
 
 .calculate-line {
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
     border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: base.$fs-15;
 
     @include utils.mQ(45rem) {
         max-width: 12rem;
     }
+}
+
+.item-total {
+    -webkit-appearance: none;
+    background-color: inherit;
 }
 
 .calculate-line-container {
@@ -111,8 +119,8 @@
     align-items: flex-start;
 }
 
-.postal-city {      
-    grid-template-columns: repeat( auto-fit, minmax(120px, 1fr) );    
+.postal-city {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
 .footer-edit {

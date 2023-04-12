@@ -52,7 +52,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="app">
+      <div className={`app ${theme ? "" : "dark-mode"}`}>
         <header className="flex header">
           <div className="flex controls">
             <div className="logo-container">

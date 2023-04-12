@@ -198,3 +198,14 @@
     border: none;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 }
+
+.dark-mode {
+    .container-invoice {
+        background-color: base.$clr-black-200;
+        color: base.$clr-white-100;
+    }
+
+    .nav-view {
+        background-color: base.$clr-black-400;
+    }
+}

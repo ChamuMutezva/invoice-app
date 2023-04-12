@@ -58,7 +58,7 @@
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }
 
-.clientname {
+.client-name {
     @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }
 
