@@ -216,6 +216,7 @@ function EditInvoice() {
               <input
                 type="text"
                 id={`street`}
+                aria-labelledby="sender-street"
                 className={`input street`}
                 placeholder={`116 Caledorn street`}
                 {...register("senderAddress.street", {
@@ -224,7 +225,7 @@ function EditInvoice() {
                 })}
               />
               {errors.senderAddress?.street && (
-                <p className="form-errors">
+                <p id="sender-street" className="form-errors">
                   {errors.senderAddress.street.message?.toString()}
                 </p>
               )}
@@ -239,6 +240,7 @@ function EditInvoice() {
                 <input
                   type="text"
                   id={`city`}
+                  aria-labelledby="sender-city"
                   className={`input city`}
                   placeholder={`Uitenhage`}
                   {...register("senderAddress.city", {
@@ -247,7 +249,7 @@ function EditInvoice() {
                   })}
                 />
                 {errors.senderAddress?.city && (
-                  <p className="form-errors">
+                  <p id="sender-city" className="form-errors">
                     {errors.senderAddress.city.message?.toString()}
                   </p>
                 )}
@@ -262,6 +264,7 @@ function EditInvoice() {
                   type="text"
                   id={`postal`}
                   className={`input postal`}
+                  aria-labelledby="sender-postal"
                   placeholder={`6229`}
                   {...register("senderAddress.postCode", {
                     required: "Enter postal code",
@@ -269,7 +272,7 @@ function EditInvoice() {
                   })}
                 />
                 {errors.senderAddress?.postCode && (
-                  <p className="form-errors">
+                  <p id="sender-postal" className="form-errors">
                     {errors.senderAddress.postCode.message?.toString()}
                   </p>
                 )}
@@ -285,13 +288,14 @@ function EditInvoice() {
                   id={`country`}
                   className={`input country`}
                   placeholder={`South Africa`}
+                  aria-labelledby="sender-country"
                   {...register("senderAddress.country", {
                     required: "Country is required",
                     minLength: 4,
                   })}
                 />
                 {errors.senderAddress?.country && (
-                  <p className="form-errors">
+                  <p id="sender-country" className="form-errors">
                     {errors.senderAddress.country.message?.toString()}
                   </p>
                 )}
@@ -313,13 +317,14 @@ function EditInvoice() {
                 id={`client`}
                 className={`input`}
                 placeholder={`Chamu mutezva`}
+                aria-labelledby="client-name-lbl"
                 {...register("clientName", {
                   required: "Client name is required",
                   minLength: 1,
                 })}
               />
               {errors.clientName && (
-                <p className="form-errors">
+                <p id="client-name-lbl" className="form-errors">
                   {errors.clientName.message?.toString()}
                 </p>
               )}
@@ -335,13 +340,14 @@ function EditInvoice() {
                 id={`email`}
                 className={`input email-address`}
                 placeholder={`mutezva@gmail.com`}
+                aria-labelledby="client-email-lbl"
                 {...register("clientEmail", {
                   required: "Enter valid email",
                   minLength: 4,
                 })}
               />
               {errors.clientEmail && (
-                <p className="form-errors">
+                <p id="client-email-lbl" className="form-errors">
                   {errors.clientEmail.message?.toString()}
                 </p>
               )}
@@ -357,13 +363,14 @@ function EditInvoice() {
                 id={`client-street`}
                 className={`input street`}
                 placeholder="19 Receiver street"
+                aria-labelledby="client-street-lbl"
                 {...register("clientAddress.street", {
                   required: "Client street is required",
                   minLength: 4,
                 })}
               />
               {errors.clientAddress?.street && (
-                <p className="form-errors">
+                <p id="client-street-lbl" className="form-errors">
                   {errors.clientAddress.street.message?.toString()}
                 </p>
               )}
@@ -380,13 +387,14 @@ function EditInvoice() {
                   id={`client-city`}
                   className={`input city`}
                   placeholder={`London`}
+                  aria-labelledby="client-city-lbl"
                   {...register("clientAddress.city", {
                     required: "Client city is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.city && (
-                  <p className="form-errors">
+                  <p id="client-city-lbl" className="form-errors">
                     {errors.clientAddress.city.message?.toString()}
                   </p>
                 )}
@@ -401,13 +409,14 @@ function EditInvoice() {
                   id={`client-postal`}
                   className={`input postal`}
                   placeholder={`AE123`}
+                  aria-labelledby="client-postal-lbl"
                   {...register("clientAddress.postCode", {
                     required: "Postal code is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.postCode && (
-                  <p className="form-errors">
+                  <p id="client-postal-lbl" className="form-errors">
                     {errors.clientAddress.postCode.message?.toString()}
                   </p>
                 )}
@@ -423,13 +432,14 @@ function EditInvoice() {
                   id={`country`}
                   className={`input country`}
                   placeholder={`South Africa`}
+                  aria-labelledby="client-country-lbl"
                   {...register("clientAddress.country", {
                     required: "Client country is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.country && (
-                  <p className="form-errors">
+                  <p id="client-country-lbl" className="form-errors">
                     {errors.clientAddress.country.message?.toString()}
                   </p>
                 )}
@@ -449,12 +459,13 @@ function EditInvoice() {
                   id={`date`}
                   className={`input date-signed`}
                   placeholder={""}
+                  aria-labelledby="invoice-date-lbl"
                   {...register("paymentDue", {
                     required: "Select a date",
                   })}
                 />
                 {errors.paymentDue && (
-                  <p className="form-errors">
+                  <p id="invoice-date-lbl" className="form-errors">
                     {errors.paymentDue.message?.toString()}
                   </p>
                 )}
@@ -468,6 +479,7 @@ function EditInvoice() {
                 <select
                   className="input terms-options"
                   id="terms"
+                  aria-labelledby="terms-lbl"
                   {...register("paymentTerms", {
                     required: "Select payment option",
                   })}
@@ -479,7 +491,7 @@ function EditInvoice() {
                   <option value={30}>Net 30 Days</option>
                 </select>
                 {errors.paymentTerms && (
-                  <p className="form-errors">
+                  <p id="terms-lbl" className="form-errors">
                     {errors.paymentTerms.message?.toString()}
                   </p>
                 )}
@@ -496,13 +508,14 @@ function EditInvoice() {
                 id={`project-desc`}
                 className={`input project-desc`}
                 placeholder={"Description"}
+                aria-labelledby="description-lbl"
                 {...register("description", {
                   required: "Project description required",
                   minLength: 4,
                 })}
               />
               {errors.description && (
-                <p className="form-errors">
+                <p id="description-lbl" className="form-errors">
                   {errors.description.message?.toString()}
                 </p>
               )}
