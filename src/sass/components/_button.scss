@@ -118,5 +118,13 @@ span.container-img {
     border-radius: 8px;
     border: none;
     margin-bottom: 2rem;
+    background-color: inherit;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+
+}
+
+.dark-mode {
+    .btn-return {
+        color: base.$clr-white-100;
+    }
 }

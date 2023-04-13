@@ -26,6 +26,10 @@ function HomePage() {
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
   }); 
 
+  const onChange = (evt: { target: { value: React.SetStateAction<string>; }; }) => {
+    setSelectedValue(evt.target.value)
+  }
+
   return (
     <div className="main">
       <h1 className="sr-only">Preprince investments business transactions</h1>
@@ -52,14 +56,14 @@ function HomePage() {
                 className="filter"
                 id="filter-options"
                 value={selectedValue}
-                onChange={(evt) => setSelectedValue(evt.target.value)}
+                onChange={(evt) => onChange(evt)}
               >
-                <option value="status"> status</option>
-                <option value="pending"> pending </option>
-                <option value="draft"> draft</option>
+                <option value="paid">Paid</option>
+                <option value="pending">Pending</option>
+                <option value="draft">Draft</option>
               </select>
             </Form>
-            <Form>
+            <div>
               <button className="btn flex btn-new-invoice">
                 <span className="container-img">
                   <img src={AddInvoiceImg} alt="" />
@@ -68,7 +72,7 @@ function HomePage() {
                   New <span className="mobile-hidden">Invoice</span>
                 </span>
               </button>
-            </Form>
+            </div>
           </div>
         </div>
         {/* main section */}
