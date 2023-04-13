@@ -561,7 +561,7 @@ function EditInvoice() {
                       <input
                         type="number"
                         id={`qty`}
-                        className={`qty calculate-line`}
+                        className={`qty input calculate-line`}
                         placeholder={"1"}
                         {...register(`items.${index}.quantity`, {
                           required: true,
@@ -586,7 +586,7 @@ function EditInvoice() {
                         type="number"
                         step={0.01}
                         id={`price`}
-                        className={`price calculate-line`}
+                        className={`price input calculate-line`}
                         placeholder={"200.00"}
                         {...register(`items.${index}.price`, {
                           required: true,
@@ -609,7 +609,7 @@ function EditInvoice() {
                       <input
                         type="number"
                         id={`item-total`}
-                        className={`item-total calculate-line`}
+                        className={`item-total input calculate-line`}
                         placeholder={"200.00"}
                         readOnly={true}
                         {...register(`items.${index}.total`, {

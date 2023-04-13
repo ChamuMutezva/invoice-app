@@ -55,7 +55,7 @@ function HomePage() {
                 name="choice"
                 className="filter"
                 id="filter-options"
-                value={selectedValue}
+                value={selectedValue}                
                 onChange={(evt) => onChange(evt)}
               >
                 <option value="paid">Paid</option>

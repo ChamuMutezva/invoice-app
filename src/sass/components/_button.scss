@@ -23,6 +23,7 @@
     padding-block: 0.5rem;
     z-index: 0;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+    background-color: lighten(base.$clr-black-200, 20%);
 
     &::before {
         position: absolute;
@@ -126,5 +127,18 @@ span.container-img {
 .dark-mode {
     .btn-return {
         color: base.$clr-white-100;
+    }
+
+    .draft-status {
+        background-color: lighten(base.$clr-black-100, 15%);
+
+        &::after {
+            background-color: base.$clr-white-100;
+        }
+    }
+
+    .pending-status,
+    .paid-status {
+        background-color: lighten(base.$clr-black-100, 15%);
     }
 }
