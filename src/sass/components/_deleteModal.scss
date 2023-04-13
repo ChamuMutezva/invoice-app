@@ -49,18 +49,3 @@
     color: #7d8187;
 }
 
-.btn-confirm-delete {
-    width: 100%;
-    text-align: center;
-    padding-block: 1rem;
-    background-color: base.$clr-pink-200;
-    color: base.$clr-white-100;
-    border: transparent;
-    border-radius: 4px;
-    font-weight: 400;
-
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
-}
