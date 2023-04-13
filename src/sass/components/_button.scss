@@ -124,6 +124,60 @@ span.container-img {
 
 }
 
+.btn-cancel {
+    background-color: base.$clr-white-400;
+    padding: 1rem 1.5rem;
+    border-radius: 50%;
+    border: none;
+    text-decoration: none;
+
+    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+}
+
+.btn-save {
+    background-color: base.$clr-blue-400;
+    padding: 1rem;
+    border-radius: 24px;
+    border: none;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+}
+
+.btn-add-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: base.$clr-white-400;
+    gap: 1rem;
+}
+
+.btn-edit {
+    background-color: base.$clr-white-400;
+    padding: 1rem 1.5rem;
+    border-radius: 50%;
+    text-decoration: none;
+    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+}
+
+.btn-delete-view {
+    background-color: base.$clr-pink-200;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    border-radius: 24px;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+}
+
+.btn-mark {
+    background-color: base.$clr-blue-400;
+    padding: 1rem;
+    border-radius: 24px;
+    border: none;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+}
+
+
 .dark-mode {
     .btn-return {
         color: base.$clr-white-100;
@@ -140,5 +194,20 @@ span.container-img {
     .pending-status,
     .paid-status {
         background-color: lighten(base.$clr-black-100, 15%);
+    }
+
+    .btn-delete {
+        background-color: inherit;
+
+        &:hover,
+        &:focus {
+            outline: dashed base.$clr-white-100;
+            outline-offset: -0.65em;
+        }
+    }
+
+    .btn-add-item {
+        background-color: base.$clr-black-400;
+        color: base.$clr-white-100
     }
 }

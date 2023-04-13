@@ -130,42 +130,15 @@
     box-shadow: 0px -20px 20px 1px base.$clr-black-600;
 }
 
-.btn-cancel {
-    background-color: base.$clr-white-400;
-    padding: 1rem 1.5rem;
-    border-radius: 50%;
-    border: none;
-    text-decoration: none;
-
-    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
-}
-
-.btn-save {
-    background-color: base.$clr-blue-400;
-    padding: 1rem;
-    border-radius: 24px;
-    border: none;
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
-}
-
-.btn-add-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-    background-color: base.$clr-white-400;
-    gap: 1rem;
-}
-
 .form-errors {
     color: base.$clr-pink-300;
 }
 
 .dark-mode {
+
     .input {
         background-color: base.$clr-black-400;
         color: base.$clr-white-100
     }
+
 }
