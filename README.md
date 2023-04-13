@@ -55,9 +55,44 @@ Users should be able to:
 
 ### What I learned
 
-#### Using React Query
-
+#### Using React Query now known as TanStack Query
+- used for data management - data fetching , caching , sychronizing and updating the server state 
 - installation: install using npm by typing `npm i react-query` on the terminal or yarn `yarn add react-query`
+
+##### Using React Query
+- in the root of the application , I have used the **App.tsx** as the center for data management. The following steps were taken
+1. import { QueryClient, QueryClientProvider } from "react-query";
+2. const queryClient = new QueryClient();
+3. 
+
+```
+<QueryClientProvider client={queryClient}>
+      <div className={`app ${theme ? "" : "dark-mode"}`}>
+        <header className="flex header">
+          <div className="flex controls">
+            <div className="logo-container">
+              <a className="btn btn-logo" href="">
+                <img src={Logo} alt="" aria-hidden={true} />
+                <span className="sr-only">preprince investments</span>
+              </a>
+            </div>
+
+            <Toggle theme={theme} onChange={onChange} />
+          </div>
+          <div className="profile">
+            <a href="#" className="btn btn-profile">
+              <img className="btn-profile-img" src={Profile} alt="" aria-hidden={true} />
+              <span className="sr-only">customer profile</span>
+            </a>
+          </div>
+        </header>
+        <RouterProvider router={router} />
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
+```
+- 4. Then in the app, `useMutation, useQuery` mainly are used for data fetching, where `useQuery` is used to get data when
+there is no need to update the data and `useMutation` is used for updating data
 
 #### Creating a Clickable Card
 - make the div `card` that should be clickable to be of `position: relative` 
