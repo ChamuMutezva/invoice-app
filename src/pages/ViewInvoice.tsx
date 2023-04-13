@@ -2,12 +2,14 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import format from "date-fns/format";
 import getInvoice from "../hooks/getInvoice";
 import PreviousPage from "../components/PreviousPage";
+import { reducer } from "../hooks/reducer";
 
-const reducer = (accumulator: number, currentValue: number) => {
-  return accumulator + currentValue;
-};
+//const reducer = (accumulator: number, currentValue: number) => {
+ // return accumulator + currentValue;
+// };
 
 function ViewInvoice() {
+  
   let params = useParams();
  // const navigate = useNavigate();
   const invoice = getInvoice(params.id);
