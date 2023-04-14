@@ -1,17 +1,20 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
 import format from "date-fns/format";
 import getInvoice from "../hooks/getInvoice";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/reducer";
+import { MouseEvent } from "react";
+import { updateInvoice } from "../hooks/updateInvoice";
 
 //const reducer = (accumulator: number, currentValue: number) => {
- // return accumulator + currentValue;
+// return accumulator + currentValue;
 // };
 
 function ViewInvoice() {
-  
+  const queryClient = useQueryClient();
   let params = useParams();
- // const navigate = useNavigate();
+  // const navigate = useNavigate();
   const invoice = getInvoice(params.id);
 
   if (invoice === undefined) {
@@ -19,15 +22,31 @@ function ViewInvoice() {
   }
 
   const totalArray = invoice.items.map((item: { total: any }) => item.total);
- // console.log(totalArray)  
+  // console.log(totalArray)
   const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
-//  console.log(grandTotal)
+  //  console.log(grandTotal)
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  const updateInvoiceMutation = useMutation(updateInvoice, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("invoices");
+    },
+  });
+
+  function handleClick() {
+    console.log(invoice.status);
+    if (invoice.status !== "paid") {
+      updateInvoiceMutation.mutate({
+        ...invoice,
+        status: "paid",
+      });
+    }
+  }
 
   return (
     <div className="main" aria-live="polite">
@@ -43,13 +62,15 @@ function ViewInvoice() {
             <span className="status-type">{invoice.status}</span>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}> 
+            <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>
               Edit
             </Link>
             <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
               Delete
             </Link>
-            <button className="btn-mark">Mark as paid</button>
+            <button className="btn btn-mark" onClick={handleClick}>
+              Mark as paid
+            </button>
           </div>
         </nav>
         <section className="container container-invoice">

@@ -720,16 +720,18 @@ function EditInvoice() {
               </div>
             </div>
           </div>
-          <div className="flex footer footer-edit">
-            <button
-              className="btn btn-cancel"
-              onClick={(evt) => evt.preventDefault()}
-            >
-              Cancel
-            </button>
-            <button className="btn btn-save" type="submit">
-              Save changes
-            </button>
+          <div className="footer flex">
+            <div className="flex footer-edit">
+              <button
+                className="btn btn-cancel"
+                onClick={(evt) => evt.preventDefault()}
+              >
+                Cancel
+              </button>
+              <button className="btn btn-save" type="submit">
+                Save changes
+              </button>
+            </div>
           </div>
         </Form>
       </main>

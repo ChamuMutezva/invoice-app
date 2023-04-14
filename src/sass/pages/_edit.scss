@@ -123,11 +123,23 @@
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
-.footer-edit {
-    justify-content: flex-end;
-    padding: base.$spacer1;
+.footer {
+    // margin-block-start: base.$spacer1 * 5;
+    position: absolute;
+    left: 0;
+    width: 100vw;
     background-color: base.$clr-white-100;
     box-shadow: 0px -20px 20px 1px base.$clr-black-600;
+    @include utils.mQ(64rem) {
+        width: calc(100vw - 20px);
+    }
+}
+
+.footer-edit {
+    justify-content: flex-end;
+    padding: base.$spacer1;  
+    width: 100%;
+    max-width: 45.6rem;
 }
 
 .form-errors {
@@ -139,6 +151,11 @@
     .input {
         background-color: base.$clr-black-400;
         color: base.$clr-white-100
+    }
+
+    .footer {
+        background-color: base.$clr-black-200;
+        box-shadow: none;
     }
 
 }
