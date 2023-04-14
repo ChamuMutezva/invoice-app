@@ -28,6 +28,8 @@ function HomePage() {
 
   const onChange = (evt: { target: { value: React.SetStateAction<string>; }; }) => {
     setSelectedValue(evt.target.value)
+   // const result = invoices.filter((invoice: { status: string; }) => invoice.status === selectedValue)
+   // console.log(result)
   }
 
   return (
@@ -64,14 +66,14 @@ function HomePage() {
               </select>
             </Form>
             <div>
-              <button className="btn flex btn-new-invoice">
+              <Link to={`/newInvoice`} className="btn flex btn-new-invoice">
                 <span className="container-img">
                   <img src={AddInvoiceImg} alt="" />
                 </span>
                 <span className="flex btn-label">
                   New <span className="mobile-hidden">Invoice</span>
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
