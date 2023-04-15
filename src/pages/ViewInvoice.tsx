@@ -1,20 +1,15 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import format from "date-fns/format";
 import getInvoice from "../hooks/getInvoice";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/reducer";
-import { MouseEvent } from "react";
 import { updateInvoice } from "../hooks/updateInvoice";
-
-//const reducer = (accumulator: number, currentValue: number) => {
-// return accumulator + currentValue;
-// };
 
 function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
-  // const navigate = useNavigate();
+
   const invoice = getInvoice(params.id);
 
   if (invoice === undefined) {
@@ -22,9 +17,7 @@ function ViewInvoice() {
   }
 
   const totalArray = invoice.items.map((item: { total: any }) => item.total);
-  // console.log(totalArray)
   const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
-  //  console.log(grandTotal)
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
@@ -56,10 +49,23 @@ function ViewInvoice() {
 
       <main>
         <nav className="flex nav-view">
-          <div className="flex status">
-            <h2 className="sr-only">Invoice status</h2>
-            <span className="status-label">Status </span>
-            <span className="status-type">{invoice.status}</span>
+          <div className="flex status-container">
+            <p className="status-label">Status </p>
+            <p
+              className={`flex status ${
+                invoice.status === "paid"
+                  ? "paid-status"
+                  : invoice.status === "draft"
+                  ? "draft-status"
+                  : "pending-status"
+              } `}
+            >
+              <span
+                aria-hidden={true}
+                className={`status-span ${invoice.status}-span`}
+              ></span>
+              {invoice.status}
+            </p>
           </div>
           <div className="mobile-hidden nav-view-btns ">
             <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>

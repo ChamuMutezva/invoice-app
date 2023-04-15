@@ -18,6 +18,25 @@
     @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
 }
 
+span.container-img {
+    padding: .5rem;
+    background: base.$clr-white-100;
+    border-radius: 50%;
+}
+
+.mobile-hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+
+    @include utils.mQ(40rem) {
+        visibility: visible;
+        width: fit-content;
+        height: fit-content;
+        padding-left: 0.5rem;
+    }
+}
+
 .dark-mode {
     background-color: base.$clr-black-300;
     color: base.$clr-white-100;
@@ -34,9 +53,8 @@
 
     .invoice-num,
     .client-name,
-    .amount-total,
-    .draft-status {
-        color: base.$clr-white-100;
+    .amount-total {
+        color: base.$clr-white-300;
     }
 
     .address-sender-details,

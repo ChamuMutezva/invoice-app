@@ -6,6 +6,7 @@
     @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
 }
 
+/*
 .status-type {
     @include utils.fonts(base.$clr-orange-100, base.$fs-15, 700);
     opacity: 0.6;
@@ -15,18 +16,82 @@
     background-color: lighten(base.$clr-pink-200, 35%);
     padding: 0.5rem 2rem;
 }
+*/
+.status-container {
+	justify-content: space-between;
+	flex: 1 1 30%;
+}
 
 .status {
+    max-width: 10rem;
     width: 100%;
+    text-transform: capitalize;
+    justify-content: center;
+    padding-block: 0.5rem;
+    border-radius: 6px;
+    grid-area: 2/2/4/3;
+    font-weight: 700;
 
     @include utils.mQ(40rem) {
         flex: 1 1 30%;
+        grid-area: 1/5/1/6;
+        padding-block: 0.75rem;
     }
 }
+
+.status-span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.paid-status {
+    color: base.$clr-green-400;
+    background-color: lighten(base.$clr-green-400, 45%);
+}
+
+
+.paid-span {
+    background-color: base.$clr-green-400;
+}
+
+.pending-status {
+    color: base.$clr-orange-100;
+    background-color: lighten(base.$clr-orange-100, 45%);
+    left: 1rem;
+}
+
+.pending-span {
+    background-color: base.$clr-orange-100;
+}
+
+
+.draft-status {
+    color: base.$clr-white-300;
+    background-color: lighten(base.$clr-black-600, 35%);
+}
+
+.draft-span {
+    background-color: base.$clr-black-500;
+}
+
 
 .dark-mode {
-    .status-type {
-        background-color: base.$clr-black-700;
+
+    .draft-status {
+        background-color: lighten(base.$clr-black-300, 20%);
+    }
+
+    .draft-span {
+        background-color: base.$clr-white-100;
+    }
+
+    .pending-status {
+        background-color: darken(base.$clr-orange-100, 45%);
+    }
+
+
+    .paid-status {
+        background-color: darken(base.$clr-green-400, 45%);
     }
 }
-

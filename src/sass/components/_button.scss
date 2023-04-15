@@ -13,7 +13,6 @@
 
 .btn-link {
     display: flex;
-    grid-area: 2/2/4/3;
     justify-content: center;
     align-items: center;
     border-radius: 6px;
@@ -23,8 +22,7 @@
     padding-block: 0.5rem;
     z-index: 0;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
-    background-color: lighten(base.$clr-black-200, 20%);
-
+   
     &::before {
         position: absolute;
         content: "";
@@ -34,51 +32,12 @@
         left: 0;
     }
 
-    &::after {
-        position: relative;
-        content: "";
-        width: 8px;
-        height: 8px;
-        z-index: 100;
-        border-radius: 50%;
-    }
-
-    @include utils.mQ(40rem) {
-        grid-area: 1/5/1/6;
+    @include utils.mQ(40rem) {      
         padding-block: 0.75rem;
     }
 
 }
 
-.paid-status {
-    color: base.$clr-green-400;
-    background-color: lighten(base.$clr-green-400, 45%);
-
-    &::after {
-        background-color: base.$clr-green-400;
-        left: -50px;
-    }
-}
-
-.pending-status {
-    color: base.$clr-orange-100;
-    background-color: lighten(base.$clr-orange-100, 45%);
-
-    &::after {
-        background-color: base.$clr-orange-100;
-        left: -70px;
-    }
-}
-
-.draft-status {
-    color: base.$clr-black-500;
-    background-color: lighten(base.$clr-black-500, 45%);
-
-    &::after {
-        background-color: base.$clr-black-500;
-        left: -50px;
-    }
-}
 
 .btn-new-invoice {
     border: none;
@@ -88,25 +47,6 @@
     gap: 0.5rem;
     padding-inline-end: 1rem;
     text-decoration: none;
-}
-
-span.container-img {
-    padding: .5rem;
-    background: base.$clr-white-100;
-    border-radius: 50%;
-}
-
-.mobile-hidden {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-
-    @include utils.mQ(40rem) {
-        visibility: visible;
-        width: fit-content;
-        height: fit-content;
-        padding-left: 0.5rem;
-    }
 }
 
 .btn-label {
@@ -183,19 +123,7 @@ span.container-img {
     .btn-return {
         color: base.$clr-white-100;
     }
-
-    .draft-status {
-        background-color: lighten(base.$clr-black-100, 15%);
-
-        &::after {
-            background-color: base.$clr-white-100;
-        }
-    }
-
-    .pending-status,
-    .paid-status {
-        background-color: lighten(base.$clr-black-100, 15%);
-    }
+   
 
     .btn-delete {
         background-color: inherit;

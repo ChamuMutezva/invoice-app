@@ -1,6 +1,10 @@
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler, LegacyRef } from "react";
+import { useForm } from "react-hook-form";
 
 function Inputs(props: {
+  register: any;
+  ariaLabelledBy: string | undefined;
+  ariaInvalid: boolean | "true" | "false" | "grammar" | "spelling" | undefined;
   name: string;
   onChange: ChangeEventHandler<HTMLInputElement> | undefined;
   value: string | number;
@@ -21,10 +25,12 @@ function Inputs(props: {
         type={props.type}
         id={props.id}
         className={`input ${props.inputClass}`}
+        aria-invalid={props.ariaInvalid}
+        aria-labelledby={props.ariaLabelledBy}
         placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}
-       name={props.name}
+        name={props.name}
       />
     </div>
   );

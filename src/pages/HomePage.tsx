@@ -6,7 +6,7 @@ import getInvoices from "../hooks/getInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("draft");
-  const { isLoading, isError, invoices, error } = getInvoices();
+  const { isLoading, isError, invoices } = getInvoices();
 
   if (isLoading) {
     return <h2 className="pre-loading">Loading...</h2>;
@@ -22,15 +22,17 @@ function HomePage() {
     currency: "USD",
 
     // These options are needed to round to whole numbers if that's what you want.
-    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  }); 
+    // minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    // maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
 
-  const onChange = (evt: { target: { value: React.SetStateAction<string>; }; }) => {
-    setSelectedValue(evt.target.value)
-   // const result = invoices.filter((invoice: { status: string; }) => invoice.status === selectedValue)
-   // console.log(result)
-  }
+  const onChange = (evt: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSelectedValue(evt.target.value);
+    // const result = invoices.filter((invoice: { status: string; }) => invoice.status === selectedValue)
+    // console.log(result)
+  };
 
   return (
     <div className="main">
@@ -57,7 +59,7 @@ function HomePage() {
                 name="choice"
                 className="filter"
                 id="filter-options"
-                value={selectedValue}                
+                value={selectedValue}
                 onChange={(evt) => onChange(evt)}
               >
                 <option value="paid">Paid</option>
@@ -100,23 +102,31 @@ function HomePage() {
                 return (
                   <div key={invoice.id} className="card">
                     <p className="invoice-num">{invoice.id}</p>
-                    <p className="client-name">{invoice.clientName}</p>
+                    <Link
+                      className={`client-name btn btn-link`}
+                      to={`/viewInvoice/${invoice._id}`}
+                    >
+                      {invoice.clientName}
+                    </Link>
                     <p className="payment-date">Due {invoice.paymentDue}</p>
                     <p className="amount-total">
                       {formatter.format(invoice.total)}
                     </p>
-                    <Link
-                      className={`btn btn-link ${
+                    <p
+                      className={`flex status ${
                         invoice.status === "paid"
                           ? "paid-status"
                           : invoice.status === "draft"
                           ? "draft-status"
                           : "pending-status"
                       } `}
-                      to={`/viewInvoice/${invoice._id}`}
                     >
+                      <span
+                        aria-hidden={true}
+                        className={`status-span ${invoice.status}-span`}
+                      ></span>
                       {invoice.status}
-                    </Link>
+                    </p>
                   </div>
                 );
               }

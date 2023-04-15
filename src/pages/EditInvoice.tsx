@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { Form, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
 import fetchInvoice from "../hooks/fetchInvoice";
@@ -10,8 +10,8 @@ import AddNewProject from "./AddNewProject";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
 import DeleteProject from "../components/DeleteProject";
+import { Interface } from "readline";
 // import SaveInvoice from "../components/SaveInvoice";
-
 // import Inputs from "../components/Inputs";
 
 function EditInvoice() {
@@ -21,6 +21,12 @@ function EditInvoice() {
     price: 100.0,
     total: 100.0,
   };
+  interface ICosting {
+    name: string;
+    quantity: number;
+    price: number;
+    total: number;
+  }
 
   const queryClient = useQueryClient();
 
@@ -44,7 +50,6 @@ function EditInvoice() {
       ? fetchInvoice(params.id)
       : getInvoice(params.id);
 
-  // const invoice2 = fetchInvoice(params.id).invoice;
   console.log(invoice);
   if (invoice === "undefined") {
     return <h1>Error in presenting page</h1>;
@@ -165,18 +170,18 @@ function EditInvoice() {
 
   const handleSubmitForm = (data: {
     _id: any;
-    id: any;
-    createdAt: any;
-    paymentDue: any;
-    description: any;
+    id: string;
+    createdAt: Date;
+    paymentDue: string;
+    description: string;
     paymentTerms: any;
-    clientEmail: any;
-    clientName: any;
-    status: any;
-    total: any;
-    senderAddress: { street: any; city: any; postCode: any; country: any };
-    clientAddress: { street: any; city: any; postCode: any; country: any };
-    items: any;
+    clientEmail: string;
+    clientName: string;
+    status: string;
+    total: number;
+    senderAddress: { street: string; city: string; postCode: string; country: string };
+    clientAddress: { street: string; city: string; postCode: string; country: string };
+    items: ICosting[];
   }) => {
     const invoice = {
       ...data,
@@ -219,13 +224,14 @@ function EditInvoice() {
                 aria-labelledby="sender-street"
                 className={`input street`}
                 placeholder={`116 Caledorn street`}
+                aria-invalid={errors.senderAddress?.street ? "true" : false}
                 {...register("senderAddress.street", {
                   required: "Street address is required",
                   minLength: 4,
                 })}
               />
               {errors.senderAddress?.street && (
-                <p id="sender-street" className="form-errors">
+                <p role="alert" id="sender-street" className="form-errors">
                   {errors.senderAddress.street.message?.toString()}
                 </p>
               )}
@@ -243,13 +249,14 @@ function EditInvoice() {
                   aria-labelledby="sender-city"
                   className={`input city`}
                   placeholder={`Uitenhage`}
+                  aria-invalid={errors.senderAddress?.city ? "true" : "false"}
                   {...register("senderAddress.city", {
                     required: "City is required",
                     minLength: 4,
                   })}
                 />
                 {errors.senderAddress?.city && (
-                  <p id="sender-city" className="form-errors">
+                  <p role="alert" id="sender-city" className="form-errors">
                     {errors.senderAddress.city.message?.toString()}
                   </p>
                 )}
@@ -266,13 +273,14 @@ function EditInvoice() {
                   className={`input postal`}
                   aria-labelledby="sender-postal"
                   placeholder={`6229`}
+                  aria-invalid={errors.senderAddress?.postCode ? "true" : "false"}
                   {...register("senderAddress.postCode", {
                     required: "Enter postal code",
                     minLength: 4,
                   })}
                 />
                 {errors.senderAddress?.postCode && (
-                  <p id="sender-postal" className="form-errors">
+                  <p role="alert" id="sender-postal" className="form-errors">
                     {errors.senderAddress.postCode.message?.toString()}
                   </p>
                 )}
@@ -289,13 +297,14 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   aria-labelledby="sender-country"
+                  aria-invalid={errors.senderAddress?.country ? "true" : "false"}
                   {...register("senderAddress.country", {
                     required: "Country is required",
                     minLength: 4,
                   })}
                 />
                 {errors.senderAddress?.country && (
-                  <p id="sender-country" className="form-errors">
+                  <p role="alert" id="sender-country" className="form-errors">
                     {errors.senderAddress.country.message?.toString()}
                   </p>
                 )}
@@ -318,13 +327,14 @@ function EditInvoice() {
                 className={`input`}
                 placeholder={`Chamu mutezva`}
                 aria-labelledby="client-name-lbl"
+                aria-invalid={errors.clientName ? "true" : "false"}
                 {...register("clientName", {
                   required: "Client name is required",
                   minLength: 1,
                 })}
               />
               {errors.clientName && (
-                <p id="client-name-lbl" className="form-errors">
+                <p role="alert" id="client-name-lbl" className="form-errors">
                   {errors.clientName.message?.toString()}
                 </p>
               )}
@@ -341,13 +351,14 @@ function EditInvoice() {
                 className={`input email-address`}
                 placeholder={`mutezva@gmail.com`}
                 aria-labelledby="client-email-lbl"
+                aria-invalid={errors.clientEmail ? "true" : "false"}
                 {...register("clientEmail", {
                   required: "Enter valid email",
                   minLength: 4,
                 })}
               />
               {errors.clientEmail && (
-                <p id="client-email-lbl" className="form-errors">
+                <p role="alert" id="client-email-lbl" className="form-errors">
                   {errors.clientEmail.message?.toString()}
                 </p>
               )}
@@ -364,13 +375,14 @@ function EditInvoice() {
                 className={`input street`}
                 placeholder="19 Receiver street"
                 aria-labelledby="client-street-lbl"
+                aria-invalid={errors.clientAddress?.street ? "true" : "false"}
                 {...register("clientAddress.street", {
                   required: "Client street is required",
                   minLength: 4,
                 })}
               />
               {errors.clientAddress?.street && (
-                <p id="client-street-lbl" className="form-errors">
+                <p role="alert" id="client-street-lbl" className="form-errors">
                   {errors.clientAddress.street.message?.toString()}
                 </p>
               )}
@@ -388,13 +400,14 @@ function EditInvoice() {
                   className={`input city`}
                   placeholder={`London`}
                   aria-labelledby="client-city-lbl"
+                  aria-invalid={errors.clientAddress?.city ? "true" : "false"}
                   {...register("clientAddress.city", {
                     required: "Client city is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.city && (
-                  <p id="client-city-lbl" className="form-errors">
+                  <p role="alert" id="client-city-lbl" className="form-errors">
                     {errors.clientAddress.city.message?.toString()}
                   </p>
                 )}
@@ -410,13 +423,14 @@ function EditInvoice() {
                   className={`input postal`}
                   placeholder={`AE123`}
                   aria-labelledby="client-postal-lbl"
+                  aria-invalid={errors.clientAddress?.postCode ? "true" : "false"}
                   {...register("clientAddress.postCode", {
                     required: "Postal code is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.postCode && (
-                  <p id="client-postal-lbl" className="form-errors">
+                  <p role="alert" id="client-postal-lbl" className="form-errors">
                     {errors.clientAddress.postCode.message?.toString()}
                   </p>
                 )}
@@ -433,6 +447,7 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   aria-labelledby="client-country-lbl"
+                  aria-invalid={errors.clientAddress?.country ? "true" : "false"}
                   {...register("clientAddress.country", {
                     required: "Client country is required",
                     minLength: 4,
@@ -460,12 +475,13 @@ function EditInvoice() {
                   className={`input date-signed`}
                   placeholder={""}
                   aria-labelledby="invoice-date-lbl"
+                  aria-invalid={errors.paymentDue ? "true" : "false"}
                   {...register("paymentDue", {
                     required: "Select a date",
                   })}
                 />
                 {errors.paymentDue && (
-                  <p id="invoice-date-lbl" className="form-errors">
+                  <p role="alert" id="invoice-date-lbl" className="form-errors">
                     {errors.paymentDue.message?.toString()}
                   </p>
                 )}
@@ -480,6 +496,7 @@ function EditInvoice() {
                   className="input terms-options"
                   id="terms"
                   aria-labelledby="terms-lbl"
+                  aria-invalid={errors.paymentTerms ? "true" : "false"}
                   {...register("paymentTerms", {
                     required: "Select payment option",
                   })}
@@ -491,7 +508,7 @@ function EditInvoice() {
                   <option value={30}>Net 30 Days</option>
                 </select>
                 {errors.paymentTerms && (
-                  <p id="terms-lbl" className="form-errors">
+                  <p role="alert" id="terms-lbl" className="form-errors">
                     {errors.paymentTerms.message?.toString()}
                   </p>
                 )}
@@ -509,13 +526,14 @@ function EditInvoice() {
                 className={`input project-desc`}
                 placeholder={"Description"}
                 aria-labelledby="description-lbl"
+                aria-invalid={errors.description ? "true" : "false"}
                 {...register("description", {
                   required: "Project description required",
                   minLength: 4,
                 })}
               />
               {errors.description && (
-                <p id="description-lbl" className="form-errors">
+                <p role="alert" id="description-lbl" className="form-errors">
                   {errors.description.message?.toString()}
                 </p>
               )}
@@ -544,7 +562,7 @@ function EditInvoice() {
                       type="text"
                       id={`project-name`}
                       className={`input project-name`}
-                      placeholder={"Name of project"}
+                      placeholder={"Name of project"}                     
                       {...register(`items.${index}.name`, {
                         required: true,
                         minLength: 4,
