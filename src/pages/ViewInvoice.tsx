@@ -68,10 +68,10 @@ function ViewInvoice() {
             </p>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>
+            <Link className="btn btn-edit" to={`/editInvoice/${invoice._id}`}>
               Edit
             </Link>
-            <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
+            <Link className="btn btn-delete-view" to={`/deleteInvoice/:id`}>
               Delete
             </Link>
             <button className="btn btn-mark" onClick={handleClick}>

@@ -179,8 +179,18 @@ function EditInvoice() {
     clientName: string;
     status: string;
     total: number;
-    senderAddress: { street: string; city: string; postCode: string; country: string };
-    clientAddress: { street: string; city: string; postCode: string; country: string };
+    senderAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+    };
+    clientAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+    };
     items: ICosting[];
   }) => {
     const invoice = {
@@ -273,7 +283,9 @@ function EditInvoice() {
                   className={`input postal`}
                   aria-labelledby="sender-postal"
                   placeholder={`6229`}
-                  aria-invalid={errors.senderAddress?.postCode ? "true" : "false"}
+                  aria-invalid={
+                    errors.senderAddress?.postCode ? "true" : "false"
+                  }
                   {...register("senderAddress.postCode", {
                     required: "Enter postal code",
                     minLength: 4,
@@ -297,7 +309,9 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   aria-labelledby="sender-country"
-                  aria-invalid={errors.senderAddress?.country ? "true" : "false"}
+                  aria-invalid={
+                    errors.senderAddress?.country ? "true" : "false"
+                  }
                   {...register("senderAddress.country", {
                     required: "Country is required",
                     minLength: 4,
@@ -423,14 +437,20 @@ function EditInvoice() {
                   className={`input postal`}
                   placeholder={`AE123`}
                   aria-labelledby="client-postal-lbl"
-                  aria-invalid={errors.clientAddress?.postCode ? "true" : "false"}
+                  aria-invalid={
+                    errors.clientAddress?.postCode ? "true" : "false"
+                  }
                   {...register("clientAddress.postCode", {
                     required: "Postal code is required",
                     minLength: 4,
                   })}
                 />
                 {errors.clientAddress?.postCode && (
-                  <p role="alert" id="client-postal-lbl" className="form-errors">
+                  <p
+                    role="alert"
+                    id="client-postal-lbl"
+                    className="form-errors"
+                  >
                     {errors.clientAddress.postCode.message?.toString()}
                   </p>
                 )}
@@ -447,7 +467,9 @@ function EditInvoice() {
                   className={`input country`}
                   placeholder={`South Africa`}
                   aria-labelledby="client-country-lbl"
-                  aria-invalid={errors.clientAddress?.country ? "true" : "false"}
+                  aria-invalid={
+                    errors.clientAddress?.country ? "true" : "false"
+                  }
                   {...register("clientAddress.country", {
                     required: "Client country is required",
                     minLength: 4,
@@ -562,7 +584,7 @@ function EditInvoice() {
                       type="text"
                       id={`project-name`}
                       className={`input project-name`}
-                      placeholder={"Name of project"}                     
+                      placeholder={"Name of project"}
                       {...register(`items.${index}.name`, {
                         required: true,
                         minLength: 4,
@@ -725,14 +747,17 @@ function EditInvoice() {
                   value={project.total}
                 />
               </div>
-              <div className="add-item-control">
+              <div className="flex add-item-control">
                 <button
-                  className="btn btn-cancel-add"
+                  className="btn btn-cancel btn-cancel-add"
                   onClick={(evt) => toggleDisplayModal(evt)}
                 >
                   Cancel
                 </button>
-                <button className="btn btn-add-project" onClick={updateItems}>
+                <button
+                  className="btn btn-add-project"
+                  onClick={updateItems}
+                >
                   Add Project
                 </button>
               </div>
