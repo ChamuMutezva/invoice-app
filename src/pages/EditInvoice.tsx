@@ -6,11 +6,11 @@ import fetchInvoice from "../hooks/fetchInvoice";
 import getInvoice from "../hooks/getInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
-import AddNewProject from "./AddNewProject";
+import AddNewProject from "../components/AddNewProject";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
 import DeleteProject from "../components/DeleteProject";
-import { Interface } from "readline";
+
 // import SaveInvoice from "../components/SaveInvoice";
 // import Inputs from "../components/Inputs";
 

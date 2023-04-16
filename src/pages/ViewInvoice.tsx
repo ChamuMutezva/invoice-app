@@ -10,7 +10,7 @@ function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
 
-  const invoice = getInvoice(params.id);
+  const invoice = getInvoice(params.id)
 
   if (invoice === undefined) {
     return <h2>Loading...</h2>;

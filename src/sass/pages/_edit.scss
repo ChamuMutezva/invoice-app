@@ -2,7 +2,8 @@
 @use '../utils';
 
 .edit-form>*+* {
-    margin-block-start: 1.5rem;
+    padding-block-start: 1.5rem;
+    padding-block-end: 2.5rem;
 }
 
 .edit-title {
@@ -130,6 +131,7 @@
     width: 100vw;
     background-color: base.$clr-white-100;
     box-shadow: 0px -20px 20px 1px base.$clr-black-600;
+
     @include utils.mQ(64rem) {
         width: calc(100vw - 20px);
     }
@@ -137,7 +139,7 @@
 
 .footer-edit {
     justify-content: flex-end;
-    padding: base.$spacer1;  
+    padding: base.$spacer1;
     width: 100%;
     max-width: 45.6rem;
 }

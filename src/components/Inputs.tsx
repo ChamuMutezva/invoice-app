@@ -28,6 +28,10 @@ function Inputs(props: {
         aria-invalid={props.ariaInvalid}
         aria-labelledby={props.ariaLabelledBy}
         placeholder={props.placeholder}
+        {...register("senderAddress.street", {
+          required: "Street address is required",
+          minLength: 4,
+        })}
         value={props.value}
         onChange={props.onChange}
         name={props.name}
@@ -37,3 +41,7 @@ function Inputs(props: {
 }
 
 export default Inputs;
+function register(arg0: string, arg1: { required: string; minLength: number; }): JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement> {
+  throw new Error("Function not implemented.");
+}
+
