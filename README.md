@@ -127,6 +127,21 @@ anchor element . See code below
   }
 }
 ```
+#### Error - Unexpected application error
+##### Rendered more hooks than during the previous render
+
+![Rendered more hooks than during the previous render](src/assets/hook-err2.png)
+
+The application has multiple pages and the error is encountered during navigation. Here is a brief steps that I 
+performed to notice the bug.
+1. From  the homepage , I navigated to the `ViewInvoice` page
+2. In the `ViewPage` , reload the page.
+
+##### Causes and solution
+
+The error is caused by (in this particular case) , having a hook which was called after a condition
+![Ilustration of error](src/assets/hook-err-illustration2.png)
+![Fixing the error](src/assets/hook-err-fix.png)
 ### Continued development
 
 Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.

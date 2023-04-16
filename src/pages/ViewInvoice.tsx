@@ -10,7 +10,13 @@ function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
 
-  const invoice = getInvoice(params.id)
+  const invoice = getInvoice(params.id);
+
+  const updateInvoiceMutation = useMutation(updateInvoice, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("invoices");
+    },
+  });
 
   if (invoice === undefined) {
     return <h2>Loading...</h2>;
@@ -23,12 +29,6 @@ function ViewInvoice() {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  });
-
-  const updateInvoiceMutation = useMutation(updateInvoice, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("invoices");
-    },
   });
 
   function handleClick() {
