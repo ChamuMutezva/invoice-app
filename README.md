@@ -141,6 +141,8 @@ performed to notice the bug.
 
 The error is caused by (in this particular case) , having a hook which was called after a condition
 ![Ilustration of error](src/assets/hook-err-illustration2.png)
+
+Moving the useMutation hook above the if condition will solve the error
 ![Fixing the error](src/assets/hook-err-fix.png)
 ### Continued development
 

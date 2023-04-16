@@ -31,8 +31,6 @@ function EditInvoice() {
   const queryClient = useQueryClient();
 
   const [showProjectModal, setShowProjectModal] = useState(false);
-  // let [openUpdateInvoice, setOpenUpdateInvoice] = useState(false);
-  // let [saveUpdatedInvoice, setSaveUpdatedInvoice] = useState(false);
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(newProject);
@@ -44,22 +42,57 @@ function EditInvoice() {
     currency: "USD",
   });
 
-  // Fetch an invoice
-  const invoice =
-    getInvoice(params.id) === undefined
-      ? fetchInvoice(params.id)
-      : getInvoice(params.id);
-
-  console.log(invoice);
-  if (invoice === "undefined") {
-    return <h1>Error in presenting page</h1>;
-  }
+  // Fetch an invoice  
+  console.log(params.id);
+  const invoice = getInvoice(params.id)
+ 
+  // load initial form data on first visit to site
+  const initialState = {
+    _id: invoice._id,
+    id: invoice.id,
+    createdAt: invoice.createdAt,
+    paymentDue: invoice.paymentDue,
+    description: invoice.description,
+    paymentTerms: invoice.paymentTerms,
+    clientEmail: invoice.clientEmail,
+    clientName: invoice.clientName,
+    status: invoice.status,
+    total: invoice.total,
+    senderAddress: {
+      street: invoice.senderAddress.street,
+      city: invoice.senderAddress.city,
+      postCode: invoice.senderAddress.postCode,
+      country: invoice.senderAddress.country,
+    },
+    clientAddress: {
+      street: invoice.clientAddress.street,
+      city: invoice.clientAddress.city,
+      postCode: invoice.clientAddress.postCode,
+      country: invoice.clientAddress.country,
+    },
+    items: invoice.items,
+  };
+  // console.log(initialState);
 
   const updateInvoiceMutation = useMutation(updateInvoice, {
     onSuccess: () => {
       queryClient.invalidateQueries("invoices");
     },
   });
+
+  // load form with initialstate
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isDirty, isValid, touchedFields },
+  } = useForm({ defaultValues: initialState });
+  console.log(errors);
+
+  useEffect(() => {
+    setProject({ ...project, total: project.price * project.quantity });
+  }, [project.price, project.quantity]);
 
   const addProject = () => {
     updateInvoiceMutation.mutate({
@@ -99,44 +132,6 @@ function EditInvoice() {
   const exitWithoutDeletingProject = () => {
     setDeleteProjectModal(!deleteProjectModal);
   };
-
-  // load initial form data on first visit to site
-  const initialState = {
-    _id: invoice._id,
-    id: invoice.id,
-    createdAt: invoice.createdAt,
-    paymentDue: invoice.paymentDue,
-    description: invoice.description,
-    paymentTerms: invoice.paymentTerms,
-    clientEmail: invoice.clientEmail,
-    clientName: invoice.clientName,
-    status: invoice.status,
-    total: invoice.total,
-    senderAddress: {
-      street: invoice.senderAddress.street,
-      city: invoice.senderAddress.city,
-      postCode: invoice.senderAddress.postCode,
-      country: invoice.senderAddress.country,
-    },
-    clientAddress: {
-      street: invoice.clientAddress.street,
-      city: invoice.clientAddress.city,
-      postCode: invoice.clientAddress.postCode,
-      country: invoice.clientAddress.country,
-    },
-    items: invoice.items,
-  };
-  // console.log(initialState);
-
-  // load form with initialstate
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors, isDirty, isValid, touchedFields },
-  } = useForm({ defaultValues: initialState });
-  console.log(errors);
 
   // add another project by displaying the modal. This will add an edit component
   // to add Name of project, quantity, price and total
@@ -200,10 +195,6 @@ function EditInvoice() {
     updateInvoiceMutation.mutate(invoice);
     alert("Invoice has been saved");
   };
-
-  useEffect(() => {
-    setProject({ ...project, total: project.price * project.quantity });
-  }, [project.price, project.quantity]);
 
   return (
     <>
@@ -754,10 +745,7 @@ function EditInvoice() {
                 >
                   Cancel
                 </button>
-                <button
-                  className="btn btn-add-project"
-                  onClick={updateItems}
-                >
+                <button className="btn btn-add-project" onClick={updateItems}>
                   Add Project
                 </button>
               </div>
