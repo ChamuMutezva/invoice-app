@@ -158,8 +158,7 @@ function EditInvoice() {
   const onChangeNewProject = (evt: {
     target: { name: string; value: string };
   }) => {
-    const { name, value } = evt.target;
-    // console.log(evt.target);
+    const { name, value } = evt.target;   
     setProject({ ...project, [name]: value });
   };
 
