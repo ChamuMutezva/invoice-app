@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PreviousPage from "../components/PreviousPage";
 import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -38,7 +38,7 @@ function NewInvoice() {
     createdAt: "",
     paymentDue: "",
     description: "",
-    paymentTerms: "",
+    paymentTerms: "Net 6 days",
     clientEmail: "ckmutezva@gmail.com",
     clientName: "Chamu Mutezva",
     status: "draft",
@@ -88,8 +88,13 @@ function NewInvoice() {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    toggleDisplayModal(evt);
+    setProject({
+      ...project,
+      name: `Project name${data.items.length + 1}`,
+    });
+    //  toggleDisplayModal(evt);
     setData({ ...data, items: data.items.concat(project) });
+    console.log(evt);
   };
 
   // Add project component to add another project to the items array
@@ -103,8 +108,6 @@ function NewInvoice() {
       [name]: value,
       total: project.price * project.quantity,
     });
-    console.log(project);
-    console.log(value);
   };
 
   // load form with initialstate
@@ -123,8 +126,11 @@ function NewInvoice() {
   };
 
   const watchTotal = watch(["items"]);
-  
+
   console.log(watchTotal);
+  useEffect(() => {
+    console.log(data.items);
+  }, [data.items]);
 
   return (
     <div className="main">
@@ -402,6 +408,7 @@ function NewInvoice() {
                 aria-labelledby="invoice-date-lbl"
                 aria-invalid={errors.paymentDue ? "true" : "false"}
                 {...register("paymentDue", {
+                  valueAsDate: true,
                   required: "Select a date",
                 })}
               />
@@ -484,11 +491,21 @@ function NewInvoice() {
                     placeholder={"Name of project"}
                     {...register(`items.${index}.name`, {
                       required: true,
-                      minLength: 4,
-                      onChange(event) {
-                        console.log(event.target.value);
+                      minLength: {
+                        value: 4,
+                        message: "Project name must be longer than 4",
+                      },
+                      validate: (value) => {
+                       return value.length > 4
+                      },
+                      onChange(evt) {
+                        console.log(evt.target.value);
                         console.log(data);
                         console.log(item, index);
+                        setProject({
+                          ...project,
+                          name: evt.target.value,
+                        });
                       },
                     })}
                   />
@@ -511,13 +528,15 @@ function NewInvoice() {
                         onChange: (evt) => {
                           setValue(
                             `items.${index}.total`,
-                            evt.target.value * getValues(`items.${index}.price`),
+                            evt.target.value * getValues(`items.${index}.price`)
                           );
                           setProject({
                             ...project,
                             quantity: evt.target.value,
-                            total: evt.target.value * getValues(`items.${index}.price`),
-                          });                          
+                            total:
+                              evt.target.value *
+                              getValues(`items.${index}.price`),
+                          });
                         },
                       })}
                     />
@@ -540,7 +559,8 @@ function NewInvoice() {
                         onChange: (evt) => {
                           setValue(
                             `items.${index}.total`,
-                            evt.target.value * getValues(`items.${index}.quantity`),
+                            evt.target.value *
+                              getValues(`items.${index}.quantity`)
                           );
                         },
                       })}
@@ -584,7 +604,7 @@ function NewInvoice() {
           <button
             className="btn btn-add-item"
             disabled={!isDirty || !isValid}
-            onClick={(evt) => toggleDisplayModal(evt)}
+            onClick={updateItems}
           >
             <img src={AddItemImg} alt="" aria-hidden={true} />
             Add new Item
