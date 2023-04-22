@@ -10,6 +10,7 @@ import AddNewProject from "../components/AddNewProject";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/updateInvoice";
 import DeleteProject from "../components/DeleteProject";
+import { reducer } from "../hooks/reducer";
 
 // import SaveInvoice from "../components/SaveInvoice";
 // import Inputs from "../components/Inputs";
@@ -43,7 +44,6 @@ function EditInvoice() {
   });
 
   // Fetch an invoice
-  console.log(params.id);
   const invoice = getInvoice(params.id);
 
   // load initial form data on first visit to site
@@ -89,13 +89,15 @@ function EditInvoice() {
     getValues,
     formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
-  console.log(errors);
+  // console.log(errors);
 
   useEffect(() => {
     setProject({ ...project, total: project.price * project.quantity });
   }, [project.price, project.quantity]);
 
   const addProject = () => {
+    const totalArray = invoice.items.map((item: { total: any }) => item.total);
+    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
     setProject({
       ...project,
       name: `Project name${invoice.items.length}`,
@@ -103,6 +105,7 @@ function EditInvoice() {
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.concat(project),
+      total: grandTotal,
     });
   };
 
@@ -123,11 +126,15 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
+    const totalArray = invoice.items.map((item: { total: any }) => item.total);
+    console.log(totalArray);
+    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.filter(
         (item: { name: string }) => item.name !== projectName
       ),
+      total: grandTotal,
     });
     setProjectName("");
     setDeleteProjectModal(!deleteProjectModal);
@@ -691,85 +698,7 @@ function EditInvoice() {
               Add new Item
             </button>
           </fieldset>
-          {/* 
-         <AddNewProject showProjectModal={showProjectModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
-                      */}
-          {/*  Add project layout */}
-          {/* 
-          <div
-            className={`modal ${showProjectModal ? "showProjectModal" : ""}`}
-          >
-            <div className="grid project-container">
-             
-              <div className="add-container project-name-container">
-                <label className="label" htmlFor="project-name">
-                  Project name
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  name="name"
-                  id="project-name"
-                  value={project.name}
-                  onChange={onChangeNewProject}
-                />
-              </div>
-             
-              <div className="add-container quantity-container">
-                <label className="label" htmlFor="quantity">
-                  Quantity
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  name="quantity"
-                  id="quantity"
-                  value={project.quantity}
-                  onChange={onChangeNewProject}
-                />
-              </div>
-             
-              <div className="add-container price-container">
-                <label className="label" htmlFor="price">
-                  Price
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  name="price"
-                  id="price"
-                  value={project.price}
-                  onChange={onChangeNewProject}
-                />
-              </div>
-              
-              <div className="add-container total-container">
-                <label className="label" htmlFor="total">
-                  Total
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  name="total"
-                  id="total"
-                  readOnly
-                  value={project.total}
-                />
-              </div>
-              <div className="flex add-item-control">
-                <button
-                  className="btn btn-cancel btn-cancel-add"
-                  onClick={(evt) => toggleDisplayModal(evt)}
-                >
-                  Cancel
-                </button>
-                <button className="btn btn-add-project" onClick={updateItems}>
-                  Add Project
-                </button>
-              </div>
-            </div>
-          </div>
-        */}
+         
           <div className="footer flex">
             <div className="flex footer-edit">
               <button
