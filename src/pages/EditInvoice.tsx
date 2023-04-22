@@ -42,10 +42,10 @@ function EditInvoice() {
     currency: "USD",
   });
 
-  // Fetch an invoice  
+  // Fetch an invoice
   console.log(params.id);
-  const invoice = getInvoice(params.id)
- 
+  const invoice = getInvoice(params.id);
+
   // load initial form data on first visit to site
   const initialState = {
     _id: invoice._id,
@@ -86,6 +86,7 @@ function EditInvoice() {
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
   console.log(errors);
@@ -95,6 +96,10 @@ function EditInvoice() {
   }, [project.price, project.quantity]);
 
   const addProject = () => {
+    setProject({
+      ...project,
+      name: `Project name${invoice.items.length}`,
+    });
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.concat(project),
@@ -150,7 +155,7 @@ function EditInvoice() {
   ) => {
     // console.log(project);
     evt.preventDefault();
-    toggleDisplayModal(evt);
+    // toggleDisplayModal(evt);
     addProject();
   };
 
@@ -158,7 +163,7 @@ function EditInvoice() {
   const onChangeNewProject = (evt: {
     target: { name: string; value: string };
   }) => {
-    const { name, value } = evt.target;   
+    const { name, value } = evt.target;
     setProject({ ...project, [name]: value });
   };
 
@@ -596,12 +601,18 @@ function EditInvoice() {
                         {...register(`items.${index}.quantity`, {
                           required: true,
                           onChange: (evt) => {
-                            console.log(item.quantity * item.price);
-                            console.log(item.quantity);
                             setValue(
                               `items.${index}.total`,
-                              evt.target.value * item.price
+                              evt.target.value *
+                                getValues(`items.${index}.price`)
                             );
+                            setProject({
+                              ...project,
+                              quantity: evt.target.value,
+                              total:
+                                evt.target.value *
+                                getValues(`items.${index}.price`),
+                            });
                           },
                         })}
                       />
@@ -621,11 +632,18 @@ function EditInvoice() {
                         {...register(`items.${index}.price`, {
                           required: true,
                           onChange: (evt) => {
-                            console.log(item.quantity * item.price);
                             setValue(
                               `items.${index}.total`,
-                              evt.target.value * item.quantity
+                              evt.target.value *
+                                getValues(`items.${index}.quantity`)
                             );
+                            setProject({
+                              ...project,
+                              price: evt.target.value,
+                              total:
+                                evt.target.value *
+                                getValues(`items.${index}.quantity`),
+                            });
                           },
                         })}
                       />
@@ -667,7 +685,7 @@ function EditInvoice() {
             <button
               className="btn btn-add-item"
               disabled={!isDirty || !isValid}
-              onClick={(evt) => toggleDisplayModal(evt)}
+              onClick={updateItems}
             >
               <img src={AddItemImg} alt="" aria-hidden={true} />
               Add new Item
@@ -677,11 +695,12 @@ function EditInvoice() {
          <AddNewProject showProjectModal={showProjectModal} click={(evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => updateItems(evt)} />
                       */}
           {/*  Add project layout */}
+          {/* 
           <div
             className={`modal ${showProjectModal ? "showProjectModal" : ""}`}
           >
             <div className="grid project-container">
-              {/* Name of project*/}
+             
               <div className="add-container project-name-container">
                 <label className="label" htmlFor="project-name">
                   Project name
@@ -695,7 +714,7 @@ function EditInvoice() {
                   onChange={onChangeNewProject}
                 />
               </div>
-              {/* quantity required */}
+             
               <div className="add-container quantity-container">
                 <label className="label" htmlFor="quantity">
                   Quantity
@@ -709,7 +728,7 @@ function EditInvoice() {
                   onChange={onChangeNewProject}
                 />
               </div>
-              {/* unit required*/}
+             
               <div className="add-container price-container">
                 <label className="label" htmlFor="price">
                   Price
@@ -723,7 +742,7 @@ function EditInvoice() {
                   onChange={onChangeNewProject}
                 />
               </div>
-              {/* total cost */}
+              
               <div className="add-container total-container">
                 <label className="label" htmlFor="total">
                   Total
@@ -750,6 +769,7 @@ function EditInvoice() {
               </div>
             </div>
           </div>
+        */}
           <div className="footer flex">
             <div className="flex footer-edit">
               <button
