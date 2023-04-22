@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PreviousPage from "../components/PreviousPage";
 import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { randomId } from "../hooks/randomID";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 
@@ -34,7 +35,7 @@ function NewInvoice() {
 
   // load initial form data on first visit to site
   const initialState = {
-    id: "",
+    id: randomId(),
     createdAt: "",
     paymentDue: "",
     description: "",
