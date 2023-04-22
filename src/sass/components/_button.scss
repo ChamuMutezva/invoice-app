@@ -9,6 +9,9 @@
         outline: dashed currentColor;
         outline-offset: .35em;
     }
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .btn-link {

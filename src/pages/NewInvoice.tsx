@@ -3,6 +3,7 @@ import PreviousPage from "../components/PreviousPage";
 import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { randomId } from "../hooks/randomID";
+import createInvoice from "../hooks/createInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 
@@ -21,13 +22,15 @@ function NewInvoice() {
     total: 100.0,
   };
 
+  const { mutate } = createInvoice();
+  /*
   const calculateTotal = (price: number, qty: number) => {
     return setProject({
       ...project,
       total: price * qty,
     });
   };
-
+*/
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
   const [projectName, setProjectName] = useState("");
@@ -36,7 +39,7 @@ function NewInvoice() {
   // load initial form data on first visit to site
   const initialState = {
     id: randomId(),
-    createdAt: "",
+    createdAt: new Date().toJSON().slice(0, 10),
     paymentDue: "",
     description: "",
     paymentTerms: "Net 6 days",
@@ -124,6 +127,7 @@ function NewInvoice() {
 
   const handleSubmitForm = (data: any) => {
     console.log(data);
+     mutate(data)
   };
 
   const watchTotal = watch(["items"]);
@@ -497,7 +501,7 @@ function NewInvoice() {
                         message: "Project name must be longer than 4",
                       },
                       validate: (value) => {
-                       return value.length > 4
+                        return value.length > 4;
                       },
                       onChange(evt) {
                         console.log(evt.target.value);
@@ -610,7 +614,7 @@ function NewInvoice() {
             <img src={AddItemImg} alt="" aria-hidden={true} />
             Add new Item
           </button>
-        </fieldset>      
+        </fieldset>
 
         <div className="footer flex">
           <div className="flex footer-edit">
