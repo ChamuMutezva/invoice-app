@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PreviousPage from "../components/PreviousPage";
 import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import add from "date-fns/add";
+import PreviousPage from "../components/PreviousPage";
 import { randomId } from "../hooks/randomID";
 import createInvoice from "../hooks/createInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
+import { reducer } from "../hooks/reducer";
 
 function NewInvoice() {
   interface ICosting {
@@ -33,14 +35,14 @@ function NewInvoice() {
 */
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
-  const [projectName, setProjectName] = useState("");
+  // const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(newProject);
 
   // load initial form data on first visit to site
   const initialState = {
     id: randomId(),
     createdAt: new Date().toJSON().slice(0, 10),
-    paymentDue: "",
+    paymentDue: add(Date.now(), {days: 1}),
     description: "",
     paymentTerms: "Net 6 days",
     clientEmail: "ckmutezva@gmail.com",
@@ -82,7 +84,7 @@ function NewInvoice() {
   ) => {
     evt.preventDefault();
     setDeleteProjectModal(!deleteProjectModal);
-    setProjectName(name);
+    // setProjectName(name);
   };
 
   // Updates the array of projects ITEM by diaplaying the modal with
@@ -126,16 +128,22 @@ function NewInvoice() {
   console.log(errors);
 
   const handleSubmitForm = (data: any) => {
+    const totalArray = data.items.map((item: { total: any }) => item.total);
+    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+    setData({
+      ...data,
+      total: grandTotal,
+    });
     console.log(data);
-     mutate(data)
+     mutate(data);
   };
 
   const watchTotal = watch(["items"]);
 
   console.log(watchTotal);
-  useEffect(() => {
-    console.log(data.items);
-  }, [data.items]);
+  // useEffect(() => {
+  //   console.log(data.items);
+  // }, [data.items]);
 
   return (
     <div className="main">
@@ -402,24 +410,23 @@ function NewInvoice() {
         <fieldset className="edit-invoice-details">
           <div className="grid">
             <div className={`invoice-date`}>
-              <label className="label" htmlFor={`date`}>
+              <label className="label" htmlFor={`dateCreated`}>
                 Invoice date
               </label>
               <input
                 type="date"
-                id={`date`}
-                className={`input date-signed`}
+                id={`dateCreated`}
+                className={`input date-created`}
                 placeholder={""}
                 aria-labelledby="invoice-date-lbl"
-                aria-invalid={errors.paymentDue ? "true" : "false"}
-                {...register("paymentDue", {
-                  valueAsDate: true,
+                aria-invalid={errors.createdAt ? "true" : "false"}
+                {...register("createdAt", {
                   required: "Select a date",
                 })}
               />
               {errors.paymentDue && (
                 <p role="alert" id="invoice-date-lbl" className="form-errors">
-                  {errors.paymentDue.message?.toString()}
+                  {errors.createdAt?.message?.toString()}
                 </p>
               )}
             </div>
@@ -436,6 +443,12 @@ function NewInvoice() {
                 aria-invalid={errors.paymentTerms ? "true" : "false"}
                 {...register("paymentTerms", {
                   required: "Select payment option",
+                  onChange(evt) {
+                    setData({
+                      ...data,
+                      paymentDue: add(new Date(data.createdAt), {days: evt.target.value} ),
+                    });
+                  },
                 })}
               >
                 <option value={1}>Net 1 Day</option>
