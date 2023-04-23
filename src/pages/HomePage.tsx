@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLoaderData, Form } from "react-router-dom";
+import format from "date-fns/format";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/getInvoices";
@@ -95,7 +96,7 @@ function HomePage() {
                 _id: any;
                 status: string;
                 total: number;
-                paymentDue: string;
+                paymentDue: Date;
                 id: React.Key;
                 clientName: string;
               }) => {
@@ -108,7 +109,7 @@ function HomePage() {
                     >
                       {invoice.clientName}
                     </Link>
-                    <p className="payment-date">Due {invoice.paymentDue}</p>
+                    <p className="payment-date">Due {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}</p>
                     <p className="amount-total">
                       {formatter.format(invoice.total)}
                     </p>

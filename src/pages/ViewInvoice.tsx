@@ -117,7 +117,9 @@ function ViewInvoice() {
               </div>
               <div className="due-date">
                 <h3 className="invoice-date-title">Payment due</h3>
-                <p className="payment-date-view">{invoice.paymentDue}</p>
+                <p className="payment-date-view">
+                  {format(new Date(invoice.paymentDue), "dd MMM yyyy")}
+                </p>
               </div>
             </div>
 
