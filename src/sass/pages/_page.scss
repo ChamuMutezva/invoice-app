@@ -5,6 +5,11 @@
     background-color: base.$clr-white-200;
 }
 
+.body-size {
+    height: 100vh;
+    overflow: hidden;
+}
+
 .pre-loading {
     position: relative;
     z-index: 1;
