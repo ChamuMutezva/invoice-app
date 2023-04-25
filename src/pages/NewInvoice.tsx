@@ -98,7 +98,7 @@ function NewInvoice() {
       total: calculateTotal(),
     });
     console.log(data);
-    // mutate(data);
+     mutate(data);
   };
 
   function calculateTotal(): number {
