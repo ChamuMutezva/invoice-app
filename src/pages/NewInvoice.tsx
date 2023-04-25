@@ -25,30 +25,20 @@ function NewInvoice() {
   };
 
   const { mutate } = createInvoice();
-  /*
-  const calculateTotal = (price: number, qty: number) => {
-    return setProject({
-      ...project,
-      total: price * qty,
-    });
-  };
-*/
-  const [showProjectModal, setShowProjectModal] = useState(false);
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
-  // const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(newProject);
 
   // load initial form data on first visit to site
   const initialState = {
     id: randomId(),
     createdAt: new Date().toJSON().slice(0, 10),
-    paymentDue: add(Date.now(), {days: 1}),
+    paymentDue: add(Date.now(), { days: 1 }),
     description: "",
     paymentTerms: "Net 6 days",
     clientEmail: "ckmutezva@gmail.com",
     clientName: "Chamu Mutezva",
     status: "draft",
-    total: 0.0,
+    total: 200.0,
     senderAddress: {
       street: "36 Gomarara street",
       city: "Mabvuku",
@@ -66,15 +56,6 @@ function NewInvoice() {
 
   const [data, setData] = useState(initialState);
 
-  // add another project by displaying the modal. This will add an edit component
-  // to add Name of project, quantity, price and total
-  const toggleDisplayModal = (
-    evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    evt.preventDefault();
-    setShowProjectModal(!showProjectModal);
-  };
-
   // Opens the Delete Project dialog with 2 options
   // 1. Option 1 - Cancel delete and return to previous page
   // 2. Option 2 - Delete project and return to previous page
@@ -84,11 +65,9 @@ function NewInvoice() {
   ) => {
     evt.preventDefault();
     setDeleteProjectModal(!deleteProjectModal);
-    // setProjectName(name);
   };
 
-  // Updates the array of projects ITEM by diaplaying the modal with
-  // the object to be added to the array. The obj has the following
+  // Updates The obj which has the following
   // Name of project, quantity, price and total.
   const updateItems = (
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -98,22 +77,8 @@ function NewInvoice() {
       ...project,
       name: `Project name${data.items.length + 1}`,
     });
-    //  toggleDisplayModal(evt);
     setData({ ...data, items: data.items.concat(project) });
     console.log(evt);
-  };
-
-  // Add project component to add another project to the items array
-  const onChangeNewProject = (evt: {
-    target: { name: string; value: string };
-  }) => {
-    const { name, value } = evt.target;
-    console.log(value);
-    setProject({
-      ...project,
-      [name]: value,
-      total: project.price * project.quantity,
-    });
   };
 
   // load form with initialstate
@@ -128,22 +93,24 @@ function NewInvoice() {
   console.log(errors);
 
   const handleSubmitForm = (data: any) => {
-    const totalArray = data.items.map((item: { total: any }) => item.total);
-    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
     setData({
       ...data,
-      total: grandTotal,
+      total: calculateTotal(),
     });
     console.log(data);
-     mutate(data);
+    // mutate(data);
   };
 
-  const watchTotal = watch(["items"]);
+  function calculateTotal(): number {
+    const totalArray = watchTotal[0].map((item: { total: any }) => item.total);   
+    setValue("total", totalArray.length > 0 ? totalArray.reduce(reducer) : 0);
+    console.log(watchTotal[0]);
+    const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+    return total.toFixed(2);
+  }
 
+  const watchTotal = watch(["items", "total"]);
   console.log(watchTotal);
-  // useEffect(() => {
-  //   console.log(data.items);
-  // }, [data.items]);
 
   return (
     <div className="main">
@@ -446,7 +413,9 @@ function NewInvoice() {
                   onChange(evt) {
                     setData({
                       ...data,
-                      paymentDue: add(new Date(data.createdAt), {days: evt.target.value} ),
+                      paymentDue: add(new Date(data.createdAt), {
+                        days: evt.target.value,
+                      }),
                     });
                   },
                 })}
@@ -535,29 +504,35 @@ function NewInvoice() {
                     <label className="label" htmlFor={`qty-line`}>
                       Qty
                     </label>
-
-                    <input
-                      type="number"
-                      id={`qty`}
-                      className={`qty input calculate-line`}
-                      placeholder={"1"}
-                      {...register(`items.${index}.quantity`, {
-                        required: true,
-                        onChange: (evt) => {
-                          setValue(
-                            `items.${index}.total`,
-                            evt.target.value * getValues(`items.${index}.price`)
-                          );
-                          setProject({
-                            ...project,
-                            quantity: evt.target.value,
-                            total:
+                    {watchTotal && (
+                      <input
+                        type="number"
+                        id={`qty`}
+                        className={`qty input calculate-line`}
+                        placeholder={"1"}
+                        {...register(`items.${index}.quantity`, {
+                          required: true,
+                          onChange: (evt) => {
+                            setValue(
+                              `items.${index}.total`,
                               evt.target.value *
-                              getValues(`items.${index}.price`),
-                          });
-                        },
-                      })}
-                    />
+                                getValues(`items.${index}.price`)
+                            );
+                            setProject({
+                              ...project,
+                              quantity: evt.target.value,
+                              total:
+                                evt.target.value *
+                                getValues(`items.${index}.price`),
+                            });
+                           setValue("total", calculateTotal());
+                          },
+                          onBlur: () => {
+                            setValue("total", calculateTotal());
+                          },
+                        })}
+                      />
+                    )}
                   </div>
 
                   {/* PRICE DETAILS */}
@@ -565,24 +540,36 @@ function NewInvoice() {
                     <label className="label" htmlFor={`price`}>
                       Price
                     </label>
-
-                    <input
-                      type="number"
-                      step={0.01}
-                      id={`price`}
-                      className={`price input calculate-line`}
-                      placeholder={"200.00"}
-                      {...register(`items.${index}.price`, {
-                        required: true,
-                        onChange: (evt) => {
-                          setValue(
-                            `items.${index}.total`,
-                            evt.target.value *
-                              getValues(`items.${index}.quantity`)
-                          );
-                        },
-                      })}
-                    />
+                    {watchTotal && (
+                      <input
+                        type="number"
+                        step={0.01}
+                        id={`price`}
+                        className={`price input calculate-line`}
+                        placeholder={"200.00"}
+                        {...register(`items.${index}.price`, {
+                          required: true,
+                          onChange: (evt) => {
+                            setValue(
+                              `items.${index}.total`,
+                              evt.target.value *
+                                getValues(`items.${index}.quantity`)
+                            );
+                            setProject({
+                              ...project,
+                              price: evt.target.value,
+                              total:
+                                evt.target.value *
+                                getValues(`items.${index}.quantity`),
+                            });
+                            setValue("total", calculateTotal());
+                          },
+                          onBlur: () => {
+                            setValue("total", calculateTotal());
+                          },
+                        })}
+                      />
+                    )}
                   </div>
 
                   {/* PROJECT TOTAL DETAILS */}
@@ -619,6 +606,25 @@ function NewInvoice() {
               </div>
             ))
           )}
+
+          {/* PROJECT TOTAL DETAILS */}
+          <div className={`sr-only item-total-line calculate-line-container`}>
+            <label className="label" htmlFor={`grand-total`}>
+              Grand Total
+            </label>
+
+            <input
+              type="number"
+              id={`grand-total`}
+              className={`grand-total input calculate-line`}
+              placeholder={"200.00"}
+              readOnly={true}
+              {...register(`total`, {
+                required: true,
+              })}
+            />
+          </div>
+
           <button
             className="btn btn-add-item"
             disabled={!isDirty || !isValid}
