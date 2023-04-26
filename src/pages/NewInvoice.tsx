@@ -101,7 +101,7 @@ function NewInvoice() {
     });
     setShowDialog(() => true);
     console.log(data);
-    // mutate(data);
+     mutate(data);
   };
 
   function calculateTotal(): number {
