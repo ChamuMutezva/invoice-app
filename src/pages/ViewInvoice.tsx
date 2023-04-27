@@ -5,12 +5,21 @@ import getInvoice from "../hooks/getInvoice";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/reducer";
 import { updateInvoice } from "../hooks/updateInvoice";
+import { useDeleteInvoice } from "../hooks/deleteInvoice";
+import axios from "axios";
+import { API_ENDPOINT_PATH } from "../config";
+import { useState } from "react";
 
 function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
-
+  const [deletionError, setDeletionError] = useState(null);
   const invoice = getInvoice(params.id);
+  const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
+
+  const onDelete = () => {
+    mutate(invoice._id);
+  };
 
   const updateInvoiceMutation = useMutation(updateInvoice, {
     onSuccess: () => {
@@ -20,6 +29,10 @@ function ViewInvoice() {
 
   if (invoice === undefined) {
     return <h2>Loading...</h2>;
+  }
+
+  if (deletionError) {
+    return <h2>Error encountered, invoice cannot be deleted</h2>;
   }
 
   const totalArray = invoice.items.map((item: { total: any }) => item.total);
@@ -71,9 +84,9 @@ function ViewInvoice() {
             <Link className="btn btn-edit" to={`/editInvoice/${invoice._id}`}>
               Edit
             </Link>
-            <Link className="btn btn-delete-view" to={`/deleteInvoice/:id`}>
+            <button className="btn btn-delete-view" onClick={onDelete}>
               Delete
-            </Link>
+            </button>
             <button className="btn btn-mark" onClick={handleClick}>
               Mark as paid
             </button>

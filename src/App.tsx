@@ -8,8 +8,8 @@ import "./sass/main.scss";
 import Toggle from "./components/Toggle";
 
 import ErrorPage from "./pages/ErrorPage";
-import HomePage  from "./pages/HomePage";
-import ViewInvoice  from "./pages/ViewInvoice";
+import HomePage from "./pages/HomePage";
+import ViewInvoice from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
 import DeleteInvoice from "./pages/DeleteInvoice";
 import EditInvoice from "./pages/EditInvoice";
@@ -21,26 +21,22 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomePage />,    
-      errorElement: <ErrorPage />,            
+      element: <HomePage />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/viewInvoice/:id",
       element: <ViewInvoice />,
-     // loader: rootLoader,
+      // loader: rootLoader,
     },
     {
       path: "/newInvoice",
       element: <NewInvoice />,
     },
     {
-      path: "/deleteInvoice/:id",
-      element: <DeleteInvoice />,
-    },
-    {
       path: "/editInvoice/:id",
       element: <EditInvoice />,
-      errorElement: <ErrorPage />, 
+      errorElement: <ErrorPage />,
     },
   ]);
 
@@ -66,7 +62,12 @@ function App() {
           </div>
           <div className="profile">
             <a href="#" className="btn btn-profile">
-              <img className="btn-profile-img" src={Profile} alt="" aria-hidden={true} />
+              <img
+                className="btn-profile-img"
+                src={Profile}
+                alt=""
+                aria-hidden={true}
+              />
               <span className="sr-only">customer profile</span>
             </a>
           </div>
