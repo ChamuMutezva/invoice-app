@@ -1,4 +1,3 @@
-import FocusTrap from "focus-trap-react";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 

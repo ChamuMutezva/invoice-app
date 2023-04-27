@@ -59,7 +59,7 @@
 }
 
 .client-name {
-    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
+    @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
 }
 
 .payment-date {

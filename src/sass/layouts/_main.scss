@@ -20,7 +20,7 @@
 }
 
 .summary-title {
-    @include utils.fonts(base.$clr-black-200, base.$fs-24, 700);   
+    @include utils.fonts(base.$clr-black-100, base.$fs-24, 700);   
 }
 
 .invoice-total-num {

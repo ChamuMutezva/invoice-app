@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import IconClose from "../assets/icon-close.svg";
-import FocusTrap from "focus-trap-react";
 
 function DeleteProject(props: {
   name: string;

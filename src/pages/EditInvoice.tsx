@@ -5,15 +5,11 @@ import PreviousPage from "../components/PreviousPage";
 import getInvoice from "../hooks/useGetInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
-import AddNewProject from "../components/AddNewProject";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
-
-// import SaveInvoice from "../components/SaveInvoice";
-// import Inputs from "../components/Inputs";
 
 function EditInvoice() {
   const newProject = {
