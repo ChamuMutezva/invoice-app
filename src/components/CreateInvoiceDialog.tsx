@@ -26,7 +26,7 @@ function CreateInvoiceDialog(props: { showDialog: boolean }) {
       <p id="modal-heading-text" className="modal-text">
         A new invoice has been created
       </p>
-      <Link ref={linkRef} className={`btn`} to={`/`}>
+      <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
         Return to Homepage
       </Link>
     </dialog>
