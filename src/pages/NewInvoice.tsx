@@ -402,12 +402,12 @@ function NewInvoice() {
           <fieldset className="edit-invoice-details">
             <div className="grid">
               <div className={`invoice-date`}>
-                <label className="label" htmlFor={`dateCreated`}>
+                <label className="label" htmlFor={`date-created`}>
                   Invoice date
                 </label>
                 <input
                   type="date"
-                  id={`dateCreated`}
+                  id={`date-created`}
                   className={`input date-created`}
                   placeholder={""}
                   aria-labelledby="invoice-date-lbl"
@@ -416,7 +416,7 @@ function NewInvoice() {
                     required: "Select a date",
                   })}
                 />
-                {errors.paymentDue && (
+                {errors.createdAt && (
                   <p role="alert" id="invoice-date-lbl" className="form-errors">
                     {errors.createdAt?.message?.toString()}
                   </p>

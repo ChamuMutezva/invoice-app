@@ -24,7 +24,7 @@ function ViewInvoice() {
   const closeDialog = () => {
     setShowDialog(false);
   };
- 
+
   const confirmDelete = () => {
     mutate(invoice._id);
     setShowDialog(false);
@@ -230,7 +230,9 @@ function ViewInvoice() {
           <button className="btn-delete-view" onClick={onDelete}>
             Delete
           </button>
-          <button className="btn-mark">Mark as paid</button>
+          <button className="btn-mark" onClick={handleClick}>
+            Mark as paid
+          </button>
         </div>
       </footer>
     </div>

@@ -1,6 +1,7 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { Form, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
 import getInvoice from "../hooks/useGetInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
@@ -10,6 +11,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
+import format from "date-fns/format";
 
 function EditInvoice() {
   const newProject = {
@@ -477,23 +479,23 @@ function EditInvoice() {
           <fieldset className="edit-invoice-details">
             <div className="grid">
               <div className={`invoice-date`}>
-                <label className="label" htmlFor={`date`}>
+                <label className="label" htmlFor={`date-created`}>
                   Invoice date
                 </label>
                 <input
                   type="date"
-                  id={`date`}
-                  className={`input date-signed`}
+                  id={`date-created`}
+                  className={`input date-created`}
                   placeholder={""}
                   aria-labelledby="invoice-date-lbl"
-                  aria-invalid={errors.paymentDue ? "true" : "false"}
-                  {...register("paymentDue", {
+                  aria-invalid={errors.createdAt ? "true" : "false"}
+                  {...register("createdAt", {
                     required: "Select a date",
                   })}
                 />
-                {errors.paymentDue && (
+                {errors.createdAt && (
                   <p role="alert" id="invoice-date-lbl" className="form-errors">
-                    {errors.paymentDue.message?.toString()}
+                    {errors.createdAt.message?.toString()}
                   </p>
                 )}
               </div>
@@ -510,6 +512,14 @@ function EditInvoice() {
                   aria-invalid={errors.paymentTerms ? "true" : "false"}
                   {...register("paymentTerms", {
                     required: "Select payment option",
+                    onChange(evt) {
+                      updateInvoiceMutation.mutate({
+                        ...invoice,
+                        paymentDue: add(new Date(invoice.createdAt), {
+                          days: evt.target.value,
+                        }),
+                      });
+                    },
                   })}
                 >
                   <option value={1}>Net 1 Day</option>
