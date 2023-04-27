@@ -9,16 +9,27 @@ import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import axios from "axios";
 import { API_ENDPOINT_PATH } from "../config";
 import { useState } from "react";
+import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 
 function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
   const invoice = getInvoice(params.id);
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
 
   const onDelete = () => {
+    setShowDialog(true);
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
+  };
+
+  const confirmDelete = () => {
     mutate(invoice._id);
+    setShowDialog(false);
   };
 
   const updateInvoiceMutation = useMutation(updateInvoice, {
@@ -207,14 +218,20 @@ function ViewInvoice() {
           </div>
         </section>
       </main>
+      <DeleteInvoiceDialog
+        showDialog={showDialog}
+        closeDialog={closeDialog}
+        invoiceID={invoice.id}
+        confirmDelete={confirmDelete}
+      />
       <footer className="footer-view tablet-hidden">
         <div className="nav-view-btns ">
           <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>
             Edit
           </Link>
-          <Link className="btn-delete-view" to={`/deleteInvoice/:id`}>
+          <button className="btn-delete-view" onClick={onDelete}>
             Delete
-          </Link>
+          </button>
           <button className="btn-mark">Mark as paid</button>
         </div>
       </footer>

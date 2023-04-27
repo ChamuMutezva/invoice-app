@@ -1,0 +1,20 @@
+@use '../base';
+@use '../utils';
+
+.show-dialog {
+    position: fixed;
+    flex-direction: column;
+    gap: 2.5rem;
+   // background: darken(hsla(225deg, 9%, 9%, 1), 50%);
+    // background-color: lighten(base.$clr-black-300, 20%);
+}
+
+.dialog-container {
+    background-color: base.$clr-white-100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: base.$spacer1;
+    border-radius: 6px;
+}
