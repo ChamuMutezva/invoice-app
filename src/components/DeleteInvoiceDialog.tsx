@@ -27,7 +27,7 @@ function DeleteInvoiceDialog(props: {
       }`}
     >
       <div className="dialog-container">
-        <h3>Delete invoice prompt</h3>
+        <h3>Delete invoice confirmation</h3>
         <p>
           Are you sure you want to delete invoice #{props.invoiceID} This action
           cannot be undone.

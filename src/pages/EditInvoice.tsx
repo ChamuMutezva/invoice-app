@@ -32,7 +32,7 @@ function EditInvoice() {
   const queryClient = useQueryClient();
 
   const [showProjectModal, setShowProjectModal] = useState(false);
-  const [deleteProjectModal, setDeleteProjectModal] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(newProject);
   const params = useParams();
@@ -89,15 +89,22 @@ function EditInvoice() {
     getValues,
     formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
-  // console.log(errors);
+
+  const watchTotal = watch(["items", "total"]);
+  console.log(watchTotal);
+  
+  function calculateTotal(): number {
+    const totalArray = watchTotal[0].map((item: { total: any }) => item.total);
+    const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+    setValue("total", total);
+    return total.toFixed(2);
+  }
 
   useEffect(() => {
     setProject({ ...project, total: project.price * project.quantity });
   }, [project.price, project.quantity]);
 
   const addProject = () => {
-    const totalArray = invoice.items.map((item: { total: any }) => item.total);
-    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
     setProject({
       ...project,
       name: `Project name${invoice.items.length}`,
@@ -105,7 +112,7 @@ function EditInvoice() {
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.concat(project),
-      total: grandTotal,
+      total: calculateTotal(),
     });
   };
 
@@ -117,7 +124,7 @@ function EditInvoice() {
     name: string
   ) => {
     evt.preventDefault();
-    setDeleteProjectModal(!deleteProjectModal);
+    setShowDialog(!showDialog);
     setProjectName(name);
   };
 
@@ -126,23 +133,21 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
-    const totalArray = invoice.items.map((item: { total: any }) => item.total);
-    console.log(totalArray);
-    const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+
     updateInvoiceMutation.mutate({
       ...invoice,
       items: invoice.items.filter(
         (item: { name: string }) => item.name !== projectName
       ),
-      total: grandTotal,
+      total: calculateTotal(),
     });
     setProjectName("");
-    setDeleteProjectModal(!deleteProjectModal);
+    setShowDialog(!showDialog);
   };
 
   // Project not deleted
   const exitWithoutDeletingProject = () => {
-    setDeleteProjectModal(!deleteProjectModal);
+    setShowDialog(!showDialog);
   };
 
   // add another project by displaying the modal. This will add an edit component
@@ -620,6 +625,10 @@ function EditInvoice() {
                                 evt.target.value *
                                 getValues(`items.${index}.price`),
                             });
+                            setValue("total", calculateTotal());
+                          },
+                          onBlur: () => {
+                            setValue("total", calculateTotal());
                           },
                         })}
                       />
@@ -651,6 +660,10 @@ function EditInvoice() {
                                 evt.target.value *
                                 getValues(`items.${index}.quantity`),
                             });
+                            setValue("total", calculateTotal());
+                          },
+                          onBlur: () => {
+                            setValue("total", calculateTotal());
                           },
                         })}
                       />
@@ -698,7 +711,7 @@ function EditInvoice() {
               Add new Item
             </button>
           </fieldset>
-         
+
           <div className="footer flex">
             <div className="flex footer-edit">
               <button
@@ -716,7 +729,7 @@ function EditInvoice() {
       </main>
 
       <DeleteProject
-        deleteModal={deleteProjectModal}
+        showDialog={showDialog}
         exitWithoutDeletingProject={exitWithoutDeletingProject}
         deleteProjectConfirmation={deleteProjectConfirmation}
         name={projectName}
