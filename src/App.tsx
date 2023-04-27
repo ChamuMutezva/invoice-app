@@ -40,7 +40,7 @@ function App() {
     },
   ]);
 
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(true);
 
   const onChange = () => {
     setTheme(!theme);
