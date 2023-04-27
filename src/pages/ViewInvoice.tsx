@@ -6,8 +6,6 @@ import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/useReducer";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
 import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
-import axios from "axios";
-import { API_ENDPOINT_PATH } from "../config";
 import { useState } from "react";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 
@@ -26,7 +24,7 @@ function ViewInvoice() {
   const closeDialog = () => {
     setShowDialog(false);
   };
-
+ 
   const confirmDelete = () => {
     mutate(invoice._id);
     setShowDialog(false);

@@ -76,6 +76,18 @@
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }
 
+.footer-view {
+    position: absolute;
+    left: 0;    
+    background-color: base.$clr-white-100;
+    padding-block: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
 .tablet-hidden {
     @include utils.mQ(40rem) {
         display: none;
@@ -157,25 +169,6 @@
     @include utils.fonts(base.$clr-white-100, base.$fs-13, 500);
 }
 
-.footer-view {
-    margin-block: 2rem;
-    background-color: base.$clr-white-100;
-    padding-block: 2rem;
-}
-
-.nav-view-btns {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    @include utils.mQ(40rem) {
-        flex: 1 1 70%;
-        justify-content: flex-end;
-        gap: 1rem;
-    }
-}
-
-
 .dark-mode {
     .container-invoice {
         background-color: base.$clr-black-200;
@@ -188,5 +181,9 @@
 
     .grand-total-container {
         background-color: base.$clr-black-100;
+    }
+
+    .footer-view {
+        background-color: base.$clr-black-500;
     }
 }

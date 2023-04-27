@@ -9,6 +9,7 @@
         outline: dashed currentColor;
         outline-offset: .35em;
     }
+
     &:disabled {
         opacity: 0.5;
     }
@@ -143,6 +144,18 @@
     }
 }
 
+.nav-view-btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.75rem;
+
+    @include utils.mQ(40rem) {
+        flex: 1 1 70%;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+}
 
 .dark-mode {
     .btn-return {
@@ -166,7 +179,7 @@
     }
 
     .btn-edit {
-        background-color: base.$clr-black-500;
+        background-color: base.$clr-black-700;
     }
 
     .btn-cancel {
