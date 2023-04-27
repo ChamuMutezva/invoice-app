@@ -3,7 +3,7 @@ import { Link, useLoaderData, Form } from "react-router-dom";
 import format from "date-fns/format";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
-import getInvoices from "../hooks/getInvoices";
+import getInvoices from "../hooks/useGetInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("draft");

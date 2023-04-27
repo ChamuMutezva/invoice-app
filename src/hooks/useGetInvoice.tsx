@@ -1,4 +1,4 @@
-import getInvoices from "./getInvoices";
+import getInvoices from "./useGetInvoices";
 
 export default function getInvoice(id: any) {
   const { invoices } = getInvoices();

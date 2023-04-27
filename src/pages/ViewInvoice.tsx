@@ -1,11 +1,11 @@
 import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import format from "date-fns/format";
-import getInvoice from "../hooks/getInvoice";
+import getInvoice from "../hooks/useGetInvoice";
 import PreviousPage from "../components/PreviousPage";
-import { reducer } from "../hooks/reducer";
-import { updateInvoice } from "../hooks/updateInvoice";
-import { useDeleteInvoice } from "../hooks/deleteInvoice";
+import { reducer } from "../hooks/useReducer";
+import { updateInvoice } from "../hooks/useUpdateInvoice";
+import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import axios from "axios";
 import { API_ENDPOINT_PATH } from "../config";
 import { useState } from "react";

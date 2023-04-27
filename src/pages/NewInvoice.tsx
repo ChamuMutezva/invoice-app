@@ -3,11 +3,11 @@ import { Form, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
-import { randomId } from "../hooks/randomID";
-import createInvoice from "../hooks/createInvoice";
+import { randomId } from "../hooks/useRandomID";
+import createInvoice from "../hooks/useCreateInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
-import { reducer } from "../hooks/reducer";
+import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 
 function NewInvoice() {
