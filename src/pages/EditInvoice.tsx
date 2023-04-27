@@ -2,7 +2,6 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Form, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import PreviousPage from "../components/PreviousPage";
-import fetchInvoice from "../hooks/useFetchInvoice";
 import getInvoice from "../hooks/useGetInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
@@ -11,6 +10,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
+import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 
 // import SaveInvoice from "../components/SaveInvoice";
 // import Inputs from "../components/Inputs";
@@ -33,6 +33,7 @@ function EditInvoice() {
 
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(newProject);
   const params = useParams();
@@ -72,7 +73,6 @@ function EditInvoice() {
     },
     items: invoice.items,
   };
-  // console.log(initialState);
 
   const updateInvoiceMutation = useMutation(updateInvoice, {
     onSuccess: () => {
@@ -90,9 +90,12 @@ function EditInvoice() {
     formState: { errors, isDirty, isValid, touchedFields },
   } = useForm({ defaultValues: initialState });
 
+  // watch for changes , changes for items to be used to calculate the grandtotal
   const watchTotal = watch(["items", "total"]);
   console.log(watchTotal);
-  
+
+  // When a new project has been added or a project has been deleted
+  // the grandtotal should be recalculated
   function calculateTotal(): number {
     const totalArray = watchTotal[0].map((item: { total: any }) => item.total);
     const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
@@ -150,15 +153,6 @@ function EditInvoice() {
     setShowDialog(!showDialog);
   };
 
-  // add another project by displaying the modal. This will add an edit component
-  // to add Name of project, quantity, price and total
-  const toggleDisplayModal = (
-    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    evt.preventDefault();
-    setShowProjectModal(!showProjectModal);
-  };
-
   // Updates the array of projects ITEM by diaplaying the modal with
   // the object to be added to the array. The obj has the following
   // Name of project, quantity, price and total.
@@ -169,14 +163,6 @@ function EditInvoice() {
     evt.preventDefault();
     // toggleDisplayModal(evt);
     addProject();
-  };
-
-  // Add project component to add another project to the items array
-  const onChangeNewProject = (evt: {
-    target: { name: string; value: string };
-  }) => {
-    const { name, value } = evt.target;
-    setProject({ ...project, [name]: value });
   };
 
   const handleSubmitForm = (data: {
@@ -209,7 +195,7 @@ function EditInvoice() {
     };
 
     updateInvoiceMutation.mutate(invoice);
-    alert("Invoice has been saved");
+    setShowConfirmSave(true);
   };
 
   return (
@@ -734,6 +720,7 @@ function EditInvoice() {
         deleteProjectConfirmation={deleteProjectConfirmation}
         name={projectName}
       />
+      <SaveEditedPageDialog showConfirmSave={showConfirmSave} />
     </>
   );
 }
