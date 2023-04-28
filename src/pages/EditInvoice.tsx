@@ -163,6 +163,13 @@ function EditInvoice() {
     addProject();
   };
 
+  // calculate the paymentDue date, when the payment options has been selected
+  // using the add function provided by "date-fns"
+  const onTermsChange = (numOfDays: number) => {
+    console.log(numOfDays);
+    setValue("paymentDue", add(Date.now(), { days: numOfDays }));
+  };
+
   const handleSubmitForm = (data: {
     _id: any;
     id: string;
@@ -513,12 +520,7 @@ function EditInvoice() {
                   {...register("paymentTerms", {
                     required: "Select payment option",
                     onChange(evt) {
-                      updateInvoiceMutation.mutate({
-                        ...invoice,
-                        paymentDue: add(new Date(invoice.createdAt), {
-                          days: evt.target.value,
-                        }),
-                      });
+                      onTermsChange(evt.target.value)
                     },
                   })}
                 >
@@ -534,6 +536,20 @@ function EditInvoice() {
                   </p>
                 )}
               </div>
+            </div>
+
+            {/* PAYMENT DUE DETAILS */}
+            <div className={`sr-only address-line`}>
+              <label className="label" htmlFor={`payment-due`}>
+                Payment due date
+              </label>
+              <input
+                type="text"
+                id={`payment-due`}
+                className={`input payment-due`}
+                readOnly={true}
+                {...register("paymentDue")}
+              />
             </div>
 
             {/* PROJECT NAME DETAILS */}

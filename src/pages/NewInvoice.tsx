@@ -83,6 +83,8 @@ function NewInvoice() {
     console.log(evt);
   };
 
+  // calculate the paymentDue date, when the payment options has been selected
+  // using the add function provided by "date-fns"
   const onTermsChange = (numOfDays: number) => {
     console.log(numOfDays);
     setValue("paymentDue", add(Date.now(), { days: numOfDays }));
