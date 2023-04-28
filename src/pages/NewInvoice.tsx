@@ -83,6 +83,11 @@ function NewInvoice() {
     console.log(evt);
   };
 
+  const onTermsChange = (numOfDays: number) => {
+    console.log(numOfDays);
+    setValue("paymentDue", add(Date.now(), { days: numOfDays }));
+  };
+
   // load form with initialstate
   const {
     register,
@@ -138,7 +143,7 @@ function NewInvoice() {
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Bill From</legend>
             {/* SENDER STREET DETAILS */}
-            <div className={`address-line street-line`}>
+            <div className={`address-line `}>
               <label className="label" htmlFor={`street`}>
                 Street Address
               </label>
@@ -165,7 +170,7 @@ function NewInvoice() {
             </div>
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`address-line city-line`}>
+              <div className={`address-line`}>
                 <label className="label" htmlFor={`city`}>
                   City
                 </label>
@@ -294,7 +299,7 @@ function NewInvoice() {
             </div>
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`address-line street-line`}>
+            <div className={`address-line `}>
               <label className="label" htmlFor={`client-street`}>
                 street name
               </label>
@@ -319,7 +324,7 @@ function NewInvoice() {
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`address-line city-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`client-city`}>
                   City
                 </label>
@@ -436,12 +441,7 @@ function NewInvoice() {
                   {...register("paymentTerms", {
                     required: "Select payment option",
                     onChange(evt) {
-                      setData({
-                        ...data,
-                        paymentDue: add(new Date(data.createdAt), {
-                          days: evt.target.value,
-                        }),
-                      });
+                      onTermsChange(evt.target.value);
                     },
                   })}
                 >
@@ -457,6 +457,20 @@ function NewInvoice() {
                   </p>
                 )}
               </div>
+            </div>
+
+            {/* PAYMENT DUE DETAILS */}
+            <div className={`sr-only address-line`}>
+              <label className="label" htmlFor={`payment-due`}>
+                Payment due date
+              </label>
+              <input
+                type="text"
+                id={`payment-due`}
+                className={`input payment-due`}
+                readOnly={true}
+                {...register("paymentDue")}
+              />
             </div>
 
             {/* PROJECT NAME DETAILS */}

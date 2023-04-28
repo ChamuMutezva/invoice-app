@@ -215,7 +215,7 @@ function EditInvoice() {
             <legend className="edit-field-title">Bill From</legend>
 
             {/* SENDER STREET DETAILS */}
-            <div className={`address-line street-line`}>
+            <div className={`address-line `}>
               <label className="label" htmlFor={`street`}>
                 Street Address
               </label>
@@ -240,7 +240,7 @@ function EditInvoice() {
 
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`address-line city-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`city`}>
                   City
                 </label>
@@ -370,7 +370,7 @@ function EditInvoice() {
             </div>
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`address-line street-line`}>
+            <div className={`address-line `}>
               <label className="label" htmlFor={`client-street`}>
                 street name
               </label>
@@ -395,7 +395,7 @@ function EditInvoice() {
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`address-line city-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`client-city`}>
                   City
                 </label>
