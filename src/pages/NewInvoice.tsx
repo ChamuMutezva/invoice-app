@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
@@ -25,6 +25,7 @@ function NewInvoice() {
     total: 100.0,
   };
 
+  const navigate = useNavigate();
   const { mutate } = createInvoice();
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
   const [project, setProject] = useState(newProject);
@@ -708,11 +709,9 @@ function NewInvoice() {
 
           <div className="footer flex">
             <div className="flex footer-edit">
-              <button
-                className="btn btn-cancel"
-                onClick={(evt) => evt.preventDefault()}
-              >
+              <button className="btn btn-cancel" onClick={() => navigate(-1)}>
                 Discard
+                <span className="sr-only">and return to homepage</span>
               </button>
               <button className="btn btn-save" type="submit">
                 Save as draft
