@@ -80,8 +80,12 @@
     border-radius: 24px;
     border: none;
     text-decoration: none;
-
     @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+
+    &:hover,
+    &:focus {
+        outline-offset: -0.5em;
+    }
 }
 
 .btn-save,
@@ -91,6 +95,11 @@
     border-radius: 24px;
     border: none;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+
+    &:hover,
+    &:focus {
+        outline-offset: -0.5em;
+    }
 }
 
 .btn-add-item {
@@ -157,20 +166,27 @@
     }
 }
 
+.btn-delete {
+
+    &:hover,
+    &:focus {
+       
+        outline-offset: -0.5em;
+    }
+}
+
 .dark-mode {
     .btn-return {
         color: base.$clr-white-100;
     }
 
-
     .btn-delete {
         background-color: inherit;
-
+        
         &:hover,
         &:focus {
-            outline: dashed base.$clr-white-100;
-            outline-offset: -0.65em;
-        }
+            outline: dashed base.$clr-white-100;           
+        } 
     }
 
     .btn-add-item {
