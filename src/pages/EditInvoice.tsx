@@ -1,6 +1,6 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
 import getInvoice from "../hooks/useGetInvoice";
@@ -11,7 +11,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
-import format from "date-fns/format";
+// import format from "date-fns/format";
 
 function EditInvoice() {
   const newProject = {
@@ -54,7 +54,7 @@ function EditInvoice() {
     paymentTerms: invoice.paymentTerms,
     clientEmail: invoice.clientEmail,
     clientName: invoice.clientName,
-    status: invoice.status,
+    status: invoice.status === "draft" ? "pending" : invoice.status,
     total: invoice.total,
     senderAddress: {
       street: invoice.senderAddress.street,
