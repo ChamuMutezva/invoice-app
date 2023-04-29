@@ -8,6 +8,7 @@ import getInvoices from "../hooks/useGetInvoices";
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("draft");
   const { isLoading, isError, invoices } = getInvoices();
+  const [filtering, setFiltering] = useState(false);
 
   if (isLoading) {
     return <h2 className="pre-loading">Loading...</h2>;
@@ -30,6 +31,28 @@ function HomePage() {
     target: { value: React.SetStateAction<string> };
   }) => {
     setSelectedValue(evt.target.value);
+    if (selectedValue !== "all") {
+      setFiltering(true);
+    } else {
+      setFiltering(false);
+    }
+    const current = invoices.filter(
+      (invoice: { status: string }) => invoice.status === evt.target.value
+    );
+    return current;
+  };
+
+  const noInvoices = () => {
+    return (
+      <div className="no-cards">
+        <div className="container-img">
+          <img src={EmptyInvoiceImg} alt="" />
+        </div>
+        <h2>There is nothing here</h2>
+
+        <p>Create an invoice by clicking the New button and get started</p>
+      </div>
+    );
   };
 
   const getStatus = (status: string) => {
@@ -42,7 +65,7 @@ function HomePage() {
     }
   };
 
-  const setLengthMessage = (length: number) => {
+  const setMessageLength = (length: number) => {
     if (length === 0) {
       return "No invoices";
     } else if (length === 1) {
@@ -55,12 +78,13 @@ function HomePage() {
   return (
     <div className="main">
       <h1 className="sr-only">Preprince investments business transactions</h1>
+
       <div className="invoices-list">
         <div className="flex summary">
           <div className="summary-headings">
             <h2 className="summary-title">Invoices</h2>
             <p className="invoice-total-num" aria-live="polite">
-              {setLengthMessage(invoices.length)}
+              {setMessageLength(invoices.length)}
             </p>
           </div>
           <div className="flex filter-new">
@@ -75,6 +99,7 @@ function HomePage() {
                 value={selectedValue}
                 onChange={(evt) => onChange(evt)}
               >
+                <option value="all">All</option>
                 <option value="paid">Paid</option>
                 <option value="pending">Pending</option>
                 <option value="draft">Draft</option>
@@ -94,13 +119,7 @@ function HomePage() {
         </div>
         {/* main section */}
         {invoices.length === 0 ? (
-          <div className="no-cards">
-            <div className="container-img">
-              <img src={EmptyInvoiceImg} alt="" />
-            </div>
-            <h2>There is nothing here</h2>
-            <p>Create an invoice by clicking the New button and get started</p>
-          </div>
+          noInvoices()
         ) : (
           <div className="cards">
             {invoices.map(
