@@ -21,7 +21,6 @@ function HomePage() {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-
     // These options are needed to round to whole numbers if that's what you want.
     // minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
     // maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
@@ -31,8 +30,26 @@ function HomePage() {
     target: { value: React.SetStateAction<string> };
   }) => {
     setSelectedValue(evt.target.value);
-    // const result = invoices.filter((invoice: { status: string; }) => invoice.status === selectedValue)
-    // console.log(result)
+  };
+
+  const getStatus = (status: string) => {
+    if (status === "paid") {
+      return "paid-status";
+    } else if (status === "draft") {
+      return "draft-status";
+    } else {
+      return "pending-status";
+    }
+  };
+
+  const setLengthMessage = (length: number) => {
+    if (length === 0) {
+      return "No invoices";
+    } else if (length === 1) {
+      return `${length} invoice`;
+    } else {
+      return `${length} invoices`;
+    }
   };
 
   return (
@@ -43,11 +60,7 @@ function HomePage() {
           <div className="summary-headings">
             <h2 className="summary-title">Invoices</h2>
             <p className="invoice-total-num" aria-live="polite">
-              {invoices.length === 0
-                ? "No invoices"
-                : invoices.length === 1
-                ? `${invoices.length} invoice`
-                : `${invoices.length} invoices`}
+              {setLengthMessage(invoices.length)}
             </p>
           </div>
           <div className="flex filter-new">
@@ -101,32 +114,34 @@ function HomePage() {
               }) => {
                 return (
                   <div key={invoice.id} className="card">
-                    <p className="invoice-num">{invoice.id}</p>
+                    <p className="invoice-num">
+                      <span className="sr-only">invoice number</span>
+                      {invoice.id}
+                    </p>
                     <Link
                       className={`client-name btn btn-link`}
                       to={`/viewInvoice/${invoice._id}`}
                     >
+                      <span className="sr-only">Invoice for</span>{" "}
                       {invoice.clientName}
                     </Link>
                     <p className="payment-date">
-                      Due {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}
+                      Due <span className="sr-only">date</span>{" "}
+                      {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}
                     </p>
                     <p className="amount-total">
+                      <span className="sr-only">total amount to be paid</span>
                       {formatter.format(invoice.total)}
                     </p>
                     <p
-                      className={`flex status ${
-                        invoice.status === "paid"
-                          ? "paid-status"
-                          : invoice.status === "draft"
-                          ? "draft-status"
-                          : "pending-status"
-                      } `}
+                      className={`flex status ${getStatus(invoice.status)}
+                         `}
                     >
                       <span
                         aria-hidden={true}
                         className={`status-span ${invoice.status}-span`}
                       ></span>
+                      <span className="sr-only">invoice status</span>
                       {invoice.status}
                     </p>
                   </div>

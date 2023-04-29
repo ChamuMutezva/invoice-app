@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
@@ -28,8 +28,7 @@ function EditInvoice() {
   }
 
   const queryClient = useQueryClient();
-
-  const [showProjectModal, setShowProjectModal] = useState(false);
+  const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(false);
   const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
@@ -157,9 +156,7 @@ function EditInvoice() {
   const updateItems = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
-    // console.log(project);
     evt.preventDefault();
-    // toggleDisplayModal(evt);
     addProject();
   };
 
@@ -520,7 +517,7 @@ function EditInvoice() {
                   {...register("paymentTerms", {
                     required: "Select payment option",
                     onChange(evt) {
-                      onTermsChange(evt.target.value)
+                      onTermsChange(evt.target.value);
                     },
                   })}
                 >
@@ -722,10 +719,7 @@ function EditInvoice() {
 
           <div className="footer flex">
             <div className="flex footer-edit">
-              <button
-                className="btn btn-cancel"
-                onClick={(evt) => evt.preventDefault()}
-              >
+              <button className="btn btn-cancel" onClick={() => navigate(-1)}>
                 Cancel
               </button>
               <button className="btn btn-save" type="submit">
