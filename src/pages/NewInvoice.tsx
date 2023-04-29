@@ -40,7 +40,7 @@ function NewInvoice() {
     clientEmail: "ckmutezva@gmail.com",
     clientName: "Chamu Mutezva",
     status: "draft",
-    total: 200.0,
+    total: 100.0,
     senderAddress: {
       street: "36 Gomarara street",
       city: "Mabvuku",
@@ -108,7 +108,7 @@ function NewInvoice() {
     });
     setShowDialog(() => true);
     console.log(data);
-     mutate(data);
+    mutate(data);
   };
 
   function calculateTotal(): number {
@@ -158,7 +158,10 @@ function NewInvoice() {
                 aria-invalid={errors.senderAddress?.street ? "true" : false}
                 {...register("senderAddress.street", {
                   required: "Street address is required",
-                  minLength: 4,
+                  minLength: {
+                    value: 4,
+                    message: "Length must be more than 4",
+                  },
                   onChange(event) {
                     console.log(data);
                   },
@@ -185,7 +188,10 @@ function NewInvoice() {
                   aria-invalid={errors.senderAddress?.city ? "true" : "false"}
                   {...register("senderAddress.city", {
                     required: "City is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.senderAddress?.city && (
@@ -196,7 +202,7 @@ function NewInvoice() {
               </div>
 
               {/* SENDER POSTAL CODE DETAILS */}
-              <div className={`address-line postal-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`postal`}>
                   Postal code
                 </label>
@@ -211,7 +217,10 @@ function NewInvoice() {
                   }
                   {...register("senderAddress.postCode", {
                     required: "Enter postal code",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.senderAddress?.postCode && (
@@ -222,7 +231,7 @@ function NewInvoice() {
               </div>
 
               {/* SENDER COUNTRY DETAILS */}
-              <div className={`address-line country-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -237,7 +246,10 @@ function NewInvoice() {
                   }
                   {...register("senderAddress.country", {
                     required: "Country is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.senderAddress?.country && (
@@ -266,7 +278,10 @@ function NewInvoice() {
                 aria-invalid={errors.clientName ? "true" : "false"}
                 {...register("clientName", {
                   required: "Client name is required",
-                  minLength: 1,
+                  minLength: {
+                    value: 1,
+                    message: "Length must be more than 1",
+                  },
                 })}
               />
               {errors.clientName && (
@@ -277,7 +292,7 @@ function NewInvoice() {
             </div>
 
             {/* CLIENT EMAIL DETAILS */}
-            <div className={`address-line email-line`}>
+            <div className={`address-line`}>
               <label className="label" htmlFor={`email`}>
                 Client email
               </label>
@@ -290,7 +305,10 @@ function NewInvoice() {
                 aria-invalid={errors.clientEmail ? "true" : "false"}
                 {...register("clientEmail", {
                   required: "Enter valid email",
-                  minLength: 4,
+                  minLength: {
+                    value: 4,
+                    message: "Length must be more than 4",
+                  },
                 })}
               />
               {errors.clientEmail && (
@@ -301,7 +319,7 @@ function NewInvoice() {
             </div>
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`address-line `}>
+            <div className={`address-line`}>
               <label className="label" htmlFor={`client-street`}>
                 street name
               </label>
@@ -314,7 +332,10 @@ function NewInvoice() {
                 aria-invalid={errors.clientAddress?.street ? "true" : "false"}
                 {...register("clientAddress.street", {
                   required: "Client street is required",
-                  minLength: 4,
+                  minLength: {
+                    value: 4,
+                    message: "Length must be more than 4",
+                  },
                 })}
               />
               {errors.clientAddress?.street && (
@@ -326,7 +347,7 @@ function NewInvoice() {
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`address-line `}>
+              <div className={`address-line`}>
                 <label className="label" htmlFor={`client-city`}>
                   City
                 </label>
@@ -339,7 +360,10 @@ function NewInvoice() {
                   aria-invalid={errors.clientAddress?.city ? "true" : "false"}
                   {...register("clientAddress.city", {
                     required: "Client city is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.clientAddress?.city && (
@@ -349,7 +373,7 @@ function NewInvoice() {
                 )}
               </div>
               {/* CLIENT POSTAL DETAILS */}
-              <div className={`address-line postal-line`}>
+              <div className={`address-line`}>
                 <label className="label" htmlFor={`client-postal`}>
                   Postal code
                 </label>
@@ -364,7 +388,10 @@ function NewInvoice() {
                   }
                   {...register("clientAddress.postCode", {
                     required: "Postal code is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.clientAddress?.postCode && (
@@ -379,7 +406,7 @@ function NewInvoice() {
               </div>
 
               {/* CLIENT COUNTRY DETAILS */}
-              <div className={`address-line country-line`}>
+              <div className={`address-line`}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -394,7 +421,10 @@ function NewInvoice() {
                   }
                   {...register("clientAddress.country", {
                     required: "Client country is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Length must be more than 4",
+                    },
                   })}
                 />
                 {errors.clientAddress?.country && (
@@ -489,7 +519,10 @@ function NewInvoice() {
                 aria-invalid={errors.description ? "true" : "false"}
                 {...register("description", {
                   required: "Project description required",
-                  minLength: 4,
+                  minLength: {
+                    value: 4,
+                    message: "Length must be more than 4",
+                  },
                 })}
               />
               {errors.description && (
@@ -521,10 +554,7 @@ function NewInvoice() {
                         required: true,
                         minLength: {
                           value: 4,
-                          message: "Project name must be longer than 4",
-                        },
-                        validate: (value) => {
-                          return value.length > 4;
+                          message: "Must be longer than 4",
                         },
                         onChange(evt) {
                           console.log(evt.target.value);

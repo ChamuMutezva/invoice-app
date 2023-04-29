@@ -271,7 +271,7 @@ function EditInvoice() {
               </div>
 
               {/* SENDER POSTAL CODE DETAILS */}
-              <div className={`address-line postal-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`postal`}>
                   Postal code
                 </label>
@@ -297,7 +297,7 @@ function EditInvoice() {
               </div>
 
               {/* SENDER COUNTRY DETAILS */}
-              <div className={`address-line country-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -353,7 +353,7 @@ function EditInvoice() {
             </div>
 
             {/* CLIENT EMAIL DETAILS */}
-            <div className={`address-line email-line`}>
+            <div className={`address-line`}>
               <label className="label" htmlFor={`email`}>
                 Client email
               </label>
@@ -425,7 +425,7 @@ function EditInvoice() {
                 )}
               </div>
               {/* CLIENT POSTAL DETAILS */}
-              <div className={`address-line postal-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`client-postal`}>
                   Postal code
                 </label>
@@ -455,7 +455,7 @@ function EditInvoice() {
               </div>
 
               {/* CLIENT COUNTRY DETAILS */}
-              <div className={`address-line country-line`}>
+              <div className={`address-line `}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
