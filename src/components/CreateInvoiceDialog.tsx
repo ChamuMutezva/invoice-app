@@ -10,7 +10,7 @@ function CreateInvoiceDialog(props: { showDialog: boolean }) {
 
     if (props.showDialog) {
       dialogNode?.showModal();
-      linkRef.current?.focus()
+      linkRef.current?.focus();
     } else {
       dialogNode?.close();
     }
@@ -21,13 +21,13 @@ function CreateInvoiceDialog(props: { showDialog: boolean }) {
       className={`modal-wrapper ${
         props.showDialog ? "show-modal show-dialog" : ""
       }`}
-    >
-      <p id="modal-heading-text" className="modal-text">
-        A new invoice has been created
-      </p>
-      <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
-        Return to Homepage
-      </Link>
+    >      
+        <p id="modal-heading-text" className="modal-text">
+          A new invoice has been created
+        </p>
+        <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
+          Return to Homepage
+        </Link>      
     </dialog>
   );
 }

@@ -43,12 +43,11 @@ function HomePage() {
           <div className="summary-headings">
             <h2 className="summary-title">Invoices</h2>
             <p className="invoice-total-num" aria-live="polite">
-              {invoices.length}{" "}
               {invoices.length === 0
                 ? "No invoices"
                 : invoices.length === 1
-                ? "invoice"
-                : "invoices"}
+                ? `${invoices.length} invoice`
+                : `${invoices.length} invoices`}
             </p>
           </div>
           <div className="flex filter-new">
@@ -109,7 +108,9 @@ function HomePage() {
                     >
                       {invoice.clientName}
                     </Link>
-                    <p className="payment-date">Due {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}</p>
+                    <p className="payment-date">
+                      Due {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}
+                    </p>
                     <p className="amount-total">
                       {formatter.format(invoice.total)}
                     </p>

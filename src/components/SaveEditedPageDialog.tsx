@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-function SaveEditedPageDialog(props: { showConfirmSave: boolean; }) {
+function SaveEditedPageDialog(props: { showConfirmSave: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const linkRef = useRef<HTMLAnchorElement>(null);
 
@@ -21,13 +21,13 @@ function SaveEditedPageDialog(props: { showConfirmSave: boolean; }) {
       className={`modal-wrapper ${
         props.showConfirmSave ? "show-modal show-dialog" : ""
       }`}
-    >
-      <p id="modal-heading-text" className="modal-text">
-        The invoice has been updated!
-      </p>
-      <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
-        Return to Homepage
-      </Link>
+    >      
+        <p id="modal-heading-text" className="modal-text">
+          The invoice has been updated!
+        </p>
+        <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
+          Return to Homepage
+        </Link>      
     </dialog>
   );
 }
