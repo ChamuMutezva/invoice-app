@@ -33,7 +33,10 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Homepage](src/assets/screenshots/homepage.png)
+![View invoice page](src/assets/screenshots/viewInvoice.png)
+![Edit invoice page](src/assets/screenshots/editinvoice.png)
+![New invoice page](src/assets/screenshots/newinvoice.png)
 
 ### Links
 
@@ -159,15 +162,13 @@ Moving the useMutation hook above the if condition will solve the error
 - [A Complete Guide to Mutations in React Query - Part 5 - Using the useMutation Hook to Delete Resources on the Server.](https://hemanta.io/a-complete-guide-to-mutations-in-react-query-part-5-using-the-usemutation-hook-to-delete-resources-on-the-server/)
 - [REST APIs - How To Mutate Data From Your React App Like The Pros](https://profy.dev/article/react-query-usemutation)
 - [UseForm hook - watch](https://react-hook-form.com/api/useform/watch/)
+- [Reusable hook forms text input](https://blog.qoddi.com/create-a-reusable-text-input-with-react-hook-form/)
+- [datefns](https://date-fns.org/v2.29.3/docs/format)
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Website - [Chamu Mutezva](https://github.com/ChamuMutezva)
+- Frontend Mentor - [@ChamuMutezva](https://www.frontendmentor.io/profile/ChamuMutezva)
+- Twitter - [@ChamuMutezva](https://twitter.com/ChamuMutezva)
 
 ## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
