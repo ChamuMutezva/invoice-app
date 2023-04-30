@@ -26,23 +26,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: calc(base.$spacer1 * 1.5);
+    padding: calc(base.$spacer1 * 1.5);
     border-radius: 4px;
 }
 
 .delete-close {
     background-color: #000;
     border: transparent;
-    padding: .45rem;
+    padding: calc(base.$spacer1 * 0.45);
     border-radius: 5px;
     align-self: flex-end;
 }
 
 .modal-heading {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #353a40;
+    @include utils.fonts(#353a40, 1.25rem, 700);
+   // font-size: 1.25rem;
+   // font-weight: 700;
+   // color: #353a40;
 }
 
 .modal-text {
@@ -51,4 +52,3 @@
     font-weight: 900;
     text-align: center;
 }
-

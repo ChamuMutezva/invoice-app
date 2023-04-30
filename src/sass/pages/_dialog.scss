@@ -4,7 +4,7 @@
 .show-dialog {
     position: fixed;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: calc(base.$spacer1 * 2.5);
    // background: darken(hsla(225deg, 9%, 9%, 1), 50%);
     // background-color: lighten(base.$clr-black-300, 20%);
 }
@@ -15,6 +15,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: base.$spacer1;
+    padding: calc(base.$spacer1 * 1.5);
     border-radius: 6px;
 }

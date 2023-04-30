@@ -7,7 +7,7 @@
     background-color: transparent;
     border: none;
     outline: none;
-    padding: 1.8rem;
+    padding: calc(base.$spacer1 * 1.8);
     border-radius: 10px;
     height: 100%;
 

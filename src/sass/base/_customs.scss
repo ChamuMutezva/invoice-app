@@ -37,7 +37,7 @@ $fs-36: utils.calculateRem(36);
 $fs-40: utils.calculateRem(40);
 $fs-56: utils.calculateRem(56);
 
-$spacer1: 1.5rem;
+$spacer1: 1rem;
 
 :root {
     font-family: $font-family;
@@ -83,11 +83,11 @@ $spacer1: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: .5rem;
+    gap:calc($spacer1 / 2);
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
-    gap: $spacer1;
+    gap: calc($spacer1 * 1.5);
 }

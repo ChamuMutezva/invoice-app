@@ -24,7 +24,7 @@
 }
 
 span.container-img {
-    padding: .5rem;
+    padding: calc(base.$spacer1 * 0.5);
     background: base.$clr-white-100;
     border-radius: 50%;
 }
@@ -38,7 +38,7 @@ span.container-img {
         visibility: visible;
         width: fit-content;
         height: fit-content;
-        padding-left: 0.5rem;
+        padding-left: calc(base.$spacer1 * 0.5);
     }
 }
 

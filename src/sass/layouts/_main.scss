@@ -2,11 +2,11 @@
 @use '../utils';
 
 .main {
-    margin: base.$spacer1;
+    margin: calc(base.$spacer1 * 1.5);
     max-width: 45.6rem;
 
     @include utils.mQ(40rem) {
-        margin-inline: base.$spacer1 * 2;
+        margin-inline: calc(base.$spacer1 * 3);
     }
 
     @include utils.mQ(48rem) {
@@ -33,5 +33,5 @@
 }
 
 .filter-new {
-    gap: 1rem;
+    gap: base.$spacer1;
 }

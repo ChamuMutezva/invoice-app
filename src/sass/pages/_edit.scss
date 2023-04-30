@@ -2,18 +2,18 @@
 @use '../utils';
 
 .edit-form>*+* {
-    padding-block-start: 1.5rem;
-    padding-block-end: 2.5rem;
+    padding-block-start: calc(base.$spacer1 * 1.5);
+    padding-block-end: calc(base.$spacer1 * 2.5);
 }
 
 .edit-title {
     font-size: base.$fs-24;
-    padding-inline: 1rem;
+    padding-inline: base.$spacer1;
 }
 
 .invoice-num-edit {
     display: inline;
-    margin-inline-start: 1.5rem;
+    margin-inline-start: calc(base.$spacer1 * 1.5);
     font-size: inherit;
 
     &::before {
@@ -25,7 +25,7 @@
 .edit-invoice-details {
     border: none;
     display: grid;
-    gap: 1rem;
+    gap: base.$spacer1;
 }
 
 .edit-field-title {
@@ -42,7 +42,7 @@
 
 .label {
     @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
-    padding-block: 0.75rem;
+    padding-block: calc(base.$spacer1 * 0.75);
 }
 
 .input {
@@ -64,7 +64,7 @@
 .costing-line {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: calc(base.$spacer1 * 0.5);
 
     @include utils.mQ(22.5rem) {
         flex-direction: row;
@@ -75,7 +75,7 @@
 }
 
 .calculate-line {
-    padding: 1rem 0.5rem;
+    padding: base.$spacer1 calc(base.$spacer1 * 0.5);;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -119,8 +119,7 @@
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
-.footer {
-    // margin-block-start: base.$spacer1 * 5;
+.footer {    
     position: absolute;
     left: 0;
     width: 100vw;
@@ -134,7 +133,7 @@
 
 .footer-edit {
     justify-content: flex-end;
-    padding: base.$spacer1;
+    padding: calc(base.$spacer1 * 1.5);
     width: 100%;
     max-width: 45.6rem;
 }

@@ -23,7 +23,7 @@
     text-transform: capitalize;
     text-decoration: none;
     overflow: hidden;
-    padding-block: 0.5rem;
+    padding-block: calc(base.$spacer1 / 2);
     z-index: 0;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 
@@ -37,14 +37,14 @@
     }
 
     @include utils.mQ(40rem) {
-        padding-block: 0.75rem;
+        padding-block: calc(base.$spacer1 * 0.75);
     }
 
 }
 
 .btn-link-home {
     background-color: base.$clr-black-200;
-    padding: 1rem;
+    padding: base.$spacer1;
     color: base.$clr-white-200;
     font-size: base.$fs-20;
     border-radius: 6px;
@@ -54,9 +54,9 @@
     border: none;
     background-color: base.$clr-blue-400;
     border-radius: 24px;
-    padding: 0.5rem;
-    gap: 0.5rem;
-    padding-inline-end: 1rem;
+    padding: calc(base.$spacer1 / 2);
+    gap: calc(base.$spacer1 / 2);
+    padding-inline-end: base.$spacer1;
     text-decoration: none;
 }
 
@@ -65,12 +65,12 @@
 }
 
 .btn-return {
-    gap: base.$spacer1;
-    padding-block: .5rem;
-    padding-inline-end: .5rem;
+    gap: calc(base.$spacer1 * 1.5);
+    padding-block: calc(base.$spacer1 / 2);
+    padding-inline-end: calc(base.$spacer1 / 2);
     border-radius: 8px;
     border: none;
-    margin-bottom: 2rem;
+    margin-bottom: calc(base.$spacer1 * 2);
     background-color: inherit;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 
@@ -78,7 +78,7 @@
 
 .btn-cancel {
     background-color: base.$clr-white-400;
-    padding: 1rem 1.5rem;
+    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
     border-radius: 24px;
     border: none;
     text-decoration: none;
@@ -93,7 +93,7 @@
 .btn-save,
 .btn-add-project {
     background-color: base.$clr-blue-400;
-    padding: 1rem;
+    padding: base.$spacer1;
     border-radius: 24px;
     border: none;
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
@@ -108,16 +108,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: base.$spacer1;
     border-radius: 10px;
     border: none;
     background-color: base.$clr-white-400;
-    gap: 1rem;
+    gap: base.$spacer1;
 }
 
 .btn-edit {
     background-color: base.$clr-white-400;
-    padding: 1rem 1.5rem;
+    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
     border-radius: 24px;
     text-decoration: none;
     @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
@@ -130,7 +130,7 @@
 
 .btn-delete-view {
     background-color: base.$clr-pink-200;
-    padding: 1rem 1.5rem;
+    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
     text-decoration: none;
     border: none;
     border-radius: 24px;
@@ -159,20 +159,18 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 0.75rem;
+    gap: calc(base.$spacer1 * 0.75);
 
     @include utils.mQ(40rem) {
         flex: 1 1 70%;
         justify-content: flex-end;
-        gap: 1rem;
+        gap: base.$spacer1;
     }
 }
 
 .btn-delete {
-
     &:hover,
     &:focus {
-       
         outline-offset: -0.5em;
     }
 }
@@ -184,11 +182,11 @@
 
     .btn-delete {
         background-color: inherit;
-        
+
         &:hover,
         &:focus {
-            outline: dashed base.$clr-white-100;           
-        } 
+            outline: dashed base.$clr-white-100;
+        }
     }
 
     .btn-add-item {

@@ -146,10 +146,9 @@ function EditInvoice() {
     setShowDialog(!showDialog);
   };
 
-  // Updates the array of projects ITEM by diaplaying the modal with
-  // the object to be added to the array. The obj has the following
+  // Updates the array of projects ITEM by displaying . The obj has the following
   // Name of project, quantity, price and total.
-  const updateItems = (
+  const addAnotherProject = (
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
@@ -706,7 +705,7 @@ function EditInvoice() {
             <button
               className="btn btn-add-item"
               disabled={!isDirty || !isValid}
-              onClick={updateItems}
+              onClick={addAnotherProject}
             >
               <img src={AddItemImg} alt="" aria-hidden={true} />
               Add new Item

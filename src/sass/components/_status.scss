@@ -18,8 +18,8 @@
 }
 */
 .status-container {
-	justify-content: space-between;
-	flex: 1 1 30%;
+    justify-content: space-between;
+    flex: 1 1 30%;
 }
 
 .status {
@@ -27,7 +27,7 @@
     width: 100%;
     text-transform: capitalize;
     justify-content: center;
-    padding-block: 0.5rem;
+    padding-block: calc(base.$spacer1 * 0.5);
     border-radius: 6px;
     grid-area: 2/2/4/3;
     font-weight: 700;
@@ -35,7 +35,7 @@
     @include utils.mQ(40rem) {
         flex: 1 1 30%;
         grid-area: 1/5/1/6;
-        padding-block: 0.75rem;
+        padding-block: calc(base.$spacer1 * 0.75);
     }
 }
 
@@ -58,7 +58,7 @@
 .pending-status {
     color: base.$clr-orange-100;
     background-color: lighten(base.$clr-orange-100, 45%);
-    left: 1rem;
+    left: base.$spacer1;
 }
 
 .pending-span {
@@ -77,7 +77,6 @@
 
 
 .dark-mode {
-
     .draft-status {
         background-color: lighten(base.$clr-black-300, 20%);
     }
