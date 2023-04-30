@@ -3,7 +3,7 @@ import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
-import getInvoice from "../hooks/useGetInvoice";
+//import getInvoice from "../hooks/useGetInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
@@ -12,6 +12,7 @@ import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { InvoiceTypes } from "../Types/DataTypes";
+import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 // import format from "date-fns/format";
 
 function EditInvoice() {
@@ -37,7 +38,8 @@ function EditInvoice() {
   });
 
   // Fetch an invoice
-  const invoice = getInvoice(params.id);
+   const { data  } = useGetSingleInvoice(params.id)
+  const invoice = data;
 
   // load initial form data on first visit to site
   const initialState: InvoiceTypes  = {

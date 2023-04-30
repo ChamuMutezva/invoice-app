@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
 import format from "date-fns/format";
-import getInvoice from "../hooks/useGetInvoice";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/useReducer";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
@@ -14,8 +13,7 @@ function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
-  const [showDialog, setShowDialog] = useState(false);
- // const invoice = getInvoice(params.id);
+  const [showDialog, setShowDialog] = useState(false); 
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id)
  // console.log(data)
