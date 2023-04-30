@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -99,10 +99,6 @@ function EditInvoice() {
     setValue("total", total);
     return total.toFixed(2);
   }
-
-  useEffect(() => {
-    setProject({ ...project, total: project.price * project.quantity });
-  }, [project.price, project.quantity]);
 
   const addProject = () => {
     setProject({
