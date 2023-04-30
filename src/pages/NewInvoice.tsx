@@ -26,7 +26,7 @@ function NewInvoice() {
   };
 
   const navigate = useNavigate();
-  const { mutate } = createInvoice();
+  const { mutate, isError, isSuccess } = createInvoice();
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
   const [project, setProject] = useState(newProject);
   const [showDialog, setShowDialog] = useState(false);
@@ -110,6 +110,8 @@ function NewInvoice() {
     setShowDialog(() => true);
     console.log(data);
     mutate(data);
+    if (isSuccess) console.log("hurray");
+    if (isError) console.log("abort mission");
   };
 
   function calculateTotal(): number {

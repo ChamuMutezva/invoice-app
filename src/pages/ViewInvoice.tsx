@@ -37,7 +37,11 @@ function ViewInvoice() {
   });
 
   if (invoice === undefined) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className="flex loading">
+        <h2 className="pre-loading">Loading...</h2>
+      </div>
+    );
   }
 
   if (deletionError) {

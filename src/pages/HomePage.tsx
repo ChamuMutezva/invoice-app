@@ -11,11 +11,19 @@ function HomePage() {
   const [filtering, setFiltering] = useState(false);
 
   if (isLoading) {
-    return <h2 className="pre-loading">Loading...</h2>;
+    return (
+      <div className="flex loading">
+        <h2 className="pre-loading">Loading...</h2>
+      </div>
+    );
   }
 
   if (isError) {
-    return <h2 className="pre-loading">Error detected</h2>;
+    return (
+      <div className="flex loading">
+        <h2 className="pre-loading">Error: </h2>
+      </div>
+    );
   }
 
   // Create our number formatter.
@@ -49,7 +57,6 @@ function HomePage() {
           <img src={EmptyInvoiceImg} alt="" />
         </div>
         <h2>There is nothing here</h2>
-
         <p>Create an invoice by clicking the New button and get started</p>
       </div>
     );
@@ -87,6 +94,7 @@ function HomePage() {
               {setMessageLength(invoices.length)}
             </p>
           </div>
+
           <div className="flex filter-new">
             <Form className="select-options">
               <label className="filter-label" htmlFor="filter-options">
@@ -105,6 +113,7 @@ function HomePage() {
                 <option value="draft">Draft</option>
               </select>
             </Form>
+
             <div>
               <Link to={`/newInvoice`} className="btn flex btn-new-invoice">
                 <span className="container-img">
@@ -137,6 +146,7 @@ function HomePage() {
                       <span className="sr-only">invoice number</span>
                       {invoice.id}
                     </p>
+
                     <Link
                       className={`client-name btn btn-link`}
                       to={`/viewInvoice/${invoice._id}`}
@@ -144,14 +154,17 @@ function HomePage() {
                       <span className="sr-only">Invoice for</span>{" "}
                       {invoice.clientName}
                     </Link>
+
                     <p className="payment-date">
                       Due <span className="sr-only">date</span>{" "}
                       {format(new Date(invoice.paymentDue), "yyyy/MM/dd")}
                     </p>
+
                     <p className="amount-total">
                       <span className="sr-only">total amount to be paid</span>
                       {formatter.format(invoice.total)}
                     </p>
+
                     <p
                       className={`flex status ${getStatus(invoice.status)}
                          `}
