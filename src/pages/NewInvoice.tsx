@@ -9,14 +9,10 @@ import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
+import { ICosting } from "../Types/DataTypes";
+import { InvoiceTypes } from "../Types/DataTypes";
 
-function NewInvoice() {
-  interface ICosting {
-    name: string;
-    quantity: number;
-    price: number;
-    total: number;
-  }
+function NewInvoice() { 
 
   const newProject: ICosting = {
     name: "Project Name",

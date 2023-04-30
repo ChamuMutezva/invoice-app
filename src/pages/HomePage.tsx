@@ -6,10 +6,11 @@ import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
 
 function HomePage() {
-  const [selectedValue, setSelectedValue] = useState("draft");
-  const { isLoading, isError, invoices } = getInvoices();
-  const [filtering, setFiltering] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("all");
+  const { isLoading, isError, invoices, isSuccess } =
+    getInvoices(selectedValue);
 
+  console.log(invoices);
   if (isLoading) {
     return (
       <div className="flex loading">
@@ -39,15 +40,9 @@ function HomePage() {
     target: { value: React.SetStateAction<string> };
   }) => {
     setSelectedValue(evt.target.value);
-    if (selectedValue !== "all") {
-      setFiltering(true);
-    } else {
-      setFiltering(false);
-    }
-    const current = invoices.filter(
-      (invoice: { status: string }) => invoice.status === evt.target.value
-    );
-    return current;
+    /* return invoices.filter(
+      (invoice: { status: string }) => invoice.status === selectedValue
+    );*/
   };
 
   const noInvoices = () => {

@@ -11,6 +11,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
+import { InvoiceTypes } from "../Types/DataTypes";
 // import format from "date-fns/format";
 
 function EditInvoice() {
@@ -20,12 +21,6 @@ function EditInvoice() {
     price: 100.0,
     total: 100.0,
   };
-  interface ICosting {
-    name: string;
-    quantity: number;
-    price: number;
-    total: number;
-  }
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -45,7 +40,7 @@ function EditInvoice() {
   const invoice = getInvoice(params.id);
 
   // load initial form data on first visit to site
-  const initialState = {
+  const initialState: InvoiceTypes  = {
     _id: invoice._id,
     id: invoice.id,
     createdAt: invoice.createdAt,
@@ -162,31 +157,7 @@ function EditInvoice() {
     setValue("paymentDue", add(Date.now(), { days: numOfDays }));
   };
 
-  const handleSubmitForm = (data: {
-    _id: any;
-    id: string;
-    createdAt: Date;
-    paymentDue: string;
-    description: string;
-    paymentTerms: any;
-    clientEmail: string;
-    clientName: string;
-    status: string;
-    total: number;
-    senderAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-    };
-    clientAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-    };
-    items: ICosting[];
-  }) => {
+  const handleSubmitForm = (data: InvoiceTypes) => {
     const invoice = {
       ...data,
     };
