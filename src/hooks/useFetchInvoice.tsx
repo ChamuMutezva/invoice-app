@@ -1,21 +1,11 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { API_ENDPOINT_PATH } from "../config";
 
-export default function fetchInvoice(id: any) {
-  const { isLoading, data, isError, error } = useQuery({
-    queryKey: ["invoices", id],
-    queryFn: () => {
-      return axios.get(`http://localhost:4000/api/invoices/${id}`);
-    },
+export const useGetSingleInvoice = (_id: any) => {
+  return useQuery(["invoices", _id], async () => {
+    const { data } = await axios.get(`${API_ENDPOINT_PATH}/${_id}`);
+    return data;
   });
-  const invoice = data?.data;
-  return { isLoading, invoice, isError, error };
-}
-/*
-export const fetchInvoice = ( id: any) =>
-   axios.get(`http://localhost:4000/api/invoices/${id}`).then((res) => res.data)
+};
 
-export default function useInvoice(id: any) {
-  return useQuery(id && ['invoice', id], fetchInvoice)
-}
-*/

@@ -1,12 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
+import { useState } from "react";
 import format from "date-fns/format";
 import getInvoice from "../hooks/useGetInvoice";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/useReducer";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
 import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
-import { useState } from "react";
+import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 
 function ViewInvoice() {
@@ -14,8 +15,10 @@ function ViewInvoice() {
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
-  const invoice = getInvoice(params.id);
+ // const invoice = getInvoice(params.id);
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
+  const { data } = useGetSingleInvoice(params.id)
+ // console.log(data)
 
   const onDelete = () => {
     setShowDialog(true);
@@ -26,7 +29,7 @@ function ViewInvoice() {
   };
 
   const confirmDelete = () => {
-    mutate(invoice._id);
+    mutate(data._id);
     setShowDialog(false);
   };
 
@@ -36,7 +39,7 @@ function ViewInvoice() {
     },
   });
 
-  if (invoice === undefined) {
+  if (data === undefined) {
     return (
       <div className="flex loading">
         <h2 className="pre-loading">Loading...</h2>
@@ -48,7 +51,7 @@ function ViewInvoice() {
     return <h2>Error encountered, invoice cannot be deleted</h2>;
   }
 
-  const totalArray = invoice.items.map((item: { total: any }) => item.total);
+  const totalArray = data.items.map((item: { total: any }) => item.total);
   const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 
   // Create our number formatter.
@@ -58,10 +61,10 @@ function ViewInvoice() {
   });
 
   function handleClick() {
-    console.log(invoice.status);
-    if (invoice.status !== "paid") {
+    console.log(data.status);
+    if (data.status !== "paid") {
       updateInvoiceMutation.mutate({
-        ...invoice,
+        ...data,
         status: "paid",
       });
     }
@@ -70,7 +73,7 @@ function ViewInvoice() {
   return (
     <div className="main" aria-live="polite">
       <PreviousPage
-        title={`Complete invoice details of ${invoice.clientName}`}
+        title={`Complete invoice details of ${data.clientName}`}
       />
 
       <main>
@@ -79,22 +82,22 @@ function ViewInvoice() {
             <p className="status-label">Status </p>
             <p
               className={`flex status ${
-                invoice.status === "paid"
+                data.status === "paid"
                   ? "paid-status"
-                  : invoice.status === "draft"
+                  : data.status === "draft"
                   ? "draft-status"
                   : "pending-status"
               } `}
             >
               <span
                 aria-hidden={true}
-                className={`status-span ${invoice.status}-span`}
+                className={`status-span ${data.status}-span`}
               ></span>
-              {invoice.status}
+              {data.status}
             </p>
           </div>
           <div className="mobile-hidden nav-view-btns ">
-            <Link className="btn btn-edit" to={`/editInvoice/${invoice._id}`}>
+            <Link className="btn btn-edit" to={`/editInvoice/${data._id}`}>
               Edit
             </Link>
             <button className="btn btn-delete-view" onClick={onDelete}>
@@ -113,23 +116,23 @@ function ViewInvoice() {
             <div className="intro">
               <p className="invoice-num">
                 <span className="sr-only">Invoice number</span>{" "}
-                <span className="invoice-num">{invoice.id}</span>
+                <span className="invoice-num">{data.id}</span>
               </p>
               <p className="invoice-descr">
                 <span className="sr-only">item</span>
-                {invoice.description}
+                {data.description}
               </p>
             </div>
 
             {/* sender details */}
             <div className="address-sender">
               <p className="address-sender-details">
-                <span className="street">{invoice.senderAddress.street}</span>
-                <span className="city">{invoice.senderAddress.city}</span>
+                <span className="street">{data.senderAddress.street}</span>
+                <span className="city">{data.senderAddress.city}</span>
                 <span className="postCode">
-                  {invoice.senderAddress.postCode}
+                  {data.senderAddress.postCode}
                 </span>
-                <span className="country">{invoice.senderAddress.country}</span>
+                <span className="country">{data.senderAddress.country}</span>
               </p>
             </div>
 
@@ -138,13 +141,13 @@ function ViewInvoice() {
               <div className="dated">
                 <h3 className="invoice-date-title">Invoice date</h3>
                 <p className="invoice-date">
-                  {format(new Date(invoice.createdAt), "dd MMM yyyy")}
+                  {format(new Date(data.createdAt), "dd MMM yyyy")}
                 </p>
               </div>
               <div className="due-date">
                 <h3 className="invoice-date-title">Payment due</h3>
                 <p className="payment-date-view">
-                  {format(new Date(invoice.paymentDue), "dd MMM yyyy")}
+                  {format(new Date(data.paymentDue), "dd MMM yyyy")}
                 </p>
               </div>
             </div>
@@ -152,16 +155,16 @@ function ViewInvoice() {
             {/* Reciever */}
             <div className="bill-to">
               <h3 className="bill-to-title">Bill to</h3>
-              <p className="billed-name">{invoice.clientName}</p>
+              <p className="billed-name">{data.clientName}</p>
               <div className="address-reciever">
                 <p className="address-reciever-details">
-                  <span className="street">{invoice.clientAddress.street}</span>
-                  <span className="city">{invoice.clientAddress.city}</span>
+                  <span className="street">{data.clientAddress.street}</span>
+                  <span className="city">{data.clientAddress.city}</span>
                   <span className="postCode">
-                    {invoice.clientAddress.postCode}
+                    {data.clientAddress.postCode}
                   </span>
                   <span className="country">
-                    {invoice.clientAddress.country}
+                    {data.clientAddress.country}
                   </span>
                 </p>
               </div>
@@ -170,13 +173,13 @@ function ViewInvoice() {
             {/* Email */}
             <div className="email-address">
               <h3 className="email-title">Sent to</h3>
-              <p className="email-to">{invoice.clientEmail}</p>
+              <p className="email-to">{data.clientEmail}</p>
             </div>
           </section>
 
           <section className="item-summary">
             <div className="items">
-              {invoice.items.map(
+              {data.items.map(
                 (item: {
                   name: string;
                   quantity: number;
@@ -223,12 +226,12 @@ function ViewInvoice() {
       <DeleteInvoiceDialog
         showDialog={showDialog}
         closeDialog={closeDialog}
-        invoiceID={invoice.id}
+        invoiceID={data.id}
         confirmDelete={confirmDelete}
       />
       <footer className="footer-view tablet-hidden">
         <div className="nav-view-btns ">
-          <Link className="btn-edit" to={`/editInvoice/${invoice._id}`}>
+          <Link className="btn-edit" to={`/editInvoice/${data._id}`}>
             Edit
           </Link>
           <button className="btn-delete-view" onClick={onDelete}>
