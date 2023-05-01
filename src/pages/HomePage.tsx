@@ -10,7 +10,7 @@ function HomePage() {
   let { isLoading, isError, invoices, isSuccess } = getInvoices(selectedValue);
 
   console.log(invoices);
-  
+
   if (isLoading) {
     return (
       <div className="flex loading">
@@ -31,7 +31,12 @@ function HomePage() {
     return (
       <div className="no-cards">
         <div className="container-img">
-          <img src={EmptyInvoiceImg} alt="" />
+          <img
+            src={EmptyInvoiceImg}
+            alt="no invoices to display"
+            width={"242px"}
+            height={"200px"}
+          />
         </div>
         <h2>There is nothing here</h2>
         <p>Create an invoice by clicking the New button and get started</p>
@@ -111,7 +116,13 @@ function HomePage() {
             <div>
               <Link to={`/newInvoice`} className="btn flex btn-new-invoice">
                 <span className="container-img">
-                  <img src={AddInvoiceImg} alt="" />
+                  <img
+                    src={AddInvoiceImg}
+                    alt=""
+                    aria-hidden={true}
+                    width={"11px"}
+                    height={"11px"}
+                  />
                 </span>
                 <span className="flex btn-label">
                   New <span className="mobile-hidden">Invoice</span>

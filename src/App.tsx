@@ -49,8 +49,14 @@ function App() {
         <header className="flex header">
           <div className="flex controls">
             <div className="logo-container">
-              <a className="btn btn-logo" href="">
-                <img src={Logo} alt="" aria-hidden={true} />
+              <a className="btn btn-logo" href="/">
+                <img
+                  src={Logo}
+                  alt=""
+                  aria-hidden={true}
+                  width={"28px"}
+                  height={"26px"}
+                />
                 <span className="sr-only">preprince investments</span>
               </a>
             </div>
@@ -64,6 +70,8 @@ function App() {
                 src={Profile}
                 alt=""
                 aria-hidden={true}
+                width={"80px"}
+                height={"80px"}
               />
               <span className="sr-only">customer profile</span>
             </a>

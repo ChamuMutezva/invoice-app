@@ -12,8 +12,7 @@ import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting } from "../Types/DataTypes";
 import { InvoiceTypes } from "../Types/DataTypes";
 
-function NewInvoice() { 
-
+function NewInvoice() {
   const newProject: ICosting = {
     name: "Project Name",
     quantity: 1,
@@ -669,7 +668,13 @@ function NewInvoice() {
                           deleteProjectDialog(evt, data.items[index].name)
                         }
                       >
-                        <img src={DeleteBtn} alt="" aria-hidden={true} />
+                        <img
+                          src={DeleteBtn}
+                          alt=""
+                          aria-hidden={true}
+                          width={"13px"}
+                          height={"16px"}
+                        />
                       </button>
                     </div>
                   </div>
@@ -700,7 +705,13 @@ function NewInvoice() {
               disabled={!isDirty || !isValid}
               onClick={updateItems}
             >
-              <img src={AddItemImg} alt="" aria-hidden={true} />
+              <img
+                src={AddItemImg}
+                alt=""
+                aria-hidden={true}
+                width={"11px"}
+                height={"11px"}
+              />
               Add new Item
             </button>
           </fieldset>

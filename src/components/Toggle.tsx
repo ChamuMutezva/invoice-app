@@ -25,6 +25,8 @@ function Toggle(props: {
               src={DarkMode}
               aria-hidden
               alt=""
+              width={"20px"}
+              height={"20px"}
             />
             <img
               className={`theme-img dark-theme-img ${
@@ -33,6 +35,8 @@ function Toggle(props: {
               src={LightMode}
               aria-hidden
               alt=""
+              width={"20px"}
+              height={"20px"}
             />
           </span>
         </span>
