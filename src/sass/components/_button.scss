@@ -15,6 +15,14 @@
     }
 }
 
+.btn-profile {
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    width: 80%;
+    aspect-ratio: 1;
+}
+
 .btn-link {
     display: flex;
     justify-content: center;
@@ -169,6 +177,7 @@
 }
 
 .btn-delete {
+
     &:hover,
     &:focus {
         outline-offset: -0.5em;

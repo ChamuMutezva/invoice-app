@@ -24,9 +24,12 @@
 }
 
 .profile {
-    padding: base.$spacer1;
-    max-width: 80px;
+    padding: calc(base.$spacer1 * 0.5);
+    // max-width: 80px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &::before {
         position: absolute;
@@ -37,21 +40,20 @@
         left: 0;
         top: 0;
     }
-}
 
-.btn-profile {
-    border-radius: 50%;
-    overflow: hidden;
-    display: block;
+    @include utils.mQ(40rem) {
+        padding-inline: base.$spacer1;
+        padding-block: 0;
+    }
 }
 
 .filter {
     border: none;
     background-color: inherit;
-   // background-image: url("./public/icon-arrow-down.svg");
-   // background-repeat: no-repeat;
-   // background-position: center right;
-   // appearance: none;
+    // background-image: url("./public/icon-arrow-down.svg");
+    // background-repeat: no-repeat;
+    // background-position: center right;
+    // appearance: none;
 }
 
 .logo-container {
@@ -89,6 +91,10 @@
 }
 
 .btn-profile-img {
+    width: 100%;
+    aspect-ratio: 1;
+    height: 100%;
+
     @include utils.mQ(64rem) {
         transform: rotate(280deg);
     }
