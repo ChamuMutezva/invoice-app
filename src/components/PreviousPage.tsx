@@ -7,7 +7,13 @@ function PreviousPage(props: { title: string }) {
     <div>
       <h1 className="sr-only">{props.title}</h1>
       <button className="btn flex btn-return" onClick={() => navigate(-1)}>
-        <img src={BackImg} alt="" aria-hidden={true} />
+        <img
+          src={BackImg}
+          alt=""
+          aria-hidden={true}
+          width={"7px"}
+          height={"10px"}
+        />
         Go back
       </button>
     </div>

@@ -38,11 +38,11 @@ function EditInvoice() {
   });
 
   // Fetch an invoice
-   const { data  } = useGetSingleInvoice(params.id)
+  const { data } = useGetSingleInvoice(params.id);
   const invoice = data;
 
   // load initial form data on first visit to site
-  const initialState: InvoiceTypes  = {
+  const initialState: InvoiceTypes = {
     _id: invoice._id,
     id: invoice.id,
     createdAt: invoice.createdAt,
@@ -668,7 +668,13 @@ function EditInvoice() {
                           deleteProjectDialog(evt, invoice.items[index].name)
                         }
                       >
-                        <img src={DeleteBtn} alt="" aria-hidden={true} />
+                        <img
+                          src={DeleteBtn}
+                          alt=""
+                          aria-hidden={true}
+                          width={"13px"}
+                          height={"16px"}
+                        />
                       </button>
                     </div>
                   </div>
@@ -680,7 +686,13 @@ function EditInvoice() {
               disabled={!isDirty || !isValid}
               onClick={addAnotherProject}
             >
-              <img src={AddItemImg} alt="" aria-hidden={true} />
+              <img
+                src={AddItemImg}
+                alt=""
+                aria-hidden={true}
+                width={"11px"}
+                height={"11px"}
+              />
               Add new Item
             </button>
           </fieldset>

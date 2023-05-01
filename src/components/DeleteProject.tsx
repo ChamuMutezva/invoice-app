@@ -32,7 +32,12 @@ function DeleteProject(props: {
           className="btn delete-close"
           onClick={props.exitWithoutDeletingProject}
         >
-          <img src={IconClose} alt="Close without deleting project" />
+          <img
+            src={IconClose}
+            alt="Close without deleting project"
+            width={"24px"}
+            height={"24px"}
+          />
         </button>
 
         <h4 id="modal-heading-delete" className="modal-heading">
