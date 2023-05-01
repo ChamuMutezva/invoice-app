@@ -6,14 +6,11 @@ import Logo from "./assets/logo.svg";
 import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
 import Toggle from "./components/Toggle";
-
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
-import DeleteInvoice from "./pages/DeleteInvoice";
 import EditInvoice from "./pages/EditInvoice";
-// import { loader  as rootLoader} from "./pages/ViewInvoice";
 
 const queryClient = new QueryClient();
 
