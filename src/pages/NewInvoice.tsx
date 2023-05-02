@@ -10,7 +10,7 @@ import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting } from "../Types/DataTypes";
-import { InvoiceTypes } from "../Types/DataTypes";
+// import { InvoiceTypes } from "../Types/DataTypes";
 
 function NewInvoice() {
   const newProject: ICosting = {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -36,12 +36,21 @@ function App() {
       errorElement: <ErrorPage />,
     },
   ]);
-
-  const [theme, setTheme] = useState(true);
+  const localstorage: boolean = JSON.parse(
+    window.localStorage.getItem("theme")!
+  );
+  console.log(typeof localstorage);
+  const [theme, setTheme] = useState(localstorage);
 
   const onChange = () => {
-    setTheme(!theme);
+    console.log(theme);
+    setTheme(() => !theme);
+    console.log(theme);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
 
   return (
     <QueryClientProvider client={queryClient}>
