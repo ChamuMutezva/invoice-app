@@ -188,7 +188,12 @@ function EditInvoice() {
 
             {/* SENDER STREET DETAILS */}
             <div className={`form-input-wrapper`}>
-              <label className="label" htmlFor={`street`}>
+              <label
+                className={`label ${
+                  errors.senderAddress?.street ? "form-errors" : ""
+                }`}
+                htmlFor={`street`}
+              >
                 Street Address
               </label>
               <input
@@ -213,7 +218,12 @@ function EditInvoice() {
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`city`}>
+                <label
+                  className={`label ${
+                    errors.senderAddress?.city ? "form-errors" : ""
+                  }`}
+                  htmlFor={`city`}
+                >
                   City
                 </label>
                 <input
@@ -237,7 +247,12 @@ function EditInvoice() {
 
               {/* SENDER POSTAL CODE DETAILS */}
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`postal`}>
+                <label
+                  className={`label ${
+                    errors.senderAddress?.postCode ? "form-errors" : ""
+                  }`}
+                  htmlFor={`postal`}
+                >
                   Postal code
                 </label>
                 <input
@@ -263,7 +278,12 @@ function EditInvoice() {
 
               {/* SENDER COUNTRY DETAILS */}
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`country`}>
+                <label
+                  className={`label ${
+                    errors.senderAddress?.country ? "form-errors" : ""
+                  }`}
+                  htmlFor={`country`}
+                >
                   Country
                 </label>
                 <input
@@ -295,7 +315,10 @@ function EditInvoice() {
 
             {/* CLIENT NAME DETAILS */}
             <div className={`form-input-wrapper`}>
-              <label className="label" htmlFor={`client`}>
+              <label
+                className={`label ${errors.clientName ? "form-errors" : ""}`}
+                htmlFor={`client`}
+              >
                 Client name
               </label>
               <input
@@ -319,7 +342,10 @@ function EditInvoice() {
 
             {/* CLIENT EMAIL DETAILS */}
             <div className={`form-input-wrapper`}>
-              <label className="label" htmlFor={`email`}>
+              <label
+                className={`label ${errors.clientEmail ? "form-errors" : ""}`}
+                htmlFor={`email`}
+              >
                 Client email
               </label>
               <input
@@ -343,7 +369,12 @@ function EditInvoice() {
 
             {/* CLIENT STREET DETAILS */}
             <div className={`form-input-wrapper`}>
-              <label className="label" htmlFor={`client-street`}>
+              <label
+                className={`label ${
+                  errors.clientAddress?.street ? "form-errors" : ""
+                }`}
+                htmlFor={`client-street`}
+              >
                 street name
               </label>
               <input
@@ -368,7 +399,12 @@ function EditInvoice() {
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`client-city`}>
+                <label
+                  className={`label ${
+                    errors.clientAddress?.city ? "form-errors" : ""
+                  }`}
+                  htmlFor={`client-city`}
+                >
                   City
                 </label>
                 <input
@@ -391,7 +427,12 @@ function EditInvoice() {
               </div>
               {/* CLIENT POSTAL DETAILS */}
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`client-postal`}>
+                <label
+                  className={`label ${
+                    errors.clientAddress?.postCode ? "form-errors" : ""
+                  }`}
+                  htmlFor={`client-postal`}
+                >
                   Postal code
                 </label>
                 <input
@@ -421,7 +462,12 @@ function EditInvoice() {
 
               {/* CLIENT COUNTRY DETAILS */}
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`country`}>
+                <label
+                  className={`label ${
+                    errors.clientAddress?.country ? "form-errors" : ""
+                  }`}
+                  htmlFor={`country`}
+                >
                   Country
                 </label>
                 <input
@@ -451,7 +497,10 @@ function EditInvoice() {
           <fieldset className="edit-invoice-details">
             <div className="grid">
               <div className={`form-input-wrapper`}>
-                <label className="label" htmlFor={`date-created`}>
+                <label
+                  className={`label ${errors.createdAt ? "form-errors" : ""}`}
+                  htmlFor={`date-created`}
+                >
                   Invoice date
                 </label>
                 <input
@@ -474,7 +523,12 @@ function EditInvoice() {
 
               {/* PAYMENT DETAILS */}
               <div className="form-input-wrapper">
-                <label className="label" htmlFor="terms">
+                <label
+                  className={`label ${
+                    errors.paymentTerms ? "form-errors" : ""
+                  }`}
+                  htmlFor="terms"
+                >
                   Payment terms
                 </label>
                 <select
@@ -519,7 +573,10 @@ function EditInvoice() {
 
             {/* PROJECT NAME DETAILS */}
             <div className={`form-input-wrapper`}>
-              <label className="label" htmlFor={`project-desc`}>
+              <label
+                className={`label ${errors.description ? "form-errors" : ""}`}
+                htmlFor={`project-desc`}
+              >
                 Project Description
               </label>
               <input
