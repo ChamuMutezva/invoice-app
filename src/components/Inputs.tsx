@@ -1,63 +1,83 @@
-import { FC, forwardRef } from "react";
+import React, { FC, forwardRef } from "react";
 
-export type InputTypeProps = {
+export type InputProps = {
   ariaLabelledBy: string | undefined;
   ariaInvalid: boolean | "true" | "false" | "grammar" | "spelling" | undefined;
   registeredName: string;
-  divClass: string;
   htmlFor: string;
-  text: string;
+  textLabel: string;
   type: string;
   id: string;
-  inputClass: string;
   placeholder: string;
-  isRequired: true,
-  register: any
-} ;
+  isRequired: true | string;
+  register: any;
+  errorRef: any;
+  errorMessage: any;
+};
 
-export const Inputs: FC<InputTypeProps> = forwardRef<
-  HTMLInputElement,
-  InputTypeProps
->(
+export const Inputs: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       ariaLabelledBy,
       ariaInvalid,
-      registeredName,     
-      divClass,
+      registeredName,
       htmlFor,
-      text,
+      textLabel,
       type,
       id,
-      inputClass,
       placeholder,
-      register, 
-      isRequired    
+      isRequired,
+      errorRef,
+      errorMessage,
+      register,
     },
-   
+    ref
   ) => {
     return (
-      <div className={`address-line ${divClass}`}>
+      <div className={`form-input-wrapper`}>
         <label className="label" htmlFor={htmlFor}>
-          {text}
+          {textLabel}
         </label>
         <input
           type={type}
           id={id}
-          className={`input ${inputClass}`}
+          className="input"
+          ref={ref}
           aria-invalid={ariaInvalid}
           aria-labelledby={ariaLabelledBy}
-          placeholder={placeholder}         
-          name={registeredName}
-          {...register(name, {
+          placeholder={placeholder}
+          {...register(registeredName, {
             required: {
               value: isRequired,
-              message: "IsRequired"
-            }
+              message: isRequired,
+            },
           })}
-         
         />
+
+        {errorRef && (
+          <p role="alert" id="sender-street" className="form-errors">
+            {errorMessage}
+          </p>
+        )}
       </div>
     );
   }
 );
+
+/*
+{/* SAMPLE USAGE ----
+<Inputs
+  ariaLabelledBy={"sender-street"}
+  ariaInvalid={errors.senderAddress?.street ? "true" : false}
+  registeredName={"senderAddress.street"}
+  htmlFor={"street"}
+  textLabel={"Street address"}
+  type={"text"}
+  id={"street"}
+  placeholder={"116 Caledorn street"}
+  isRequired={"Street address is required"}
+  register={register}
+  errorRef={errors.senderAddress?.street}
+  errorMessage={errors.senderAddress?.street?.message?.toString()}
+/>;
+*/

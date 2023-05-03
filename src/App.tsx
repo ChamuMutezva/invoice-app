@@ -36,16 +36,15 @@ function App() {
       errorElement: <ErrorPage />,
     },
   ]);
+  
   const localstorage: boolean = JSON.parse(
     window.localStorage.getItem("theme")!
   );
-  console.log(typeof localstorage);
+ 
   const [theme, setTheme] = useState(localstorage);
 
-  const onChange = () => {
-    console.log(theme);
-    setTheme(() => !theme);
-    console.log(theme);
+  const onChange = () => {    
+    setTheme(() => !theme);   
   };
 
   useEffect(() => {

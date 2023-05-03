@@ -187,7 +187,7 @@ function EditInvoice() {
             <legend className="edit-field-title">Bill From</legend>
 
             {/* SENDER STREET DETAILS */}
-            <div className={`address-line `}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`street`}>
                 Street Address
               </label>
@@ -212,7 +212,7 @@ function EditInvoice() {
 
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`city`}>
                   City
                 </label>
@@ -236,7 +236,7 @@ function EditInvoice() {
               </div>
 
               {/* SENDER POSTAL CODE DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`postal`}>
                   Postal code
                 </label>
@@ -262,7 +262,7 @@ function EditInvoice() {
               </div>
 
               {/* SENDER COUNTRY DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -294,7 +294,7 @@ function EditInvoice() {
             <legend className="edit-field-title">Bill to</legend>
 
             {/* CLIENT NAME DETAILS */}
-            <div className={`address-line`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`client`}>
                 Client name
               </label>
@@ -318,7 +318,7 @@ function EditInvoice() {
             </div>
 
             {/* CLIENT EMAIL DETAILS */}
-            <div className={`address-line`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`email`}>
                 Client email
               </label>
@@ -342,7 +342,7 @@ function EditInvoice() {
             </div>
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`address-line `}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`client-street`}>
                 street name
               </label>
@@ -367,7 +367,7 @@ function EditInvoice() {
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`client-city`}>
                   City
                 </label>
@@ -390,7 +390,7 @@ function EditInvoice() {
                 )}
               </div>
               {/* CLIENT POSTAL DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`client-postal`}>
                   Postal code
                 </label>
@@ -420,7 +420,7 @@ function EditInvoice() {
               </div>
 
               {/* CLIENT COUNTRY DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -450,7 +450,7 @@ function EditInvoice() {
           {/* INVOICE DETAILS  */}
           <fieldset className="edit-invoice-details">
             <div className="grid">
-              <div className={`invoice-date`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`date-created`}>
                   Invoice date
                 </label>
@@ -473,7 +473,7 @@ function EditInvoice() {
               </div>
 
               {/* PAYMENT DETAILS */}
-              <div className="payment-terms">
+              <div className="form-input-wrapper">
                 <label className="label" htmlFor="terms">
                   Payment terms
                 </label>
@@ -504,7 +504,7 @@ function EditInvoice() {
             </div>
 
             {/* PAYMENT DUE DETAILS */}
-            <div className={`sr-only address-line`}>
+            <div className={`sr-only form-input-wrapper`}>
               <label className="label" htmlFor={`payment-due`}>
                 Payment due date
               </label>
@@ -518,7 +518,7 @@ function EditInvoice() {
             </div>
 
             {/* PROJECT NAME DETAILS */}
-            <div className={`project`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`project-desc`}>
                 Project Description
               </label>
@@ -556,7 +556,7 @@ function EditInvoice() {
               ) => (
                 <div className="item-line" key={item.name}>
                   {/* PROJECT NAME DETAILS */}
-                  <div className={`project-line`}>
+                  <div className={`form-input-wrapper`}>
                     <label className="label" htmlFor={`project-name`}>
                       Project name
                     </label>

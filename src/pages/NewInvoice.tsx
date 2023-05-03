@@ -10,6 +10,7 @@ import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting } from "../Types/DataTypes";
+import { Inputs } from "../components/Inputs";
 // import { InvoiceTypes } from "../Types/DataTypes";
 
 function NewInvoice() {
@@ -142,8 +143,8 @@ function NewInvoice() {
           {/* SENDER DETAILS */}
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Bill From</legend>
-            {/* SENDER STREET DETAILS */}
-            <div className={`address-line `}>
+            {/* SENDER STREET DETAILS */}             
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`street`}>
                 Street Address
               </label>
@@ -160,9 +161,6 @@ function NewInvoice() {
                     value: 4,
                     message: "Length must be more than 4",
                   },
-                  onChange(event) {
-                    console.log(data);
-                  },
                 })}
               />
               {errors.senderAddress?.street && (
@@ -171,9 +169,10 @@ function NewInvoice() {
                 </p>
               )}
             </div>
+              
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`address-line`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`city`}>
                   City
                 </label>
@@ -200,7 +199,7 @@ function NewInvoice() {
               </div>
 
               {/* SENDER POSTAL CODE DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper `}>
                 <label className="label" htmlFor={`postal`}>
                   Postal code
                 </label>
@@ -229,7 +228,7 @@ function NewInvoice() {
               </div>
 
               {/* SENDER COUNTRY DETAILS */}
-              <div className={`address-line `}>
+              <div className={`form-input-wrapper `}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -263,7 +262,7 @@ function NewInvoice() {
             <legend className="edit-field-title">Bill to</legend>
 
             {/* CLIENT NAME DETAILS */}
-            <div className={`address-line`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`client`}>
                 Client name
               </label>
@@ -290,7 +289,7 @@ function NewInvoice() {
             </div>
 
             {/* CLIENT EMAIL DETAILS */}
-            <div className={`address-line`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`email`}>
                 Client email
               </label>
@@ -317,7 +316,7 @@ function NewInvoice() {
             </div>
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`address-line`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`client-street`}>
                 street name
               </label>
@@ -345,7 +344,7 @@ function NewInvoice() {
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`address-line`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`client-city`}>
                   City
                 </label>
@@ -371,7 +370,7 @@ function NewInvoice() {
                 )}
               </div>
               {/* CLIENT POSTAL DETAILS */}
-              <div className={`address-line`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`client-postal`}>
                   Postal code
                 </label>
@@ -404,7 +403,7 @@ function NewInvoice() {
               </div>
 
               {/* CLIENT COUNTRY DETAILS */}
-              <div className={`address-line`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`country`}>
                   Country
                 </label>
@@ -436,7 +435,7 @@ function NewInvoice() {
           {/* INVOICE DETAILS  */}
           <fieldset className="edit-invoice-details">
             <div className="grid">
-              <div className={`invoice-date`}>
+              <div className={`form-input-wrapper`}>
                 <label className="label" htmlFor={`date-created`}>
                   Invoice date
                 </label>
@@ -459,7 +458,7 @@ function NewInvoice() {
               </div>
 
               {/* PAYMENT DETAILS */}
-              <div className="payment-terms">
+              <div className="form-input-wrapper">
                 <label className="label" htmlFor="terms">
                   Payment terms
                 </label>
@@ -490,7 +489,7 @@ function NewInvoice() {
             </div>
 
             {/* PAYMENT DUE DETAILS */}
-            <div className={`sr-only address-line`}>
+            <div className={`sr-only form-input-wrapper`}>
               <label className="label" htmlFor={`payment-due`}>
                 Payment due date
               </label>
@@ -504,7 +503,7 @@ function NewInvoice() {
             </div>
 
             {/* PROJECT NAME DETAILS */}
-            <div className={`project`}>
+            <div className={`form-input-wrapper`}>
               <label className="label" htmlFor={`project-desc`}>
                 Project Description
               </label>
@@ -539,7 +538,7 @@ function NewInvoice() {
               data.items.map((item, index) => (
                 <div className="item-line" key={item.name}>
                   {/* PROJECT NAME DETAILS */}
-                  <div className={`project-line`}>
+                  <div className={`form-input-wrapper`}>
                     <label className="label" htmlFor={`project-name`}>
                       Project name
                     </label>
