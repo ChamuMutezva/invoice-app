@@ -13,10 +13,10 @@ function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
-  const [showDialog, setShowDialog] = useState(false); 
+  const [showDialog, setShowDialog] = useState(false);
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
-  const { data } = useGetSingleInvoice(params.id)
- // console.log(data)
+  const { data } = useGetSingleInvoice(params.id);
+  // console.log(data)
 
   const onDelete = () => {
     setShowDialog(true);
@@ -29,6 +29,16 @@ function ViewInvoice() {
   const confirmDelete = () => {
     mutate(data._id);
     setShowDialog(false);
+  };
+
+  const getStatus = (status: string) => {
+    if (status === "paid") {
+      return "paid-status";
+    } else if (status === "draft") {
+      return "draft-status";
+    } else {
+      return "pending-status";
+    }
   };
 
   const updateInvoiceMutation = useMutation(updateInvoice, {
@@ -70,23 +80,13 @@ function ViewInvoice() {
 
   return (
     <div className="main" aria-live="polite">
-      <PreviousPage
-        title={`Complete invoice details of ${data.clientName}`}
-      />
+      <PreviousPage title={`Complete invoice details of ${data.clientName}`} />
 
       <main>
         <nav className="flex nav-view">
           <div className="flex status-container">
             <p className="status-label">Status </p>
-            <p
-              className={`flex status ${
-                data.status === "paid"
-                  ? "paid-status"
-                  : data.status === "draft"
-                  ? "draft-status"
-                  : "pending-status"
-              } `}
-            >
+            <p className={`flex status ${getStatus(data.status)} `}>
               <span
                 aria-hidden={true}
                 className={`status-span ${data.status}-span`}
@@ -127,9 +127,7 @@ function ViewInvoice() {
               <p className="address-sender-details">
                 <span className="street">{data.senderAddress.street}</span>
                 <span className="city">{data.senderAddress.city}</span>
-                <span className="postCode">
-                  {data.senderAddress.postCode}
-                </span>
+                <span className="postCode">{data.senderAddress.postCode}</span>
                 <span className="country">{data.senderAddress.country}</span>
               </p>
             </div>
@@ -161,9 +159,7 @@ function ViewInvoice() {
                   <span className="postCode">
                     {data.clientAddress.postCode}
                   </span>
-                  <span className="country">
-                    {data.clientAddress.country}
-                  </span>
+                  <span className="country">{data.clientAddress.country}</span>
                 </p>
               </div>
             </div>
