@@ -45,6 +45,9 @@ Users should be able to:
 
 ## My process
 
+I created the challenge as a Fullstack application, the backend files are in a separate folder known as `invoice backend`
+The Backend fetches and stores data that is stored in MongoDb.
+
 ### Built with
 
 - Semantic HTML5 markup
