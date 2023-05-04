@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLoaderData, Form } from "react-router-dom";
+import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
@@ -7,7 +7,7 @@ import getInvoices from "../hooks/useGetInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("all");
-  let { isLoading, isError, invoices, isSuccess } = getInvoices(selectedValue);
+  let { isLoading, isError, invoices, isSuccess , error} = getInvoices(selectedValue);
 
   console.log(invoices);
 

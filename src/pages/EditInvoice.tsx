@@ -13,10 +13,11 @@ import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { InvoiceTypes } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
+
 // import format from "date-fns/format";
 
 function EditInvoice() {
-  const newProject = {
+  const projectInit = {
     name: "Project Name",
     quantity: 1,
     price: 100.0,
@@ -28,7 +29,7 @@ function EditInvoice() {
   const [showDialog, setShowDialog] = useState(false);
   const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
-  const [project, setProject] = useState(newProject);
+  const [project, setProject] = useState(projectInit);
   const params = useParams();
 
   // Create our number formatter.
@@ -138,7 +139,6 @@ function EditInvoice() {
     setShowDialog(!showDialog);
   };
 
-  // Project not deleted
   const exitWithoutDeletingProject = () => {
     setShowDialog(!showDialog);
   };

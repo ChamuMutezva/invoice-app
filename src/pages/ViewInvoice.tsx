@@ -16,8 +16,7 @@ function ViewInvoice() {
   const [showDialog, setShowDialog] = useState(false);
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id);
-  // console.log(data)
-
+  
   const onDelete = () => {
     setShowDialog(true);
   };

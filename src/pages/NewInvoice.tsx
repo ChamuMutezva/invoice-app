@@ -14,7 +14,7 @@ import { Inputs } from "../components/Inputs";
 // import { InvoiceTypes } from "../Types/DataTypes";
 
 function NewInvoice() {
-  const newProject: ICosting = {
+  const projectInit: ICosting = {
     name: "Project Name",
     quantity: 1,
     price: 100.0,
@@ -24,7 +24,7 @@ function NewInvoice() {
   const navigate = useNavigate();
   const { mutate, isError, isSuccess } = createInvoice();
   const [deleteProjectModal, setDeleteProjectModal] = useState(false);
-  const [project, setProject] = useState(newProject);
+  const [project, setProject] = useState(projectInit);
   const [showDialog, setShowDialog] = useState(false);
 
   // load initial form data on first visit to site
