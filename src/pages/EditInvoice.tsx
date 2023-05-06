@@ -522,7 +522,7 @@ function EditInvoice() {
               </div>
 
               {/* PAYMENT DETAILS */}
-              <div className="form-input-wrapper">
+              <div className="form-input-wrapper select-container">
                 <label
                   className={`label ${
                     errors.paymentTerms ? "form-errors" : ""
@@ -532,7 +532,7 @@ function EditInvoice() {
                   Payment terms
                 </label>
                 <select
-                  className="input terms-options"
+                  className="input select"
                   id="terms"
                   aria-labelledby="terms-lbl"
                   aria-invalid={errors.paymentTerms ? "true" : "false"}
@@ -543,11 +543,21 @@ function EditInvoice() {
                     },
                   })}
                 >
-                  <option value={1}>Net 1 Day</option>
-                  <option value={6}>Net 6 days</option>
-                  <option value={7}>Net 7 days</option>
-                  <option value={14}>Net 14 Days</option>
-                  <option value={30}>Net 30 Days</option>
+                  <option className="option" value={1}>
+                    Net 1 Day
+                  </option>
+                  <option className="option" value={6}>
+                    Net 6 days
+                  </option>
+                  <option className="option" value={7}>
+                    Net 7 days
+                  </option>
+                  <option className="option" value={14}>
+                    Net 14 Days
+                  </option>
+                  <option className="option" value={30}>
+                    Net 30 Days
+                  </option>
                 </select>
                 {errors.paymentTerms && (
                   <p role="alert" id="terms-lbl" className="form-errors">

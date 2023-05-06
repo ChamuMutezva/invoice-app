@@ -1,0 +1,32 @@
+@use 'sass:color';
+@use '../base';
+@use '../utils';
+
+.select {   
+    appearance: none;   
+    font-family: inherit;
+    // font-size: inherit;
+    cursor: inherit;
+    &>*+* {
+        margin-block-start: 1rem;
+    }
+}
+
+.select-container {    
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;    
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 0.8em;
+        height: 0.5em;
+        background-color: base.$clr-blue-100;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);        
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        margin-block-start: 0.75em;
+    }
+}
