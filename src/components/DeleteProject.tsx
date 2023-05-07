@@ -26,10 +26,10 @@ function DeleteProject(props: {
       ref={dialogRef}
       className={`modal-wrapper ${props.showDialog ? "show-modal" : ""} `}
     >
-      <div className="delete-confirmation">
+      <div className="dialog-container">
         <button
           type="button"
-          className="btn delete-close"
+          className="btn btn-delete-close"
           onClick={props.exitWithoutDeletingProject}
         >
           <img
@@ -40,10 +40,10 @@ function DeleteProject(props: {
           />
         </button>
 
-        <h4 id="modal-heading-delete" className="modal-heading">
+        <h3 id="modal-heading-delete" className="dialog-title">
           Delete project {props.name} from invoice?
-        </h4>
-        <p id="modal-heading-text" className="modal-text">
+        </h3>
+        <p id="modal-heading-text" className="dialog-content">
           Are you sure you want to delete the{" "}
           <span className="modal-text-ID">{}</span> project and its contents?
           This action cannot be reversed.
@@ -51,7 +51,7 @@ function DeleteProject(props: {
         <button
           type="button"
           aria-labelledby="modal-heading-text"
-          className="btn btn-confirm-delete"
+          className="btn btn-delete-view"
           onClick={props.deleteProjectConfirmation}
         >
           Confirm & Delete

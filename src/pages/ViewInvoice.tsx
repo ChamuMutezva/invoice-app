@@ -16,7 +16,7 @@ function ViewInvoice() {
   const [showDialog, setShowDialog] = useState(false);
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id);
-  
+
   const onDelete = () => {
     setShowDialog(true);
   };
@@ -78,10 +78,10 @@ function ViewInvoice() {
   }
 
   return (
-    <div className="main" aria-live="polite">
+    <main className="main" aria-live="polite">
       <PreviousPage title={`Complete invoice details of ${data.clientName}`} />
 
-      <main>
+      <div className="main-container">
         <nav className="flex nav-view">
           <div className="flex status-container">
             <p className="status-label">Status </p>
@@ -215,7 +215,7 @@ function ViewInvoice() {
             <p className="grand-total">{formatter.format(grandTotal)}</p>
           </div>
         </section>
-      </main>
+      </div>
       <DeleteInvoiceDialog
         showDialog={showDialog}
         closeDialog={closeDialog}
@@ -235,7 +235,7 @@ function ViewInvoice() {
           </button>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
 

@@ -665,7 +665,14 @@ function EditInvoice() {
                 aria-invalid={errors.description ? "true" : "false"}
                 {...register("description", {
                   required: "Project description required",
-                  minLength: 4,
+                  minLength: {
+                    value: 4,
+                    message: "Description should have at least 4 characters",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Description should have at most 40 characters",
+                  },
                 })}
               />
               {errors.description && (
@@ -695,6 +702,15 @@ function EditInvoice() {
                       minLength: 4,
                     })}
                   />
+                  {`${errors}.items?.index.name` && (
+                    <p
+                      role="alert"
+                      id="description-lbl"
+                      className="form-errors"
+                    >
+                      {errors.items?.message?.toString()}
+                    </p>
+                  )}
                 </div>
 
                 {/* QUANTITY DETAILS */}

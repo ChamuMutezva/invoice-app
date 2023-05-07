@@ -3,13 +3,10 @@
 @use '../utils';
 
 .modal-wrapper {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    display: none;   
+    width: 100vw;
     height: 100vh;
-    background: hsla(225deg, 9%, 9%, .75);
+    background: hsla(225deg, 9%, 9%, .75);   
 }
 
 .show-modal {
@@ -31,24 +28,16 @@
     border-radius: 4px;
 }
 
-.delete-close {
-    background-color: #000;
-    border: transparent;
-    padding: calc(base.$spacer1 * 0.45);
-    border-radius: 5px;
-    align-self: flex-end;
-}
-
 .modal-heading {
     @include utils.fonts(#353a40, 1.25rem, 700);
-   // font-size: 1.25rem;
-   // font-weight: 700;
-   // color: #353a40;
+    // font-size: 1.25rem;
+    // font-weight: 700;
+    // color: #353a40;
 }
 
 .modal-text {
     color: #7d8187;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 900;
     text-align: center;
 }

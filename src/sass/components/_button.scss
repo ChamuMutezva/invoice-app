@@ -176,6 +176,14 @@
     }
 }
 
+.btn-delete-close {
+    background-color: base.$clr-black-100;
+    border: transparent;
+    padding: calc(base.$spacer1 * 0.45);
+    border-radius: 5px;
+    align-self: flex-end;
+}
+
 .btn-delete {
 
     &:hover,
@@ -196,6 +204,11 @@
         &:focus {
             outline: dashed base.$clr-white-100;
         }
+    }
+
+    .btn-delete-close  {
+        background-color: base.$clr-blue-100;
+        color: base.$clr-white-200;
     }
 
     .btn-add-item {

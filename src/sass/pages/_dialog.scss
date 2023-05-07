@@ -4,7 +4,8 @@
 .show-dialog {
     position: fixed;
     flex-direction: column;
-    gap: calc(base.$spacer1 * 2.5);   
+    gap: calc(base.$spacer1 * 2.5);
+    // max-width: 100vw;
 }
 
 .dialog-container {
@@ -13,6 +14,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: base.$spacer1 * 1.5;
     padding: calc(base.$spacer1 * 1.5);
-    border-radius: 6px;
+    border-radius: 8px;
+    max-width: 30rem;
+
+}
+
+.button-container {
+    align-self: flex-end;    
+    gap: base.$spacer1 * 1.5;  
+}
+
+.dialog-title {
+    align-self: baseline;
+    font-size: base.$fs-24;
+    font-weight: 700;
+    color: base.$clr-black-100;
+}
+
+.dialog-content {
+    font-size: base.$fs-13;
+    color: base.$clr-blue-200;
+    font-weight: 500;
+}
+
+.dark-mode {
+    .dialog-container {
+        background-color: base.$clr-black-200;
+    }
+    .dialog-title {
+        color: base.$clr-white-100;
+    }
+    .dialog-content {
+        color: base.$clr-blue-200;
+    }
 }
