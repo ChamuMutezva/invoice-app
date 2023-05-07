@@ -3,7 +3,6 @@ import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import PreviousPage from "../components/PreviousPage";
-//import getInvoice from "../hooks/useGetInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
@@ -11,13 +10,11 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
-import { InvoiceTypes } from "../Types/DataTypes";
+import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 
-// import format from "date-fns/format";
-
 function EditInvoice() {
-  const projectInit = {
+  const projectInit: ICosting = {
     name: "Project Name",
     quantity: 1,
     price: 100.0,
@@ -82,7 +79,7 @@ function EditInvoice() {
     watch,
     setValue,
     getValues,
-    formState: { errors, isDirty, isValid, touchedFields },
+    formState: { errors, isDirty, isValid },
   } = useForm({ defaultValues: initialState });
 
   // watch for changes , changes for items to be used to calculate the grandtotal
@@ -205,7 +202,14 @@ function EditInvoice() {
                 aria-invalid={errors.senderAddress?.street ? "true" : false}
                 {...register("senderAddress.street", {
                   required: "Street address is required",
-                  minLength: 4,
+                  minLength: {
+                    value: 3,
+                    message: "Street must have at least 3 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Street must have at most 40 characters",
+                  },
                 })}
               />
               {errors.senderAddress?.street && (
@@ -235,7 +239,14 @@ function EditInvoice() {
                   aria-invalid={errors.senderAddress?.city ? "true" : "false"}
                   {...register("senderAddress.city", {
                     required: "City is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 3,
+                      message: "City must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "City must have at most 40 characters",
+                    },
                   })}
                 />
                 {errors.senderAddress?.city && (
@@ -266,7 +277,14 @@ function EditInvoice() {
                   }
                   {...register("senderAddress.postCode", {
                     required: "Enter postal code",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Postal code must have at least 4 characters",
+                    },
+                    maxLength: {
+                      value: 10,
+                      message: "Postal code must have at most 10 characters",
+                    },
                   })}
                 />
                 {errors.senderAddress?.postCode && (
@@ -297,7 +315,14 @@ function EditInvoice() {
                   }
                   {...register("senderAddress.country", {
                     required: "Country is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 3,
+                      message: "Country must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "Country must have at most 40 characters",
+                    },
                   })}
                 />
                 {errors.senderAddress?.country && (
@@ -330,7 +355,14 @@ function EditInvoice() {
                 aria-invalid={errors.clientName ? "true" : "false"}
                 {...register("clientName", {
                   required: "Client name is required",
-                  minLength: 1,
+                  minLength: {
+                    value: 1,
+                    message: "Name must have at least 1 character",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Name must have at most 40 characters",
+                  },
                 })}
               />
               {errors.clientName && (
@@ -357,7 +389,14 @@ function EditInvoice() {
                 aria-invalid={errors.clientEmail ? "true" : "false"}
                 {...register("clientEmail", {
                   required: "Enter valid email",
-                  minLength: 4,
+                  minLength: {
+                    value: 5,
+                    message: "Email must have at least 5 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Email must have at most 40 characters",
+                  },
                 })}
               />
               {errors.clientEmail && (
@@ -386,7 +425,14 @@ function EditInvoice() {
                 aria-invalid={errors.clientAddress?.street ? "true" : "false"}
                 {...register("clientAddress.street", {
                   required: "Client street is required",
-                  minLength: 4,
+                  minLength: {
+                    value: 3,
+                    message: "Street must have at least 3 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Street must have at most 40 characters",
+                  },
                 })}
               />
               {errors.clientAddress?.street && (
@@ -416,7 +462,14 @@ function EditInvoice() {
                   aria-invalid={errors.clientAddress?.city ? "true" : "false"}
                   {...register("clientAddress.city", {
                     required: "Client city is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 3,
+                      message: "City must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "City must have at most 40 characters",
+                    },
                   })}
                 />
                 {errors.clientAddress?.city && (
@@ -446,7 +499,14 @@ function EditInvoice() {
                   }
                   {...register("clientAddress.postCode", {
                     required: "Postal code is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 4,
+                      message: "Postal code must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 10,
+                      message: "Postal code must have at most 10 characters",
+                    },
                   })}
                 />
                 {errors.clientAddress?.postCode && (
@@ -481,7 +541,14 @@ function EditInvoice() {
                   }
                   {...register("clientAddress.country", {
                     required: "Client country is required",
-                    minLength: 4,
+                    minLength: {
+                      value: 3,
+                      message: "Country must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "Country must have at most 40 characters",
+                    },
                   })}
                 />
                 {errors.clientAddress?.country && (
@@ -611,143 +678,132 @@ function EditInvoice() {
 
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Item list</legend>
-            {invoice.items.map(
-              (
-                item: {
-                  name: string;
-                  quantity: number;
-                  price: number;
-                  total: number;
-                },
-                index: number
-              ) => (
-                <div className="item-line" key={item.name}>
-                  {/* PROJECT NAME DETAILS */}
-                  <div className={`form-input-wrapper`}>
-                    <label className="label" htmlFor={`project-name`}>
-                      Project name
+            {invoice.items.map((item: ICosting, index: number) => (
+              <div className="item-line" key={item.name}>
+                {/* PROJECT NAME DETAILS */}
+                <div className={`form-input-wrapper`}>
+                  <label className="label" htmlFor={`project-name`}>
+                    Project name
+                  </label>
+                  <input
+                    type="text"
+                    id={`project-name`}
+                    className={`input project-name`}
+                    placeholder={"Name of project"}
+                    {...register(`items.${index}.name`, {
+                      required: true,
+                      minLength: 4,
+                    })}
+                  />
+                </div>
+
+                {/* QUANTITY DETAILS */}
+                <div className={`costing-line`}>
+                  <div className="quantity-line calculate-line-container">
+                    <label className="label" htmlFor={`qty-line`}>
+                      Qty
                     </label>
                     <input
-                      type="text"
-                      id={`project-name`}
-                      className={`input project-name`}
-                      placeholder={"Name of project"}
-                      {...register(`items.${index}.name`, {
+                      type="number"
+                      id={`qty`}
+                      className={`qty input calculate-line`}
+                      placeholder={"1"}
+                      {...register(`items.${index}.quantity`, {
                         required: true,
-                        minLength: 4,
+                        onChange: (evt) => {
+                          setValue(
+                            `items.${index}.total`,
+                            evt.target.value * getValues(`items.${index}.price`)
+                          );
+                          setProject({
+                            ...project,
+                            quantity: evt.target.value,
+                            total:
+                              evt.target.value *
+                              getValues(`items.${index}.price`),
+                          });
+                          setValue("total", calculateTotal());
+                        },
+                        onBlur: () => {
+                          setValue("total", calculateTotal());
+                        },
                       })}
                     />
                   </div>
 
-                  {/* QUANTITY DETAILS */}
-                  <div className={`costing-line`}>
-                    <div className="quantity-line calculate-line-container">
-                      <label className="label" htmlFor={`qty-line`}>
-                        Qty
-                      </label>
-                      <input
-                        type="number"
-                        id={`qty`}
-                        className={`qty input calculate-line`}
-                        placeholder={"1"}
-                        {...register(`items.${index}.quantity`, {
-                          required: true,
-                          onChange: (evt) => {
-                            setValue(
-                              `items.${index}.total`,
+                  {/* PRICE DETAILS */}
+                  <div className={`price-line calculate-line-container`}>
+                    <label className="label" htmlFor={`price`}>
+                      Price
+                    </label>
+                    <input
+                      type="number"
+                      step={0.01}
+                      id={`price`}
+                      className={`price input calculate-line`}
+                      placeholder={"200.00"}
+                      {...register(`items.${index}.price`, {
+                        required: true,
+                        onChange: (evt) => {
+                          setValue(
+                            `items.${index}.total`,
+                            evt.target.value *
+                              getValues(`items.${index}.quantity`)
+                          );
+                          setProject({
+                            ...project,
+                            price: evt.target.value,
+                            total:
                               evt.target.value *
-                                getValues(`items.${index}.price`)
-                            );
-                            setProject({
-                              ...project,
-                              quantity: evt.target.value,
-                              total:
-                                evt.target.value *
-                                getValues(`items.${index}.price`),
-                            });
-                            setValue("total", calculateTotal());
-                          },
-                          onBlur: () => {
-                            setValue("total", calculateTotal());
-                          },
-                        })}
-                      />
-                    </div>
+                              getValues(`items.${index}.quantity`),
+                          });
+                          setValue("total", calculateTotal());
+                        },
+                        onBlur: () => {
+                          setValue("total", calculateTotal());
+                        },
+                      })}
+                    />
+                  </div>
 
-                    {/* PRICE DETAILS */}
-                    <div className={`price-line calculate-line-container`}>
-                      <label className="label" htmlFor={`price`}>
-                        Price
-                      </label>
-                      <input
-                        type="number"
-                        step={0.01}
-                        id={`price`}
-                        className={`price input calculate-line`}
-                        placeholder={"200.00"}
-                        {...register(`items.${index}.price`, {
-                          required: true,
-                          onChange: (evt) => {
-                            setValue(
-                              `items.${index}.total`,
-                              evt.target.value *
-                                getValues(`items.${index}.quantity`)
-                            );
-                            setProject({
-                              ...project,
-                              price: evt.target.value,
-                              total:
-                                evt.target.value *
-                                getValues(`items.${index}.quantity`),
-                            });
-                            setValue("total", calculateTotal());
-                          },
-                          onBlur: () => {
-                            setValue("total", calculateTotal());
-                          },
-                        })}
-                      />
-                    </div>
+                  {/* PROJECT TOTAL DETAILS */}
+                  <div className={`item-total-line calculate-line-container`}>
+                    <label className="label" htmlFor={`item-total`}>
+                      Total
+                    </label>
+                    <input
+                      type="number"
+                      id={`item-total`}
+                      className={`item-total input calculate-line`}
+                      placeholder={"200.00"}
+                      readOnly={true}
+                      {...register(`items.${index}.total`, {
+                        required: true,
+                      })}
+                    />
+                  </div>
 
-                    {/* PROJECT TOTAL DETAILS */}
-                    <div className={`item-total-line calculate-line-container`}>
-                      <label className="label" htmlFor={`item-total`}>
-                        Total
-                      </label>
-                      <input
-                        type="number"
-                        id={`item-total`}
-                        className={`item-total input calculate-line`}
-                        placeholder={"200.00"}
-                        readOnly={true}
-                        {...register(`items.${index}.total`, {
-                          required: true,
-                        })}
+                  {/* DELETE PROJECT */}
+                  <div className="container-delete calculate-line-container">
+                    <button
+                      className="btn btn-delete calculate-line"
+                      aria-label="delete product"
+                      onClick={(evt) =>
+                        deleteProjectDialog(evt, invoice.items[index].name)
+                      }
+                    >
+                      <img
+                        src={DeleteBtn}
+                        alt=""
+                        aria-hidden={true}
+                        width={"13px"}
+                        height={"16px"}
                       />
-                    </div>
-
-                    {/* DELETE PROJECT */}
-                    <div className="container-delete calculate-line-container">
-                      <button
-                        className="btn btn-delete calculate-line"
-                        aria-label="delete product"
-                        onClick={(evt) =>
-                          deleteProjectDialog(evt, invoice.items[index].name)
-                        }
-                      >
-                        <img
-                          src={DeleteBtn}
-                          alt=""
-                          aria-hidden={true}
-                          width={"13px"}
-                          height={"16px"}
-                        />
-                      </button>
-                    </div>
+                    </button>
                   </div>
                 </div>
-              )
-            )}
+              </div>
+            ))}
             <button
               className="btn btn-add-item"
               disabled={!isDirty || !isValid}
