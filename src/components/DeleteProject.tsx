@@ -16,7 +16,7 @@ function DeleteProject(props: {
 
     if (props.showDialog) {
       dialogNode?.showModal();
-      linkRef.current?.focus();
+      // linkRef.current?.focus();
     } else {
       dialogNode?.close();
     }

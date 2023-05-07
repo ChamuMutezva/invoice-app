@@ -507,7 +507,7 @@ function NewInvoice() {
               </div>
 
               {/* PAYMENT DETAILS */}
-              <div className="form-input-wrapper">
+              <div className="form-input-wrapper select-container">
                 <label
                   className={`label ${
                     errors.paymentTerms ? "form-errors" : ""
@@ -517,7 +517,7 @@ function NewInvoice() {
                   Payment terms
                 </label>
                 <select
-                  className="input terms-options"
+                  className="input select"
                   id="terms"
                   aria-labelledby="terms-lbl"
                   aria-invalid={errors.paymentTerms ? "true" : "false"}

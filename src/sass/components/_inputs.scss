@@ -1,0 +1,21 @@
+@use 'sass:color';
+@use '../base';
+@use '../utils';
+
+input[type="date"]::-webkit-calendar-picker-indicator {   
+    opacity: 0;
+    display: block;
+}
+
+input[type="date"] {
+    position: relative;
+    &::before {
+        content: url("./../assets/icon-calendar.svg");
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+    }
+}

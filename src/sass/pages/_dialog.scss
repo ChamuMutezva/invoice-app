@@ -17,8 +17,10 @@
     gap: base.$spacer1 * 1.5;
     padding: calc(base.$spacer1 * 1.5);
     border-radius: 8px;
-    max-width: 30rem;
-
+    max-width: 30rem;   
+    &:focus-within {
+        border: 5px dotted base.$clr-blue-200;
+    } 
 }
 
 .button-container {
