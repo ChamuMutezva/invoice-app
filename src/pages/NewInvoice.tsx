@@ -163,8 +163,12 @@ function NewInvoice() {
                 {...register("senderAddress.street", {
                   required: "Street address is required",
                   minLength: {
-                    value: 4,
-                    message: "Length must be more than 4",
+                    value: 3,
+                    message: "Street must have at least 3 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Street must have at most 40 characters",
                   },
                 })}
               />
@@ -196,8 +200,12 @@ function NewInvoice() {
                   {...register("senderAddress.city", {
                     required: "City is required",
                     minLength: {
-                      value: 4,
-                      message: "Length must be more than 4",
+                      value: 3,
+                      message: "City must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "City must have at most 40 characters",
                     },
                   })}
                 />
@@ -231,7 +239,11 @@ function NewInvoice() {
                     required: "Enter postal code",
                     minLength: {
                       value: 4,
-                      message: "Length must be more than 4",
+                      message: "Postal code must have at least 4 characters",
+                    },
+                    maxLength: {
+                      value: 10,
+                      message: "Postal code must have at most 10 characters",
                     },
                   })}
                 />
@@ -264,8 +276,12 @@ function NewInvoice() {
                   {...register("senderAddress.country", {
                     required: "Country is required",
                     minLength: {
-                      value: 4,
-                      message: "Length must be more than 4",
+                      value: 3,
+                      message: "Country must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "Country must have at most 40 characters",
                     },
                   })}
                 />
@@ -300,7 +316,11 @@ function NewInvoice() {
                   required: "Client name is required",
                   minLength: {
                     value: 1,
-                    message: "Length must be more than 1",
+                    message: "Name must have at least 1 character",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Name must have at most 40 characters",
                   },
                 })}
               />
@@ -329,8 +349,12 @@ function NewInvoice() {
                 {...register("clientEmail", {
                   required: "Enter valid email",
                   minLength: {
-                    value: 4,
-                    message: "Length must be more than 4",
+                    value: 5,
+                    message: "Email must have at least 5 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Email must have at most 40 characters",
                   },
                 })}
               />
@@ -361,8 +385,12 @@ function NewInvoice() {
                 {...register("clientAddress.street", {
                   required: "Client street is required",
                   minLength: {
-                    value: 4,
-                    message: "Length must be more than 4",
+                    value: 3,
+                    message: "Street must have at least 3 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Street must have at most 40 characters",
                   },
                 })}
               />
@@ -394,8 +422,12 @@ function NewInvoice() {
                   {...register("clientAddress.city", {
                     required: "Client city is required",
                     minLength: {
-                      value: 4,
-                      message: "Length must be more than 4",
+                      value: 3,
+                      message: "City must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "City must have at most 40 characters",
                     },
                   })}
                 />
@@ -428,7 +460,11 @@ function NewInvoice() {
                     required: "Postal code is required",
                     minLength: {
                       value: 4,
-                      message: "Length must be more than 4",
+                      message: "Postal code must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 10,
+                      message: "Postal code must have at most 10 characters",
                     },
                   })}
                 />
@@ -465,8 +501,12 @@ function NewInvoice() {
                   {...register("clientAddress.country", {
                     required: "Client country is required",
                     minLength: {
-                      value: 4,
-                      message: "Length must be more than 4",
+                      value: 3,
+                      message: "Country must have at least 3 characters",
+                    },
+                    maxLength: {
+                      value: 40,
+                      message: "Country must have at most 40 characters",
                     },
                   })}
                 />
@@ -575,7 +615,11 @@ function NewInvoice() {
                   required: "Project description required",
                   minLength: {
                     value: 4,
-                    message: "Length must be more than 4",
+                    message: "Description should have at least 4 characters",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Description should have at most 40 characters",
                   },
                 })}
               />

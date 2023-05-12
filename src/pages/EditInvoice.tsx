@@ -12,6 +12,7 @@ import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
+import CustomInput from "../components/CustomInput";
 
 function EditInvoice() {
   const projectInit: ICosting = {
@@ -75,6 +76,7 @@ function EditInvoice() {
   // load form with initialstate
   const {
     register,
+    control,
     handleSubmit,
     watch,
     setValue,
@@ -184,77 +186,43 @@ function EditInvoice() {
             <legend className="edit-field-title">Bill From</legend>
 
             {/* SENDER STREET DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${
-                  errors.senderAddress?.street ? "form-errors" : ""
-                }`}
-                htmlFor={`street`}
-              >
-                Street Address
-              </label>
-              <input
-                type="text"
-                id={`street`}
-                aria-labelledby="sender-street"
-                className={`input street`}
-                placeholder={`116 Caledorn street`}
-                aria-invalid={errors.senderAddress?.street ? "true" : false}
-                {...register("senderAddress.street", {
-                  required: "Street address is required",
-                  minLength: {
-                    value: 3,
-                    message: "Street must have at least 3 characters",
-                  },
-                  maxLength: {
-                    value: 40,
-                    message: "Street must have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.senderAddress?.street && (
-                <p role="alert" id="sender-street" className="form-errors">
-                  {errors.senderAddress.street.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="text"
+              name="senderAddress.street"
+              labelText="Sender street"
+              control={control}
+              rules={{
+                required: "Street is required",
+                minLength: {
+                  value: 3,
+                  message: "Street must be greater than 3",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Street must be less than 40",
+                },
+              }}
+            />
 
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${
-                    errors.senderAddress?.city ? "form-errors" : ""
-                  }`}
-                  htmlFor={`city`}
-                >
-                  City
-                </label>
-                <input
-                  type="text"
-                  id={`city`}
-                  aria-labelledby="sender-city"
-                  className={`input city`}
-                  placeholder={`Uitenhage`}
-                  aria-invalid={errors.senderAddress?.city ? "true" : "false"}
-                  {...register("senderAddress.city", {
-                    required: "City is required",
-                    minLength: {
-                      value: 3,
-                      message: "City must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "City must have at most 40 characters",
-                    },
-                  })}
-                />
-                {errors.senderAddress?.city && (
-                  <p role="alert" id="sender-city" className="form-errors">
-                    {errors.senderAddress.city.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="senderAddress.city"
+                labelText="Sender city"
+                control={control}
+                rules={{
+                  required: "City is required",
+                  minLength: {
+                    value: 3,
+                    message: "City must be greater than 3",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "City must be less than 40",
+                  },
+                }}
+              />
 
               {/* SENDER POSTAL CODE DETAILS */}
               <div className={`form-input-wrapper`}>
