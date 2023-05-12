@@ -1,8 +1,8 @@
 export interface InvoiceTypes {
   _id: any;
   id: string;
-  createdAt: Date;
-  paymentDue: Date;
+  createdAt: string;
+  paymentDue: string;
   description: string;
   paymentTerms: any;
   clientEmail: string;
