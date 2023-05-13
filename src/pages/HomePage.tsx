@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
+import { currencyFormatter } from "../hooks/useFormatter";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
@@ -44,15 +45,6 @@ function HomePage() {
       </div>
     );
   };
-
-  // Create our number formatter.
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    // These options are needed to round to whole numbers if that's what you want.
-    // minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-    // maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  });
 
   // the onchange triggers the backend to apply filters through the dependency used in
   // the queryKey of the useGetInvoices hook. High five to React Query
@@ -168,7 +160,7 @@ function HomePage() {
 
                     <p className="amount-total">
                       <span className="sr-only">total amount to be paid</span>
-                      {formatter.format(invoice.total)}
+                      {currencyFormatter.format(invoice.total)}
                     </p>
 
                     <p

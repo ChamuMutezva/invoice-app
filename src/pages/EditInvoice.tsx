@@ -30,13 +30,7 @@ function EditInvoice() {
   const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(projectInit);
-  const params = useParams();
-
-  // Create our number formatter.
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  const params = useParams();  
 
   // Fetch an invoice
   const { data } = useGetSingleInvoice(params.id);
@@ -131,7 +125,7 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     evt.preventDefault();
-    console.log(projectName)
+    console.log(projectName);
     updateInvoiceMutation.mutate({
       ...data,
       items: invoice.items.filter(
@@ -203,7 +197,7 @@ function EditInvoice() {
     const invoice = {
       ...data,
     };
-
+    console.log(invoice);
     updateInvoiceMutation.mutate(invoice);
     setShowConfirmSave(true);
   };
@@ -530,7 +524,7 @@ function EditInvoice() {
                               evt.target.value *
                               getValues(`items.${index}.price`),
                           });
-                          // setValue("total", calculateTotal());
+                          setValue("total", calculateTotal());
                         },
                         onBlur: () => {
                           setValue("total", calculateTotal());
@@ -565,7 +559,7 @@ function EditInvoice() {
                               evt.target.value *
                               getValues(`items.${index}.quantity`),
                           });
-                          // setValue("total", calculateTotal());
+                          setValue("total", calculateTotal());
                         },
                         onBlur: () => {
                           setValue("total", calculateTotal());

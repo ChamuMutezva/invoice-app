@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
 import format from "date-fns/format";
+import { currencyFormatter } from "../hooks/useFormatter";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/useReducer";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
@@ -61,12 +62,7 @@ function ViewInvoice() {
   const totalArray = data.items.map((item: { total: any }) => item.total);
   const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 
-  // Create our number formatter.
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
+  
   function handleClick() {
     console.log(data.status);
     if (data.status !== "paid") {
@@ -189,20 +185,20 @@ function ViewInvoice() {
                       <p className="item-sold">
                         {item.quantity}{" "}
                         <span className="tablet-hidden">
-                          x {formatter.format(item.price)}{" "}
+                          x {currencyFormatter.format(item.price)}{" "}
                         </span>
                       </p>
                     </div>
                     <div className="mobile-hidden item-price">
                       <h3 className="price-heading">Price</h3>
                       <p className="unit-price">
-                        {formatter.format(item.price)}
+                        {currencyFormatter.format(item.price)}
                       </p>
                     </div>
                     <div className="total">
                       <h3 className="mobile-hidden total-heading">Total</h3>
                       <p className="gross-total">
-                        {formatter.format(item.total)}
+                        {currencyFormatter.format(item.total)}
                       </p>
                     </div>
                   </div>
@@ -212,7 +208,7 @@ function ViewInvoice() {
           </section>
           <div className="grand-total-container">
             <h3 className="grand-total-title">Grand Total</h3>
-            <p className="grand-total">{formatter.format(grandTotal)}</p>
+            <p className="grand-total">{currencyFormatter.format(grandTotal)}</p>
           </div>
         </section>
       </div>
