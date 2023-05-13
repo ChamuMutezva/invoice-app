@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
+import format from "date-fns/format";
 import PreviousPage from "../components/PreviousPage";
 import { randomId } from "../hooks/useRandomID";
 import createInvoice from "../hooks/useCreateInvoice";
@@ -11,6 +12,9 @@ import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting } from "../Types/DataTypes";
 import { Inputs } from "../components/Inputs";
+import { selectOption } from "../hooks/useSelectOption";
+import CustomInput from "../components/CustomInput";
+import CustomSelect from "../components/CustomSelect";
 // import { InvoiceTypes } from "../Types/DataTypes";
 
 function NewInvoice() {
@@ -28,12 +32,13 @@ function NewInvoice() {
   const [showDialog, setShowDialog] = useState(false);
 
   // load initial form data on first visit to site
+  // format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
   const initialState = {
     id: randomId(),
-    createdAt: new Date().toJSON().slice(0, 10),
-    paymentDue: add(Date.now(), { days: 1 }),
+    createdAt: format(new Date(), "yyyy-MM-dd"),
+    paymentDue: format(add(Date.now(), { days: 1 }), "yyyy-MM-dd"),
     description: "",
-    paymentTerms: "Net 6 days",
+    paymentTerms: "Net 1 days",
     clientEmail: "ckmutezva@gmail.com",
     clientName: "Chamu Mutezva",
     status: "draft",
@@ -82,14 +87,19 @@ function NewInvoice() {
 
   // calculate the paymentDue date, when the payment options has been selected
   // using the add function provided by "date-fns"
+  /*
   const onTermsChange = (numOfDays: number) => {
     console.log(numOfDays);
-    setValue("paymentDue", add(Date.now(), { days: numOfDays }));
-  };
+    setValue(
+      "paymentDue",
+      format(add(Date.now(), { days: numOfDays }), "yyyy-MM-dd")
+    );
+  };*/
 
   // load form with initialstate
   const {
     register,
+    control,
     handleSubmit,
     watch,
     setValue,
@@ -119,7 +129,43 @@ function NewInvoice() {
   }
 
   const watchTotal = watch(["items", "total"]);
+  const payment = watch("paymentTerms");
   console.log(watchTotal);
+  useEffect(() => {
+    // update the days when payment terms have been selected
+    switch (payment) {
+      case "1":
+        setValue(
+          "paymentDue",
+          format(add(Date.now(), { days: 1 }), "yyyy-MM-dd")
+        );
+        break;
+      case "6":
+        setValue(
+          "paymentDue",
+          format(add(Date.now(), { days: 6 }), "yyyy-MM-dd")
+        );
+        break;
+      case "7":
+        setValue(
+          "paymentDue",
+          format(add(Date.now(), { days: 7 }), "yyyy-MM-dd")
+        );
+        break;
+      case "14":
+        setValue(
+          "paymentDue",
+          format(add(Date.now(), { days: 14 }), "yyyy-MM-dd")
+        );
+        break;
+      default:
+        setValue(
+          "paymentDue",
+          format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
+        );
+    }
+    console.log(payment);
+  }, [payment]);
 
   useEffect(() => {
     if (showDialog) {
@@ -144,153 +190,78 @@ function NewInvoice() {
           <fieldset className="edit-invoice-details">
             <legend className="edit-field-title">Bill From</legend>
             {/* SENDER STREET DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${
-                  errors.senderAddress?.street ? "form-errors" : ""
-                }`}
-                htmlFor={`street`}
-              >
-                Street Address
-              </label>
-              <input
-                type="text"
-                id={`street`}
-                aria-labelledby="sender-street"
-                className={`input street`}
-                placeholder={`116 Caledorn street`}
-                aria-invalid={errors.senderAddress?.street ? "true" : false}
-                {...register("senderAddress.street", {
-                  required: "Street address is required",
-                  minLength: {
-                    value: 3,
-                    message: "Street must have at least 3 characters",
-                  },
-                  maxLength: {
-                    value: 40,
-                    message: "Street must have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.senderAddress?.street && (
-                <p role="alert" id="sender-street" className="form-errors">
-                  {errors.senderAddress.street.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="text"
+              name="senderAddress.street"
+              labelText="Sender street"
+              control={control}
+              rules={{
+                required: "Street is required",
+                minLength: {
+                  value: 3,
+                  message: "Street must be greater than 3",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Street must be less than 40",
+                },
+              }}
+            />
 
             {/* SENDER CITY DETAILS */}
             <div className="grid postal-city">
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${
-                    errors.senderAddress?.city ? "form-errors" : ""
-                  }`}
-                  htmlFor={`city`}
-                >
-                  City
-                </label>
-                <input
-                  type="text"
-                  id={`city`}
-                  aria-labelledby="sender-city"
-                  className={`input city`}
-                  placeholder={`Uitenhage`}
-                  aria-invalid={errors.senderAddress?.city ? "true" : "false"}
-                  {...register("senderAddress.city", {
-                    required: "City is required",
-                    minLength: {
-                      value: 3,
-                      message: "City must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "City must have at most 40 characters",
-                    },
-                  })}
-                />
-                {errors.senderAddress?.city && (
-                  <p role="alert" id="sender-city" className="form-errors">
-                    {errors.senderAddress.city.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="senderAddress.city"
+                labelText="Sender city"
+                control={control}
+                rules={{
+                  required: "City is required",
+                  minLength: {
+                    value: 3,
+                    message: "City must be greater than 3",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "City must be less than 40",
+                  },
+                }}
+              />
 
               {/* SENDER POSTAL CODE DETAILS */}
-              <div className={`form-input-wrapper `}>
-                <label
-                  className={`label ${
-                    errors.senderAddress?.postCode ? "form-errors" : ""
-                  }`}
-                  htmlFor={`postal`}
-                >
-                  Postal code
-                </label>
-                <input
-                  type="text"
-                  id={`postal`}
-                  className={`input postal`}
-                  aria-labelledby="sender-postal"
-                  placeholder={`6229`}
-                  aria-invalid={
-                    errors.senderAddress?.postCode ? "true" : "false"
-                  }
-                  {...register("senderAddress.postCode", {
-                    required: "Enter postal code",
-                    minLength: {
-                      value: 4,
-                      message: "Postal code must have at least 4 characters",
-                    },
-                    maxLength: {
-                      value: 10,
-                      message: "Postal code must have at most 10 characters",
-                    },
-                  })}
-                />
-                {errors.senderAddress?.postCode && (
-                  <p role="alert" id="sender-postal" className="form-errors">
-                    {errors.senderAddress.postCode.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="senderAddress.postCode"
+                labelText="Sender postcode"
+                control={control}
+                rules={{
+                  required: "postal code is required",
+                  minLength: {
+                    value: 4,
+                    message: "Postal code must be greater than 4",
+                  },
+                  maxLength: {
+                    value: 8,
+                    message: "Postal code  must be less than 8",
+                  },
+                }}
+              />
 
               {/* SENDER COUNTRY DETAILS */}
-              <div className={`form-input-wrapper `}>
-                <label
-                  className={`label ${
-                    errors.senderAddress?.country ? "form-errors" : ""
-                  }`}
-                  htmlFor={`country`}
-                >
-                  Country
-                </label>
-                <input
-                  type="text"
-                  id={`country`}
-                  className={`input country`}
-                  placeholder={`South Africa`}
-                  aria-labelledby="sender-country"
-                  aria-invalid={
-                    errors.senderAddress?.country ? "true" : "false"
-                  }
-                  {...register("senderAddress.country", {
-                    required: "Country is required",
-                    minLength: {
-                      value: 3,
-                      message: "Country must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "Country must have at most 40 characters",
-                    },
-                  })}
-                />
-                {errors.senderAddress?.country && (
-                  <p role="alert" id="sender-country" className="form-errors">
-                    {errors.senderAddress.country.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="senderAddress.country"
+                labelText="Sender country"
+                control={control}
+                rules={{
+                  required: "country is required",
+                  minLength: { value: 4, message: "must be greater than 4" },
+                  maxLength: {
+                    value: 40,
+                    message: "Postal code  must be less than 40",
+                  },
+                }}
+              />
             </div>
           </fieldset>
           {/* CLIENT DETAILS */}
@@ -298,337 +269,172 @@ function NewInvoice() {
             <legend className="edit-field-title">Bill to</legend>
 
             {/* CLIENT NAME DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${errors.clientName ? "form-errors" : ""}`}
-                htmlFor={`client`}
-              >
-                Client name
-              </label>
-              <input
-                type="text"
-                id={`client`}
-                className={`input`}
-                placeholder={`Chamu mutezva`}
-                aria-labelledby="client-name-lbl"
-                aria-invalid={errors.clientName ? "true" : "false"}
-                {...register("clientName", {
-                  required: "Client name is required",
-                  minLength: {
-                    value: 1,
-                    message: "Name must have at least 1 character",
-                  },
-                  maxLength: {
-                    value: 40,
-                    message: "Name must have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.clientName && (
-                <p role="alert" id="client-name-lbl" className="form-errors">
-                  {errors.clientName.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="text"
+              name="clientName"
+              labelText="Client name"
+              control={control}
+              rules={{
+                required: "Client name is required",
+                minLength: {
+                  value: 3,
+                  message: "Client name must be greater than 3",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Client name must be less than 40",
+                },
+              }}
+            />
 
             {/* CLIENT EMAIL DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${errors.clientEmail ? "form-errors" : ""}`}
-                htmlFor={`email`}
-              >
-                Client email
-              </label>
-              <input
-                type="text"
-                id={`email`}
-                className={`input email-address`}
-                placeholder={`mutezva@gmail.com`}
-                aria-labelledby="client-email-lbl"
-                aria-invalid={errors.clientEmail ? "true" : "false"}
-                {...register("clientEmail", {
-                  required: "Enter valid email",
-                  minLength: {
-                    value: 5,
-                    message: "Email must have at least 5 characters",
-                  },
-                  maxLength: {
-                    value: 40,
-                    message: "Email must have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.clientEmail && (
-                <p role="alert" id="client-email-lbl" className="form-errors">
-                  {errors.clientEmail.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="email"
+              name="clientEmail"
+              labelText="Client email"
+              control={control}
+              rules={{
+                required: "Email is required",
+                minLength: {
+                  value: 3,
+                  message: "Client email must be greater than 3",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Client email must be less than 40",
+                },
+              }}
+            />
 
             {/* CLIENT STREET DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${
-                  errors.clientAddress?.street ? "form-errors" : ""
-                }`}
-                htmlFor={`client-street`}
-              >
-                street name
-              </label>
-              <input
-                type="text"
-                id={`client-street`}
-                className={`input street`}
-                placeholder="19 Receiver street"
-                aria-labelledby="client-street-lbl"
-                aria-invalid={errors.clientAddress?.street ? "true" : "false"}
-                {...register("clientAddress.street", {
-                  required: "Client street is required",
-                  minLength: {
-                    value: 3,
-                    message: "Street must have at least 3 characters",
-                  },
-                  maxLength: {
-                    value: 40,
-                    message: "Street must have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.clientAddress?.street && (
-                <p role="alert" id="client-street-lbl" className="form-errors">
-                  {errors.clientAddress.street.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="text"
+              name="clientAddress.street"
+              labelText="Client street"
+              control={control}
+              rules={{
+                required: "Street is required",
+                minLength: {
+                  value: 3,
+                  message: "Street must be greater than 3",
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Street must be less than 40",
+                },
+              }}
+            />
 
             <div className="grid postal-city">
               {/* CLIENT CITY DETAILS */}
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${
-                    errors.clientAddress?.city ? "form-errors" : ""
-                  }`}
-                  htmlFor={`client-city`}
-                >
-                  City
-                </label>
-                <input
-                  type="text"
-                  id={`client-city`}
-                  className={`input city`}
-                  placeholder={`London`}
-                  aria-labelledby="client-city-lbl"
-                  aria-invalid={errors.clientAddress?.city ? "true" : "false"}
-                  {...register("clientAddress.city", {
-                    required: "Client city is required",
-                    minLength: {
-                      value: 3,
-                      message: "City must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "City must have at most 40 characters",
-                    },
-                  })}
-                />
-                {errors.clientAddress?.city && (
-                  <p role="alert" id="client-city-lbl" className="form-errors">
-                    {errors.clientAddress.city.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="clientAddress.city"
+                labelText="client city"
+                control={control}
+                rules={{
+                  required: "City is required",
+                  minLength: {
+                    value: 3,
+                    message: "City must be greater than 3",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "City must be less than 40",
+                  },
+                }}
+              />
+
               {/* CLIENT POSTAL DETAILS */}
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${
-                    errors.clientAddress?.postCode ? "form-errors" : ""
-                  }`}
-                  htmlFor={`client-postal`}
-                >
-                  Postal code
-                </label>
-                <input
-                  type="text"
-                  id={`client-postal`}
-                  className={`input postal`}
-                  placeholder={`AE123`}
-                  aria-labelledby="client-postal-lbl"
-                  aria-invalid={
-                    errors.clientAddress?.postCode ? "true" : "false"
-                  }
-                  {...register("clientAddress.postCode", {
-                    required: "Postal code is required",
-                    minLength: {
-                      value: 4,
-                      message: "Postal code must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 10,
-                      message: "Postal code must have at most 10 characters",
-                    },
-                  })}
-                />
-                {errors.clientAddress?.postCode && (
-                  <p
-                    role="alert"
-                    id="client-postal-lbl"
-                    className="form-errors"
-                  >
-                    {errors.clientAddress.postCode.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="clientAddress.postCode"
+                labelText="Client postal"
+                control={control}
+                rules={{
+                  required: "postal code is required",
+                  minLength: {
+                    value: 4,
+                    message: "Postal code must be greater than 4",
+                  },
+                  maxLength: {
+                    value: 8,
+                    message: "Postal code  must be less than 8",
+                  },
+                }}
+              />
 
               {/* CLIENT COUNTRY DETAILS */}
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${
-                    errors.clientAddress?.country ? "form-errors" : ""
-                  }`}
-                  htmlFor={`country`}
-                >
-                  Country
-                </label>
-                <input
-                  type="text"
-                  id={`country`}
-                  className={`input country`}
-                  placeholder={`South Africa`}
-                  aria-labelledby="client-country-lbl"
-                  aria-invalid={
-                    errors.clientAddress?.country ? "true" : "false"
-                  }
-                  {...register("clientAddress.country", {
-                    required: "Client country is required",
-                    minLength: {
-                      value: 3,
-                      message: "Country must have at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 40,
-                      message: "Country must have at most 40 characters",
-                    },
-                  })}
-                />
-                {errors.clientAddress?.country && (
-                  <p id="client-country-lbl" className="form-errors">
-                    {errors.clientAddress.country.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="text"
+                name="clientAddress.country"
+                labelText="Client country"
+                control={control}
+                rules={{
+                  required: "country is required",
+                  minLength: { value: 4, message: "must be greater than 4" },
+                  maxLength: {
+                    value: 40,
+                    message: "Postal code  must be less than 40",
+                  },
+                }}
+              />
             </div>
           </fieldset>
           {/* INVOICE DETAILS  */}
           <fieldset className="edit-invoice-details">
             <div className="grid">
-              <div className={`form-input-wrapper`}>
-                <label
-                  className={`label ${errors.createdAt ? "form-errors" : ""}`}
-                  htmlFor={`date-created`}
-                >
-                  Invoice date
-                </label>
-                <input
-                  type="date"
-                  id={`date-created`}
-                  className={`input date-created`}
-                  placeholder={""}
-                  aria-labelledby="invoice-date-lbl"
-                  aria-invalid={errors.createdAt ? "true" : "false"}
-                  {...register("createdAt", {
-                    required: "Select a date",
-                  })}
-                />
-                {errors.createdAt && (
-                  <p role="alert" id="invoice-date-lbl" className="form-errors">
-                    {errors.createdAt?.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomInput
+                type="date"
+                name="createdAt"
+                labelText="Invoice Date"
+                control={control}
+                rules={{
+                  required: "Date is required",
+                }}
+              />
 
               {/* PAYMENT DETAILS */}
-              <div className="form-input-wrapper select-container">
-                <label
-                  className={`label ${
-                    errors.paymentTerms ? "form-errors" : ""
-                  }`}
-                  htmlFor="terms"
-                >
-                  Payment terms
-                </label>
-                <select
-                  className="input select"
-                  id="terms"
-                  aria-labelledby="terms-lbl"
-                  aria-invalid={errors.paymentTerms ? "true" : "false"}
-                  {...register("paymentTerms", {
-                    required: "Select payment option",
-                    onChange(evt) {
-                      onTermsChange(evt.target.value);
-                    },
-                  })}
-                >
-                  <option value={1}>Net 1 Day</option>
-                  <option value={6}>Net 6 days</option>
-                  <option value={7}>Net 7 days</option>
-                  <option value={14}>Net 14 Days</option>
-                  <option value={30}>Net 30 Days</option>
-                </select>
-                {errors.paymentTerms && (
-                  <p role="alert" id="terms-lbl" className="form-errors">
-                    {errors.paymentTerms.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <CustomSelect
+                name="paymentTerms"
+                control={control}
+                rules={{ required: "Payment terms are required" }}
+                options={[
+                  { value: 1, label: "Net 1 Day" },
+                  { value: 6, label: "Net 6 days" },
+                  { value: 7, label: "Net 7 days" },
+                  { value: 14, label: "Net 14 days" },
+                  { value: 30, label: "Net 30 days" },
+                ]}
+              />
             </div>
 
             {/* PAYMENT DUE DETAILS */}
-            <div className={`sr-only form-input-wrapper`}>
-              <label className="label" htmlFor={`payment-due`}>
-                Payment due date
-              </label>
-              <input
-                type="text"
-                id={`payment-due`}
-                className={`input payment-due`}
-                readOnly={true}
-                {...register("paymentDue")}
-              />
-            </div>
+            <CustomInput
+              type="date"
+              name="paymentDue"
+              labelText="Due Date"
+              control={control}
+              rules={{
+                required: "Date is required",
+              }}
+            />
 
             {/* PROJECT NAME DETAILS */}
-            <div className={`form-input-wrapper`}>
-              <label
-                className={`label ${errors.description ? "form-errors" : ""}`}
-                htmlFor={`project-desc`}
-              >
-                Project Description
-              </label>
-              <input
-                type="text"
-                id={`project-desc`}
-                className={`input project-desc`}
-                placeholder={"Description"}
-                aria-labelledby="description-lbl"
-                aria-invalid={errors.description ? "true" : "false"}
-                {...register("description", {
-                  required: "Project description required",
-                  minLength: {
-                    value: 4,
-                    message: "Description should have at least 4 characters",
-                  },
-                  maxLength: {
-                    value: 50,
-                    message: "Description should have at most 40 characters",
-                  },
-                })}
-              />
-              {errors.description && (
-                <p role="alert" id="description-lbl" className="form-errors">
-                  {errors.description.message?.toString()}
-                </p>
-              )}
-            </div>
+            <CustomInput
+              type="text"
+              name="description"
+              labelText="Project description"
+              control={control}
+              rules={{
+                required: "Project description is required",
+                minLength: { value: 4, message: "must be greater than 4" },
+                maxLength: {
+                  value: 40,
+                  message: "Project description  must be less than 40",
+                },
+              }}
+            />
           </fieldset>
 
           <fieldset className="edit-invoice-details">
