@@ -11,7 +11,6 @@ import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting, InvoiceTypes, InvoiceTypesID } from "../Types/DataTypes";
-import { Inputs } from "../components/Inputs";
 import { selectOption } from "../hooks/useSelectOption";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
@@ -575,8 +574,8 @@ function NewInvoice() {
                           src={DeleteBtn}
                           alt=""
                           aria-hidden={true}
-                          width={"13px"}
-                          height={"16px"}
+                          width={"13"}
+                          height={"16"}
                         />
                       </button>
                     </div>
@@ -612,8 +611,8 @@ function NewInvoice() {
                 src={AddItemImg}
                 alt=""
                 aria-hidden={true}
-                width={"11px"}
-                height={"11px"}
+                width={"11"}
+                height={"11"}
               />
               Add new Item
             </button>

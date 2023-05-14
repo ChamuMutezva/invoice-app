@@ -592,8 +592,8 @@ function EditInvoice() {
                         src={DeleteBtn}
                         alt=""
                         aria-hidden={true}
-                        width={"13px"}
-                        height={"16px"}
+                        width={"13"}
+                        height={"16"}
                       />
                     </button>
                   </div>
@@ -609,8 +609,8 @@ function EditInvoice() {
                 src={AddItemImg}
                 alt=""
                 aria-hidden={true}
-                width={"11px"}
-                height={"11px"}
+                width={"11"}
+                height={"11"}
               />
               Add new Item
             </button>
