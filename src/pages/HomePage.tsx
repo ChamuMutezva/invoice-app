@@ -66,14 +66,14 @@ function HomePage() {
     if (length === 0) {
       return "No invoices";
     } else if (length === 1) {
-      return `${length} invoice`;
+      return `There is ${length} invoice`;
     } else {
-      return `${length} invoices`;
+      return `There are ${length} total invoices`;
     }
   };
 
   return (
-    <div className="main">
+    <main className="main">
       <h1 className="sr-only">Preprince investments business transactions</h1>
 
       <div className="invoices-list">
@@ -179,7 +179,7 @@ function HomePage() {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
