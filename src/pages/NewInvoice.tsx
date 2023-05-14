@@ -10,7 +10,7 @@ import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
-import { ICosting } from "../Types/DataTypes";
+import { ICosting, InvoiceTypes, InvoiceTypesID } from "../Types/DataTypes";
 import { Inputs } from "../components/Inputs";
 import { selectOption } from "../hooks/useSelectOption";
 import CustomInput from "../components/CustomInput";
@@ -33,7 +33,7 @@ function NewInvoice() {
 
   // load initial form data on first visit to site
   // format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
-  const initialState = {
+  const initialState: InvoiceTypes = {
     id: randomId(),
     createdAt: format(new Date(), "yyyy-MM-dd"),
     paymentDue: format(add(Date.now(), { days: 1 }), "yyyy-MM-dd"),

@@ -11,7 +11,7 @@ function HomePage() {
   let { isLoading, isError, invoices, isSuccess, error } =
     getInvoices(selectedValue);
 
-  console.log(invoices);
+ // console.log(invoices);
 
   if (isLoading) {
     return (

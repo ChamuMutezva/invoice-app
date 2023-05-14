@@ -11,7 +11,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
-import { ICosting, InvoiceTypes } from "../Types/DataTypes";
+import { ICosting, InvoiceTypes, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
@@ -30,7 +30,7 @@ function EditInvoice() {
   const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useState(projectInit);
-  const params = useParams();  
+  const params = useParams();
 
   // Fetch an invoice
   const { data } = useGetSingleInvoice(params.id);
@@ -38,7 +38,7 @@ function EditInvoice() {
 
   // load initial form data on first visit to site
   // format(new Date(invoice.createdAt), "yyyy-MM-dd"),
-  const initialState: InvoiceTypes = {
+  const initialState: InvoiceTypesID = {
     _id: invoice._id,
     id: invoice.id,
     createdAt: format(new Date(invoice.createdAt), "yyyy-MM-dd"),
@@ -115,6 +115,7 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     name: string
   ) => {
+    console.log(name);
     evt.preventDefault();
     setShowDialog(!showDialog);
     setProjectName(name);
@@ -150,12 +151,6 @@ function EditInvoice() {
     addProject();
   };
 
-  // calculate the paymentDue date, when the payment options has been selected
-  // using the add function provided by "date-fns"
-  /* const onTermsChange = (numOfDays: number) => {
-    console.log(numOfDays);
-    setValue("paymentDue", add(Date.now(), { days: numOfDays }));
-  };*/
   useEffect(() => {
     // update the days when payment terms have been selected
     switch (payment) {
@@ -189,11 +184,11 @@ function EditInvoice() {
           format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
         );
     }
-    console.log(payment);
-    console.log(invoice.paymentDue);
+    // console.log(payment);
+    // console.log(invoice.paymentDue);
   }, [payment]);
 
-  const handleSubmitForm = (data: InvoiceTypes) => {
+  const handleSubmitForm = (data: InvoiceTypesID) => {
     const invoice = {
       ...data,
     };

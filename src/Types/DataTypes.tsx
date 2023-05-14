@@ -1,5 +1,4 @@
-export interface InvoiceTypes {
-  _id: any;
+export interface InvoiceTypes { 
   id: string;
   createdAt: string;
   paymentDue: string;
@@ -22,6 +21,10 @@ export interface InvoiceTypes {
     country: string;
   };
   items: ICosting[];
+}
+
+export interface InvoiceTypesID extends InvoiceTypes {
+   _id: any;
 }
 
 export interface ICosting {
