@@ -12,7 +12,7 @@ function Toggle(props: {
         type="button"
         role="switch"
         className="btn btn-theme-control"
-        aria-checked={props.theme}
+        aria-checked={props.theme || true}
         aria-label="toggle dark mode"
         onClick={props.onChange}
       >
@@ -25,8 +25,8 @@ function Toggle(props: {
               src={DarkMode}
               aria-hidden={true}
               alt=""
-              width={"20px"}
-              height={"20px"}
+              width={"20"}
+              height={"20"}
             />
             <img
               className={`theme-img dark-theme-img ${
@@ -35,8 +35,8 @@ function Toggle(props: {
               src={LightMode}
               aria-hidden={true}
               alt=""
-              width={"20px"}
-              height={"20px"}
+              width={"20"}
+              height={"20"}
             />
           </span>
         </span>

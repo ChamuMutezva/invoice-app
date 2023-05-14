@@ -34,8 +34,8 @@ function HomePage() {
           <img
             src={EmptyInvoiceImg}
             alt="no invoices to display"
-            width={"242px"}
-            height={"200px"}
+            width={"242"}
+            height={"200"}
           />
         </div>
         <h2>There is nothing here</h2>
@@ -111,8 +111,8 @@ function HomePage() {
                     src={AddInvoiceImg}
                     alt=""
                     aria-hidden={true}
-                    width={"11px"}
-                    height={"11px"}
+                    width={"11"}
+                    height={"11"}
                   />
                 </span>
                 <span className="flex btn-label">

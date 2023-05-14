@@ -62,8 +62,8 @@ function App() {
                   src={Logo}
                   alt=""
                   aria-hidden={true}
-                  width={"28px"}
-                  height={"26px"}
+                  width={"28"}
+                  height={"26"}
                 />
                 <span className="sr-only">preprince investments</span>
               </a>
@@ -78,8 +78,8 @@ function App() {
                 src={Profile}
                 alt=""
                 aria-hidden={true}
-                width={"80px"}
-                height={"80px"}
+                width={"80"}
+                height={"80"}
               />
               <span className="sr-only">customer profile</span>
             </a>
