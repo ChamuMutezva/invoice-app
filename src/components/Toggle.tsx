@@ -12,7 +12,7 @@ function Toggle(props: {
         type="button"
         role="switch"
         className="btn btn-theme-control"
-        aria-checked={props.theme || true}
+        aria-checked={props.theme}
         aria-label="toggle dark mode"
         onClick={props.onChange}
       >
