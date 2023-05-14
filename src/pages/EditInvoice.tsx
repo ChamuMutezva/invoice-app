@@ -11,7 +11,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
-import { ICosting, InvoiceTypes, InvoiceTypesID } from "../Types/DataTypes";
+import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
@@ -84,8 +84,7 @@ function EditInvoice() {
   // watch for changes , changes for items to be used to calculate the grandtotal
   const watchTotal = watch(["items", "total"]);
   console.log(watchTotal);
-  const payment = watch("paymentTerms");
-  // const itemsWatch = watch("items");
+  const payment = watch("paymentTerms"); 
   console.log(payment);
   // When a new project has been added or a project has been deleted
   // the grandtotal should be recalculated
@@ -199,7 +198,7 @@ function EditInvoice() {
 
   return (
     <>
-      <main className="main">
+      <main className="main edit-page">
         <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
         <Form
           method="post"

@@ -23,7 +23,7 @@ function Toggle(props: {
                 props.theme ? "hide-theme-img" : ""
               }`}
               src={DarkMode}
-              aria-hidden
+              aria-hidden={true}
               alt=""
               width={"20px"}
               height={"20px"}
@@ -33,7 +33,7 @@ function Toggle(props: {
                 props.theme ? "" : "hide-theme-img"
               }`}
               src={LightMode}
-              aria-hidden
+              aria-hidden={true}
               alt=""
               width={"20px"}
               height={"20px"}
