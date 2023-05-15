@@ -10,12 +10,13 @@ import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 import EditInvoice from "./EditInvoice";
+import OverLay from "./OverLay";
 
 function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState(false); 
   const { mutate, isLoading: isDeleting } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id);
 
@@ -31,7 +32,7 @@ function ViewInvoice() {
     mutate(data._id);
     setShowDialog(false);
   };
-
+ 
   const getStatus = (status: string) => {
     if (status === "paid") {
       return "paid-status";
@@ -249,7 +250,7 @@ function ViewInvoice() {
           </div>
         </footer>
       </div>
-      {/* EditInvoice here */}
+      {/* EditPage here */}
     </>
   );
 }

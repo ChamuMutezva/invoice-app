@@ -10,11 +10,10 @@ import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
-import { ICosting, InvoiceTypes, InvoiceTypesID } from "../Types/DataTypes";
+import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import { selectOption } from "../hooks/useSelectOption";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
-// import { InvoiceTypes } from "../Types/DataTypes";
 
 function NewInvoice() {
   const projectInit: ICosting = {
@@ -83,17 +82,6 @@ function NewInvoice() {
     setData({ ...data, items: data.items.concat(project) });
     console.log(evt);
   };
-
-  // calculate the paymentDue date, when the payment options has been selected
-  // using the add function provided by "date-fns"
-  /*
-  const onTermsChange = (numOfDays: number) => {
-    console.log(numOfDays);
-    setValue(
-      "paymentDue",
-      format(add(Date.now(), { days: numOfDays }), "yyyy-MM-dd")
-    );
-  };*/
 
   // load form with initialstate
   const {
@@ -254,10 +242,13 @@ function NewInvoice() {
                 control={control}
                 rules={{
                   required: "country is required",
-                  minLength: { value: 4, message: "must be greater than 4" },
+                  minLength: {
+                    value: 4,
+                    message: "Country must be greater than 4",
+                  },
                   maxLength: {
                     value: 40,
-                    message: "Postal code  must be less than 40",
+                    message: "Country must be less than 40",
                   },
                 }}
               />
@@ -371,10 +362,10 @@ function NewInvoice() {
                 control={control}
                 rules={{
                   required: "country is required",
-                  minLength: { value: 4, message: "must be greater than 4" },
+                  minLength: { value: 4, message: "Country must be greater than 4" },
                   maxLength: {
                     value: 40,
-                    message: "Postal code  must be less than 40",
+                    message: "Country must be less than 40",
                   },
                 }}
               />

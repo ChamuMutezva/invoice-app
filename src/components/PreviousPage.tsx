@@ -11,8 +11,8 @@ function PreviousPage(props: { title: string }) {
           src={BackImg}
           alt=""
           aria-hidden={true}
-          width={"7px"}
-          height={"10px"}
+          width={"7"}
+          height={"10"}
         />
         Go back
       </button>

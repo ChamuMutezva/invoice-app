@@ -1,10 +1,6 @@
 import React from "react";
 import { useController } from "react-hook-form";
 
-type FormValues = {
-  name: string;
-};
-
 type CustomInputProps = {
   name: string;
   control: any;
