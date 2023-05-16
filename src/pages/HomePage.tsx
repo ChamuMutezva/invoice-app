@@ -108,6 +108,7 @@ function HomePage() {
               <Link to={`/newInvoice`} className="btn flex btn-new-invoice">
                 <span className="container-img">
                   <img
+                    className="new-invoice-img"
                     src={AddInvoiceImg}
                     alt=""
                     aria-hidden={true}
