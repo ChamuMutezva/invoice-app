@@ -72,19 +72,20 @@
 }
 
 .btn-label {
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
     gap: 0;
 }
 
 .btn-return {
-    gap: calc(base.$spacer1 * 1.5);
+    gap: base.$spacer1;
     padding-block: calc(base.$spacer1 / 2);
     padding-inline-end: calc(base.$spacer1 / 2);
     border-radius: 8px;
     border: none;
+    justify-content: center;
     margin-bottom: calc(base.$spacer1 * 2);
     background-color: inherit;
-    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
 
 }
 
@@ -132,7 +133,7 @@
     padding: base.$spacer1 calc(base.$spacer1 * 1.5);
     border-radius: 24px;
     text-decoration: none;
-    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-blue-100, base.$fs-16, 700);
 
     &:hover,
     &:focus {
@@ -146,7 +147,7 @@
     text-decoration: none;
     border: none;
     border-radius: 24px;
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
 
     &:hover,
     &:focus {
@@ -159,7 +160,7 @@
     padding: 1rem;
     border-radius: 24px;
     border: none;
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
 
     &:hover,
     &:focus {

@@ -19,7 +19,7 @@
     border-radius: 8px;
     max-width: 30rem;   
     &:focus-within {
-        border: 5px dotted base.$clr-blue-200;
+        border: 2px solid base.$clr-blue-200;
     } 
 }
 

@@ -63,7 +63,7 @@
 .invoice-date-title,
 .bill-to-title,
 .email-title {
-    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
+    @include utils.fonts(base.$clr-blue-100, base.$fs-16, 500);
     line-height: 1.15;
 }
 
@@ -73,12 +73,12 @@
 .item-descr,
 .email-to,
 .gross-total {
-    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
 }
 
 .footer-view {
     position: absolute;
-    left: 0;    
+    left: 0;
     background-color: base.$clr-white-100;
     padding-block: calc(base.$spacer1 * 3);
     display: flex;
@@ -166,7 +166,7 @@
 }
 
 .grand-total-title {
-    @include utils.fonts(base.$clr-white-100, base.$fs-13, 500);
+    @include utils.fonts(base.$clr-white-100, base.$fs-16, 500);
 }
 
 .dark-mode {

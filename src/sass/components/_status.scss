@@ -3,20 +3,9 @@
 @use '../utils';
 
 .status-label {
-    @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
+    @include utils.fonts(base.$clr-black-600, base.$fs-16, 500);
 }
 
-/*
-.status-type {
-    @include utils.fonts(base.$clr-orange-100, base.$fs-15, 700);
-    opacity: 0.6;
-    border-radius: 6px;
-    text-transform: capitalize;
-    display: block;
-    background-color: lighten(base.$clr-pink-200, 35%);
-    padding: 0.5rem 2rem;
-}
-*/
 .status-container {
     justify-content: space-between;
     flex: 1 1 30%;
@@ -27,6 +16,7 @@
     width: 100%;
     text-transform: capitalize;
     justify-content: center;
+    font-size:  base.$fs-16;
     padding-block: calc(base.$spacer1 * 0.5);
     border-radius: 6px;
     grid-area: 2/2/4/3;
