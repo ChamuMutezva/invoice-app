@@ -1,7 +1,9 @@
-- fix font sizes in homepage
+- fix font sizes in homepage @done
 - delete project logic
 - tablet edit-invoice display 
-- tablet edit-invoice display
+- desktop edit-invoice display
 - new invoice button display size @done
 - increase space between options dropdown
 - text font sizes should be increased in size
+- EditPage - fix calculations when changes has been cancelled. 
+- Homepage - Grid items spacing. Name and dates to have more width @done

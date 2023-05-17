@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
@@ -11,7 +11,6 @@ import AddItemImg from "../assets/icon-plus.svg";
 import { reducer } from "../hooks/useReducer";
 import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting, InvoiceTypes } from "../Types/DataTypes";
-import { selectOption } from "../hooks/useSelectOption";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 
@@ -91,7 +90,7 @@ function NewInvoice() {
     watch,
     setValue,
     getValues,
-    formState: { errors, isDirty, isValid, touchedFields },
+    formState: { errors, isDirty, isValid },
   } = useForm({ defaultValues: initialState });
   console.log(errors);
 

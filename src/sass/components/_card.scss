@@ -20,7 +20,7 @@
     box-shadow: 0px 10px 10px -10px hsla(231, 38%, 45%, 0.1);
 
     @include utils.mQ(40rem) {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
         padding-inline: calc(base.$spacer1 * 2.5);
         position: relative;
 
@@ -60,6 +60,7 @@
 
 .client-name {
     @include utils.fonts(base.$clr-black-600, base.$fs-16, 500);
+    justify-content: flex-start;
 }
 
 .payment-date {

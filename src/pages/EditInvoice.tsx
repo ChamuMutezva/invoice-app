@@ -84,8 +84,8 @@ function EditInvoice() {
   // watch for changes , changes for items to be used to calculate the grandtotal
   const watchTotal = watch(["items", "total"]);
   console.log(watchTotal);
-  const payment = watch("paymentTerms"); 
-  console.log(payment);
+  const payment = watch("paymentTerms");
+  // console.log(payment);
   // When a new project has been added or a project has been deleted
   // the grandtotal should be recalculated
   function calculateTotal(): number {
@@ -107,6 +107,15 @@ function EditInvoice() {
     });
   };
 
+  // Updates the array of projects ITEM by displaying . The obj has the following
+  // Name of project, quantity, price and total.
+  const addAnotherProject = (
+    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    evt.preventDefault();
+    addProject();
+  };
+
   // Opens the Delete Project dialog with 2 options
   // 1. Option 1 - Cancel delete and return to previous page
   // 2. Option 2 - Delete project and return to previous page
@@ -114,7 +123,7 @@ function EditInvoice() {
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     name: string
   ) => {
-    console.log(name);
+    // console.log(name);
     evt.preventDefault();
     setShowDialog(!showDialog);
     setProjectName(name);
@@ -139,15 +148,6 @@ function EditInvoice() {
 
   const exitWithoutDeletingProject = () => {
     setShowDialog(!showDialog);
-  };
-
-  // Updates the array of projects ITEM by displaying . The obj has the following
-  // Name of project, quantity, price and total.
-  const addAnotherProject = (
-    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    evt.preventDefault();
-    addProject();
   };
 
   useEffect(() => {

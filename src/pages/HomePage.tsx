@@ -8,7 +8,7 @@ import getInvoices from "../hooks/useGetInvoices";
 
 function HomePage() {
   const [selectedValue, setSelectedValue] = useState("all");
-  let { isLoading, isError, invoices, isSuccess, error } =
+  let { isLoading, isError, invoices } =
     getInvoices(selectedValue);
 
   if (isLoading) {
