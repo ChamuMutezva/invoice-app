@@ -838,7 +838,6 @@ span.container-img {
     visibility: visible;
     width: fit-content;
     height: fit-content;
-    padding-left: 0.5rem;
   }
 }
 
@@ -898,6 +897,16 @@ span.container-img {
 .container-invoice {
   background-color: hsl(0, 0%, 100%);
   position: relative;
+}
+
+.project-item-heading {
+  display: grid;
+}
+@media screen and (min-width: 40rem) {
+  .project-item-heading {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 1.5rem 0;
+  }
 }
 
 .invoice-details {
@@ -1007,31 +1016,6 @@ span.container-img {
   }
 }
 
-.item-qty {
-  grid-area: 2/1;
-}
-@media screen and (min-width: 40rem) {
-  .item-qty {
-    grid-area: 1/2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.item-price {
-  grid-area: 2/1;
-  display: flex;
-  justify-content: center;
-}
-@media screen and (min-width: 40rem) {
-  .item-price {
-    grid-area: 1/3;
-    flex-direction: column;
-  }
-}
-
 .total {
   grid-area: 2/2;
 }
@@ -1041,8 +1025,29 @@ span.container-img {
   }
 }
 
+.item-qty {
+  grid-area: 2/1;
+}
+@media screen and (min-width: 40rem) {
+  .item-qty {
+    grid-area: 1/2;
+  }
+}
+
+.unit-price {
+  grid-area: 2/1;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (min-width: 40rem) {
+  .unit-price {
+    grid-area: 1/3;
+    flex-direction: column;
+  }
+}
+
 .unit-price,
-.item-sold {
+.item-qty {
   font-size: 0.9375rem;
   font-weight: 700;
   color: hsl(231, 36%, 63%);

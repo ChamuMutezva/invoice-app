@@ -195,6 +195,12 @@ function ViewInvoice() {
 
               <section className="item-summary">
                 <div className="items">
+                  <div className="project-item-heading mobile-hidden">
+                    <h3 className="mobile-hidden item-title">Item name</h3>
+                    <h3 className="mobile-hidden quantity-title">Qty.</h3>
+                    <h3 className="price-heading">Price</h3>
+                    <h3 className="mobile-hidden total-heading">Total</h3>
+                  </div>
                   {data.items.map(
                     (item: {
                       name: string;
@@ -203,33 +209,22 @@ function ViewInvoice() {
                       total: number;
                     }) => (
                       <div className="item-details" key={item.name}>
-                        <div className="item-name">
-                          <h3 className="mobile-hidden item-title">
-                            Item name
-                          </h3>
-                          <p className="item-descr">{item.name}</p>
-                        </div>
-                        <div className="item-qty">
-                          <h3 className="mobile-hidden quantity-title">Qty.</h3>
-                          <p className="item-sold">
-                            {item.quantity}{" "}
-                            <span className="tablet-hidden">
-                              x {currencyFormatter.format(item.price)}{" "}
-                            </span>
-                          </p>
-                        </div>
-                        <div className="mobile-hidden item-price">
-                          <h3 className="price-heading">Price</h3>
-                          <p className="unit-price">
-                            {currencyFormatter.format(item.price)}
-                          </p>
-                        </div>
-                        <div className="total">
-                          <h3 className="mobile-hidden total-heading">Total</h3>
-                          <p className="gross-total">
-                            {currencyFormatter.format(item.total)}
-                          </p>
-                        </div>
+                        <p className="item-descr">{item.name}</p>
+
+                        <p className="item-qty">
+                          {item.quantity}{" "}
+                          <span className="tablet-hidden">
+                            x {currencyFormatter.format(item.price)}{" "}
+                          </span>
+                        </p>
+
+                        <p className="mobile-hidden unit-price">
+                          {currencyFormatter.format(item.price)}
+                        </p>
+
+                        <p className="total gross-total">
+                          {currencyFormatter.format(item.total)}
+                        </p>
                       </div>
                     )
                   )}
