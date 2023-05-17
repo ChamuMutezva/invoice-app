@@ -20,41 +20,54 @@
 
 .invoice-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     row-gap: calc(base.$spacer1 * 1.5);
     margin-block: calc(base.$spacer1 * 2);
     padding: base.$spacer1;
     border-radius: 8px;
 
-    @include utils.mQ(40rem) {
+    @include utils.mQ(22.5rem) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include utils.mQ(45rem) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         padding: calc(base.$spacer1 * 1.5);
     }
 }
 
 .address-sender {
-    grid-area: 2/1/3/2;
+    @include utils.mQ(22.5rem) {
+        grid-area: 2/1/3/2;
+    }
 
-    @include utils.mQ(40rem) {
+    @include utils.mQ(45rem) {
         grid-area: 1/4/2/5;
     }
 }
 
 .invoice-dates {
-    grid-area: 3/1/4/2;
+    @include utils.mQ(22.5rem) {
+        grid-area: 3/1/4/2;
+    }
+
     display: flex;
     flex-direction: column;
     gap: base.$spacer1;
 }
 
 .bill-to {
-    grid-area: 3/2/3/3;
+    @include utils.mQ(22.5rem) {
+        grid-area: 3/2/3/3;
+    }
 }
 
 .email-address {
-    grid-area: 4/1;
+    @include utils.mQ(22.5rem) {
+        grid-area: 4/1;
+    }
 
-    @include utils.mQ(40rem) {
+    @include utils.mQ(45rem) {
         grid-area: 3/3/4/4;
     }
 }

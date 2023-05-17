@@ -123,24 +123,24 @@ function ViewInvoice() {
                 {/* sender details */}
                 <div className="address-sender">
                   <h3 className="sr-only">Bill from</h3>
-                  <p className="address-sender-details">
-                    <span className="street">
+                  <div className="address-sender-details">
+                    <p className="street">
                       <span className="sr-only">Name of street</span>
                       {data.senderAddress.street}
-                    </span>
-                    <span className="city">
+                    </p>
+                    <p className="city">
                       <span className="sr-only">City name</span>
                       {data.senderAddress.city}
-                    </span>
-                    <span className="postCode">
+                    </p>
+                    <p className="postCode">
                       <span className="sr-only">Postal code</span>
                       {data.senderAddress.postCode}
-                    </span>
-                    <span className="country">
+                    </p>
+                    <p className="country">
                       <span className="sr-only">Country of origin</span>
                       {data.senderAddress.country}
-                    </span>
-                  </p>
+                    </p>
+                  </div>
                 </div>
 
                 {/* Dates */}
@@ -163,24 +163,22 @@ function ViewInvoice() {
                 <div className="bill-to">
                   <h3 className="bill-to-title">Bill to</h3>
                   <p className="billed-name">{data.clientName}</p>
-                  <div className="address-reciever">
-                    <p className="address-reciever-details">
-                      <span className="street">
-                        <span className="sr-only">Street name</span>
-                        {data.clientAddress.street}
-                      </span>
-                      <span className="city">
-                        <span className="sr-only">City name</span>
-                        {data.clientAddress.city}
-                      </span>
-                      <span className="postCode">
-                        <span className="sr-only">Postal code</span>
-                        {data.clientAddress.postCode}
-                      </span>
-                      <span className="country">
-                        <span className="sr-only">Country</span>
-                        {data.clientAddress.country}
-                      </span>
+                  <div className="address-reciever-details">
+                    <p className="street">
+                      <span className="sr-only">Street name</span>
+                      {data.clientAddress.street}
+                    </p>
+                    <p className="city">
+                      <span className="sr-only">City name</span>
+                      {data.clientAddress.city}
+                    </p>
+                    <p className="postCode">
+                      <span className="sr-only">Postal code</span>
+                      {data.clientAddress.postCode}
+                    </p>
+                    <p className="country">
+                      <span className="sr-only">Country</span>
+                      {data.clientAddress.country}
                     </p>
                   </div>
                 </div>
