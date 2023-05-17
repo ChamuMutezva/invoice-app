@@ -197,7 +197,7 @@ function ViewInvoice() {
                 <div className="items">
                   <div className="project-item-heading mobile-hidden">
                     <h3 className="mobile-hidden item-title">Item name</h3>
-                    <h3 className="mobile-hidden quantity-title">Qty.</h3>
+                    <h3 className="mobile-hidden quantity-title">Qty</h3>
                     <h3 className="price-heading">Price</h3>
                     <h3 className="mobile-hidden total-heading">Total</h3>
                   </div>

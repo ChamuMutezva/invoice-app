@@ -19,11 +19,12 @@
 }
 
 .project-item-heading {
+    width: 100%;
     display: grid;
 
     @include utils.mQ(40rem) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        padding: calc(base.$spacer1 * 1.5) 0;
+        padding: calc(base.$spacer1 * 1.5) 0 0;
     }
 }
 

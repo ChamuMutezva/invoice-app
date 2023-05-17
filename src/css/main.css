@@ -900,12 +900,13 @@ span.container-img {
 }
 
 .project-item-heading {
+  width: 100%;
   display: grid;
 }
 @media screen and (min-width: 40rem) {
   .project-item-heading {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 0;
   }
 }
 
