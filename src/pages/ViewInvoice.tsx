@@ -14,7 +14,7 @@ function ViewInvoice() {
   const queryClient = useQueryClient();
   let params = useParams();
   const [deletionError, setDeletionError] = useState(null);
-  const [showDialog, setShowDialog] = useState(false); 
+  const [showDialog, setShowDialog] = useState(false);
   const { mutate } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id);
 
@@ -30,7 +30,7 @@ function ViewInvoice() {
     mutate(data._id);
     setShowDialog(false);
   };
- 
+
   const getStatus = (status: string) => {
     if (status === "paid") {
       return "paid-status";
@@ -122,13 +122,22 @@ function ViewInvoice() {
 
                 {/* sender details */}
                 <div className="address-sender">
+                  <h3 className="sr-only">Bill from</h3>
                   <p className="address-sender-details">
-                    <span className="street">{data.senderAddress.street}</span>
-                    <span className="city">{data.senderAddress.city}</span>
+                    <span className="street">
+                      <span className="sr-only">Name of street</span>
+                      {data.senderAddress.street}
+                    </span>
+                    <span className="city">
+                      <span className="sr-only">City name</span>
+                      {data.senderAddress.city}
+                    </span>
                     <span className="postCode">
+                      <span className="sr-only">Postal code</span>
                       {data.senderAddress.postCode}
                     </span>
                     <span className="country">
+                      <span className="sr-only">Country of origin</span>
                       {data.senderAddress.country}
                     </span>
                   </p>
@@ -157,13 +166,19 @@ function ViewInvoice() {
                   <div className="address-reciever">
                     <p className="address-reciever-details">
                       <span className="street">
+                        <span className="sr-only">Street name</span>
                         {data.clientAddress.street}
                       </span>
-                      <span className="city">{data.clientAddress.city}</span>
+                      <span className="city">
+                        <span className="sr-only">City name</span>
+                        {data.clientAddress.city}
+                      </span>
                       <span className="postCode">
+                        <span className="sr-only">Postal code</span>
                         {data.clientAddress.postCode}
                       </span>
                       <span className="country">
+                        <span className="sr-only">Country</span>
                         {data.clientAddress.country}
                       </span>
                     </p>
@@ -173,7 +188,10 @@ function ViewInvoice() {
                 {/* Email */}
                 <div className="email-address">
                   <h3 className="email-title">Sent to</h3>
-                  <p className="email-to">{data.clientEmail}</p>
+                  <p className="email-to">
+                    <span className="sr-only">email address</span>
+                    {data.clientEmail}
+                  </p>
                 </div>
               </section>
 
