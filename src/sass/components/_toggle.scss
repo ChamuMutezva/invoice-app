@@ -34,7 +34,7 @@
     transition: transform .25s;
 
     @include utils.mQ(64rem) {
-        transform: rotate(280deg);
+        transform: rotate(180deg);
     }
 }
 
@@ -46,6 +46,9 @@
 
 .light-mode {
     .check {
-        transform: translate(10px);
+        transform: rotate(10deg);
+        @include utils.mQ(64rem) {
+            transform: rotate(280deg);
+        }
     }
 }

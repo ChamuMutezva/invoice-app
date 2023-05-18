@@ -22,7 +22,7 @@ function Toggle(props: {
               className={`theme-img light-theme-img ${
                 props.theme ? "hide-theme-img" : ""
               }`}
-              src={DarkMode}
+              src={LightMode}
               aria-hidden={true}
               alt=""
               width={"20"}
@@ -32,7 +32,7 @@ function Toggle(props: {
               className={`theme-img dark-theme-img ${
                 props.theme ? "" : "hide-theme-img"
               }`}
-              src={LightMode}
+              src={DarkMode}
               aria-hidden={true}
               alt=""
               width={"20"}

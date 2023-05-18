@@ -380,7 +380,7 @@ select {
 }
 @media screen and (min-width: 64rem) {
   .check {
-    transform: rotate(280deg);
+    transform: rotate(180deg);
   }
 }
 
@@ -389,7 +389,12 @@ select {
 }
 
 .light-mode .check {
-  transform: translate(10px);
+  transform: rotate(10deg);
+}
+@media screen and (min-width: 64rem) {
+  .light-mode .check {
+    transform: rotate(280deg);
+  }
 }
 
 .cards {
@@ -1033,6 +1038,10 @@ span.container-img {
   .item-qty {
     grid-area: 1/2;
   }
+}
+
+.price-heading {
+  text-align: left;
 }
 
 .unit-price {
