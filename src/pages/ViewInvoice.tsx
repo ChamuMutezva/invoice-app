@@ -80,8 +80,10 @@ function ViewInvoice() {
             title={`Complete invoice details of ${data.clientName}`}
           />
 
-          <div className="main-container">
+          <div className="main-container">            
             <nav className="flex nav-view">
+
+              {/* STATUS PANEL */}
               <div className="flex status-container">
                 <p className="status-label">Status </p>
                 <p className={`flex status ${getStatus(data.status)} `}>
@@ -92,6 +94,8 @@ function ViewInvoice() {
                   {data.status}
                 </p>
               </div>
+
+              {/* BUTTON CONTROLS */}
               <div className="mobile-hidden nav-view-btns ">
                 <Link className="btn btn-edit" to={`/editInvoice/${data._id}`}>
                   Edit
@@ -105,7 +109,7 @@ function ViewInvoice() {
               </div>
             </nav>
             <section className="container container-invoice">
-              <section className="invoice-details">
+              <div className="invoice-details">
                 <h2 className="sr-only">Invoice client details</h2>
 
                 {/* Invoice intro */}
@@ -191,9 +195,11 @@ function ViewInvoice() {
                     {data.clientEmail}
                   </p>
                 </div>
-              </section>
+              </div>
 
-              <section className="item-summary">
+              {/* PROJECT AND SUMMARY OF ITEMS */}
+              <div className="item-summary">
+                
                 <table className="items">
                   <caption className="sr-only">
                     Project Details and costs
@@ -236,7 +242,8 @@ function ViewInvoice() {
                     )}
                   </tbody>
                 </table>
-              </section>
+              </div>
+              
               <div className="grand-total-container">
                 <h3 className="grand-total-title">Grand Total</h3>
                 <p className="grand-total">

@@ -4,6 +4,7 @@
 
 .status-label {
     @include utils.fonts(base.$clr-black-600, base.$fs-16, 500);
+    line-height: 1.25;
 }
 
 .status-container {
@@ -12,17 +13,18 @@
 }
 
 .status {
-    max-width: 10rem;
+    max-width: 6.5rem;
     width: 100%;
     text-transform: capitalize;
     justify-content: center;
-    font-size:  base.$fs-16;
+    font-size: base.$fs-16;
     padding-block: calc(base.$spacer1 * 0.5);
     border-radius: 6px;
     grid-area: 2/2/4/3;
     font-weight: 700;
 
     @include utils.mQ(40rem) {
+        max-width: 10rem;
         flex: 1 1 30%;
         grid-area: 1/5/1/6;
         padding-block: calc(base.$spacer1 * 0.75);

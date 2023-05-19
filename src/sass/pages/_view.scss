@@ -16,6 +16,8 @@
 .container-invoice {
     background-color: base.$clr-white-100;
     position: relative;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;   
 }
 
 .project-item-heading {
@@ -182,6 +184,8 @@
     justify-content: space-between;
     align-items: center;
     padding: calc(base.$spacer1 * 2);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px
 }
 
 .grand-total {
