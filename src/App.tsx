@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
-import EditInvoice from "./pages/EditInvoice";
+// import EditInvoice from "./pages/EditInvoice";
 
 const queryClient = new QueryClient();
 
@@ -30,11 +30,13 @@ function App() {
       path: "/newInvoice",
       element: <NewInvoice />,
     },
+    {/*
     {
       path: "/editInvoice/:id",
       element: <EditInvoice />,
       errorElement: <ErrorPage />,
     },
+  */}
   ]);
   
   const localstorage: boolean = JSON.parse(
