@@ -1,41 +1,63 @@
+@use '../base';
+@use '../utils';
+
 .overlay-bg {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    z-index: 9;
+  background-color: hsla(225, 9%, 9%, 0.75);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.overlay-container {
+  background-color: base.$clr-white-100;
+  position: absolute;
+  top: 72px;
+  right: 0;
+  // bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 10;
+  padding: 30px;
+  width: fit-content;
+
+  @include utils.mQ(40rem) {
+    margin-inline-start: 0;
+    width: 80%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
-  
+
+  @include utils.mQ(64rem) {
+    margin-inline-start: 104px;
+    width: 50%;
+    top: 0;
+    left: -20px;
+  }
+}
+
+.overlay-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.overlay-close:after {
+  display: inline-block;
+}
+
+.overlay-close {
+  border: none;
+  background-color: transparent;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.dark-mode {
   .overlay-container {
-    background-color: white;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    z-index: 10;
-    padding: 30px;
-    width: fit-content;
-    height: fit-content;
+    background-color: base.$clr-black-100;
   }
-  
-  .overlay-controls {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .overlay-close:after {
-    display: inline-block;   
-  }
-  
-  .overlay-close {
-    border: none;
-    background-color: transparent;
-    font-size: 36px;
-    cursor: pointer;
-  }
+}

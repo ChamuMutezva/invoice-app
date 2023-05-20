@@ -661,12 +661,13 @@ input[type=date]::before {
 .header {
   background-color: hsl(231, 20%, 27%);
   align-items: stretch;
+  position: relative;
+  z-index: 100;
 }
 @media screen and (min-width: 64rem) {
   .header {
     position: fixed;
     transform-origin: top left;
-    z-index: 1;
     left: 6.5rem;
     top: 0;
     transform: rotate(90deg);
@@ -1240,16 +1241,10 @@ span.container-img {
 .footer {
   position: absolute;
   left: 0;
-  width: 100vw;
+  width: 100%;
   background-color: hsl(0, 0%, 100%);
   box-shadow: 0px -20px 20px 1px hsl(231, 23%, 61%);
 }
-@media screen and (min-width: 64rem) {
-  .footer {
-    width: calc(100vw - 20px);
-  }
-}
-
 .footer-edit {
   justify-content: flex-end;
   padding: 1.5rem;
@@ -1335,7 +1330,7 @@ span.container-img {
 }
 
 .overlay-bg {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: hsla(225, 9%, 9%, 0.75);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -1346,17 +1341,31 @@ span.container-img {
 }
 
 .overlay-container {
-  background-color: white;
-  position: fixed;
-  top: 0;
+  background-color: hsl(0, 0%, 100%);
+  position: absolute;
+  top: 72px;
   right: 0;
-  bottom: 0;
   left: 0;
   margin: auto;
   z-index: 10;
   padding: 30px;
   width: fit-content;
-  height: fit-content;
+}
+@media screen and (min-width: 40rem) {
+  .overlay-container {
+    margin-inline-start: 0;
+    width: 80%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .overlay-container {
+    margin-inline-start: 104px;
+    width: 50%;
+    top: 0;
+    left: -20px;
+  }
 }
 
 .overlay-controls {
@@ -1374,4 +1383,8 @@ span.container-img {
   background-color: transparent;
   font-size: 36px;
   cursor: pointer;
+}
+
+.dark-mode .overlay-container {
+  background-color: hsl(231, 28%, 7%);
 }

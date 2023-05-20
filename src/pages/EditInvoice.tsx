@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -15,8 +15,12 @@ import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
+import OverLay from "./OverLay";
 
-function EditInvoice() {
+function EditInvoice(props: {
+  isOpen: boolean;
+  toggleOverlay: MouseEventHandler<HTMLButtonElement>;
+}) {
   const projectInit: ICosting = {
     name: "Project Name",
     quantity: 1,
@@ -83,7 +87,7 @@ function EditInvoice() {
 
   // watch for changes , changes for items to be used to calculate the grandtotal
   const watchTotal = watch(["items", "total"]);
-  console.log(watchTotal);
+ // console.log(watchTotal);
   const payment = watch("paymentTerms");
   // console.log(payment);
   // When a new project has been added or a project has been deleted
@@ -92,7 +96,7 @@ function EditInvoice() {
     const totalArray = watchTotal[0].map((item: { total: any }) => item.total);
     const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
     setValue("total", total);
-    return total.toFixed(2);
+    return total;
   }
 
   const addProject = () => {
@@ -194,12 +198,15 @@ function EditInvoice() {
     console.log(invoice);
     updateInvoiceMutation.mutate(invoice);
     setShowConfirmSave(true);
+    props.toggleOverlay
   };
 
   return (
-    <>
+    <OverLay isOpen={props.isOpen} onClose={props.toggleOverlay}>
       <main className="main edit-page">
+        {/*
         <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
+  */}
         <Form
           method="post"
           className="edit-form"
@@ -618,7 +625,7 @@ function EditInvoice() {
 
           <div className="footer flex">
             <div className="flex footer-edit">
-              <button className="btn btn-cancel" onClick={() => navigate(-1)}>
+              <button className="btn btn-cancel" onClick={props.toggleOverlay}>
                 Cancel
               </button>
               <button className="btn btn-save" type="submit">
@@ -636,7 +643,7 @@ function EditInvoice() {
         name={projectName}
       />
       <SaveEditedPageDialog showConfirmSave={showConfirmSave} />
-    </>
+    </OverLay>
   );
 }
 

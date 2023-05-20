@@ -9,6 +9,8 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
+import OverLay from "./OverLay";
+import EditInvoice from "./EditInvoice";
 
 function ViewInvoice() {
   const queryClient = useQueryClient();
@@ -17,6 +19,12 @@ function ViewInvoice() {
   const [showDialog, setShowDialog] = useState(false);
   const { mutate } = useDeleteInvoice(setDeletionError);
   const { data } = useGetSingleInvoice(params.id);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOverlay = () => {
+    setIsOpen(!isOpen);
+    console.log("div opened")
+  };
 
   const onDelete = () => {
     setShowDialog(true);
@@ -80,9 +88,8 @@ function ViewInvoice() {
             title={`Complete invoice details of ${data.clientName}`}
           />
 
-          <div className="main-container">            
+          <div className="main-container">
             <nav className="flex nav-view">
-
               {/* STATUS PANEL */}
               <div className="flex status-container">
                 <p className="status-label">Status </p>
@@ -97,9 +104,9 @@ function ViewInvoice() {
 
               {/* BUTTON CONTROLS */}
               <div className="mobile-hidden nav-view-btns ">
-                <Link className="btn btn-edit" to={`/editInvoice/${data._id}`}>
+                <button className="btn-edit" onClick={toggleOverlay}>
                   Edit
-                </Link>
+                </button>
                 <button className="btn btn-delete-view" onClick={onDelete}>
                   Delete
                 </button>
@@ -199,7 +206,6 @@ function ViewInvoice() {
 
               {/* PROJECT AND SUMMARY OF ITEMS */}
               <div className="item-summary">
-                
                 <table className="items">
                   <caption className="sr-only">
                     Project Details and costs
@@ -243,7 +249,7 @@ function ViewInvoice() {
                   </tbody>
                 </table>
               </div>
-              
+
               <div className="grand-total-container">
                 <h3 className="grand-total-title">Grand Total</h3>
                 <p className="grand-total">
@@ -261,9 +267,9 @@ function ViewInvoice() {
         </main>
         <footer className="footer-view tablet-hidden">
           <div className="nav-view-btns ">
-            <Link className="btn-edit" to={`/editInvoice/${data._id}`}>
+            <button className="btn-edit" onClick={toggleOverlay}>
               Edit
-            </Link>
+            </button>
             <button className="btn-delete-view" onClick={onDelete}>
               Delete
             </button>
@@ -273,6 +279,9 @@ function ViewInvoice() {
           </div>
         </footer>
       </div>
+
+      <EditInvoice isOpen={isOpen} toggleOverlay={toggleOverlay} />
+
       {/* EditPage here */}
     </>
   );

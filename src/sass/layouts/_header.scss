@@ -4,11 +4,13 @@
 .header {
     background-color: base.$clr-black-500;
     align-items: stretch;
+    position: relative;
+    z-index: 100;
 
     @include utils.mQ(64rem) {
         position: fixed;
         transform-origin: top left;
-        z-index: 1;
+       // z-index: 1;
         left: 6.5rem;
         top: 0;
         transform: rotate(90deg);
@@ -83,7 +85,8 @@
         min-width: 6.5rem;
         min-height: 6.5rem;
         border-radius: 0 20px 0 0;
-        &::before {           
+
+        &::before {
             border-radius: 20px 0 0 0;
         }
     }

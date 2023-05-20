@@ -26,6 +26,7 @@ function OverLay(props: {
             {" "}
           </div>
           <div className="overlay-container">
+            {/*
             <div className="overlay-controls">
               <button
                 type="button"
@@ -35,6 +36,7 @@ function OverLay(props: {
                 Close
               </button>
             </div>
+          */}
             {props.children}
           </div>
         </div>
