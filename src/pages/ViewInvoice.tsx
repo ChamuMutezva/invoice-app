@@ -23,7 +23,7 @@ function ViewInvoice() {
 
   const toggleOverlay = () => {
     setIsOpen(!isOpen);
-    console.log("div opened")
+    console.log("div opened");
   };
 
   const onDelete = () => {
@@ -104,7 +104,7 @@ function ViewInvoice() {
 
               {/* BUTTON CONTROLS */}
               <div className="mobile-hidden nav-view-btns ">
-                <button className="btn-edit" onClick={toggleOverlay}>
+                <button className="btn btn-edit" onClick={toggleOverlay}>
                   Edit
                 </button>
                 <button className="btn btn-delete-view" onClick={onDelete}>
@@ -267,7 +267,7 @@ function ViewInvoice() {
         </main>
         <footer className="footer-view tablet-hidden">
           <div className="nav-view-btns ">
-            <button className="btn-edit" onClick={toggleOverlay}>
+            <button className="btn btn-edit" onClick={toggleOverlay}>
               Edit
             </button>
             <button className="btn-delete-view" onClick={onDelete}>
@@ -279,9 +279,9 @@ function ViewInvoice() {
           </div>
         </footer>
       </div>
-
-      <EditInvoice isOpen={isOpen} toggleOverlay={toggleOverlay} />
-
+      <OverLay isOpen={isOpen} onClose={toggleOverlay}>
+        <EditInvoice isOpen={isOpen} toggleOverlay={toggleOverlay} />
+      </OverLay>
       {/* EditPage here */}
     </>
   );

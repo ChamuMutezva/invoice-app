@@ -49,7 +49,7 @@
 
     &:hover,
     &:focus {
-        outline: dashed currentColor;
+        outline: dashed currentColor 1px;
         outline-offset: -0.5em;
     }
 

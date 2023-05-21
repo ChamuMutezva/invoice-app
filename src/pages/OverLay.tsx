@@ -14,7 +14,7 @@ function OverLay(props: {
     | undefined;
 }) {
   return (
-    <div>
+    <div role="dialog" aria-modal="true">
       {props.isOpen && (
         <div className="overlay">
           <div

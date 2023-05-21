@@ -3,7 +3,7 @@ import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
-import PreviousPage from "../components/PreviousPage";
+// import PreviousPage from "../components/PreviousPage";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
@@ -15,7 +15,7 @@ import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
-import OverLay from "./OverLay";
+// import OverLay from "./OverLay";
 
 function EditInvoice(props: {
   isOpen: boolean;
@@ -29,7 +29,7 @@ function EditInvoice(props: {
   };
 
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(false);
   const [showConfirmSave, setShowConfirmSave] = useState(false);
   const [projectName, setProjectName] = useState("");
@@ -41,7 +41,6 @@ function EditInvoice(props: {
   const invoice = data;
 
   // load initial form data on first visit to site
-  // format(new Date(invoice.createdAt), "yyyy-MM-dd"),
   const initialState: InvoiceTypesID = {
     _id: invoice._id,
     id: invoice.id,
@@ -87,7 +86,7 @@ function EditInvoice(props: {
 
   // watch for changes , changes for items to be used to calculate the grandtotal
   const watchTotal = watch(["items", "total"]);
- // console.log(watchTotal);
+  // console.log(watchTotal);
   const payment = watch("paymentTerms");
   // console.log(payment);
   // When a new project has been added or a project has been deleted
@@ -198,15 +197,12 @@ function EditInvoice(props: {
     console.log(invoice);
     updateInvoiceMutation.mutate(invoice);
     setShowConfirmSave(true);
-    props.toggleOverlay
+    props.toggleOverlay;
   };
 
   return (
-    <OverLay isOpen={props.isOpen} onClose={props.toggleOverlay}>
-      <main className="main edit-page">
-        {/*
-        <PreviousPage title={`Edit the invoice of ${invoice.clientName}`} />
-  */}
+    <>
+      <main className="main edit-page" role="dialog" aria-modal="true">
         <Form
           method="post"
           className="edit-form"
@@ -377,6 +373,7 @@ function EditInvoice(props: {
                   },
                 }}
               />
+
               {/* CLIENT POSTAL DETAILS */}
               <CustomInput
                 type="text"
@@ -643,7 +640,7 @@ function EditInvoice(props: {
         name={projectName}
       />
       <SaveEditedPageDialog showConfirmSave={showConfirmSave} />
-    </OverLay>
+    </>
   );
 }
 
