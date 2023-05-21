@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 function OverLay(props: {
-  isOpen: boolean;
-  onClose: React.MouseEventHandler<HTMLButtonElement>;
-  children:    
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | React.ReactFragment
-    | React.ReactPortal   
+	// isEditOverlayOpen: boolean;
+	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
+	children:
+		| React.ReactElement<any, string | React.JSXElementConstructor<any>>
+		| React.ReactFragment
+		| React.ReactPortal;
 }) {
-  return (
-    <div role="dialog" aria-modal="true">
-      {props.isOpen && (
-        <div className="overlay">
-          <div className="overlay-bg" onClick={() => props.onClose}>
-            {" "}
-          </div>
-          <div className="overlay-container">
-            {/*
+	const dialogRef = useRef<HTMLDivElement>(null);
+	dialogRef.current?.addEventListener("click", () => {
+		return props.toggleOverlay;
+	});
+	return (
+		<div
+			role="dialog"
+			aria-modal="true"
+		>
+			<div className="overlay">
+				<div
+					className="overlay-bg"
+					tabIndex={-1}
+					ref={dialogRef}
+					onClick={() => props.toggleOverlay}
+				>
+					{" "}
+				</div>
+				<div className="overlay-container">
+					{/*
             <div className="overlay-controls">
               <button
                 type="button"
@@ -27,12 +38,11 @@ function OverLay(props: {
               </button>
             </div>
           */}
-            {props.children}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+					{props.children}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default OverLay;

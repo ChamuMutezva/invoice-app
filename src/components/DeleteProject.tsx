@@ -5,26 +5,26 @@ function DeleteProject(props: {
   name: string;
   deleteProjectConfirmation: React.MouseEventHandler<HTMLButtonElement>;
   exitWithoutDeletingProject: React.MouseEventHandler<HTMLButtonElement>;
-  showDialog: boolean;
+  showDeleteProjectDialog: boolean;
 }) {
-  const btnRef = useRef<HTMLButtonElement>(null);
+ // const btnRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const linkRef = useRef<HTMLAnchorElement>(null);
+ // const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const dialogNode = dialogRef.current;
 
-    if (props.showDialog) {
+    if (props.showDeleteProjectDialog) {
       dialogNode?.showModal();
       // linkRef.current?.focus();
     } else {
       dialogNode?.close();
     }
-  }, [props.showDialog]);
+  }, [props.showDeleteProjectDialog]);
   return (
     <dialog
       ref={dialogRef}
-      className={`modal-wrapper ${props.showDialog ? "show-modal" : ""} `}
+      className={`modal-wrapper ${props.showDeleteProjectDialog ? "show-modal" : ""} `}
     >
       <div className="dialog-container">
         <button

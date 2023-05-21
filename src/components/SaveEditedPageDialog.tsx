@@ -15,19 +15,23 @@ function SaveEditedPageDialog(props: { showConfirmSave: boolean }) {
       dialogNode?.close();
     }
   }, [props.showConfirmSave]);
+
   return (
     <dialog
       ref={dialogRef}
       className={`modal-wrapper ${
         props.showConfirmSave ? "show-modal show-dialog" : ""
       }`}
-    >      
+    >
+      {" "}
+      <div className="dialog-container">
         <p id="modal-heading-text" className="modal-text">
           The invoice has been updated!
         </p>
         <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
           Return to Homepage
-        </Link>      
+        </Link>
+      </div>
     </dialog>
   );
 }

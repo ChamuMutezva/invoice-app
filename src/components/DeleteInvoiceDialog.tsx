@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 function DeleteInvoiceDialog(props: {
   invoiceID: string;
-  showDialog: boolean;
+  showDeleteInvoiceDialog: boolean;
   closeDialog: React.MouseEventHandler<HTMLButtonElement>;
   confirmDelete: React.MouseEventHandler<HTMLButtonElement>;
 }) {
@@ -12,18 +12,18 @@ function DeleteInvoiceDialog(props: {
   useEffect(() => {
     const dialogNode = dialogRef.current;
 
-    if (props.showDialog) {
+    if (props.showDeleteInvoiceDialog) {
       dialogNode?.showModal();
       linkRef.current?.focus();
     } else {
       dialogNode?.close();
     }
-  }, [props.showDialog]);
+  }, [props.showDeleteInvoiceDialog]);
   return (
     <dialog
       ref={dialogRef}
       className={`modal-wrapper ${
-        props.showDialog ? "show-modal show-dialog" : ""
+        props.showDeleteInvoiceDialog ? "show-modal show-dialog" : ""
       }`}
     >
       <div className="dialog-container">
