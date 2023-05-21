@@ -70,7 +70,7 @@ function ViewInvoice() {
   const totalArray = data.items.map((item: { total: any }) => item.total);
   const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 
-  function handleClick() {
+  function handleChangeStatus() {
     console.log(data.status);
     if (data.status !== "paid") {
       updateInvoiceMutation.mutate({
@@ -113,9 +113,12 @@ function ViewInvoice() {
                 <button className="btn btn-delete-view" onClick={onDelete}>
                   Delete
                 </button>
-                <button className="btn btn-mark" onClick={handleClick}>
-                  Mark as paid
-                </button>
+
+                {data.status !== "paid" && (
+                  <button className="btn btn-mark" onClick={handleChangeStatus}>
+                    Mark as paid
+                  </button>
+                )}
               </div>
             </nav>
             <section className="container container-invoice">
@@ -278,9 +281,11 @@ function ViewInvoice() {
             <button className="btn-delete-view" onClick={onDelete}>
               Delete
             </button>
-            <button className="btn-mark" onClick={handleClick}>
-              Mark as paid
-            </button>
+            {data.status !== "paid" && (
+              <button className="btn btn-mark" onClick={handleChangeStatus}>
+                Mark as paid
+              </button>
+            )}
           </div>
         </footer>
       </div>
