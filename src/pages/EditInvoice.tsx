@@ -202,7 +202,7 @@ function EditInvoice(props: {
 
   return (
     <>
-      <main className="main edit-page" role="dialog" aria-modal="true">
+      <main className="main edit-page" role="dialog" aria-modal="true" tabIndex={-1} >
         <Form
           method="post"
           className="edit-form"

@@ -2,27 +2,17 @@ import React from "react";
 
 function OverLay(props: {
   isOpen: boolean;
-  onClose: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  children:
-    | string
-    | number
-    | boolean
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  children:    
     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
     | React.ReactFragment
-    | React.ReactPortal
-    | null
-    | undefined;
+    | React.ReactPortal   
 }) {
   return (
     <div role="dialog" aria-modal="true">
       {props.isOpen && (
         <div className="overlay">
-          <div
-            className="overlay-bg"
-            onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-              props.onClose
-            }
-          >
+          <div className="overlay-bg" onClick={() => props.onClose}>
             {" "}
           </div>
           <div className="overlay-container">
