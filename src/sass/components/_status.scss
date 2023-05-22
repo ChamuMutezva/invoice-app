@@ -3,7 +3,7 @@
 @use '../utils';
 
 .status-label {
-    @include utils.fonts(base.$clr-black-600, base.$fs-16, 500);
+    @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
     line-height: 1.25;
 }
 
@@ -17,7 +17,7 @@
     width: 100%;
     text-transform: capitalize;
     justify-content: center;
-    font-size: base.$fs-16;
+    font-size: base.$fs-15;
     padding-block: calc(base.$spacer1 * 0.5);
     border-radius: 6px;
     grid-area: 2/2/4/3;

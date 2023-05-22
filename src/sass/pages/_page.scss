@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     line-height: 1.38;
-    @include utils.fonts(base.$clr-blue-100, base.$fs-16, 500);
+    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
 }
 
 span.container-img {
@@ -50,19 +50,9 @@ span.container-img {
     color: base.$clr-white-100;
     min-height: 100vh;
 
-    .filter-label {
-        color: base.$clr-white-100;
-    }
-
     .filter {
         color: base.$clr-white-100;
         background-color: base.$clr-black-300;
-    }
-
-    .invoice-num,
-    .client-name,
-    .amount-total {
-        color: base.$clr-white-300;
     }
 
     .address-sender-details,

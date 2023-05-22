@@ -72,8 +72,8 @@
 }
 
 .btn-label {
-    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
-    gap: 0;
+    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+    gap: 0.5rem;
 }
 
 .btn-return {
@@ -85,7 +85,7 @@
     justify-content: center;
     margin-bottom: calc(base.$spacer1 * 2);
     background-color: inherit;
-    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 
 }
 

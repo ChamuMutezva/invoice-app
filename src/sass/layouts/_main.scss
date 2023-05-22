@@ -41,7 +41,10 @@
 }
 
 .dark-mode {
-    .summary-title {
+
+    .summary-title,
+    .filter-label {
         color: base.$clr-white-100;
     }
+
 }

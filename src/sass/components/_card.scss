@@ -40,7 +40,7 @@
 }
 
 .invoice-num {
-    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
     text-transform: uppercase;
     display: block;
     position: relative;
@@ -55,25 +55,32 @@
 }
 
 .amount-total {
-    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
+    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }
 
 .client-name {
-    @include utils.fonts(base.$clr-black-600, base.$fs-16, 500);
+    @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
     justify-content: flex-start;
 }
 
 .payment-date {
-    @include utils.fonts(base.$clr-blue-200, base.$fs-16, 500);
+    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 
     @include utils.mQ(40rem) {
         grid-area: 1/2;
     }
 }
 
-.dark-mode {    
+.dark-mode {
     .card {
         background-color: base.$clr-black-200;
         color: base.$clr-white-100;
     }
+
+    .invoice-num,
+    .client-name,
+    .amount-total {
+        color: base.$clr-white-300;
+    }
+
 }
