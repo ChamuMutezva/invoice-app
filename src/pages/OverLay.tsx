@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 
 function OverLay(props: {
 	// isEditOverlayOpen: boolean;

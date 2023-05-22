@@ -34,12 +34,14 @@ span.container-img {
     visibility: hidden;
     width: 0;
     height: 0;
+    position: absolute;
 
     @include utils.mQ(40rem) {
         visibility: visible;
         width: fit-content;
         height: fit-content;
-       // padding-left: calc(base.$spacer1 * 0.5);
+        position: relative;
+        // padding-left: calc(base.$spacer1 * 0.5);
     }
 }
 
@@ -48,7 +50,6 @@ span.container-img {
     color: base.$clr-white-100;
     min-height: 100vh;
 
-    .summary-title,
     .filter-label {
         color: base.$clr-white-100;
     }

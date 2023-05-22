@@ -67,9 +67,21 @@ function HomePage() {
 		if (length === 0) {
 			return "No invoices";
 		} else if (length === 1) {
-			return `There is ${length} invoice`;
+			return (
+				<>
+					{" "}
+					<span className="mobile-hidden">There is</span>
+					{length} invoice
+				</>
+			);
 		} else {
-			return `There are ${length} total invoices`;
+			return (
+				<>
+					{" "}
+					<span className="mobile-hidden">There are</span> {length}{" "}
+					<span className="mobile-hidden"> total </span> invoices{" "}
+				</>
+			);
 		}
 	};
 

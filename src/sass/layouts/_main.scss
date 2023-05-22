@@ -20,21 +20,28 @@
 }
 
 .summary-title {
-    @include utils.fonts(base.$clr-black-100, base.$fs-24, 800); 
+    @include utils.fonts(base.$clr-black-100, base.$fs-24, 700);
+
     @include utils.mQ(40rem) {
         font-size: base.$fs-36;
     }
 }
 
 .invoice-total-num {
-    @include utils.fonts(base.$clr-blue-200, base.$fs-16, 500);   
+    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }
 
-.filter-label {    
-    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700); 
+.filter-label {
+    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
     line-height: 1;
 }
 
 .filter-new {
     gap: base.$spacer1;
+}
+
+.dark-mode {
+    .summary-title {
+        color: base.$clr-white-100;
+    }
 }

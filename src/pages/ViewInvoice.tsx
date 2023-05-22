@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
 import PreviousPage from "../components/PreviousPage";
@@ -21,6 +22,7 @@ function ViewInvoice() {
 	const { mutate } = useDeleteInvoice(setDeletionError);
 	const { data } = useGetSingleInvoice(params.id);
 	const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
+	// const editRef = useRef<HTMLDivElement>(null)
 
 	function toggleOverlay() {
 		setIsEditOverlayOpen(() => !isEditOverlayOpen);
@@ -68,11 +70,10 @@ function ViewInvoice() {
 		return <h2>Error encountered, invoice cannot be deleted</h2>;
 	}
 
-	const totalArray = data.items.map((item: { total: any }) => item.total);
+	const totalArray = data.items.map((item: { total: number }) => item.total);
 	const grandTotal = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 
 	function handleChangeStatus() {
-		console.log(data.status);
 		if (data.status !== "paid") {
 			updateInvoiceMutation.mutate({
 				...data,
@@ -80,7 +81,13 @@ function ViewInvoice() {
 			});
 		}
 	}
-
+	/*
+	useEffect(() => {
+		if(isEditOverlayOpen) {
+			editRef.current?.focus()
+		}
+	}, [isEditOverlayOpen])
+*/
 	return (
 		<>
 			<div className="wrapper">
@@ -373,12 +380,12 @@ function ViewInvoice() {
 					</div>
 				</footer>
 			</div>
+
 			{isEditOverlayOpen === true && (
 				<OverLay toggleOverlay={toggleOverlay}>
 					<EditInvoice toggleOverlay={toggleOverlay} />
 				</OverLay>
 			)}
-			{/* EditPage here */}
 		</>
 	);
 }

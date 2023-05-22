@@ -17,6 +17,7 @@ import CustomSelect from "../components/CustomSelect";
 
 function EditInvoice(props: {
 	// isEditOverlayOpen: boolean;
+	// ref: any;
 	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
 }) {
 	const projectInit: ICosting = {
@@ -184,7 +185,6 @@ function EditInvoice(props: {
 					format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
 				);
 		}
-		
 	}, [payment]);
 
 	const handleSubmitForm = (data: InvoiceTypesID) => {
@@ -200,6 +200,7 @@ function EditInvoice(props: {
 	return (
 		<>
 			<main
+				id="edit-page"
 				className="main edit-page"
 				role="dialog"
 				aria-modal="true"
