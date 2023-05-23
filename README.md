@@ -40,13 +40,13 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Frontend Mentor Solution URL: [Frontend Mentor solution url](https://www.frontendmentor.io/solutions/invoice-app-tanstack-queryreact-query-react-hook-form-LLKN1HpWdS)
 - Live Site URL: [Invoice app](https://invoice-app-ckm.netlify.app/)
 
 ## My process
 
 I created the challenge as a Fullstack application, the backend files are in a separate folder known as `invoice backend`
-The Backend fetches and stores data that is stored in MongoDb.
+The Backend fetches and stores data that is stored in MongoDb. Project created using Vite typescript.
 
 ### Built with
 

@@ -25,8 +25,8 @@ function ViewInvoice() {
 	// const editRef = useRef<HTMLDivElement>(null)
 
 	function toggleOverlay() {
-		setIsEditOverlayOpen(() => !isEditOverlayOpen);
 		console.log(isEditOverlayOpen);
+		setIsEditOverlayOpen(!isEditOverlayOpen);		
 	}
 
 	const handleDeleteInvoice = () => {
@@ -381,8 +381,8 @@ function ViewInvoice() {
 				</footer>
 			</div>
 
-			{isEditOverlayOpen === true && (
-				<OverLay toggleOverlay={toggleOverlay}>
+			{isEditOverlayOpen  && (
+				<OverLay isEditOverlayOpen={isEditOverlayOpen} toggleOverlay={toggleOverlay}>
 					<EditInvoice toggleOverlay={toggleOverlay} />
 				</OverLay>
 			)}

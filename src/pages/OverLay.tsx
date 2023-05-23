@@ -1,7 +1,7 @@
-import React, {  useRef } from "react";
+import React, { useRef } from "react";
 
 function OverLay(props: {
-	// isEditOverlayOpen: boolean;
+	isEditOverlayOpen: boolean;
 	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
 	children:
 		| React.ReactElement<any, string | React.JSXElementConstructor<any>>
@@ -9,7 +9,10 @@ function OverLay(props: {
 		| React.ReactPortal;
 }) {
 	const dialogRef = useRef<HTMLDivElement>(null);
-	dialogRef.current?.addEventListener("click", () => {
+
+	dialogRef.current?.addEventListener("click", (evt) => {
+		console.log("overlay button clicked");
+
 		return props.toggleOverlay;
 	});
 	return (
@@ -22,24 +25,19 @@ function OverLay(props: {
 					className="overlay-bg"
 					tabIndex={-1}
 					ref={dialogRef}
-					onClick={() => props.toggleOverlay}
+				
 				>
-					{" "}
+					<div className="overlay-controls">
+						<button
+							type="button"
+							className="btn-overlay-close"
+							onClick={props.toggleOverlay}
+						>
+							Close overlay
+						</button>
+					</div>
 				</div>
-				<div className="overlay-container">
-					{/*
-            <div className="overlay-controls">
-              <button
-                type="button"
-                className="btn-overlay-close"
-                onClick={props.onClose}
-              >
-                Close
-              </button>
-            </div>
-          */}
-					{props.children}
-				</div>
+				<div className="overlay-container">{props.children}</div>
 			</div>
 		</div>
 	);
