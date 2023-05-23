@@ -10,88 +10,94 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
 import NewInvoice from "./pages/NewInvoice";
-// import EditInvoice from "./pages/EditInvoice";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <HomePage />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/viewInvoice/:id",
-      element: <ViewInvoice />,
-      // loader: rootLoader,
-    },
-    {
-      path: "/newInvoice",
-      element: <NewInvoice />,
-    },
-    {/*
-    {
-      path: "/editInvoice/:id",
-      element: <EditInvoice />,
-      errorElement: <ErrorPage />,
-    },
-  */}
-  ]);
-  
-  const localstorage: boolean = JSON.parse(
-    window.localStorage.getItem("theme")!
-  );
- 
-  const [theme, setTheme] = useState(localstorage);
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <HomePage />,
+			errorElement: <ErrorPage />,
+		},
+		{
+			path: "/viewInvoice/:id",
+			element: <ViewInvoice />,
+			// loader: rootLoader,
+		},
+		{
+			path: "/newInvoice",
+			element: <NewInvoice />,
+		},
+	]);
 
-  const onChange = () => {    
-    setTheme(() => !theme);   
-  };
+	const localstorage: boolean = JSON.parse(
+		window.localStorage.getItem("theme")!
+	);
 
-  useEffect(() => {
-    window.localStorage.setItem("theme", JSON.stringify(theme));
-  }, [theme]);
+	const [theme, setTheme] = useState(localstorage);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className={`app ${theme ? "" : "dark-mode"}`}>
-        <header className="flex header">
-          <div className="flex controls">
-            <div className="logo-container">
-              <a className="btn btn-logo" href="/">
-                <img
-                  src={Logo}
-                  alt=""
-                  aria-hidden={true}
-                  width={"28"}
-                  height={"26"}
-                />
-                <span className="sr-only">preprince investments</span>
-              </a>
-            </div>
+	const onChange = () => {
+		setTheme(() => !theme);
+	};
 
-            <Toggle theme={theme} onChange={onChange} />
-          </div>
-          <div className="profile">
-            <a href="#" className="btn btn-profile">
-              <img
-                className="btn-profile-img"
-                src={Profile}
-                alt=""
-                aria-hidden={true}
-                width={"80"}
-                height={"80"}
-              />
-              <span className="sr-only">customer profile</span>
-            </a>
-          </div>
-        </header>
-        <RouterProvider router={router} />
-      </div>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-    </QueryClientProvider>
-  );
+	useEffect(() => {
+		window.localStorage.setItem("theme", JSON.stringify(theme));
+	}, [theme]);
+
+	return (
+		<QueryClientProvider client={queryClient}>
+			<div className={`app ${theme ? "" : "dark-mode"}`}>
+				<header className="flex header">
+					<div className="flex controls">
+						<div className="logo-container">
+							<a
+								className="btn btn-logo"
+								href="/"
+							>
+								<img
+									src={Logo}
+									alt=""
+									aria-hidden={true}
+									width={"28"}
+									height={"26"}
+								/>
+								<span className="sr-only">
+									preprince investments
+								</span>
+							</a>
+						</div>
+
+						<Toggle
+							theme={theme}
+							onChange={onChange}
+						/>
+					</div>
+					<div className="profile">
+						<a
+							href="#"
+							className="btn btn-profile"
+						>
+							<img
+								className="btn-profile-img"
+								src={Profile}
+								alt=""
+								aria-hidden={true}
+								width={"80"}
+								height={"80"}
+							/>
+							<span className="sr-only">customer profile</span>
+						</a>
+					</div>
+				</header>
+				<RouterProvider router={router} />
+			</div>
+			<ReactQueryDevtools
+				initialIsOpen={false}
+				position="bottom-right"
+			/>
+		</QueryClientProvider>
+	);
 }
 
 export default App;
