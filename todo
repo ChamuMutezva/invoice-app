@@ -15,3 +15,4 @@
 - when status is "paid" , invoice should not be edited @done
 - when status is paid , MARK AS PAID button should not be displayed @done
 - overlay should close the dialog when clicked @done
+- homepage over when the new invoice button has been clicked 

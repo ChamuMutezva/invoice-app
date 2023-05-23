@@ -22,8 +22,7 @@ function ViewInvoice() {
 	const { mutate } = useDeleteInvoice(setDeletionError);
 	const { data } = useGetSingleInvoice(params.id);
 	const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
-	// const editRef = useRef<HTMLDivElement>(null)
-
+	
 	function toggleOverlay() {
 		console.log(isEditOverlayOpen);
 		setIsEditOverlayOpen(!isEditOverlayOpen);		

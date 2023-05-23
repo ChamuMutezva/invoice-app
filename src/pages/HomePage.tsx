@@ -5,9 +5,13 @@ import { currencyFormatter } from "../hooks/useFormatter";
 import AddInvoiceImg from "../assets/icon-plus.svg";
 import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
+import OverLay from "./OverLay";
+import NewInvoice from "./NewInvoice";
 
 function HomePage() {
 	const [selectedValue, setSelectedValue] = useState("all");
+	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =
+		useState(false);
 	let { isLoading, isError, invoices } = getInvoices(selectedValue);
 
 	if (isLoading) {
@@ -24,6 +28,11 @@ function HomePage() {
 				<h2 className="pre-loading">Error: </h2>
 			</div>
 		);
+	}
+
+  function toggleOverlay() {
+		console.log(isNewInvoiceOverlayOpen);
+		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);		
 	}
 
 	const noInvoices = () => {
@@ -86,149 +95,158 @@ function HomePage() {
 	};
 
 	return (
-		<main className="main">
-			<h1 className="sr-only">
-				Preprince investments business transactions
-			</h1>
+		<>
+			<main className="main">
+				<h1 className="sr-only">
+					Preprince investments business transactions
+				</h1>
 
-			<div className="invoices-list">
-				<div className="flex summary">
-					<div className="summary-headings">
-						<h2 className="summary-title">Invoices</h2>
-						<p
-							className="invoice-total-num"
-							aria-live="polite"
-						>
-							{setMessageLength(invoices.length)}
-						</p>
-					</div>
+				<div className="invoices-list">
+					<div className="flex summary">
+						<div className="summary-headings">
+							<h2 className="summary-title">Invoices</h2>
+							<p
+								className="invoice-total-num"
+								aria-live="polite"
+							>
+								{setMessageLength(invoices.length)}
+							</p>
+						</div>
 
-					<div className="flex filter-new">
-						<Form className="select-options">
-							<label
-								className="filter-label"
-								htmlFor="filter-options"
-							>
-								Filter
-							</label>
-							<select
-								name="choice"
-								className="filter"
-								id="filter-options"
-								value={selectedValue}
-								onChange={(evt) => onChange(evt)}
-							>
-								<option value="all">All</option>
-								<option value="paid">Paid</option>
-								<option value="pending">Pending</option>
-								<option value="draft">Draft</option>
-							</select>
-						</Form>
+						<div className="flex filter-new">
+							<Form className="select-options">
+								<label
+									className="filter-label"
+									htmlFor="filter-options"
+								>
+									Filter
+								</label>
+								<select
+									name="choice"
+									className="filter"
+									id="filter-options"
+									value={selectedValue}
+									onChange={(evt) => onChange(evt)}
+								>
+									<option value="all">All</option>
+									<option value="paid">Paid</option>
+									<option value="pending">Pending</option>
+									<option value="draft">Draft</option>
+								</select>
+							</Form>
 
-						<div>
-							<Link
-								to={`/newInvoice`}
-								className="btn flex btn-new-invoice"
-							>
-								<span className="container-img">
-									<img
-										className="new-invoice-img"
-										src={AddInvoiceImg}
-										alt=""
-										aria-hidden={true}
-										width={"11"}
-										height={"11"}
-									/>
-								</span>
-								<span className="flex btn-label">
-									New{" "}
-									<span className="mobile-hidden">
-										Invoice
+							<div>
+								<button								
+                  onClick={toggleOverlay}
+									className="btn flex btn-new-invoice"
+								>
+									<span className="container-img">
+										<img
+											className="new-invoice-img"
+											src={AddInvoiceImg}
+											alt=""
+											aria-hidden={true}
+											width={"11"}
+											height={"11"}
+										/>
 									</span>
-								</span>
-							</Link>
+									<span className="flex btn-label">
+										New{" "}
+										<span className="mobile-hidden">
+											Invoice
+										</span>
+									</span>
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				{/* main section */}
-				{invoices.length === 0 ? (
-					noInvoices()
-				) : (
-					<div className="cards">
-						{invoices.map(
-							(invoice: {
-								_id: any;
-								status: string;
-								total: number;
-								paymentDue: Date;
-								id: React.Key;
-								clientName: string;
-							}) => {
-								return (
-									<div
-										key={invoice.id}
-										className="card"
-									>
-										<p className="invoice-num">
-											<span className="sr-only">
-												invoice number
-											</span>
-											{invoice.id}
-										</p>
-
-										<Link
-											className={`client-name btn btn-link`}
-											to={`/viewInvoice/${invoice._id}`}
+					{/* main section */}
+					{invoices.length === 0 ? (
+						noInvoices()
+					) : (
+						<div className="cards">
+							{invoices.map(
+								(invoice: {
+									_id: any;
+									status: string;
+									total: number;
+									paymentDue: Date;
+									id: React.Key;
+									clientName: string;
+								}) => {
+									return (
+										<div
+											key={invoice.id}
+											className="card"
 										>
-											<span className="sr-only">
-												Invoice for
-											</span>{" "}
-											{invoice.clientName}
-										</Link>
+											<p className="invoice-num">
+												<span className="sr-only">
+													invoice number
+												</span>
+												{invoice.id}
+											</p>
 
-										<p className="payment-date">
-											Due{" "}
-											<span className="sr-only">
-												date
-											</span>{" "}
-											{format(
-												new Date(invoice.paymentDue),
-												"yyyy/MM/dd"
-											)}
-										</p>
+											<Link
+												className={`client-name btn btn-link`}
+												to={`/viewInvoice/${invoice._id}`}
+											>
+												<span className="sr-only">
+													Invoice for
+												</span>{" "}
+												{invoice.clientName}
+											</Link>
 
-										<p className="amount-total">
-											<span className="sr-only">
-												total amount to be paid
-											</span>
-											{currencyFormatter.format(
-												invoice.total
-											)}
-										</p>
+											<p className="payment-date">
+												Due{" "}
+												<span className="sr-only">
+													date
+												</span>{" "}
+												{format(
+													new Date(
+														invoice.paymentDue
+													),
+													"yyyy/MM/dd"
+												)}
+											</p>
 
-										<p
-											className={`flex status ${getStatus(
-												invoice.status
-											)}
+											<p className="amount-total">
+												<span className="sr-only">
+													total amount to be paid
+												</span>
+												{currencyFormatter.format(
+													invoice.total
+												)}
+											</p>
+
+											<p
+												className={`flex status ${getStatus(
+													invoice.status
+												)}
                          `}
-										>
-											<span
-												aria-hidden={true}
-												className={`status-span ${invoice.status}-span`}
-											></span>
-											<span className="sr-only">
-												invoice status
-											</span>
-											{invoice.status}
-										</p>
-									</div>
-								);
-							}
-						)}
-					</div>
-				)}
-			</div>
-		</main>
+											>
+												<span
+													aria-hidden={true}
+													className={`status-span ${invoice.status}-span`}
+												></span>
+												<span className="sr-only">
+													invoice status
+												</span>
+												{invoice.status}
+											</p>
+										</div>
+									);
+								}
+							)}
+						</div>
+					)}
+				</div>
+			</main>
+      {isNewInvoiceOverlayOpen  && (
+				<OverLay isEditOverlayOpen={isNewInvoiceOverlayOpen} toggleOverlay={toggleOverlay}>
+					<NewInvoice toggleOverlay={toggleOverlay} />
+				</OverLay>
+			)}
+		</>
 	);
 }
 

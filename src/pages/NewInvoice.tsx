@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
 import PreviousPage from "../components/PreviousPage";
+import BackImg from "../assets/icon-arrow-left.svg";
 import { randomId } from "../hooks/useRandomID";
 import createInvoice from "../hooks/useCreateInvoice";
 import DeleteBtn from "../assets/icon-delete.svg";
@@ -14,7 +15,9 @@ import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 
-function NewInvoice() {
+function NewInvoice(props: {
+	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
+}) {
 	const projectInit: ICosting = {
 		name: "Project Name",
 		quantity: 1,
@@ -22,7 +25,7 @@ function NewInvoice() {
 		total: 100.0,
 	};
 
-	const navigate = useNavigate();
+	const navigate = useNavigate(); // () => navigate(-1)
 	const { mutate, isError, isSuccess } = createInvoice();
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
 	const [project, setProject] = useState(projectInit);
@@ -170,7 +173,20 @@ function NewInvoice() {
 	return (
 		<>
 			<main className="main">
-				<PreviousPage title={`Create new invoice`} />
+				{/* <PreviousPage title={`Create new invoice`}  /> */}
+				<button
+					className="btn flex btn-return"
+					onClick={props.toggleOverlay}
+				>
+					<img
+						src={BackImg}
+						alt=""
+						aria-hidden={true}
+						width={"7"}
+						height={"10"}
+					/>
+					Go back
+				</button>
 				<Form
 					method="post"
 					className="edit-form"
@@ -707,7 +723,7 @@ function NewInvoice() {
 						<div className="flex footer-edit">
 							<button
 								className="btn btn-cancel"
-								onClick={() => navigate(-1)}
+								onClick={props.toggleOverlay}
 							>
 								Discard
 								<span className="sr-only">

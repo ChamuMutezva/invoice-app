@@ -25,10 +25,12 @@ function App() {
 			element: <ViewInvoice />,
 			// loader: rootLoader,
 		},
+    {/*
 		{
 			path: "/newInvoice",
 			element: <NewInvoice />,
 		},
+  */}
 	]);
 
 	const localstorage: boolean = JSON.parse(
