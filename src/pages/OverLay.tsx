@@ -25,7 +25,6 @@ function OverLay(props: {
 					className="overlay-bg"
 					tabIndex={-1}
 					ref={dialogRef}
-				
 				>
 					<div className="overlay-controls">
 						<button

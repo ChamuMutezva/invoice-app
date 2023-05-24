@@ -15,9 +15,10 @@ import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 
-function NewInvoice(props: {
+const NewInvoice = (props: {
 	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
-}) {
+	childInputRef: any;
+}) => {
 	const projectInit: ICosting = {
 		name: "Project Name",
 		quantity: 1,
@@ -190,8 +191,10 @@ function NewInvoice(props: {
 					</button>
 				</div>
 				<Form
+					tabIndex={-1}
 					method="post"
 					className="edit-form"
+					ref={props.childInputRef}
 					onSubmit={handleSubmit(handleSubmitForm)}
 				>
 					<h2 className="edit-title">New invoice</h2>
@@ -334,11 +337,13 @@ function NewInvoice(props: {
 								required: "Client Street is required",
 								minLength: {
 									value: 3,
-									message: "Client Street must be greater than 3",
+									message:
+										"Client Street must be greater than 3",
 								},
 								maxLength: {
 									value: 40,
-									message: "Client Street must be less than 40",
+									message:
+										"Client Street must be less than 40",
 								},
 							}}
 						/>
@@ -354,11 +359,13 @@ function NewInvoice(props: {
 									required: "Client city is required",
 									minLength: {
 										value: 3,
-										message: "Client city must be greater than 3",
+										message:
+											"Client city must be greater than 3",
 									},
 									maxLength: {
 										value: 40,
-										message: "Client city must be less than 40",
+										message:
+											"Client city must be less than 40",
 									},
 								}}
 							/>
@@ -399,7 +406,8 @@ function NewInvoice(props: {
 									},
 									maxLength: {
 										value: 40,
-										message: "Client country must be less than 40",
+										message:
+											"Client country must be less than 40",
 									},
 								}}
 							/>
@@ -751,6 +759,6 @@ function NewInvoice(props: {
 			<CreateInvoiceDialog showDialog={showDialog} />
 		</>
 	);
-}
+};
 
 export default NewInvoice;

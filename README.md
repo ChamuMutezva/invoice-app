@@ -29,7 +29,7 @@ Users should be able to:
 - Save draft invoices, and mark pending invoices as paid
 - Filter invoices by status (draft/pending/paid)
 - Toggle light and dark mode
-- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
+- **Bonus**: full-stack app
 
 ### Screenshot
 
@@ -153,12 +153,32 @@ performed to notice the bug.
 ##### Causes and solution
 
 The error is caused by (in this particular case) , having a hook which was called after a condition
-![Ilustration of error](src/assets/hook-err-illustration2.png)
+![Illustration of error](src/assets/hook-err-illustration2.png)
 
 Moving the useMutation hook above the if condition will solve the error
 ![Fixing the error](src/assets/hook-err-fix.png)
 
+### Reusable overlay
+
+Link to ![Reusable overlay component](src/pages/OverLay.tsx)
+Application link ![Reusable overlay usage](src/pages/HomePage.tsx)
+
+```tsx
+<OverLay
+     isOverlayOpen={isNewInvoiceOverlayOpen}
+     toggleOverlay={toggleOverlay}
+    >
+     <NewInvoice
+      toggleOverlay={toggleOverlay}
+      childInputRef={childInputRef}
+     />
+    </OverLay>
+```
+
 ### Continued development
+
+- Focus control when new pages has been opened
+- Focus trapping
 
 ### Useful resources
 

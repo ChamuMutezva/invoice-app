@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
@@ -13,6 +13,7 @@ function HomePage() {
 	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =
 		useState(false);
 	let { isLoading, isError, invoices } = getInvoices(selectedValue);
+	const childInputRef = useRef<HTMLInputElement>(null);
 
 	if (isLoading) {
 		return (
@@ -30,9 +31,12 @@ function HomePage() {
 		);
 	}
 
-  function toggleOverlay() {
+	function toggleOverlay() {
 		console.log(isNewInvoiceOverlayOpen);
-		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);		
+		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);
+    if (isNewInvoiceOverlayOpen) {
+			childInputRef.current && childInputRef.current.focus();
+		}
 	}
 
 	const noInvoices = () => {
@@ -93,7 +97,7 @@ function HomePage() {
 			);
 		}
 	};
-
+	
 	return (
 		<>
 			<main className="main">
@@ -136,8 +140,8 @@ function HomePage() {
 							</Form>
 
 							<div>
-								<button								
-                  onClick={toggleOverlay}
+								<button
+									onClick={toggleOverlay}
 									className="btn flex btn-new-invoice"
 								>
 									<span className="container-img">
@@ -241,9 +245,15 @@ function HomePage() {
 					)}
 				</div>
 			</main>
-      {isNewInvoiceOverlayOpen  && (
-				<OverLay isOverlayOpen={isNewInvoiceOverlayOpen} toggleOverlay={toggleOverlay}>
-					<NewInvoice toggleOverlay={toggleOverlay} />
+			{isNewInvoiceOverlayOpen && (
+				<OverLay
+					isOverlayOpen={isNewInvoiceOverlayOpen}
+					toggleOverlay={toggleOverlay}
+				>
+					<NewInvoice
+						toggleOverlay={toggleOverlay}
+						childInputRef={childInputRef}
+					/>
 				</OverLay>
 			)}
 		</>
