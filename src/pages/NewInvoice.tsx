@@ -25,7 +25,7 @@ function NewInvoice(props: {
 		total: 100.0,
 	};
 
-	const navigate = useNavigate(); // () => navigate(-1)
+	// const navigate = useNavigate(); // () => navigate(-1)
 	const { mutate, isError, isSuccess } = createInvoice();
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
 	const [project, setProject] = useState(projectInit);
@@ -174,19 +174,21 @@ function NewInvoice(props: {
 		<>
 			<main className="main">
 				{/* <PreviousPage title={`Create new invoice`}  /> */}
-				<button
-					className="btn flex btn-return"
-					onClick={props.toggleOverlay}
-				>
-					<img
-						src={BackImg}
-						alt=""
-						aria-hidden={true}
-						width={"7"}
-						height={"10"}
-					/>
-					Go back
-				</button>
+				<div className="tablet-hidden">
+					<button
+						className="btn flex btn-return"
+						onClick={props.toggleOverlay}
+					>
+						<img
+							src={BackImg}
+							alt=""
+							aria-hidden={true}
+							width={"7"}
+							height={"10"}
+						/>
+						Go back
+					</button>
+				</div>
 				<Form
 					method="post"
 					className="edit-form"
@@ -200,7 +202,7 @@ function NewInvoice(props: {
 						<CustomInput
 							type="text"
 							name="senderAddress.street"
-							labelText="Sender street"
+							labelText="Street address"
 							control={control}
 							rules={{
 								required: "Street is required",
@@ -220,7 +222,7 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="senderAddress.city"
-								labelText="Sender city"
+								labelText="City"
 								control={control}
 								rules={{
 									required: "City is required",
@@ -239,7 +241,7 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="senderAddress.postCode"
-								labelText="Sender postcode"
+								labelText="Post code"
 								control={control}
 								rules={{
 									required: "postal code is required",
@@ -260,7 +262,7 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="senderAddress.country"
-								labelText="Sender country"
+								labelText="Country"
 								control={control}
 								rules={{
 									required: "country is required",
@@ -285,7 +287,7 @@ function NewInvoice(props: {
 						<CustomInput
 							type="text"
 							name="clientName"
-							labelText="Client name"
+							labelText="Client's name"
 							control={control}
 							rules={{
 								required: "Client name is required",
@@ -305,7 +307,7 @@ function NewInvoice(props: {
 						<CustomInput
 							type="email"
 							name="clientEmail"
-							labelText="Client email"
+							labelText="Client's email"
 							control={control}
 							rules={{
 								required: "Email is required",
@@ -326,17 +328,17 @@ function NewInvoice(props: {
 						<CustomInput
 							type="text"
 							name="clientAddress.street"
-							labelText="Client street"
+							labelText="Street"
 							control={control}
 							rules={{
-								required: "Street is required",
+								required: "Client Street is required",
 								minLength: {
 									value: 3,
-									message: "Street must be greater than 3",
+									message: "Client Street must be greater than 3",
 								},
 								maxLength: {
 									value: 40,
-									message: "Street must be less than 40",
+									message: "Client Street must be less than 40",
 								},
 							}}
 						/>
@@ -346,17 +348,17 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="clientAddress.city"
-								labelText="client city"
+								labelText="City"
 								control={control}
 								rules={{
-									required: "City is required",
+									required: "Client city is required",
 									minLength: {
 										value: 3,
-										message: "City must be greater than 3",
+										message: "Client city must be greater than 3",
 									},
 									maxLength: {
 										value: 40,
-										message: "City must be less than 40",
+										message: "Client city must be less than 40",
 									},
 								}}
 							/>
@@ -365,19 +367,19 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="clientAddress.postCode"
-								labelText="Client postal"
+								labelText="Post code"
 								control={control}
 								rules={{
-									required: "postal code is required",
+									required: "Client postal code is required",
 									minLength: {
 										value: 4,
 										message:
-											"Postal code must be greater than 4",
+											"Client postal code must be greater than 4",
 									},
 									maxLength: {
 										value: 8,
 										message:
-											"Postal code  must be less than 8",
+											"Client postal code  must be less than 8",
 									},
 								}}
 							/>
@@ -386,18 +388,18 @@ function NewInvoice(props: {
 							<CustomInput
 								type="text"
 								name="clientAddress.country"
-								labelText="Client country"
+								labelText="Country"
 								control={control}
 								rules={{
-									required: "country is required",
+									required: "Client country is required",
 									minLength: {
 										value: 4,
 										message:
-											"Country must be greater than 4",
+											"Client country must be greater than 4",
 									},
 									maxLength: {
 										value: 40,
-										message: "Country must be less than 40",
+										message: "Client country must be less than 40",
 									},
 								}}
 							/>

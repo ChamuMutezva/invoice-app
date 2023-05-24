@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 function OverLay(props: {
-	isEditOverlayOpen: boolean;
+	isOverlayOpen: boolean;
 	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
 	children:
 		| React.ReactElement<any, string | React.JSXElementConstructor<any>>

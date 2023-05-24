@@ -381,7 +381,7 @@ function ViewInvoice() {
 			</div>
 
 			{isEditOverlayOpen  && (
-				<OverLay isEditOverlayOpen={isEditOverlayOpen} toggleOverlay={toggleOverlay}>
+				<OverLay isOverlayOpen={isEditOverlayOpen} toggleOverlay={toggleOverlay}>
 					<EditInvoice toggleOverlay={toggleOverlay} />
 				</OverLay>
 			)}

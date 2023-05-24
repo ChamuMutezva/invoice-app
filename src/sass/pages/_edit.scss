@@ -2,7 +2,7 @@
 @use '../utils';
 
 .edit-form>*+* {
-    padding-block-start: calc(base.$spacer1 * 1.5);
+    // padding-block-start: calc(base.$spacer1 * 1.5);
     padding-block-end: calc(base.$spacer1 * 2.5);
 }
 
@@ -30,6 +30,7 @@
 
 .edit-field-title {
     @include utils.fonts(base.$clr-blue-400, base.$fs-15, 700);
+    padding-block-start: 1.5rem;
 }
 
 .form-input-wrapper {
@@ -116,7 +117,7 @@
 }
 
 .postal-city {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
 }
 
 .footer {    

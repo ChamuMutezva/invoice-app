@@ -242,7 +242,7 @@ function HomePage() {
 				</div>
 			</main>
       {isNewInvoiceOverlayOpen  && (
-				<OverLay isEditOverlayOpen={isNewInvoiceOverlayOpen} toggleOverlay={toggleOverlay}>
+				<OverLay isOverlayOpen={isNewInvoiceOverlayOpen} toggleOverlay={toggleOverlay}>
 					<NewInvoice toggleOverlay={toggleOverlay} />
 				</OverLay>
 			)}

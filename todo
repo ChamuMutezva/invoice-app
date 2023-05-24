@@ -4,7 +4,7 @@
 - desktop edit-invoice display @done
 - new invoice button display size @done
 - increase space between options dropdown
-- text font sizes should be increased in size
+- text font sizes should be increased in size @done
 - EditPage - fix calculations when changes has been cancelled. 
 - Homepage - Grid items spacing. Name and dates to have more width @done
 - Viewpage - accessibility - address just read without indication @done
@@ -15,4 +15,4 @@
 - when status is "paid" , invoice should not be edited @done
 - when status is paid , MARK AS PAID button should not be displayed @done
 - overlay should close the dialog when clicked @done
-- homepage over when the new invoice button has been clicked 
+- homepage overlay when the new invoice button has been clicked @done

@@ -83,7 +83,7 @@
     border-radius: 8px;
     border: none;
     justify-content: center;
-    margin-bottom: calc(base.$spacer1 * 2);
+   // margin-bottom: calc(base.$spacer1 * 2);
     background-color: inherit;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 
