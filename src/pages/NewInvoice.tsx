@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
-import PreviousPage from "../components/PreviousPage";
+// import PreviousPage from "../components/PreviousPage";
 import BackImg from "../assets/icon-arrow-left.svg";
 import { randomId } from "../hooks/useRandomID";
 import createInvoice from "../hooks/useCreateInvoice";
@@ -60,6 +60,8 @@ const NewInvoice = (props: {
 	};
 
 	const [data, setData] = useState(initialState);
+
+	const closeDialog = () => [(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => props.toggleOverlay(e), setShowDialog(false)];
 
 	// Opens the Delete Project dialog with 2 options
 	// 1. Option 1 - Cancel delete and return to previous page
@@ -756,7 +758,10 @@ const NewInvoice = (props: {
 					</div>
 				</Form>
 			</main>
-			<CreateInvoiceDialog showDialog={showDialog} />
+			<CreateInvoiceDialog
+				showDialog={showDialog}
+				closeDialog={closeDialog}
+			/>
 		</>
 	);
 };

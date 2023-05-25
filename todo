@@ -18,3 +18,4 @@
 - homepage overlay when the new invoice button has been clicked @done
 - moving focus to the opened dialog
 - Focus trapping in the dialog
+- Return to Homepage button not Working in CreateNewInvoice Dialog 
