@@ -68,10 +68,6 @@ const NewInvoice = (props: {
 		setShowDialog(false),
 	];
 
-	if (createInvoiceError) {
-		return <h2>Error encountered: invoice could not be created</h2>;
-	}
-
 	// Opens the Delete Project dialog with 2 options
 	// 1. Option 1 - Cancel delete and return to previous page
 	// 2. Option 2 - Delete project and return to previous page
@@ -107,18 +103,16 @@ const NewInvoice = (props: {
 		getValues,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
-	console.log(errors);
+	//console.log(errors);
 
 	const handleSubmitForm = (data: any) => {
 		setData({
 			...data,
 			total: calculateTotal(),
 		});
-		setShowDialog(() => true);
+		setShowDialog(() => true);		
 		console.log(data);
-		mutate(data);
-		if (isSuccess) console.log("hurray");
-		if (isError) console.log("abort mission");
+		 mutate(data);
 	};
 
 	function calculateTotal(): number {
@@ -129,14 +123,15 @@ const NewInvoice = (props: {
 			"total",
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0
 		);
-		console.log(watchTotal[0]);
+		// console.log(watchTotal[0]);
 		const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		return total.toFixed(2);
 	}
 
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
-	console.log(watchTotal);
+	//console.log(watchTotal);
+
 	useEffect(() => {
 		// update the days when payment terms have been selected
 		switch (payment) {
@@ -181,6 +176,10 @@ const NewInvoice = (props: {
 			document.body.classList.remove("body-size");
 		};
 	});
+
+	if (createInvoiceError) {
+		return <h2>Error encountered: invoice could not be created</h2>;
+	}
 
 	return (
 		<>

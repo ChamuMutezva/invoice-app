@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
@@ -14,6 +14,13 @@ function HomePage() {
 		useState(false);
 	let { isLoading, isError, invoices } = getInvoices(selectedValue);
 	const childInputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (isNewInvoiceOverlayOpen) {
+			childInputRef.current && childInputRef.current.focus();
+		}
+		console.log(isNewInvoiceOverlayOpen);
+	}, [isNewInvoiceOverlayOpen]);
 
 	if (isLoading) {
 		return (
@@ -34,9 +41,6 @@ function HomePage() {
 	function toggleOverlay() {
 		console.log(isNewInvoiceOverlayOpen);
 		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);
-    if (isNewInvoiceOverlayOpen) {
-			childInputRef.current && childInputRef.current.focus();
-		}
 	}
 
 	const noInvoices = () => {
@@ -97,7 +101,7 @@ function HomePage() {
 			);
 		}
 	};
-	
+
 	return (
 		<>
 			<main className="main">
@@ -245,7 +249,7 @@ function HomePage() {
 					)}
 				</div>
 			</main>
-			{isNewInvoiceOverlayOpen && (
+			{isNewInvoiceOverlayOpen === true && (
 				<OverLay
 					isOverlayOpen={isNewInvoiceOverlayOpen}
 					toggleOverlay={toggleOverlay}

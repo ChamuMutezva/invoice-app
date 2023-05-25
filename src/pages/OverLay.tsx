@@ -12,11 +12,11 @@ function OverLay(props: {
 
 	dialogRef.current?.addEventListener("click", (evt) => {
 		console.log("overlay button clicked");
-
 		return props.toggleOverlay;
 	});
 	return (
 		<div
+			className={props.isOverlayOpen ? "" : "hide-overlay"}
 			role="dialog"
 			aria-modal="true"
 		>

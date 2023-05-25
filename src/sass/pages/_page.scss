@@ -45,6 +45,10 @@ span.container-img {
     }
 }
 
+.hide-overlay {
+    display: none;
+}
+
 .dark-mode {
     background-color: base.$clr-black-300;
     color: base.$clr-white-100;
