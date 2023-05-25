@@ -27,10 +27,11 @@ const NewInvoice = (props: {
 	};
 
 	// const navigate = useNavigate(); // () => navigate(-1)
-	const { mutate, isError, isSuccess } = createInvoice();
+	const [createInvoiceError, setCreateInvoiceError] = useState(null);
+	const { mutate, isError, isSuccess } = createInvoice(setCreateInvoiceError);
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
 	const [project, setProject] = useState(projectInit);
-	const [showDialog, setShowDialog] = useState(false);
+	const [showDialog, setShowDialog] = useState(false);	
 
 	// load initial form data on first visit to site
 	// format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
