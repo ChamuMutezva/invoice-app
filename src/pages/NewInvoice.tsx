@@ -31,7 +31,7 @@ const NewInvoice = (props: {
 	const { mutate, isError, isSuccess } = createInvoice(setCreateInvoiceError);
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
 	const [project, setProject] = useState(projectInit);
-	const [showDialog, setShowDialog] = useState(false);	
+	const [showDialog, setShowDialog] = useState(false);
 
 	// load initial form data on first visit to site
 	// format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
@@ -62,7 +62,15 @@ const NewInvoice = (props: {
 
 	const [data, setData] = useState(initialState);
 
-	const closeDialog = () => [(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => props.toggleOverlay(e), setShowDialog(false)];
+	const closeDialog = () => [
+		(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+			props.toggleOverlay(e),
+		setShowDialog(false),
+	];
+
+	if (createInvoiceError) {
+		return <h2>Error encountered: invoice could not be created</h2>;
+	}
 
 	// Opens the Delete Project dialog with 2 options
 	// 1. Option 1 - Cancel delete and return to previous page
