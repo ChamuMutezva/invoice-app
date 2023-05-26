@@ -22,10 +22,18 @@ function ViewInvoice() {
 	const { mutate } = useDeleteInvoice(setDeletionError);
 	const { data } = useGetSingleInvoice(params.id);
 	const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
-	
+	const childInputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (isEditOverlayOpen) {
+			childInputRef.current && childInputRef.current.focus();
+		}
+		console.log(isEditOverlayOpen);
+	}, [isEditOverlayOpen]);
+
 	function toggleOverlay() {
 		console.log(isEditOverlayOpen);
-		setIsEditOverlayOpen(!isEditOverlayOpen);		
+		setIsEditOverlayOpen(!isEditOverlayOpen);
 	}
 
 	const handleDeleteInvoice = () => {
@@ -380,9 +388,15 @@ function ViewInvoice() {
 				</footer>
 			</div>
 
-			{isEditOverlayOpen  && (
-				<OverLay isOverlayOpen={isEditOverlayOpen} toggleOverlay={toggleOverlay}>
-					<EditInvoice toggleOverlay={toggleOverlay} />
+			{isEditOverlayOpen === true && (
+				<OverLay
+					isOverlayOpen={isEditOverlayOpen}
+					toggleOverlay={toggleOverlay}
+				>
+					<EditInvoice
+						toggleOverlay={toggleOverlay}
+						childInputRef={childInputRef}
+					/>
 				</OverLay>
 			)}
 		</>

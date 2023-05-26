@@ -1,4 +1,4 @@
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
+import { MouseEvent, MouseEventHandler, Ref, useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -16,8 +16,7 @@ import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 
 function EditInvoice(props: {
-	// isEditOverlayOpen: boolean;
-	// ref: any;
+	childInputRef: any; // Ref<HTMLFormElement> | undefined;
 	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
 }) {
 	const projectInit: ICosting = {
@@ -152,6 +151,45 @@ function EditInvoice(props: {
 		setShowDeleteProjectDialog(!showDeleteProjectDialog);
 	};
 
+	// Focus trap implementation inspired by Tediko from his solution - see link below
+	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
+	const focusTrap = (event: {
+		key: string;
+		shiftKey: any;
+		preventDefault: () => void;
+	}) => {
+		if (event.key === "Escape") props.toggleOverlay;
+		if (event.key !== "Tab") return;
+
+		const formElements =
+			props.childInputRef.current.querySelectorAll("button, a, input");
+		const firstElement = formElements[0];
+		const lastElement = formElements[formElements.length - 1];
+
+		// if going forward by pressing tab and lastElement is active shift focus to first focusable element
+		if (!event.shiftKey && document.activeElement === lastElement) {
+			event.preventDefault();
+			firstElement.focus();
+		}
+
+		// if going backward by pressing tab and firstElement is active shift focus to last focusable element
+		if (event.shiftKey && document.activeElement === firstElement) {
+			event.preventDefault();
+			lastElement.focus();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("keydown", focusTrap);
+		document.addEventListener("click", () => props.toggleOverlay);
+		props.childInputRef.current.focus();
+		// Removing the event listener in the return function in order to avoid memory leaks.
+		return () => {
+			document.removeEventListener("keydown", focusTrap);
+			document.removeEventListener("click", () => props.toggleOverlay);
+		};
+	}, []);
+
 	useEffect(() => {
 		// update the days when payment terms have been selected
 		switch (payment) {
@@ -204,11 +242,12 @@ function EditInvoice(props: {
 				className="main edit-page"
 				role="dialog"
 				aria-modal="true"
-				tabIndex={-1}
 			>
 				<Form
+					tabIndex={-1}
 					method="post"
 					className="edit-form"
+					ref={props.childInputRef}
 					onSubmit={handleSubmit(handleSubmitForm)}
 				>
 					<h2 className="edit-title">
@@ -232,11 +271,13 @@ function EditInvoice(props: {
 								required: "Sender street is required",
 								minLength: {
 									value: 3,
-									message: "Sender street must be greater than 3",
+									message:
+										"Sender street must be greater than 3",
 								},
 								maxLength: {
 									value: 40,
-									message: "Sender street must be less than 40",
+									message:
+										"Sender street must be less than 40",
 								},
 							}}
 						/>
@@ -252,11 +293,13 @@ function EditInvoice(props: {
 									required: "Sender city is required",
 									minLength: {
 										value: 3,
-										message: "Sender city must be greater than 3",
+										message:
+											"Sender city must be greater than 3",
 									},
 									maxLength: {
 										value: 40,
-										message: "Sender city must be less than 40",
+										message:
+											"Sender city must be less than 40",
 									},
 								}}
 							/>
@@ -292,7 +335,8 @@ function EditInvoice(props: {
 									required: "Sender country is required",
 									minLength: {
 										value: 4,
-										message: "Sender country must be greater than 4",
+										message:
+											"Sender country must be greater than 4",
 									},
 									maxLength: {
 										value: 40,
@@ -359,11 +403,13 @@ function EditInvoice(props: {
 								required: "Client street is required",
 								minLength: {
 									value: 3,
-									message: "Client street must be greater than 3",
+									message:
+										"Client street must be greater than 3",
 								},
 								maxLength: {
 									value: 40,
-									message: "Client street must be less than 40",
+									message:
+										"Client street must be less than 40",
 								},
 							}}
 						/>
@@ -379,11 +425,13 @@ function EditInvoice(props: {
 									required: "Client city is required",
 									minLength: {
 										value: 3,
-										message: "Client city must be greater than 3",
+										message:
+											"Client city must be greater than 3",
 									},
 									maxLength: {
 										value: 40,
-										message: "Client city must be less than 40",
+										message:
+											"Client city must be less than 40",
 									},
 								}}
 							/>
@@ -419,7 +467,8 @@ function EditInvoice(props: {
 									required: "Client country is required",
 									minLength: {
 										value: 4,
-										message: "Client country must be greater than 4",
+										message:
+											"Client country must be greater than 4",
 									},
 									maxLength: {
 										value: 40,

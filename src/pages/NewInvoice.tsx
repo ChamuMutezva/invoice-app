@@ -124,8 +124,8 @@ const NewInvoice = (props: {
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0
 		);
 		// console.log(watchTotal[0]);
-		const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
-		return total.toFixed(2);
+		const total: number = totalArray.length > 0 ? totalArray.reduce(reducer).toFixed(2) : 0;
+		return total;
 	}
 
 	const watchTotal = watch(["items", "total"]);
