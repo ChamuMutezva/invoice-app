@@ -110,9 +110,9 @@ const NewInvoice = (props: {
 			...data,
 			total: calculateTotal(),
 		});
-		setShowDialog(() => true);		
+		setShowDialog(() => true);
 		console.log(data);
-		 mutate(data);
+		mutate(data);
 	};
 
 	function calculateTotal(): number {
@@ -131,6 +131,45 @@ const NewInvoice = (props: {
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
 	//console.log(watchTotal);
+
+	// Focus trap implementation inspired by Tediko from his solution - see link below
+	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
+	const focusTrap = (event: {
+		key: string;
+		shiftKey: any;
+		preventDefault: () => void;
+	}) => {
+		if (event.key === "Escape") closeDialog();
+		if (event.key !== "Tab") return;
+
+		const formElements =
+			props.childInputRef.current.querySelectorAll("button, a, input");
+		const firstElement = formElements[0];
+		const lastElement = formElements[formElements.length - 1];
+
+		// if going forward by pressing tab and lastElement is active shift focus to first focusable element
+		if (!event.shiftKey && document.activeElement === lastElement) {
+			event.preventDefault();
+			firstElement.focus();
+		}
+
+		// if going backward by pressing tab and firstElement is active shift focus to last focusable element
+		if (event.shiftKey && document.activeElement === firstElement) {
+			event.preventDefault();
+			lastElement.focus();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("keydown", focusTrap);
+		document.addEventListener("click", () => props.toggleOverlay)
+		props.childInputRef.current.focus();
+		// Removing the event listener in the return function in order to avoid memory leaks.
+		return () => {
+			document.removeEventListener("keydown", focusTrap);
+			document.removeEventListener("click", () => props.toggleOverlay)
+		};
+	}, []);
 
 	useEffect(() => {
 		// update the days when payment terms have been selected
