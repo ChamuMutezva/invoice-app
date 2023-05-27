@@ -38,6 +38,11 @@
 
 .filter-new {
     gap: base.$spacer1;
+    flex: 1 1 50%;
+}
+
+.summary-headings {
+    flex: 1 1 50%;
 }
 
 .dark-mode {

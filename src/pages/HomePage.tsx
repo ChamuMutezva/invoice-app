@@ -122,17 +122,20 @@ function HomePage() {
 						</div>
 
 						<div className="flex filter-new">
-							<Form className="select-options" id="filter-status">
+							<Form
+								className="select-options"
+								id="filter-status"
+							>
 								<label
 									className="filter-label"
 									htmlFor="filter-options"
 								>
 									Filter
 								</label>
-								<div className="select-wrapper">
+								<div className="select-wrapper select-wrapper-home">
 									<select
 										name="choice"
-										className="filter"
+										className="filter filter-home"
 										id="filter-options"
 										value={selectedValue}
 										onChange={(evt) => onChange(evt)}
@@ -145,7 +148,7 @@ function HomePage() {
 								</div>
 							</Form>
 
-							<div>
+							<div className="btn-new-invoice-wrapper">
 								<button
 									onClick={toggleOverlay}
 									className="btn flex btn-new-invoice"

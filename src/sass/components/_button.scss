@@ -71,6 +71,12 @@
     text-decoration: none;
 }
 
+.btn-new-invoice-wrapper {
+    flex: 1 1 50%;
+    display: flex;   
+    justify-content: flex-end;
+}
+
 .btn-label {
     @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
     gap: 0.5rem;

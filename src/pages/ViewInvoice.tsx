@@ -1,7 +1,6 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
 import PreviousPage from "../components/PreviousPage";

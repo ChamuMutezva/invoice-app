@@ -15,7 +15,7 @@ const CustomSelect = ({ name, control, rules, options }: CustomSelectProps) => {
   } = useController({ name, control, rules });
 
   return (
-    <div className="form-input-wrapper select-container">
+    <div className="form-input-wrapper select-wrapper">
       <label htmlFor={name} className={`label ${error ? "form-errors" : ""}`}>
         Payment Terms
       </label>

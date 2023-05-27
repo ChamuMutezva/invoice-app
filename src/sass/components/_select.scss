@@ -4,7 +4,7 @@
 
 select {
     &:focus-within {
-        border: 2px solid red;
+        border: 2px solid base.$clr-blue-200;
         border-radius: inherit;
     }
 }
@@ -34,14 +34,30 @@ select {
         clip-path: polygon(100% 0%, 0 0%, 50% 100%);
         justify-self: end;
         position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        margin-block-start: 0.75em;
     }
 }
 
+.select-wrapper-home {
+    &::after {
+        margin-block-start: -0.25em;
+    }
+}
+
+.filter {
+    padding: 0.25rem;
+    min-width: 6rem;
+}
+
 .select-options {
+    flex: 1 1 50%;
+
     @include utils.mQ(30rem) {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: baseline;
     }
 }
@@ -54,24 +70,5 @@ select {
 
     &>*+* {
         margin-block-start: 1rem;
-    }
-}
-
-.select-container {
-    font-size: 1.25rem;
-    cursor: pointer;
-    line-height: 1.1;
-    position: relative;
-
-    &::after {
-        content: "";
-        width: 0.8em;
-        height: 0.5em;
-        background-color: base.$clr-blue-100;
-        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-        position: absolute;
-        right: 1.5rem;
-        top: 50%;
-        margin-block-start: 0.75em;
     }
 }

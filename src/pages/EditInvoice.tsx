@@ -158,7 +158,7 @@ function EditInvoice(props: {
 		shiftKey: any;
 		preventDefault: () => void;
 	}) => {
-		if (event.key === "Escape") props.toggleOverlay;
+		if (event.key === "Escape") return props.toggleOverlay;
 		if (event.key !== "Tab") return;
 
 		const formElements =
@@ -232,7 +232,7 @@ function EditInvoice(props: {
 		console.log(invoice);
 		updateInvoiceMutation.mutate(invoice);
 		setShowConfirmSave(true);
-		props.toggleOverlay;
+		return props.toggleOverlay;
 	};
 
 	return (

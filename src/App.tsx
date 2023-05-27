@@ -9,7 +9,6 @@ import Toggle from "./components/Toggle";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
-import NewInvoice from "./pages/NewInvoice";
 
 const queryClient = new QueryClient();
 
@@ -25,12 +24,7 @@ function App() {
 			element: <ViewInvoice />,
 			// loader: rootLoader,
 		},
-    {/*
-		{
-			path: "/newInvoice",
-			element: <NewInvoice />,
-		},
-  */}
+   
 	]);
 
 	const localstorage: boolean = JSON.parse(
