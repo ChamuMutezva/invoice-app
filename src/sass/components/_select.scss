@@ -2,20 +2,65 @@
 @use '../base';
 @use '../utils';
 
-.select {   
-    appearance: none;   
+select {
+    &:focus-within {
+        border: 2px solid red;
+        border-radius: inherit;
+    }
+}
+
+.select-wrapper {
+    min-width: 9ch;
+    max-width: 30ch;
+    // border: 1px solid firebrick;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1.1;
+    // background-color: #fff;
+    // background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+    position: relative;
+    display: grid;
+    // grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+        content: "";
+        width: 0.8em;
+        height: 0.5em;
+        background-color: base.$clr-blue-200;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        justify-self: end;
+        position: absolute;
+    }
+}
+
+.select-options {
+    @include utils.mQ(30rem) {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: baseline;
+    }
+}
+
+.select {
+    appearance: none;
     font-family: inherit;
     // font-size: inherit;
     cursor: inherit;
+
     &>*+* {
         margin-block-start: 1rem;
     }
 }
 
-.select-container {    
+.select-container {
     font-size: 1.25rem;
     cursor: pointer;
-    line-height: 1.1;    
+    line-height: 1.1;
     position: relative;
 
     &::after {
@@ -23,7 +68,7 @@
         width: 0.8em;
         height: 0.5em;
         background-color: base.$clr-blue-100;
-        clip-path: polygon(100% 0%, 0 0%, 50% 100%);        
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
         position: absolute;
         right: 1.5rem;
         top: 50%;

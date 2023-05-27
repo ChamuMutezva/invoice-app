@@ -122,25 +122,27 @@ function HomePage() {
 						</div>
 
 						<div className="flex filter-new">
-							<Form className="select-options">
+							<Form className="select-options" id="filter-status">
 								<label
 									className="filter-label"
 									htmlFor="filter-options"
 								>
 									Filter
 								</label>
-								<select
-									name="choice"
-									className="filter"
-									id="filter-options"
-									value={selectedValue}
-									onChange={(evt) => onChange(evt)}
-								>
-									<option value="all">All</option>
-									<option value="paid">Paid</option>
-									<option value="pending">Pending</option>
-									<option value="draft">Draft</option>
-								</select>
+								<div className="select-wrapper">
+									<select
+										name="choice"
+										className="filter"
+										id="filter-options"
+										value={selectedValue}
+										onChange={(evt) => onChange(evt)}
+									>
+										<option value="all">All</option>
+										<option value="paid">Paid</option>
+										<option value="pending">Pending</option>
+										<option value="draft">Draft</option>
+									</select>
+								</div>
 							</Form>
 
 							<div>

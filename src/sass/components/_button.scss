@@ -83,7 +83,7 @@
     border-radius: 8px;
     border: none;
     justify-content: center;
-   // margin-bottom: calc(base.$spacer1 * 2);
+    // margin-bottom: calc(base.$spacer1 * 2);
     background-color: inherit;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 
@@ -200,6 +200,7 @@
 
 .btn-overlay-close {
     opacity: 0;
+
     &::before {
         display: block;
         position: absolute;
@@ -243,6 +244,11 @@
 
     .btn-cancel {
         background-color: base.$clr-black-400;
+        color: base.$clr-white-100;
+    }
+
+
+    .btn-new-invoice {
         color: base.$clr-white-100;
     }
 }

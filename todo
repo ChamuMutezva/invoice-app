@@ -16,6 +16,6 @@
 - when status is paid , MARK AS PAID button should not be displayed @done
 - overlay should close the dialog when clicked @done
 - homepage overlay when the new invoice button has been clicked @done
-- moving focus to the opened dialog
+- moving focus to the opened dialog @done
 - Focus trapping in the dialog
 - Return to Homepage button not Working in CreateNewInvoice Dialog 

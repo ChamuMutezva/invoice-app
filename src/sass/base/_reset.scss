@@ -68,6 +68,22 @@ select {
     font: inherit;
 }
 
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0em 0;
+    margin: 0;
+    width: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    font-size: inherit;
+    line-height: inherit;
+    cursor: inherit;
+    font-family: inherit;
+    outline: none;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {
@@ -83,4 +99,3 @@ select {
         scroll-behavior: auto !important;
     }
 }
-
