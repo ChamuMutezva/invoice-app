@@ -26,8 +26,8 @@ function EditInvoice(props: {
 		total: 0.0,
 	};
 
-	const queryClient = useQueryClient();	
-	const [showConfirmSave, setShowConfirmSave] = useState(false);	
+	const queryClient = useQueryClient();
+	const [showConfirmSave, setShowConfirmSave] = useState(false);
 	const [project, setProject] = useState(projectInit);
 	const params = useParams();
 
@@ -94,7 +94,8 @@ function EditInvoice(props: {
 			(item: { total: any }) => item.total
 		);
 		console.log(totalArray);
-		const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+		const total: number =
+			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		setValue("total", total);
 		// console.log(total);
 		return total;
@@ -153,6 +154,7 @@ function EditInvoice(props: {
 
 	useEffect(() => {
 		calculateTotal();
+		setValue("total", calculateTotal());
 	}, [watchTotal[0]]);
 
 	useEffect(() => {
@@ -534,7 +536,7 @@ function EditInvoice(props: {
 											minLength: 4,
 										})}
 									/>
-									{`${errors.items}?.index.name` && (
+									{`errors.${field.name}` && (
 										<p
 											role="alert"
 											id="description-lbl"
@@ -584,16 +586,7 @@ function EditInvoice(props: {
 																	`items.${index}.price`
 																),
 														});
-														setValue(
-															"total",
-															calculateTotal()
-														);
-													},
-													onBlur: () => {
-														setValue(
-															"total",
-															calculateTotal()
-														);
+														calculateTotal();
 													},
 												}
 											)}
@@ -612,15 +605,16 @@ function EditInvoice(props: {
 										</label>
 										<input
 											type="number"
-											step={0.01}
+											step={1}
 											id={`price`}
 											className={`price input calculate-line`}
 											placeholder={"200.00"}
 											{...register(
-												`items.${index}.price`,
+												`items.${index}.price`, 
 												{
+													valueAsNumber: true,
 													required: true,
-													min: 1,
+													min: 1,													
 													onChange: (evt) => {
 														setValue(
 															`items.${index}.total`,
@@ -640,16 +634,7 @@ function EditInvoice(props: {
 																	`items.${index}.quantity`
 																),
 														});
-														setValue(
-															"total",
-															calculateTotal()
-														);
-													},
-													onBlur: () => {
-														setValue(
-															"total",
-															calculateTotal()
-														);
+														calculateTotal();
 													},
 												}
 											)}
@@ -704,6 +689,19 @@ function EditInvoice(props: {
 								</div>
 							</div>
 						))}
+
+						<div className="sr-only grand-total-wrapper">
+							<label
+								htmlFor="grand-total"
+								className="label"
+							>
+								The grand total is
+								<input
+									type="number"
+									{...register("total")}
+								/>
+							</label>
+						</div>
 
 						<button
 							type="button"

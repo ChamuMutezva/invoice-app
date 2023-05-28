@@ -5,7 +5,7 @@
 - new invoice button display size @done
 - increase space between options dropdown
 - text font sizes should be increased in size @done
-- EditPage - fix calculations when changes has been cancelled. 
+- EditPage - fix calculations when changes has been cancelled. @done
 - Homepage - Grid items spacing. Name and dates to have more width @done
 - Viewpage - accessibility - address just read without indication @done
 - Viewpage - mobile display for 22.5rem and below in a single row. @done

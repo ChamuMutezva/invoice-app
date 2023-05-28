@@ -1,3 +1,3 @@
-export const reducer = (accumulator: number, currentValue: number) => {
+export const reducer = (accumulator: number, currentValue: number) =>  {
   return accumulator + currentValue;
 };
