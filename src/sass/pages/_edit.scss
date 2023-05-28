@@ -81,13 +81,22 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    border: none;
+    // border: none;
     border-radius: 8px;
     font-weight: 700;
     font-size: base.$fs-15;
 
+
     @include utils.mQ(45rem) {
         max-width: 12rem;
+    }
+}
+
+.item-total {
+    &:read-only {
+        background: inherit;
+        border: none;
+        outline: none;
     }
 }
 
@@ -120,7 +129,7 @@
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
 }
 
-.footer {    
+.footer {
     position: absolute;
     left: 0;
     width: 100%;
@@ -128,7 +137,7 @@
     box-shadow: 0px -20px 20px 1px base.$clr-black-600;
 
     @include utils.mQ(64rem) {
-      //  width: calc(100% - 20px);
+        //  width: calc(100% - 20px);
     }
 }
 
@@ -153,6 +162,14 @@
     .footer {
         background-color: base.$clr-black-200;
         box-shadow: none;
+    }
+
+    .item-total {
+        &:read-only {
+            background: inherit;
+            border: none;
+            outline: none;
+        }
     }
 
 }

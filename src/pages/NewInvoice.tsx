@@ -3,7 +3,6 @@ import { Form } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
-// import PreviousPage from "../components/PreviousPage";
 import BackImg from "../assets/icon-arrow-left.svg";
 import { randomId } from "../hooks/useRandomID";
 import createInvoice from "../hooks/useCreateInvoice";

@@ -1,6 +1,6 @@
 import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { Form, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
 import DeleteBtn from "../assets/icon-delete.svg";
@@ -20,17 +20,14 @@ function EditInvoice(props: {
 	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
 }) {
 	const projectInit: ICosting = {
-		name: "Project Name",
-		quantity: 1,
-		price: 100.0,
-		total: 100.0,
+		name: "",
+		quantity: 0,
+		price: 0.0,
+		total: 0.0,
 	};
 
-	const queryClient = useQueryClient();
-	const [showDeleteProjectDialog, setShowDeleteProjectDialog] =
-		useState(false);
-	const [showConfirmSave, setShowConfirmSave] = useState(false);
-	const [projectName, setProjectName] = useState("");
+	const queryClient = useQueryClient();	
+	const [showConfirmSave, setShowConfirmSave] = useState(false);	
 	const [project, setProject] = useState(projectInit);
 	const params = useParams();
 
@@ -81,27 +78,29 @@ function EditInvoice(props: {
 		getValues,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: "items",
+	});
 
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
-
+	console.log(watchTotal);
 	// When a new project has been added or a project has been deleted
 	// the grandtotal should be recalculated
 	function calculateTotal(): number {
 		const totalArray = watchTotal[0].map(
 			(item: { total: any }) => item.total
 		);
+		console.log(totalArray);
 		const total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		setValue("total", total);
+		// console.log(total);
 		return total;
 	}
 
 	const addProject = () => {
-		setProject({
-			...project,
-			name: `Project name${invoice.items.length}`,
-		});
 		updateInvoiceMutation.mutate({
 			...invoice,
 			items: invoice.items.concat(project),
@@ -111,45 +110,7 @@ function EditInvoice(props: {
 
 	// Updates the array of projects ITEM by displaying . The obj has the following
 	// Name of project, quantity, price and total.
-	const addAnotherProject = (
-		evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-	) => {
-		evt.preventDefault();
-		addProject();
-	};
-
-	// Opens the Delete Project dialog with 2 options
-	// 1. Option 1 - Cancel delete and return to previous page
-	// 2. Option 2 - Delete project and return to previous page
-	const deleteProjectDialog = (
-		evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-		name: string
-	) => {
-		evt.preventDefault();
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-		setProjectName(name);
-	};
-
-	// Deletes a project from the invoice
-	const deleteProjectConfirmation = (
-		evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-	) => {
-		evt.preventDefault();
-		console.log(projectName);
-		updateInvoiceMutation.mutate({
-			...data,
-			items: invoice.items.filter(
-				(item: { name: string }) => item.name !== projectName
-			),
-			total: calculateTotal(),
-		});
-		setProjectName("");
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-	};
-
-	const exitWithoutDeletingProject = () => {
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-	};
+	const addAnotherProject = () => addProject();
 
 	// Focus trap implementation inspired by Tediko from his solution - see link below
 	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
@@ -191,6 +152,10 @@ function EditInvoice(props: {
 	}, []);
 
 	useEffect(() => {
+		calculateTotal();
+	}, [watchTotal[0]]);
+
+	useEffect(() => {
 		// update the days when payment terms have been selected
 		switch (payment) {
 			case "1":
@@ -229,6 +194,7 @@ function EditInvoice(props: {
 		const invoice = {
 			...data,
 		};
+		calculateTotal();
 		console.log(invoice);
 		updateInvoiceMutation.mutate(invoice);
 		setShowConfirmSave(true);
@@ -544,10 +510,11 @@ function EditInvoice(props: {
 
 					<fieldset className="edit-invoice-details">
 						<legend className="edit-field-title">Item list</legend>
-						{invoice.items.map((item: ICosting, index: number) => (
+
+						{fields.map((field, index: number) => (
 							<div
 								className="item-line"
-								key={item.name}
+								key={field.id}
 							>
 								{/* PROJECT NAME DETAILS */}
 								<div className={`form-input-wrapper`}>
@@ -567,7 +534,7 @@ function EditInvoice(props: {
 											minLength: 4,
 										})}
 									/>
-									{`${errors}.items?.index.name` && (
+									{`${errors.items}?.index.name` && (
 										<p
 											role="alert"
 											id="description-lbl"
@@ -596,6 +563,7 @@ function EditInvoice(props: {
 												`items.${index}.quantity`,
 												{
 													required: true,
+													min: 1,
 													onChange: (evt) => {
 														setValue(
 															`items.${index}.total`,
@@ -652,6 +620,7 @@ function EditInvoice(props: {
 												`items.${index}.price`,
 												{
 													required: true,
+													min: 1,
 													onChange: (evt) => {
 														setValue(
 															`items.${index}.total`,
@@ -717,12 +686,11 @@ function EditInvoice(props: {
 										<button
 											className="btn btn-delete calculate-line"
 											aria-label="delete product"
-											onClick={(evt) =>
-												deleteProjectDialog(
-													evt,
-													invoice.items[index].name
-												)
-											}
+											type="button"
+											onClick={() => [
+												calculateTotal(),
+												remove(index),
+											]}
 										>
 											<img
 												src={DeleteBtn}
@@ -736,10 +704,16 @@ function EditInvoice(props: {
 								</div>
 							</div>
 						))}
+
 						<button
+							type="button"
 							className="btn btn-add-item"
 							disabled={!isDirty || !isValid}
-							onClick={addAnotherProject}
+							onClick={() => [
+								append(projectInit),
+								calculateTotal(),
+								addAnotherProject,
+							]}
 						>
 							<img
 								src={AddItemImg}
@@ -771,12 +745,6 @@ function EditInvoice(props: {
 				</Form>
 			</main>
 
-			<DeleteProject
-				showDeleteProjectDialog={showDeleteProjectDialog}
-				exitWithoutDeletingProject={exitWithoutDeletingProject}
-				deleteProjectConfirmation={deleteProjectConfirmation}
-				name={projectName}
-			/>
 			<SaveEditedPageDialog showConfirmSave={showConfirmSave} />
 		</>
 	);

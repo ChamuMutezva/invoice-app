@@ -695,6 +695,8 @@ select:focus-within {
 .filter {
   padding: 0.25rem;
   min-width: 6rem;
+  border: none;
+  background-color: inherit;
 }
 
 .select-options {
@@ -781,11 +783,6 @@ input[type=date]::before {
     padding-inline: 1rem;
     padding-block: 0;
   }
-}
-
-.filter {
-  border: none;
-  background-color: inherit;
 }
 
 .logo-container {
@@ -1285,7 +1282,6 @@ span.container-img {
   display: flex;
   justify-content: center;
   align-content: center;
-  border: none;
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.9375rem;
@@ -1294,6 +1290,12 @@ span.container-img {
   .calculate-line {
     max-width: 12rem;
   }
+}
+
+.item-total:read-only {
+  background: inherit;
+  border: none;
+  outline: none;
 }
 
 .calculate-line-container {
@@ -1350,6 +1352,11 @@ span.container-img {
 .dark-mode .footer {
   background-color: hsl(233, 31%, 17%);
   box-shadow: none;
+}
+.dark-mode .item-total:read-only {
+  background: inherit;
+  border: none;
+  outline: none;
 }
 
 .error-page {
