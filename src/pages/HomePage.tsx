@@ -260,7 +260,7 @@ function HomePage() {
 					toggleOverlay={toggleOverlay}
 				>
 					<NewInvoice
-						toggleOverlay={toggleOverlay}
+						toggleOverlay={() =>toggleOverlay()}
 						childInputRef={childInputRef}
 					/>
 				</OverLay>

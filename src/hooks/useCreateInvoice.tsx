@@ -14,8 +14,7 @@ export default function createInvoice(
 		},
 
 		onSuccess: () => {
-			queryClient.invalidateQueries(["invoices"]);
-			navigate("/");
+			queryClient.invalidateQueries(["invoices"]);			
 		},
 		onError: ({ message }) => {
 			setCreateInvoiceError(message);

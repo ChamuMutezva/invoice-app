@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
@@ -25,7 +25,7 @@ const NewInvoice = (props: {
 		total: 100.0,
 	};
 
-	// const navigate = useNavigate(); // () => navigate(-1)
+	const navigate = useNavigate();
 	const [createInvoiceError, setCreateInvoiceError] = useState(null);
 	const { mutate, isError, isSuccess } = createInvoice(setCreateInvoiceError);
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
@@ -39,7 +39,7 @@ const NewInvoice = (props: {
 		createdAt: format(new Date(), "yyyy-MM-dd"),
 		paymentDue: format(add(Date.now(), { days: 1 }), "yyyy-MM-dd"),
 		description: "",
-		paymentTerms: "Net 1 days",
+		paymentTerms: 1,
 		clientEmail: "ckmutezva@gmail.com",
 		clientName: "Chamu Mutezva",
 		status: "draft",
@@ -62,11 +62,10 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	const closeDialog = () => [
-		(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-			props.toggleOverlay(e),
 		setShowDialog(false),
+		props.toggleOverlay,
+		navigate("/"),
 	];
-
 	// Opens the Delete Project dialog with 2 options
 	// 1. Option 1 - Cancel delete and return to previous page
 	// 2. Option 2 - Delete project and return to previous page
@@ -110,6 +109,7 @@ const NewInvoice = (props: {
 			total: calculateTotal(),
 		});
 		setShowDialog(() => true);
+		props.toggleOverlay;
 		console.log(data);
 		mutate(data);
 	};
@@ -123,7 +123,8 @@ const NewInvoice = (props: {
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0
 		);
 		// console.log(watchTotal[0]);
-		const total: number = totalArray.length > 0 ? totalArray.reduce(reducer).toFixed(2) : 0;
+		const total: number =
+			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		return total;
 	}
 
@@ -161,12 +162,12 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		document.addEventListener("keydown", focusTrap);
-		document.addEventListener("click", () => props.toggleOverlay)
+		document.addEventListener("click", () => props.toggleOverlay);
 		props.childInputRef.current.focus();
 		// Removing the event listener in the return function in order to avoid memory leaks.
 		return () => {
 			document.removeEventListener("keydown", focusTrap);
-			document.removeEventListener("click", () => props.toggleOverlay)
+			document.removeEventListener("click", () => props.toggleOverlay);
 		};
 	}, []);
 
