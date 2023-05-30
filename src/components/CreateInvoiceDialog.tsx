@@ -1,8 +1,9 @@
 import { MouseEventHandler, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 function CreateInvoiceDialog(props: {
 	closeDialog: MouseEventHandler<HTMLButtonElement>;
-	showDialog: boolean;
+	showCreateInvoiceDialog: boolean;
 }) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const btnRef = useRef<HTMLButtonElement>(null);
@@ -10,18 +11,19 @@ function CreateInvoiceDialog(props: {
 	useEffect(() => {
 		const dialogNode = dialogRef.current;
 
-		if (props.showDialog) {
+		if (props.showCreateInvoiceDialog) {
 			dialogNode?.showModal();
 			btnRef.current?.focus();
 		} else {
 			dialogNode?.close();
 		}
-	}, [props.showDialog]);
+	}, [props.showCreateInvoiceDialog]);
+
 	return (
 		<dialog
 			ref={dialogRef}
 			className={`modal-wrapper ${
-				props.showDialog ? "show-modal show-dialog" : ""
+				props.showCreateInvoiceDialog ? "show-modal show-dialog" : ""
 			}`}
 		>
 			<div className="dialog-container">
@@ -34,8 +36,8 @@ function CreateInvoiceDialog(props: {
 
 				<button
 					ref={btnRef}
-					className={`btn btn-link-home`}
 					onClick={props.closeDialog}
+					className={`btn btn-link-home`}
 				>
 					Return to Homepage
 				</button>

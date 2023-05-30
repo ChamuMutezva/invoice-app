@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -15,7 +15,7 @@ import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 
 const NewInvoice = (props: {
-	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
+	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
 	childInputRef: any;
 }) => {
 	const projectInit: ICosting = {
@@ -27,10 +27,11 @@ const NewInvoice = (props: {
 
 	const navigate = useNavigate();
 	const [createInvoiceError, setCreateInvoiceError] = useState(null);
-	const { mutate, isError, isSuccess } = createInvoice(setCreateInvoiceError);
+	const { mutate } = createInvoice(setCreateInvoiceError);
 	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
 	const [project, setProject] = useState(projectInit);
-	const [showDialog, setShowDialog] = useState(false);
+	const [showCreateInvoiceDialog, setShowCreateInvoiceDialog] =
+		useState(false);
 
 	// load initial form data on first visit to site
 	// format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
@@ -61,11 +62,10 @@ const NewInvoice = (props: {
 
 	const [data, setData] = useState(initialState);
 
-	const closeDialog = () => [
-		setShowDialog(false),
-		props.toggleOverlay,
-		navigate("/"),
-	];
+	function closeDialog() {
+		return navigate(0)
+		// [setShowCreateInvoiceDialog(false), (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => props.toggleOverlay(e)];
+	}
 	// Opens the Delete Project dialog with 2 options
 	// 1. Option 1 - Cancel delete and return to previous page
 	// 2. Option 2 - Delete project and return to previous page
@@ -108,10 +108,11 @@ const NewInvoice = (props: {
 			...data,
 			total: calculateTotal(),
 		});
-		setShowDialog(() => true);
-		props.toggleOverlay;
+
 		console.log(data);
 		mutate(data);
+		props.toggleOverlay;
+		setShowCreateInvoiceDialog(true);		
 	};
 
 	function calculateTotal(): number {
@@ -204,17 +205,20 @@ const NewInvoice = (props: {
 					format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
 				);
 		}
-		console.log(payment);
+		// console.log(payment);
 	}, [payment]);
 
 	useEffect(() => {
-		if (showDialog) {
+		console.log(
+			`Is the create invoice dialog open: ${showCreateInvoiceDialog}`
+		);
+		if (showCreateInvoiceDialog) {
 			document.body.classList.add("body-size");
 		}
 		return () => {
 			document.body.classList.remove("body-size");
 		};
-	});
+	}, [showCreateInvoiceDialog]);
 
 	if (createInvoiceError) {
 		return <h2>Error encountered: invoice could not be created</h2>;
@@ -806,7 +810,7 @@ const NewInvoice = (props: {
 				</Form>
 			</main>
 			<CreateInvoiceDialog
-				showDialog={showDialog}
+				showCreateInvoiceDialog={showCreateInvoiceDialog}
 				closeDialog={closeDialog}
 			/>
 		</>

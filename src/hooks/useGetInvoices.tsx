@@ -6,7 +6,7 @@ export default function getInvoices(filters: string) {
   const { isLoading, data, isError, error, isSuccess } = useQuery({
     queryKey: ["invoices", filters],
     queryFn: (filters) => {
-      console.log(filters);
+     // console.log(filters);
       return axios.get(`${API_ENDPOINT_PATH}`);
     },
   });

@@ -19,7 +19,9 @@ function HomePage() {
 		if (isNewInvoiceOverlayOpen) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-		console.log(isNewInvoiceOverlayOpen);
+		console.log(
+			`new invoice and overlay opened: ${isNewInvoiceOverlayOpen}`
+		);
 	}, [isNewInvoiceOverlayOpen]);
 
 	if (isLoading) {
@@ -39,7 +41,9 @@ function HomePage() {
 	}
 
 	function toggleOverlay() {
-		console.log(isNewInvoiceOverlayOpen);
+		console.log(
+			`new invoice and overlay opened: ${isNewInvoiceOverlayOpen}`
+		);
 		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);
 	}
 
@@ -254,17 +258,17 @@ function HomePage() {
 					)}
 				</div>
 			</main>
-			{isNewInvoiceOverlayOpen === true && (
+			{isNewInvoiceOverlayOpen === true ? (
 				<OverLay
 					isOverlayOpen={isNewInvoiceOverlayOpen}
 					toggleOverlay={toggleOverlay}
 				>
 					<NewInvoice
-						toggleOverlay={() =>toggleOverlay()}
+						toggleOverlay={toggleOverlay}
 						childInputRef={childInputRef}
 					/>
 				</OverLay>
-			)}
+			) : null}
 		</>
 	);
 }
