@@ -63,7 +63,7 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	function closeDialog() {
-		return navigate(0)
+		return navigate(0);
 		// [setShowCreateInvoiceDialog(false), (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => props.toggleOverlay(e)];
 	}
 	// Opens the Delete Project dialog with 2 options
@@ -112,7 +112,7 @@ const NewInvoice = (props: {
 		console.log(data);
 		mutate(data);
 		props.toggleOverlay;
-		setShowCreateInvoiceDialog(true);		
+		setShowCreateInvoiceDialog(true);
 	};
 
 	function calculateTotal(): number {
@@ -160,6 +160,11 @@ const NewInvoice = (props: {
 			lastElement.focus();
 		}
 	};
+
+	useEffect(() => {
+		calculateTotal();
+		setValue("total", calculateTotal());
+	}, [watchTotal[0]]);
 
 	useEffect(() => {
 		document.addEventListener("keydown", focusTrap);
@@ -614,16 +619,7 @@ const NewInvoice = (props: {
 																			`items.${index}.price`
 																		),
 																});
-																setValue(
-																	"total",
-																	calculateTotal()
-																);
-															},
-															onBlur: () => {
-																setValue(
-																	"total",
-																	calculateTotal()
-																);
+																calculateTotal();
 															},
 														}
 													)}
@@ -674,16 +670,7 @@ const NewInvoice = (props: {
 																			`items.${index}.quantity`
 																		),
 																});
-																setValue(
-																	"total",
-																	calculateTotal()
-																);
-															},
-															onBlur: () => {
-																setValue(
-																	"total",
-																	calculateTotal()
-																);
+																calculateTotal();
 															},
 														}
 													)}
@@ -722,6 +709,7 @@ const NewInvoice = (props: {
 											<button
 												className="btn btn-delete calculate-line"
 												aria-label="delete product"
+												type="button"
 												onClick={(evt) =>
 													deleteProjectDialog(
 														evt,

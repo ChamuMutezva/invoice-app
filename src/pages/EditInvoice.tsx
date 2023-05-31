@@ -559,6 +559,7 @@ function EditInvoice(props: {
 										<input
 											type="number"
 											id={`qty`}
+											step={1}
 											className={`qty input calculate-line`}
 											placeholder={"1"}
 											{...register(
@@ -605,7 +606,7 @@ function EditInvoice(props: {
 										</label>
 										<input
 											type="number"
-											step={1}
+											step={1.00}
 											id={`price`}
 											className={`price input calculate-line`}
 											placeholder={"200.00"}
