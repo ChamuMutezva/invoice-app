@@ -13,6 +13,7 @@ import CreateInvoiceDialog from "../components/CreateInvoiceDialog";
 import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
+import dueDays from "../utilities/selectPaymentDue";
 
 const NewInvoice = (props: {
 	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
@@ -117,15 +118,14 @@ const NewInvoice = (props: {
 
 	function calculateTotal(): number {
 		const totalArray = watchTotal[0].map(
-			(item: { total: any }) => item.total
+			(item: { total: number }) => item.total
 		);
-		setValue(
-			"total",
-			totalArray.length > 0 ? totalArray.reduce(reducer) : 0
-		);
-		// console.log(watchTotal[0]);
+
 		const total: number =
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+		setValue("total", totalArray.length > 0 ? total : 0);
+		// console.log(watchTotal[0]);
+
 		return total;
 	}
 
@@ -179,37 +179,7 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		// update the days when payment terms have been selected
-		switch (payment) {
-			case "1":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 1 }), "yyyy-MM-dd")
-				);
-				break;
-			case "6":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 6 }), "yyyy-MM-dd")
-				);
-				break;
-			case "7":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 7 }), "yyyy-MM-dd")
-				);
-				break;
-			case "14":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 14 }), "yyyy-MM-dd")
-				);
-				break;
-			default:
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
-				);
-		}
+		dueDays(payment, setValue)		
 		// console.log(payment);
 	}, [payment]);
 

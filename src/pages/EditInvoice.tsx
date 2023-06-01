@@ -14,6 +14,7 @@ import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
+import dueDays from "../utilities/selectPaymentDue";
 
 function EditInvoice(props: {
 	childInputRef: any; // Ref<HTMLFormElement> | undefined;
@@ -158,38 +159,8 @@ function EditInvoice(props: {
 	}, [watchTotal[0]]);
 
 	useEffect(() => {
-		// update the days when payment terms have been selected
-		switch (payment) {
-			case "1":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 1 }), "yyyy-MM-dd")
-				);
-				break;
-			case "6":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 6 }), "yyyy-MM-dd")
-				);
-				break;
-			case "7":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 7 }), "yyyy-MM-dd")
-				);
-				break;
-			case "14":
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 14 }), "yyyy-MM-dd")
-				);
-				break;
-			default:
-				setValue(
-					"paymentDue",
-					format(add(Date.now(), { days: 30 }), "yyyy-MM-dd")
-				);
-		}
+		// update the payment days when payment terms have been selected
+		dueDays(payment, setValue)		
 	}, [payment]);
 
 	const handleSubmitForm = (data: InvoiceTypesID) => {
@@ -606,7 +577,7 @@ function EditInvoice(props: {
 										</label>
 										<input
 											type="number"
-											step={1.00}
+											step={1}
 											id={`price`}
 											className={`price input calculate-line`}
 											placeholder={"200.00"}
@@ -658,6 +629,7 @@ function EditInvoice(props: {
 											className={`item-total input calculate-line`}
 											placeholder={"200.00"}
 											readOnly={true}
+											disabled={true}
 											{...register(
 												`items.${index}.total`,
 												{
