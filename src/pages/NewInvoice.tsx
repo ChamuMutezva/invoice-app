@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import add from "date-fns/add";
 import format from "date-fns/format";
 import BackImg from "../assets/icon-arrow-left.svg";
@@ -64,23 +64,12 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	function closeDialog() {
-		return navigate(0);
-		// [setShowCreateInvoiceDialog(false), (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => props.toggleOverlay(e)];
+		return navigate(0);		
 	}
-	// Opens the Delete Project dialog with 2 options
-	// 1. Option 1 - Cancel delete and return to previous page
-	// 2. Option 2 - Delete project and return to previous page
-	const deleteProjectDialog = (
-		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		name: string
-	) => {
-		evt.preventDefault();
-		setDeleteProjectModal(!deleteProjectModal);
-	};
-
+	
 	// Updates The obj which has the following
 	// Name of project, quantity, price and total.
-	const updateItems = (
+	const updateProjects = (
 		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		evt.preventDefault();
@@ -90,8 +79,9 @@ const NewInvoice = (props: {
 		});
 		setData({ ...data, items: data.items.concat(project) });
 		console.log(evt);
-	};
 
+	};
+	
 	// load form with initialstate
 	const {
 		register,
@@ -103,6 +93,10 @@ const NewInvoice = (props: {
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
 	//console.log(errors);
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: "items",
+	});
 
 	const handleSubmitForm = (data: any) => {
 		setData({
@@ -124,7 +118,7 @@ const NewInvoice = (props: {
 		const total: number =
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		setValue("total", totalArray.length > 0 ? total : 0);
-		// console.log(watchTotal[0]);
+		console.log(totalArray);
 
 		return total;
 	}
@@ -179,7 +173,7 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		// update the days when payment terms have been selected
-		dueDays(payment, setValue)		
+		dueDays(payment, setValue);
 		// console.log(payment);
 	}, [payment]);
 
@@ -521,144 +515,140 @@ const NewInvoice = (props: {
 						{data.items.length <= 0 ? (
 							<p>They is no projects yet to display</p>
 						) : (
-							data.items.map((item, index) => (
+							fields.map((field, index) => (
 								<div
 									className="item-line"
-									key={item.name}
+									key={field.id}
 								>
 									{/* PROJECT NAME DETAILS */}
-									<div className={`form-input-wrapper`}>
-										<label
-											className="label"
-											htmlFor={`project-name`}
-										>
-											Project name
-										</label>
-										<input
-											type="text"
-											id={`project-name`}
-											className={`input project-name`}
-											placeholder={"Name of project"}
-											{...register(
-												`items.${index}.name`,
-												{
-													required: true,
-													minLength: {
-														value: 4,
-														message:
-															"Must be longer than 4",
-													},
-													onChange(evt) {
-														setProject({
-															...project,
-															name: evt.target
-																.value,
-														});
-													},
-												}
-											)}
-										/>
-									</div>
+									<CustomInput
+										name={`items.${index}.name`}
+										control={control}
+										labelText={"Project Name"}
+										type={"text"}
+										className=""
+										rules={{
+											required:
+												"Project name is required",
+											minLength: {
+												value: 4,
+												message:
+													"Project name must be greater than 4",
+											},
+											maxLength: {
+												value: 40,
+												message:
+													"Project name  must be less than 40",
+											},
+										}}
+									/>
 
 									{/* QUANTITY DETAILS */}
 									<div className={`costing-line`}>
 										<div className="quantity-line calculate-line-container">
-											<label
-												className="label"
-												htmlFor={`qty-line`}
-											>
-												Qty
-											</label>
-											{watchTotal && (
-												<input
-													type="number"
-													id={`qty`}
-													className={`qty input calculate-line`}
-													placeholder={"1"}
-													{...register(
-														`items.${index}.quantity`,
-														{
-															required: true,
-															onChange: (evt) => {
-																setValue(
-																	`items.${index}.total`,
-																	evt.target
-																		.value *
-																		getValues(
-																			`items.${index}.price`
-																		)
-																);
-																setProject({
-																	...project,
-																	quantity:
-																		evt
-																			.target
-																			.value,
-																	total:
-																		evt
-																			.target
-																			.value *
-																		getValues(
-																			`items.${index}.price`
-																		),
-																});
-																calculateTotal();
-															},
-														}
-													)}
-												/>
-											)}
+											<CustomInput
+												name={`items.${index}.quantity`}
+												control={control}
+												labelText={"Qty"}
+												type={"number"}
+												className={`qty input calculate-line`}
+												rules={{
+													required:
+														"Quantity is required",
+													step: 1,
+													min: {
+														value: 1,
+														message:
+															"Quantity must be greater than 0",
+													},
+													max: {
+														value: 1000,
+														message:
+															"Quantity must be less than 1000",
+													},
+													onChange: (evt: {
+														target: {
+															value: number;
+														};
+													}) => {
+														setValue(
+															`items.${index}.total`,
+															evt.target.value *
+																getValues(
+																	`items.${index}.price`
+																)
+														);
+														setProject({
+															...project,
+															quantity:
+																evt.target
+																	.value,
+															total:
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.price`
+																),
+														});
+														calculateTotal();
+													},
+												}}
+											/>
 										</div>
 
 										{/* PRICE DETAILS */}
 										<div
 											className={`price-line calculate-line-container`}
 										>
-											<label
-												className="label"
-												htmlFor={`price`}
-											>
-												Price
-											</label>
-											{watchTotal && (
-												<input
-													type="number"
-													step={0.01}
-													id={`price`}
-													className={`price input calculate-line`}
-													placeholder={"200.00"}
-													{...register(
-														`items.${index}.price`,
-														{
-															required: true,
-															onChange: (evt) => {
-																setValue(
-																	`items.${index}.total`,
-																	evt.target
-																		.value *
-																		getValues(
-																			`items.${index}.quantity`
-																		)
-																);
-																setProject({
-																	...project,
-																	price: evt
-																		.target
-																		.value,
-																	total:
-																		evt
-																			.target
-																			.value *
-																		getValues(
-																			`items.${index}.quantity`
-																		),
-																});
-																calculateTotal();
-															},
-														}
-													)}
-												/>
-											)}
+											<CustomInput
+												name={`items.${index}.price`}
+												control={control}
+												labelText={"Price"}
+												type={"number"}
+												className={
+													"price calculate-line"
+												}
+												rules={{
+													required:
+														"Price is required",
+													step: 1,
+													min: {
+														value: 1,
+														message:
+															"Price must be greater than 0",
+													},
+													max: {
+														value: 1000000,
+														message:
+															"Price must be less than 1000000",
+													},
+													onChange: (evt: {
+														target: {
+															value: number;
+														};
+													}) => {
+														setValue(
+															`items.${index}.total`,
+															evt.target.value *
+																getValues(
+																	`items.${index}.quantity`
+																)
+														);
+														setProject({
+															...project,
+															price: evt.target
+																.value,
+															total:
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.quantity`
+																),
+														});
+														calculateTotal();
+													},
+												}}
+											/>
 										</div>
 
 										{/* PROJECT TOTAL DETAILS */}
@@ -693,12 +683,10 @@ const NewInvoice = (props: {
 												className="btn btn-delete calculate-line"
 												aria-label="delete product"
 												type="button"
-												onClick={(evt) =>
-													deleteProjectDialog(
-														evt,
-														data.items[index].name
-													)
-												}
+												onClick={() => [
+													calculateTotal(),
+													remove(index),
+												]}
 											>
 												<img
 													src={DeleteBtn}
@@ -738,9 +726,14 @@ const NewInvoice = (props: {
 						</div>
 
 						<button
+							type="button"
 							className="btn btn-add-item"
 							disabled={!isDirty || !isValid}
-							onClick={updateItems}
+							onClick={() => [
+								append(projectInit),
+								calculateTotal(),
+								updateProjects,
+							]}
 						>
 							<img
 								src={AddItemImg}
