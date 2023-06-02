@@ -235,6 +235,7 @@ const NewInvoice = (props: {
 							name="senderAddress.street"
 							labelText="Street address"
 							control={control}
+							className=""
 							rules={{
 								required: "Street is required",
 								minLength: {
@@ -255,6 +256,7 @@ const NewInvoice = (props: {
 								name="senderAddress.city"
 								labelText="City"
 								control={control}
+								className=""
 								rules={{
 									required: "City is required",
 									minLength: {
@@ -274,6 +276,7 @@ const NewInvoice = (props: {
 								name="senderAddress.postCode"
 								labelText="Post code"
 								control={control}
+								className=""
 								rules={{
 									required: "postal code is required",
 									minLength: {
@@ -295,6 +298,7 @@ const NewInvoice = (props: {
 								name="senderAddress.country"
 								labelText="Country"
 								control={control}
+								className=""
 								rules={{
 									required: "country is required",
 									minLength: {
@@ -320,6 +324,7 @@ const NewInvoice = (props: {
 							name="clientName"
 							labelText="Client's name"
 							control={control}
+							className=""
 							rules={{
 								required: "Client name is required",
 								minLength: {
@@ -340,6 +345,7 @@ const NewInvoice = (props: {
 							name="clientEmail"
 							labelText="Client's email"
 							control={control}
+							className=""
 							rules={{
 								required: "Email is required",
 								minLength: {
@@ -361,6 +367,7 @@ const NewInvoice = (props: {
 							name="clientAddress.street"
 							labelText="Street"
 							control={control}
+							className=""
 							rules={{
 								required: "Client Street is required",
 								minLength: {
@@ -383,6 +390,7 @@ const NewInvoice = (props: {
 								name="clientAddress.city"
 								labelText="City"
 								control={control}
+								className=""
 								rules={{
 									required: "Client city is required",
 									minLength: {
@@ -404,6 +412,7 @@ const NewInvoice = (props: {
 								name="clientAddress.postCode"
 								labelText="Post code"
 								control={control}
+								className=""
 								rules={{
 									required: "Client postal code is required",
 									minLength: {
@@ -425,6 +434,7 @@ const NewInvoice = (props: {
 								name="clientAddress.country"
 								labelText="Country"
 								control={control}
+								className=""
 								rules={{
 									required: "Client country is required",
 									minLength: {
@@ -449,6 +459,7 @@ const NewInvoice = (props: {
 								name="createdAt"
 								labelText="Invoice Date"
 								control={control}
+								className=""
 								rules={{
 									required: "Date is required",
 								}}
@@ -477,6 +488,7 @@ const NewInvoice = (props: {
 							name="paymentDue"
 							labelText="Due Date"
 							control={control}
+							className=""
 							rules={{
 								required: "Date is required",
 							}}
@@ -488,6 +500,7 @@ const NewInvoice = (props: {
 							name="description"
 							labelText="Project description"
 							control={control}
+							className=""
 							rules={{
 								required: "Project description is required",
 								minLength: {

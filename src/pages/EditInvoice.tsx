@@ -30,6 +30,7 @@ function EditInvoice(props: {
 	const queryClient = useQueryClient();
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
 	const [project, setProject] = useState(projectInit);
+	const [quantity, setQuantity] = useState();
 	const params = useParams();
 
 	// Fetch an invoice
@@ -40,8 +41,11 @@ function EditInvoice(props: {
 	const initialState: InvoiceTypesID = {
 		_id: invoice._id,
 		id: invoice.id,
-		createdAt: format(new Date(invoice.createdAt), "yyyy-MM-dd"),
-		paymentDue: invoice.paymentDue,
+		createdAt: format(
+			new Date(invoice.createdAt.split("T").shift()),
+			"yyyy-MM-dd"
+		),
+		paymentDue: format(new Date(invoice.paymentDue), "yyyy-MM-dd"),
 		description: invoice.description,
 		paymentTerms: invoice.paymentTerms,
 		clientEmail: invoice.clientEmail,
@@ -87,12 +91,13 @@ function EditInvoice(props: {
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
-	console.log(watchTotal);
+
+	// console.log(watchTotal);
 	// When a new project has been added or a project has been deleted
 	// the grandtotal should be recalculated
 	function calculateTotal(): number {
 		const totalArray = watchTotal[0].map(
-			(item: { total: any }) => item.total
+			(item: { total: number }) => item.total
 		);
 		console.log(totalArray);
 		const total: number =
@@ -110,8 +115,8 @@ function EditInvoice(props: {
 		});
 	};
 
-	// Updates the array of projects ITEM by displaying . The obj has the following
-	// Name of project, quantity, price and total.
+	// Updates the array of projects ITEM by displaying .
+	// The obj has the following: name of project, quantity, price and total.
 	const addAnotherProject = () => addProject();
 
 	// Focus trap implementation inspired by Tediko from his solution - see link below
@@ -160,7 +165,7 @@ function EditInvoice(props: {
 
 	useEffect(() => {
 		// update the payment days when payment terms have been selected
-		dueDays(payment, setValue)		
+		dueDays(payment, setValue);
 	}, [payment]);
 
 	const handleSubmitForm = (data: InvoiceTypesID) => {
@@ -206,6 +211,7 @@ function EditInvoice(props: {
 							name="senderAddress.street"
 							labelText="Street"
 							control={control}
+							className=""
 							rules={{
 								required: "Sender street is required",
 								minLength: {
@@ -228,6 +234,7 @@ function EditInvoice(props: {
 								name="senderAddress.city"
 								labelText="City"
 								control={control}
+								className=""
 								rules={{
 									required: "Sender city is required",
 									minLength: {
@@ -249,6 +256,7 @@ function EditInvoice(props: {
 								name="senderAddress.postCode"
 								labelText="Post Code"
 								control={control}
+								className=""
 								rules={{
 									required: "Sender post code is required",
 									minLength: {
@@ -270,6 +278,7 @@ function EditInvoice(props: {
 								name="senderAddress.country"
 								labelText="Country"
 								control={control}
+								className=""
 								rules={{
 									required: "Sender country is required",
 									minLength: {
@@ -297,6 +306,7 @@ function EditInvoice(props: {
 							name="clientName"
 							labelText="Client's name"
 							control={control}
+							className=""
 							rules={{
 								required: "Client name is required",
 								minLength: {
@@ -317,6 +327,7 @@ function EditInvoice(props: {
 							name="clientEmail"
 							labelText="Client's email"
 							control={control}
+							className=""
 							rules={{
 								required: "Email is required",
 								minLength: {
@@ -338,6 +349,7 @@ function EditInvoice(props: {
 							name="clientAddress.street"
 							labelText="Street"
 							control={control}
+							className=""
 							rules={{
 								required: "Client street is required",
 								minLength: {
@@ -360,6 +372,7 @@ function EditInvoice(props: {
 								name="clientAddress.city"
 								labelText="City"
 								control={control}
+								className=""
 								rules={{
 									required: "Client city is required",
 									minLength: {
@@ -381,6 +394,7 @@ function EditInvoice(props: {
 								name="clientAddress.postCode"
 								labelText="Post code"
 								control={control}
+								className=""
 								rules={{
 									required: "Client postal code is required",
 									minLength: {
@@ -402,6 +416,7 @@ function EditInvoice(props: {
 								name="clientAddress.country"
 								labelText="Country"
 								control={control}
+								className=""
 								rules={{
 									required: "Client country is required",
 									minLength: {
@@ -427,6 +442,7 @@ function EditInvoice(props: {
 								name="createdAt"
 								labelText="Invoice Date"
 								control={control}
+								className=""
 								rules={{
 									required: "Date is required",
 								}}
@@ -455,6 +471,7 @@ function EditInvoice(props: {
 							name="paymentDue"
 							labelText="Due Date"
 							control={control}
+							className=""
 							rules={{
 								required: "Date is required",
 							}}
@@ -466,6 +483,7 @@ function EditInvoice(props: {
 							name="description"
 							labelText="Project description"
 							control={control}
+							className=""
 							rules={{
 								required: "Project description is required",
 								minLength: {
@@ -489,127 +507,120 @@ function EditInvoice(props: {
 								className="item-line"
 								key={field.id}
 							>
-								{/* PROJECT NAME DETAILS */}
-								<div className={`form-input-wrapper`}>
-									<label
-										className="label"
-										htmlFor={`project-name`}
-									>
-										Project name
-									</label>
-									<input
-										type="text"
-										id={`project-name`}
-										className={`input project-name`}
-										placeholder={"Name of project"}
-										{...register(`items.${index}.name`, {
-											required: true,
-											minLength: 4,
-										})}
-									/>
-									{`errors.${field.name}` && (
-										<p
-											role="alert"
-											id="description-lbl"
-											className="form-errors"
-										>
-											{errors.items?.message?.toString()}
-										</p>
-									)}
-								</div>
+								<CustomInput
+									name={`items.${index}.name`}
+									control={control}
+									labelText={"Project Name"}
+									type={"text"}
+									className=""
+									rules={{
+										required: "Project name is required",
+										minLength: {
+											value: 4,
+											message:
+												"Project name must be greater than 4",
+										},
+										maxLength: {
+											value: 40,
+											message:
+												"Project name  must be less than 40",
+										},
+									}}
+								/>
 
 								{/* QUANTITY DETAILS */}
 								<div className={`costing-line`}>
 									<div className="quantity-line calculate-line-container">
-										<label
-											className="label"
-											htmlFor={`qty-line`}
-										>
-											Qty
-										</label>
-										<input
-											type="number"
-											id={`qty`}
-											step={1}
+										<CustomInput
+											name={`items.${index}.quantity`}
+											control={control}
+											labelText={"Qty"}
+											type={"number"}
 											className={`qty input calculate-line`}
-											placeholder={"1"}
-											{...register(
-												`items.${index}.quantity`,
-												{
-													required: true,
-													min: 1,
-													onChange: (evt) => {
-														setValue(
-															`items.${index}.total`,
+											rules={{
+												required:
+													"Quantity is required",
+												step: 1,
+												min: {
+													value: 1,
+													message:
+														"Quantity must be greater than 0",
+												},
+												max: {
+													value: 1000,
+													message:
+														"Quantity must be less than 1000",
+												},
+												onChange: (evt: {
+													target: { value: number };
+												}) => {
+													setValue(
+														`items.${index}.total`,
+														evt.target.value *
+															getValues(
+																`items.${index}.price`
+															)
+													);
+													setProject({
+														...project,
+														quantity:
+															evt.target.value,
+														total:
 															evt.target.value *
-																getValues(
-																	`items.${index}.price`
-																)
-														);
-														setProject({
-															...project,
-															quantity:
-																evt.target
-																	.value,
-															total:
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.price`
-																),
-														});
-														calculateTotal();
-													},
-												}
-											)}
+															getValues(
+																`items.${index}.price`
+															),
+													});
+													calculateTotal();
+												},
+											}}
 										/>
 									</div>
-
 									{/* PRICE DETAILS */}
 									<div
 										className={`price-line calculate-line-container`}
 									>
-										<label
-											className="label"
-											htmlFor={`price`}
-										>
-											Price
-										</label>
-										<input
-											type="number"
-											step={1}
-											id={`price`}
-											className={`price input calculate-line`}
-											placeholder={"200.00"}
-											{...register(
-												`items.${index}.price`, 
-												{
-													valueAsNumber: true,
-													required: true,
-													min: 1,													
-													onChange: (evt) => {
-														setValue(
-															`items.${index}.total`,
+										<CustomInput
+											name={`items.${index}.price`}
+											control={control}
+											labelText={"Price"}
+											type={"number"}
+											className={"price calculate-line"}
+											rules={{
+												required: "Price is required",
+												step: 1,
+												min: {
+													value: 1,
+													message:
+														"Price must be greater than 0",
+												},
+												max: {
+													value: 1000000,
+													message:
+														"Price must be less than 1000000",
+												},
+												onChange: (evt: {
+													target: { value: number };
+												}) => {
+													setValue(
+														`items.${index}.total`,
+														evt.target.value *
+															getValues(
+																`items.${index}.quantity`
+															)
+													);
+													setProject({
+														...project,
+														price: evt.target.value,
+														total:
 															evt.target.value *
-																getValues(
-																	`items.${index}.quantity`
-																)
-														);
-														setProject({
-															...project,
-															price: evt.target
-																.value,
-															total:
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.quantity`
-																),
-														});
-														calculateTotal();
-													},
-												}
-											)}
+															getValues(
+																`items.${index}.quantity`
+															),
+													});
+													calculateTotal();
+												},
+											}}
 										/>
 									</div>
 

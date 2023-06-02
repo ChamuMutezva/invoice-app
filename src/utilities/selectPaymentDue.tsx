@@ -5,10 +5,7 @@ import { InvoiceTypesID } from "../Types/DataTypes";
 
 // Select the number of days due for payment .
 // used with the select option in the NewInvoice and EditInvoice
-const dueDays = (
-	payment: string,
-	setValue: UseFormSetValue<any>
-) => {
+const dueDays = (payment: string, setValue: UseFormSetValue<any>) => {
 	switch (payment) {
 		case "1":
 			setValue(
