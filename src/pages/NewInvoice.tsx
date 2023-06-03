@@ -714,7 +714,7 @@ const NewInvoice = (props: {
 							</label>
 
 							<input
-								type="number"
+								type="text"
 								id={`grand-total`}
 								className={`grand-total input calculate-line`}
 								placeholder={"200.00"}

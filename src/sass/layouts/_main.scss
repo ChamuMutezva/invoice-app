@@ -2,7 +2,8 @@
 @use '../utils';
 
 .main {
-    margin: calc(base.$spacer1 * 1.5);
+    margin-inline: calc(base.$spacer1 * 1.5);
+    margin-block: calc(base.$spacer1 * 6);
     max-width: 45.6rem;
 
     @include utils.mQ(40rem) {
@@ -17,6 +18,10 @@
         margin-block: 0;
         padding-block: calc(base.$spacer2 * 3)
     }
+}
+
+.main-edit {
+    margin-block: calc(base.$spacer1 * 1.5);
 }
 
 .summary-title {
@@ -39,6 +44,19 @@
 .filter-new {
     gap: base.$spacer1;
     flex: 1 1 50%;
+}
+
+.wrapper-intro {
+    padding-block: 2rem;
+}
+
+.summary {
+    flex-direction: column;
+    align-items: baseline;
+
+    @include utils.mQ(22.5rem) {
+        flex-direction: row;
+    }
 }
 
 .summary-headings {

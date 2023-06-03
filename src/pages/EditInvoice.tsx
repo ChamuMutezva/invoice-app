@@ -96,14 +96,19 @@ function EditInvoice(props: {
 	// When a new project has been added or a project has been deleted
 	// the grandtotal should be recalculated
 	function calculateTotal(): number {
-		const totalArray = watchTotal[0].map(
-			(item: { total: number }) => item.total
-		);
-		console.log(totalArray);
-		const total: number =
-			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
-		setValue("total", total);
-		// console.log(total);
+		let total: number = 0;
+		try {
+			const totalArray = watchTotal[0].map(
+				(item: { total: number }) => item.total
+			);
+			console.log(totalArray);
+			total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
+			setValue("total", total);
+			console.log(total);
+			return total;
+		} catch (error) {
+			console.log(error);
+		}
 		return total;
 	}
 
@@ -183,7 +188,7 @@ function EditInvoice(props: {
 		<>
 			<main
 				id="edit-page"
-				className="main edit-page"
+				className="main-edit edit-page"
 				role="dialog"
 				aria-modal="true"
 			>
@@ -635,7 +640,7 @@ function EditInvoice(props: {
 											Total
 										</label>
 										<input
-											type="number"
+											type="text"
 											id={`item-total`}
 											className={`item-total input calculate-line`}
 											placeholder={"200.00"}
@@ -681,7 +686,7 @@ function EditInvoice(props: {
 							>
 								The grand total is
 								<input
-									type="number"
+									type="text"
 									{...register("total")}
 								/>
 							</label>

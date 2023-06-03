@@ -4,13 +4,12 @@
 .header {
     background-color: base.$clr-black-500;
     align-items: stretch;
-    position: relative;
+    position: fixed;
+    width: 100%;
     z-index: 100;
 
-    @include utils.mQ(64rem) {
-        position: fixed;
-        transform-origin: top left;
-       // z-index: 1;
+    @include utils.mQ(64rem) {     
+        transform-origin: top left;       
         left: 6.5rem;
         top: 0;
         transform: rotate(90deg);

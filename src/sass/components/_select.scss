@@ -53,13 +53,10 @@ select {
 
 .select-options {
     flex: 1 1 50%;
+    display: flex;
+    align-items: baseline;
 
-    @include utils.mQ(30rem) {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: baseline;
-    }
+    @include utils.mQ(30rem) {}
 }
 
 .select {
