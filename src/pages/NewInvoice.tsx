@@ -64,9 +64,9 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	function closeDialog() {
-		return navigate(0);		
+		return navigate(0);
 	}
-	
+
 	// Updates The obj which has the following
 	// Name of project, quantity, price and total.
 	const updateProjects = (
@@ -79,9 +79,8 @@ const NewInvoice = (props: {
 		});
 		setData({ ...data, items: data.items.concat(project) });
 		console.log(evt);
-
 	};
-	
+
 	// load form with initialstate
 	const {
 		register,
@@ -106,7 +105,7 @@ const NewInvoice = (props: {
 
 		console.log(data);
 		mutate(data);
-		props.toggleOverlay;
+		 props.toggleOverlay;
 		setShowCreateInvoiceDialog(true);
 	};
 
@@ -230,6 +229,7 @@ const NewInvoice = (props: {
 							labelText="Street address"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Street is required",
 								minLength: {
@@ -251,6 +251,7 @@ const NewInvoice = (props: {
 								labelText="City"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "City is required",
 									minLength: {
@@ -271,6 +272,7 @@ const NewInvoice = (props: {
 								labelText="Post code"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "postal code is required",
 									minLength: {
@@ -293,6 +295,7 @@ const NewInvoice = (props: {
 								labelText="Country"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "country is required",
 									minLength: {
@@ -319,6 +322,7 @@ const NewInvoice = (props: {
 							labelText="Client's name"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Client name is required",
 								minLength: {
@@ -340,6 +344,7 @@ const NewInvoice = (props: {
 							labelText="Client's email"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Email is required",
 								minLength: {
@@ -362,6 +367,7 @@ const NewInvoice = (props: {
 							labelText="Street"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Client Street is required",
 								minLength: {
@@ -385,6 +391,7 @@ const NewInvoice = (props: {
 								labelText="City"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client city is required",
 									minLength: {
@@ -407,6 +414,7 @@ const NewInvoice = (props: {
 								labelText="Post code"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client postal code is required",
 									minLength: {
@@ -429,6 +437,7 @@ const NewInvoice = (props: {
 								labelText="Country"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client country is required",
 									minLength: {
@@ -454,6 +463,7 @@ const NewInvoice = (props: {
 								labelText="Invoice Date"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Date is required",
 								}}
@@ -477,17 +487,19 @@ const NewInvoice = (props: {
 						</div>
 
 						{/* PAYMENT DUE DETAILS */}
-						<CustomInput
-							type="date"
-							name="paymentDue"
-							labelText="Due Date"
-							control={control}
-							className=""
-							rules={{
-								required: "Date is required",
-							}}
-						/>
-
+						<div className="sr-only">
+							<CustomInput
+								type="date"
+								name="paymentDue"
+								labelText="Due Date"
+								control={control}
+								className=""
+								disabled={true}
+								rules={{
+									required: "Date is required",
+								}}
+							/>
+						</div>
 						{/* PROJECT NAME DETAILS */}
 						<CustomInput
 							type="text"
@@ -495,6 +507,7 @@ const NewInvoice = (props: {
 							labelText="Project description"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Project description is required",
 								minLength: {
@@ -527,6 +540,7 @@ const NewInvoice = (props: {
 										labelText={"Project Name"}
 										type={"text"}
 										className=""
+										disabled={false}
 										rules={{
 											required:
 												"Project name is required",
@@ -552,6 +566,7 @@ const NewInvoice = (props: {
 												labelText={"Qty"}
 												type={"number"}
 												className={`qty input calculate-line`}
+												disabled={false}
 												rules={{
 													required:
 														"Quantity is required",
@@ -608,6 +623,7 @@ const NewInvoice = (props: {
 												className={
 													"price calculate-line"
 												}
+												disabled={false}
 												rules={{
 													required:
 														"Price is required",

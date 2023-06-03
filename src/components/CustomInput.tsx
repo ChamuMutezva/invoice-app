@@ -8,6 +8,7 @@ type CustomInputProps = {
 	labelText: string;
 	type: string;
 	className: string;
+	disabled: boolean;
 };
 
 const CustomInput = ({
@@ -16,7 +17,8 @@ const CustomInput = ({
 	rules,
 	labelText,
 	type,
-	className
+	className,
+	disabled,
 }: CustomInputProps) => {
 	const {
 		field: { onChange, onBlur, value, ref },
@@ -39,6 +41,7 @@ const CustomInput = ({
 				onBlur={onBlur}
 				value={value}
 				ref={ref}
+				disabled={disabled}
 			/>
 			{error && (
 				<p

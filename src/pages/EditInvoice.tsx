@@ -217,6 +217,7 @@ function EditInvoice(props: {
 							labelText="Street"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Sender street is required",
 								minLength: {
@@ -240,6 +241,7 @@ function EditInvoice(props: {
 								labelText="City"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Sender city is required",
 									minLength: {
@@ -262,6 +264,7 @@ function EditInvoice(props: {
 								labelText="Post Code"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Sender post code is required",
 									minLength: {
@@ -284,6 +287,7 @@ function EditInvoice(props: {
 								labelText="Country"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Sender country is required",
 									minLength: {
@@ -312,6 +316,7 @@ function EditInvoice(props: {
 							labelText="Client's name"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Client name is required",
 								minLength: {
@@ -333,6 +338,7 @@ function EditInvoice(props: {
 							labelText="Client's email"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Email is required",
 								minLength: {
@@ -355,6 +361,7 @@ function EditInvoice(props: {
 							labelText="Street"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Client street is required",
 								minLength: {
@@ -378,6 +385,7 @@ function EditInvoice(props: {
 								labelText="City"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client city is required",
 									minLength: {
@@ -400,6 +408,7 @@ function EditInvoice(props: {
 								labelText="Post code"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client postal code is required",
 									minLength: {
@@ -422,6 +431,7 @@ function EditInvoice(props: {
 								labelText="Country"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Client country is required",
 									minLength: {
@@ -448,6 +458,7 @@ function EditInvoice(props: {
 								labelText="Invoice Date"
 								control={control}
 								className=""
+								disabled={false}
 								rules={{
 									required: "Date is required",
 								}}
@@ -469,19 +480,20 @@ function EditInvoice(props: {
 								]}
 							/>
 						</div>
-
-						{/* PAYMENT DUE DETAILS */}
-						<CustomInput
-							type="date"
-							name="paymentDue"
-							labelText="Due Date"
-							control={control}
-							className=""
-							rules={{
-								required: "Date is required",
-							}}
-						/>
-
+						<div className="sr-only">
+							{/* PAYMENT DUE DETAILS */}
+							<CustomInput
+								type="date"
+								name="paymentDue"
+								labelText="Due Date"
+								control={control}
+								className=""
+								disabled={true}
+								rules={{
+									required: "Date is required",
+								}}
+							/>
+						</div>
 						{/* PROJECT NAME DETAILS */}
 						<CustomInput
 							type="text"
@@ -489,6 +501,7 @@ function EditInvoice(props: {
 							labelText="Project description"
 							control={control}
 							className=""
+							disabled={false}
 							rules={{
 								required: "Project description is required",
 								minLength: {
@@ -518,6 +531,7 @@ function EditInvoice(props: {
 									labelText={"Project Name"}
 									type={"text"}
 									className=""
+									disabled={false}
 									rules={{
 										required: "Project name is required",
 										minLength: {
@@ -542,6 +556,7 @@ function EditInvoice(props: {
 											labelText={"Qty"}
 											type={"number"}
 											className={`qty input calculate-line`}
+											disabled={false}
 											rules={{
 												required:
 													"Quantity is required",
@@ -591,6 +606,7 @@ function EditInvoice(props: {
 											labelText={"Price"}
 											type={"number"}
 											className={"price calculate-line"}
+											disabled={false}
 											rules={{
 												required: "Price is required",
 												step: 1,
