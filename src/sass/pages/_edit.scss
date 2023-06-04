@@ -40,6 +40,7 @@
     justify-content: center;
     flex: 1 1 100%;
     width: 100%;
+    position: relative;
 }
 
 .label {
@@ -66,9 +67,12 @@
 .costing-line {
     display: flex;
     flex-direction: column;
-    gap: calc(base.$spacer1 * 0.5);
+    column-gap: calc(base.$spacer1 * 0.5);
+    row-gap: calc(base.$spacer1 * 2);
+    margin-block: calc(base.$spacer1 * 1.5);
+    flex-wrap: wrap;
 
-    @include utils.mQ(22.5rem) {
+    @include utils.mQ(30rem) {
         flex-direction: row;
         align-items: center;
         justify-items: center;
@@ -104,19 +108,28 @@
 .calculate-line-container {
     display: flex;
     flex-direction: column;
-    align-self: self-end;
-    flex: 1 1 25%;
-    width: 100%;
+    align-self: flex-start;
+    @include utils.mQ(30rem) {
+        align-self: flex-end;
+    }
 }
 
 .quantity-line,
 .price-line {
     width: 100%;
+    flex: 1 1 25%;
 }
 
-.container-delete,
-.quantity-line {
-    flex: 1 1 15%;
+.item-total-line {
+    flex: 1 1 20%;
+    align-self: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @include utils.mQ(30rem) {
+       flex-direction: column;
+       align-items: flex-start;
+    }
 }
 
 .total-line {
@@ -153,6 +166,11 @@
 
 .form-errors {
     color: base.$clr-pink-300;
+}
+
+.input-error {
+    position: absolute;
+    bottom: -2rem;
 }
 
 .dark-mode {

@@ -23,7 +23,7 @@
   z-index: 10;
   padding-inline: 30px;
   padding-block: 0;
-  width: fit-content;
+ // width: fit-content;
 
   @include utils.mQ(40rem) {
     margin-inline-start: 0;

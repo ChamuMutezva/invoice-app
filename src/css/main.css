@@ -160,6 +160,7 @@ select {
   display: block;
   width: 80%;
   aspect-ratio: 1;
+  color: hsl(0, 0%, 100%);
 }
 
 .btn-link {
@@ -695,22 +696,13 @@ select:focus-within {
 .filter {
   padding: 0.25rem;
   min-width: 6rem;
-  border: none;
-  background-color: inherit;
 }
 
 .select-options {
   flex: 1 1 50%;
+  display: flex;
+  align-items: baseline;
 }
-@media screen and (min-width: 30rem) {
-  .select-options {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-}
-
 .select {
   appearance: none;
   font-family: inherit;
@@ -741,12 +733,12 @@ input[type=date]::before {
 .header {
   background-color: hsl(231, 20%, 27%);
   align-items: stretch;
-  position: relative;
+  position: fixed;
+  width: 100%;
   z-index: 100;
 }
 @media screen and (min-width: 64rem) {
   .header {
-    position: fixed;
     transform-origin: top left;
     left: 6.5rem;
     top: 0;
@@ -783,6 +775,11 @@ input[type=date]::before {
     padding-inline: 1rem;
     padding-block: 0;
   }
+}
+
+.filter {
+  border: none;
+  background-color: inherit;
 }
 
 .logo-container {
@@ -832,7 +829,8 @@ input[type=date]::before {
 }
 
 .main {
-  margin: 1.5rem;
+  margin-inline: 1.5rem;
+  margin-block: 6rem;
   max-width: 45.6rem;
 }
 @media screen and (min-width: 40rem) {
@@ -850,6 +848,10 @@ input[type=date]::before {
     margin-block: 0;
     padding-block: 3.6rem;
   }
+}
+
+.main-edit {
+  margin-block: 1.5rem;
 }
 
 .summary-title {
@@ -879,6 +881,21 @@ input[type=date]::before {
 .filter-new {
   gap: 1rem;
   flex: 1 1 50%;
+  width: 100%;
+}
+
+.wrapper-intro {
+  padding-block: 2rem;
+}
+
+.summary {
+  flex-direction: column;
+  align-items: baseline;
+}
+@media screen and (min-width: 22.5rem) {
+  .summary {
+    flex-direction: row;
+  }
 }
 
 .summary-headings {
@@ -1240,6 +1257,8 @@ span.container-img {
   align-items: stretch;
   justify-content: center;
   flex: 1 1 100%;
+  width: 100%;
+  position: relative;
 }
 
 .label {
@@ -1266,9 +1285,12 @@ span.container-img {
 .costing-line {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  column-gap: 0.5rem;
+  row-gap: 2rem;
+  margin-block: 1.5rem;
+  flex-wrap: wrap;
 }
-@media screen and (min-width: 22.5rem) {
+@media screen and (min-width: 30rem) {
   .costing-line {
     flex-direction: row;
     align-items: center;
@@ -1301,13 +1323,32 @@ span.container-img {
 .calculate-line-container {
   display: flex;
   flex-direction: column;
-  align-self: self-end;
+  align-self: flex-start;
+}
+@media screen and (min-width: 30rem) {
+  .calculate-line-container {
+    align-self: flex-end;
+  }
+}
+
+.quantity-line,
+.price-line {
+  width: 100%;
   flex: 1 1 25%;
 }
 
-.container-delete,
-.quantity-line {
-  flex: 1 1 15%;
+.item-total-line {
+  flex: 1 1 20%;
+  align-self: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (min-width: 30rem) {
+  .item-total-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .total-line {
@@ -1324,7 +1365,7 @@ span.container-img {
 }
 
 .postal-city {
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 }
 
 .footer {
@@ -1334,6 +1375,7 @@ span.container-img {
   background-color: hsl(0, 0%, 100%);
   box-shadow: 0px -20px 20px 1px hsl(231, 23%, 61%);
 }
+
 .footer-edit {
   justify-content: flex-end;
   padding: 1.5rem;
@@ -1343,6 +1385,11 @@ span.container-img {
 
 .form-errors {
   color: hsl(0, 100%, 80%);
+}
+
+.input-error {
+  position: absolute;
+  bottom: -2rem;
 }
 
 .dark-mode .input {
@@ -1444,7 +1491,6 @@ span.container-img {
   z-index: 10;
   padding-inline: 30px;
   padding-block: 0;
-  width: fit-content;
 }
 @media screen and (min-width: 40rem) {
   .overlay-container {

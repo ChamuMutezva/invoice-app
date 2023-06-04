@@ -47,7 +47,7 @@ const CustomInput = ({
 				<p
 					role="alert"
 					id={`${name}-err`}
-					className="form-errors"
+					className="input-error form-errors"
 				>
 					{error.message}
 				</p>
