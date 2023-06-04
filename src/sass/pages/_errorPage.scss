@@ -6,7 +6,9 @@
 }
 
 .loading {
+    height: 100vh;
     justify-content: center;
+    flex-direction: column;
 }
 
 .pre-loading {

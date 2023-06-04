@@ -11,6 +11,7 @@ import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 import OverLay from "./OverLay";
 import EditInvoice from "./EditInvoice";
+import { Oval } from "react-loader-spinner";
 
 function ViewInvoice() {
 	const queryClient = useQueryClient();
@@ -68,6 +69,18 @@ function ViewInvoice() {
 		return (
 			<div className="flex loading">
 				<h2 className="pre-loading">Loading...</h2>
+				<Oval
+					height={80}
+					width={80}
+					color="#4fa94d"
+					wrapperStyle={{}}
+					wrapperClass=""
+					visible={true}
+					ariaLabel="oval-loading"
+					secondaryColor="#4fa94d"
+					strokeWidth={2}
+					strokeWidthSecondary={2}
+				/>
 			</div>
 		);
 	}

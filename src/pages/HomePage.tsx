@@ -7,6 +7,7 @@ import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
 import OverLay from "./OverLay";
 import NewInvoice from "./NewInvoice";
+import { Oval, Comment } from "react-loader-spinner";
 
 function HomePage() {
 	const [selectedValue, setSelectedValue] = useState("all");
@@ -28,6 +29,18 @@ function HomePage() {
 		return (
 			<div className="flex loading">
 				<h2 className="pre-loading">Loading...</h2>
+				<Oval
+					height={80}
+					width={80}
+					color="#4fa94d"
+					wrapperStyle={{}}
+					wrapperClass=""
+					visible={true}
+					ariaLabel="oval-loading"
+					secondaryColor="#4fa94d"
+					strokeWidth={2}
+					strokeWidthSecondary={2}
+				/>
 			</div>
 		);
 	}
@@ -36,6 +49,16 @@ function HomePage() {
 		return (
 			<div className="flex loading">
 				<h2 className="pre-loading">Error: </h2>
+				<Comment
+					visible={true}
+					height="80"
+					width="80"
+					ariaLabel="comment-loading"
+					wrapperStyle={{}}
+					wrapperClass="comment-wrapper"
+					color="#fff"
+					backgroundColor="#F4442E"
+				/>
 			</div>
 		);
 	}
