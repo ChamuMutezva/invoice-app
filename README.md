@@ -64,7 +64,40 @@ The Backend fetches and stores data that is stored in MongoDb. Project created u
 
 #### input type number
 
-- input type number is used to enter a number and has in-built validation to reject non-numerical entries
+- input type number is used to enter a number and has in-built validation to reject non-numerical entries.
+ in this project, one of the task requires to calculate the total amount of a single project and then sum up to get the total os all the projects.
+- The NewInvoice and the EditInvoice design files did not have the Grand Total input field , but to allow the
+ data to be collected in the form , I created a sr-only input field as shown below and among other things, the
+ input element had a type `number`.
+
+``` tsx
+<div className="sr-only grand-total-wrapper">
+       <label
+        htmlFor="grand-total"
+        className="label"
+       >
+        The grand total is
+        <input
+         type="number"
+         {...register("total")}
+        />
+       </label>
+      </div>
+```
+
+##### Observation - input type number
+
+- No issues where recorded when entering a number that has no decimal point, for example, I could make calculations where
+ the `Quantity = 3` and `Price = 1568`. Issues started when I would enter something like `Price = 1569.95`. The form could not be submitted , but no feedback or error message was provided. In some cases where I had more than 1 project, the Grand total summation was weird as the individual project total was a string concatenation. Eg
+
+ 1. Project 1 Total: 1578.95
+ 2. Project 2 Total: 7699.85
+ 3. Project 3 Total: 645.55
+
+ The above will be displayed as `1578.957699.85645.55`
+
+My final solution was to use the `input type text`
+For issues related to input type number , read the following article [Why the GOV.UK Design System team changed the input type for numbers](https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/)
 
 #### Using React Query now known as TanStack Query
 
