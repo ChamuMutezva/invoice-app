@@ -17,7 +17,7 @@
     background-color: base.$clr-white-100;
     position: relative;
     border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;   
+    border-bottom-right-radius: 8px;
 }
 
 .project-item-heading {
@@ -163,9 +163,6 @@
 
 .unit-price,
 .item-qty {
-    font-size: base.$fs-15;
-    font-weight: 700;
-    color: base.$clr-blue-100;
     @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
 }
 

@@ -7,16 +7,11 @@ function DeleteProject(props: {
 	exitWithoutDeletingProject: React.MouseEventHandler<HTMLButtonElement>;
 	showDeleteProjectDialog: boolean;
 }) {
-	// const btnRef = useRef<HTMLButtonElement>(null);
 	const dialogRef = useRef<HTMLDialogElement>(null);
-	// const linkRef = useRef<HTMLAnchorElement>(null);
-
 	useEffect(() => {
 		const dialogNode = dialogRef.current;
-
 		if (props.showDeleteProjectDialog) {
 			dialogNode?.showModal();
-			// linkRef.current?.focus();
 		} else {
 			dialogNode?.close();
 		}
@@ -70,50 +65,3 @@ function DeleteProject(props: {
 }
 
 export default DeleteProject;
-
-{
-	/*
-			<DeleteProject
-				showDeleteProjectDialog={showDeleteProjectDialog}
-				exitWithoutDeletingProject={exitWithoutDeletingProject}
-				deleteProjectConfirmation={deleteProjectConfirmation}
-				name={projectName}
-			/>
-						*/
-}
-
-// Opens the Delete Project dialog with 2 options
-	// 1. Option 1 - Cancel delete and return to previous page
-	// 2. Option 2 - Delete project and return to previous page
-	/*
-	const deleteProjectDialog = (
-		evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-		name: string
-	) => {
-		evt.preventDefault();
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-		setProjectName(name);
-	}; */
-
-	/* Deletes a project from the invoice
-	const deleteProjectConfirmation = (
-		evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-	) => {
-		evt.preventDefault();
-		console.log(projectName);
-		//remove(index)
-		updateInvoiceMutation.mutate({
-			...data,
-			items: invoice.items.filter(
-				(item: { name: string }) => item.name !== projectName
-			),
-			total: calculateTotal(),
-		});
-		setProjectName("");
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-	};
-
-	const exitWithoutDeletingProject = () => {
-		setShowDeleteProjectDialog(!showDeleteProjectDialog);
-	};
-  */

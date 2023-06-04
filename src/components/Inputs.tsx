@@ -64,20 +64,3 @@ export const Inputs: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-/*
-{/* SAMPLE USAGE ----
-<Inputs
-  ariaLabelledBy={"sender-street"}
-  ariaInvalid={errors.senderAddress?.street ? "true" : false}
-  registeredName={"senderAddress.street"}
-  htmlFor={"street"}
-  textLabel={"Street address"}
-  type={"text"}
-  id={"street"}
-  placeholder={"116 Caledorn street"}
-  isRequired={"Street address is required"}
-  register={register}
-  errorRef={errors.senderAddress?.street}
-  errorMessage={errors.senderAddress?.street?.message?.toString()}
-/>;
-*/

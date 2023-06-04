@@ -46,23 +46,15 @@ select {
     }
 }
 
-.filter {
-    padding: 0.25rem;
-    min-width: 6rem;
-}
-
 .select-options {
     flex: 1 1 50%;
     display: flex;
     align-items: baseline;
-
-    @include utils.mQ(30rem) {}
 }
 
 .select {
     appearance: none;
     font-family: inherit;
-    // font-size: inherit;
     cursor: inherit;
 
     &>*+* {

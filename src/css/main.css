@@ -693,16 +693,12 @@ select:focus-within {
   margin-block-start: -0.25em;
 }
 
-.filter {
-  padding: 0.25rem;
-  min-width: 6rem;
-}
-
 .select-options {
   flex: 1 1 50%;
   display: flex;
   align-items: baseline;
 }
+
 .select {
   appearance: none;
   font-family: inherit;
@@ -775,11 +771,6 @@ input[type=date]::before {
     padding-inline: 1rem;
     padding-block: 0;
   }
-}
-
-.filter {
-  border: none;
-  background-color: inherit;
 }
 
 .logo-container {
@@ -917,11 +908,6 @@ input[type=date]::before {
   overflow: hidden;
 }
 
-.pre-loading {
-  position: relative;
-  z-index: 1;
-}
-
 .address-sender-details,
 .address-reciever-details {
   display: flex;
@@ -955,6 +941,13 @@ span.container-img {
 
 .hide-overlay {
   display: none;
+}
+
+.filter {
+  border: none;
+  background-color: inherit;
+  padding: 0.25rem;
+  min-width: 6rem;
 }
 
 .dark-mode {
@@ -1164,9 +1157,6 @@ span.container-img {
 
 .unit-price,
 .item-qty {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: hsl(231, 36%, 63%);
   color: hsl(231, 36%, 63%);
   font-weight: 700;
   font-size: 0.9375rem;
@@ -1421,6 +1411,8 @@ span.container-img {
 
 .pre-loading {
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .show-dialog {

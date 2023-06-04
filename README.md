@@ -45,7 +45,7 @@ Users should be able to:
 
 ## My process
 
-I created the challenge as a Fullstack application, the backend files are in a separate folder known as `invoice backend`
+I created the challenge as a Fullstack application, the backend files are in a separate project folder known as `invoice backend`
 The Backend fetches and stores data that is stored in MongoDb. Project created using Vite typescript.
 
 ### Built with
@@ -56,6 +56,7 @@ The Backend fetches and stores data that is stored in MongoDb. Project created u
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
+- [vite](https://vitejs.dev/) - Frontend tooling for React
 - [React Query](https://react-query-v3.tanstack.com/) - Fetching data from the server
 - [React Router](https://reactrouter.com/en/main/start/tutorial) - navigation
 - [React hook form](https://react-hook-form.com/api/useform/register/) - forms and form validation
@@ -94,7 +95,7 @@ The Backend fetches and stores data that is stored in MongoDb. Project created u
  2. Project 2 Total: 7699.85
  3. Project 3 Total: 645.55
 
- The above will be displayed as `1578.957699.85645.55`
+ The above will be displayed as `1578.957699.85645.55` for the total
 
 My final solution was to use the `input type text`
 For issues related to input type number , read the following article [Why the GOV.UK Design System team changed the input type for numbers](https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/)
