@@ -62,6 +62,10 @@ The Backend fetches and stores data that is stored in MongoDb. Project created u
 
 ### What I learned
 
+#### input type number
+
+- input type number is used to enter a number and has in-built validation to reject non-numerical entries
+
 #### Using React Query now known as TanStack Query
 
 - used for data management - data fetching , caching , sychronizing and updating the server state
@@ -177,8 +181,7 @@ Application link ![Reusable overlay usage](src/pages/HomePage.tsx)
 
 ### Continued development
 
-- Focus control when new pages has been opened
-- Focus trapping
+- authentification - log in users by authentification
 
 ### Useful resources
 
