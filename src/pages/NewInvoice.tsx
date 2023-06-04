@@ -28,8 +28,7 @@ const NewInvoice = (props: {
 
 	const navigate = useNavigate();
 	const [createInvoiceError, setCreateInvoiceError] = useState(null);
-	const { mutate } = createInvoice(setCreateInvoiceError);
-	const [deleteProjectModal, setDeleteProjectModal] = useState(false);
+	const { mutate } = createInvoice(setCreateInvoiceError);	
 	const [project, setProject] = useState(projectInit);
 	const [showCreateInvoiceDialog, setShowCreateInvoiceDialog] =
 		useState(false);
@@ -105,7 +104,7 @@ const NewInvoice = (props: {
 
 		console.log(data);
 		mutate(data);
-		 props.toggleOverlay;
+		props.toggleOverlay;
 		setShowCreateInvoiceDialog(true);
 	};
 

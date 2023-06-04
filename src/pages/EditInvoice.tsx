@@ -1,13 +1,11 @@
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { Form, useParams } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
-import add from "date-fns/add";
 import format from "date-fns/format";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
-import DeleteProject from "../components/DeleteProject";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
@@ -29,8 +27,7 @@ function EditInvoice(props: {
 
 	const queryClient = useQueryClient();
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
-	const [project, setProject] = useState(projectInit);
-	const [quantity, setQuantity] = useState();
+	const [project, setProject] = useState(projectInit);	
 	const params = useParams();
 
 	// Fetch an invoice
@@ -112,17 +109,15 @@ function EditInvoice(props: {
 		return total;
 	}
 
+	// Updates the array of projects ITEM by displaying .
+	// The obj has the following: name of project, quantity, price and total.
 	const addProject = () => {
 		updateInvoiceMutation.mutate({
 			...invoice,
 			items: invoice.items.concat(project),
 			total: calculateTotal(),
 		});
-	};
-
-	// Updates the array of projects ITEM by displaying .
-	// The obj has the following: name of project, quantity, price and total.
-	const addAnotherProject = () => addProject();
+	};	
 
 	// Focus trap implementation inspired by Tediko from his solution - see link below
 	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
@@ -715,7 +710,7 @@ function EditInvoice(props: {
 							onClick={() => [
 								append(projectInit),
 								calculateTotal(),
-								addAnotherProject,
+								addProject,
 							]}
 						>
 							<img
