@@ -28,7 +28,7 @@ const NewInvoice = (props: {
 
 	const navigate = useNavigate();
 	const [createInvoiceError, setCreateInvoiceError] = useState(null);
-	const { mutate } = createInvoice(setCreateInvoiceError);	
+	const { mutate } = createInvoice(setCreateInvoiceError);
 	const [project, setProject] = useState(projectInit);
 	const [showCreateInvoiceDialog, setShowCreateInvoiceDialog] =
 		useState(false);
@@ -118,7 +118,7 @@ const NewInvoice = (props: {
 		setValue("total", totalArray.length > 0 ? total : 0);
 		console.log(totalArray);
 
-		return total;
+		return parseFloat(total.toFixed(2));
 	}
 
 	const watchTotal = watch(["items", "total"]);
@@ -587,22 +587,30 @@ const NewInvoice = (props: {
 													}) => {
 														setValue(
 															`items.${index}.total`,
-															evt.target.value *
-																getValues(
-																	`items.${index}.price`
-																)
+															parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.price`
+																	)
+																).toFixed(2)
+															)
 														);
 														setProject({
 															...project,
 															quantity:
 																evt.target
 																	.value,
-															total:
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.price`
-																),
+															total: parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.price`
+																	)
+																).toFixed(2)
+															),
 														});
 														calculateTotal();
 													},
@@ -644,21 +652,29 @@ const NewInvoice = (props: {
 													}) => {
 														setValue(
 															`items.${index}.total`,
-															evt.target.value *
-																getValues(
-																	`items.${index}.quantity`
-																)
+															parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.quantity`
+																	)
+																).toFixed(2)
+															)
 														);
 														setProject({
 															...project,
 															price: evt.target
 																.value,
-															total:
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.quantity`
-																),
+															total: parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.quantity`
+																	)
+																).toFixed(2)
+															),
 														});
 														calculateTotal();
 													},
@@ -678,7 +694,7 @@ const NewInvoice = (props: {
 											</label>
 
 											<input
-												type="number"
+												type="text"
 												id={`item-total`}
 												className={`item-total input calculate-line`}
 												placeholder={"200.00"}
