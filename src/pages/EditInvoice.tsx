@@ -27,7 +27,7 @@ function EditInvoice(props: {
 
 	const queryClient = useQueryClient();
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
-	const [project, setProject] = useState(projectInit);	
+	const [project, setProject] = useState(projectInit);
 	const params = useParams();
 
 	// Fetch an invoice
@@ -106,7 +106,7 @@ function EditInvoice(props: {
 		} catch (error) {
 			console.log(error);
 		}
-		return total;
+		return parseFloat(total.toFixed(2));
 	}
 
 	// Updates the array of projects ITEM by displaying .
@@ -117,7 +117,7 @@ function EditInvoice(props: {
 			items: invoice.items.concat(project),
 			total: calculateTotal(),
 		});
-	};	
+	};
 
 	// Focus trap implementation inspired by Tediko from his solution - see link below
 	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
@@ -571,20 +571,29 @@ function EditInvoice(props: {
 												}) => {
 													setValue(
 														`items.${index}.total`,
-														evt.target.value *
-															getValues(
-																`items.${index}.price`
-															)
+														parseFloat(
+															(
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.price`
+																)
+															).toFixed(2)
+														)
 													);
 													setProject({
 														...project,
 														quantity:
 															evt.target.value,
-														total:
-															evt.target.value *
-															getValues(
-																`items.${index}.price`
-															),
+														total: parseFloat(
+															(
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.price`
+																)
+															).toFixed(2)
+														),
 													});
 													calculateTotal();
 												},
@@ -620,19 +629,28 @@ function EditInvoice(props: {
 												}) => {
 													setValue(
 														`items.${index}.total`,
-														evt.target.value *
-															getValues(
-																`items.${index}.quantity`
-															)
+														parseFloat(
+															(
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.quantity`
+																)
+															).toFixed(2)
+														)
 													);
 													setProject({
 														...project,
 														price: evt.target.value,
-														total:
-															evt.target.value *
-															getValues(
-																`items.${index}.quantity`
-															),
+														total: parseFloat(
+															(
+																evt.target
+																	.value *
+																getValues(
+																	`items.${index}.quantity`
+																)
+															).toFixed(2)
+														),
 													});
 													calculateTotal();
 												},
