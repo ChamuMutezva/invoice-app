@@ -727,7 +727,7 @@ function EditInvoice(props: {
 							disabled={!isDirty || !isValid}
 							onClick={() => [
 								append(projectInit),
-								calculateTotal(),
+								calculateTotal,
 								addProject,
 							]}
 						>

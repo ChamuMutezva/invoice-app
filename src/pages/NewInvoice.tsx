@@ -20,10 +20,10 @@ const NewInvoice = (props: {
 	childInputRef: any;
 }) => {
 	const projectInit: ICosting = {
-		name: "Project Name",
-		quantity: 1,
-		price: 100.0,
-		total: 100.0,
+		name: "",
+		quantity: 0,
+		price: 0.0,
+		total: 0.0,
 	};
 
 	const navigate = useNavigate();
@@ -762,7 +762,7 @@ const NewInvoice = (props: {
 							disabled={!isDirty || !isValid}
 							onClick={() => [
 								append(projectInit),
-								calculateTotal(),
+								calculateTotal,
 								updateProjects,
 							]}
 						>
