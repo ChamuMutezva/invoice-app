@@ -90,7 +90,7 @@ const NewInvoice = (props: {
 		getValues,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
-	//console.log(errors);
+	console.log(errors);
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "items",
@@ -695,6 +695,7 @@ const NewInvoice = (props: {
 
 											<input
 												type="text"
+												tabIndex={-1}
 												id={`item-total`}
 												className={`item-total input calculate-line`}
 												placeholder={"200.00"}
@@ -746,6 +747,7 @@ const NewInvoice = (props: {
 
 							<input
 								type="text"
+								tabIndex={-1}
 								id={`grand-total`}
 								className={`grand-total input calculate-line`}
 								placeholder={"200.00"}

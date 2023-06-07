@@ -84,7 +84,7 @@ function EditInvoice(props: {
 		control,
 		name: "items",
 	});
-
+	console.log(errors);
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
@@ -664,13 +664,14 @@ function EditInvoice(props: {
 									>
 										<label
 											className="label"
-											htmlFor={`item-total`}
+											htmlFor={`item-total${index}`}
 										>
 											Total
 										</label>
 										<input
 											type="text"
-											id={`item-total`}
+											tabIndex={-1}
+											id={`item-total${index}`}
 											className={`item-total input calculate-line`}
 											placeholder={"200.00"}
 											readOnly={true}
@@ -715,7 +716,9 @@ function EditInvoice(props: {
 							>
 								The grand total is
 								<input
+									id="grand-total"
 									type="text"
+									tabIndex={-1}
 									{...register("total")}
 								/>
 							</label>

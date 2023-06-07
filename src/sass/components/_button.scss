@@ -59,6 +59,11 @@
     border-radius: 6px;
     text-align: center;
     text-decoration: none;
+    &:hover,
+    &:focus {
+        outline: dashed base.$clr-pink-300 1px;
+        outline-offset: .35em;
+    }
 }
 
 .btn-new-invoice {

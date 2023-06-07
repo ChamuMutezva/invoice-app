@@ -200,6 +200,10 @@ select {
   text-align: center;
   text-decoration: none;
 }
+.btn-link-home:hover, .btn-link-home:focus {
+  outline: dashed hsl(0, 100%, 80%) 1px;
+  outline-offset: 0.35em;
+}
 
 .btn-new-invoice {
   border: none;
