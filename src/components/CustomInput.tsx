@@ -42,6 +42,7 @@ const CustomInput = ({
 				value={value}
 				ref={ref}
 				disabled={disabled}
+				aria-describedby={`${name}-err`}
 			/>
 			{error && (
 				<p

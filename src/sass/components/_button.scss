@@ -59,6 +59,7 @@
     border-radius: 6px;
     text-align: center;
     text-decoration: none;
+
     &:hover,
     &:focus {
         outline: dashed base.$clr-pink-300 1px;
@@ -79,7 +80,7 @@
 
 .btn-new-invoice-wrapper {
     flex: 1 1 50%;
-    display: flex;   
+    display: flex;
     justify-content: flex-end;
 }
 
@@ -203,10 +204,13 @@
 }
 
 .btn-delete {
+    border: none;
+    outline: none;
 
     &:hover,
     &:focus {
         outline-offset: -0.5em;
+        outline: dashed base.$clr-pink-300 1px;
     }
 }
 

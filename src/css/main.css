@@ -346,8 +346,13 @@ select {
   align-self: flex-end;
 }
 
+.btn-delete {
+  border: none;
+  outline: none;
+}
 .btn-delete:hover, .btn-delete:focus {
   outline-offset: -0.5em;
+  outline: dashed hsl(0, 100%, 80%) 1px;
 }
 
 .btn-overlay-close {

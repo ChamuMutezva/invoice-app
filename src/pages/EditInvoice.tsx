@@ -84,7 +84,7 @@ function EditInvoice(props: {
 		control,
 		name: "items",
 	});
-	console.log(errors);
+	// console.log(errors);
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
