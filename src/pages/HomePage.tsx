@@ -8,12 +8,13 @@ import getInvoices from "../hooks/useGetInvoices";
 import OverLay from "./OverLay";
 import NewInvoice from "./NewInvoice";
 import { Oval, Comment } from "react-loader-spinner";
+import axios from "axios";
 
 function HomePage() {
 	const [selectedValue, setSelectedValue] = useState("all");
 	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =
 		useState(false);
-	let { isLoading, isError, invoices } = getInvoices(selectedValue);
+	let { isLoading, isError, invoices, error } = getInvoices(selectedValue);
 	const childInputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
@@ -46,9 +47,13 @@ function HomePage() {
 	}
 
 	if (isError) {
+		let errorMessage = "";
+		if (axios.isAxiosError(error)) {
+			errorMessage = error.message;
+		}
 		return (
 			<div className="flex loading">
-				<h2 className="pre-loading">Error: </h2>
+				<h2 className="pre-loading">Error: {errorMessage} </h2>
 				<Comment
 					visible={true}
 					height="80"
