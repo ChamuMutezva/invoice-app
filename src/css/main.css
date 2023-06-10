@@ -697,6 +697,9 @@ select:focus-within {
   top: 50%;
   margin-block-start: 0.75em;
 }
+.select-wrapper:has(select:active)::after {
+  transform: rotate(180deg);
+}
 
 .select-wrapper-home::after {
   margin-block-start: -0.25em;
@@ -1260,6 +1263,19 @@ span.container-img {
   position: relative;
 }
 
+@media screen and (min-width: 45rem) {
+  .item-line {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 45rem) {
+  .form-input-wrapper {
+    flex: 1 1 35%;
+  }
+}
+
 .label {
   color: hsl(231, 36%, 63%);
   font-weight: 500;
@@ -1296,6 +1312,11 @@ span.container-img {
     justify-items: center;
   }
 }
+@media screen and (min-width: 45rem) {
+  .costing-line {
+    flex: 1 1 65%;
+  }
+}
 
 .calculate-line {
   padding: 1rem 0.5rem;
@@ -1330,14 +1351,20 @@ span.container-img {
   }
 }
 
-.quantity-line,
+.quantity-line {
+  flex: 1 1 15%;
+}
+
 .price-line {
-  width: 100%;
-  flex: 1 1 25%;
+  flex: 1 1 30%;
+}
+
+.container-delete {
+  flex: 1 1 12%;
 }
 
 .item-total-line {
-  flex: 1 1 20%;
+  flex: 1 1 30%;
   align-self: flex-start;
   flex-direction: row;
   justify-content: center;

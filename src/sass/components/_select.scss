@@ -38,6 +38,12 @@ select {
         top: 50%;
         margin-block-start: 0.75em;
     }
+
+    &:has(select:active) {
+        &::after {
+            transform: rotate(180deg);
+        }
+    }
 }
 
 .select-wrapper-home {

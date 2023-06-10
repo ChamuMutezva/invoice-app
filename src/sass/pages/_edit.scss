@@ -2,7 +2,6 @@
 @use '../utils';
 
 .edit-form>*+* {
-    // padding-block-start: calc(base.$spacer1 * 1.5);
     padding-block-end: calc(base.$spacer1 * 2.5);
 }
 
@@ -43,6 +42,22 @@
     position: relative;
 }
 
+.item-line {
+    @include utils.mQ(45rem) {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+//.edit-invoice-details {
+.form-input-wrapper {
+    @include utils.mQ(45rem) {
+        flex: 1 1 35%;
+    }
+}
+
+//}
+
 .label {
     @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
     padding-block: calc(base.$spacer1 * 0.75);
@@ -61,7 +76,6 @@
     border-radius: 4px;
     padding: 1rem;
     width: 100%;
-    // min-width: 100%;
 }
 
 .costing-line {
@@ -76,7 +90,10 @@
         flex-direction: row;
         align-items: center;
         justify-items: center;
+    }
 
+    @include utils.mQ(45rem) {
+        flex: 1 1 65%;
     }
 }
 
@@ -109,26 +126,34 @@
     display: flex;
     flex-direction: column;
     align-self: flex-start;
+
     @include utils.mQ(30rem) {
         align-self: flex-end;
     }
 }
 
-.quantity-line,
+.quantity-line {
+    flex: 1 1 15%;
+}
+
 .price-line {
-    width: 100%;
-    flex: 1 1 25%;
+    flex: 1 1 30%;
+}
+
+.container-delete {
+    flex: 1 1 12%;
 }
 
 .item-total-line {
-    flex: 1 1 20%;
+    flex: 1 1 30%;
     align-self: flex-start;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     @include utils.mQ(30rem) {
-       flex-direction: column;
-       align-items: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 

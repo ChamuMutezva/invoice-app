@@ -542,8 +542,9 @@ function EditInvoice(props: {
 									}}
 								/>
 
-								{/* QUANTITY DETAILS */}
 								<div className={`costing-line`}>
+									
+								{/* QUANTITY DETAILS */}
 									<div className="quantity-line calculate-line-container">
 										<CustomInput
 											name={`items.${index}.quantity`}

@@ -193,7 +193,7 @@ const NewInvoice = (props: {
 
 	return (
 		<>
-			<main className="main">
+			<main className="main main-new-invoice">
 				{/* <PreviousPage title={`Create new invoice`}  /> */}
 				<div className="tablet-hidden">
 					<button
