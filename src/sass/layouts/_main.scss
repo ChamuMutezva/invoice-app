@@ -42,9 +42,11 @@
 }
 
 .filter-new {
-    gap: base.$spacer1;
-    flex: 1 1 50%;
     width: 100%;
+
+    @include utils.mQ(22.5rem) {
+        flex: 1 1 50%;
+    }
 }
 
 .wrapper-intro {
