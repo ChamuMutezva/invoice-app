@@ -60,7 +60,7 @@
 
 .client-name {
     @include utils.fonts(base.$clr-black-600, base.$fs-13, 500);
-    justify-content: flex-start;
+    // justify-content: flex-start;
 }
 
 .payment-date {
@@ -81,6 +81,10 @@
     .client-name,
     .amount-total {
         color: base.$clr-white-300;
+    }
+
+    .payment-date {
+        color: base.$clr-white-100;
     }
 
 }

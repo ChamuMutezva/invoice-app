@@ -388,6 +388,7 @@ select {
 }
 .dark-mode .btn-edit {
   background-color: hsla(231, 38%, 45%, 0.1);
+  color: hsl(0, 0%, 100%);
 }
 .dark-mode .btn-cancel {
   background-color: hsl(233, 30%, 21%);
@@ -420,7 +421,7 @@ select {
   position: absolute;
   top: 50%;
   margin-top: -9px;
-  left: 15px;
+  left: 20px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -510,7 +511,6 @@ select {
   color: hsl(231, 23%, 61%);
   font-weight: 500;
   font-size: 0.8125rem;
-  justify-content: flex-start;
 }
 
 .payment-date {
@@ -532,6 +532,9 @@ select {
 .dark-mode .client-name,
 .dark-mode .amount-total {
   color: hsl(231, 75%, 93%);
+}
+.dark-mode .payment-date {
+  color: hsl(0, 0%, 100%);
 }
 
 .status-label {
