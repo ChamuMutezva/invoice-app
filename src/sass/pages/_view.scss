@@ -76,7 +76,7 @@
 
 .email-address {
     @include utils.mQ(22.5rem) {
-        grid-area: 4/1;
+        grid-area: 4/1/5/3;
     }
 
     @include utils.mQ(45rem) {
