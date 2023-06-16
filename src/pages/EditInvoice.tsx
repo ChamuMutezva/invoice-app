@@ -87,7 +87,7 @@ function EditInvoice(props: {
 		name: "items",
 	});
 
-	console.log(errors)
+	console.log(errors);
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
@@ -161,6 +161,9 @@ function EditInvoice(props: {
 		};
 	}, []);
 
+	// when a new project has been added, move focus to the first element of the newly added object
+	// projectInit: ICosting = {name: "", quantity: 0, price: 0.0, total: 0.0,};
+	// four fields are created and focus should be moved to the name field
 	useEffect(() => {
 		console.log(watchTotal[0]);
 		setFocus(`items.${watchTotal[0].length - 1}.name`, {

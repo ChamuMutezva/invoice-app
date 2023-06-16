@@ -88,6 +88,7 @@ const NewInvoice = (props: {
 		watch,
 		setValue,
 		getValues,
+		setFocus,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
 	console.log(errors);
@@ -158,6 +159,16 @@ const NewInvoice = (props: {
 		setValue("total", calculateTotal());
 	}, [watchTotal[0]]);
 
+	// when a new project has been added, move focus to the first element of the newly added object
+	// projectInit: ICosting = {name: "", quantity: 0, price: 0.0, total: 0.0,};
+	// four fields are created and focus should be moved to the name field
+	useEffect(() => {
+		console.log(watchTotal[0]);
+		setFocus(`items.${watchTotal[0].length - 1}.name`, {
+			shouldSelect: true,
+		});
+	}, [watchTotal[0].length]);
+
 	useEffect(() => {
 		document.addEventListener("keydown", focusTrap);
 		document.addEventListener("click", () => props.toggleOverlay);
@@ -171,8 +182,7 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		// update the days when payment terms have been selected
-		dueDays(payment, setValue);
-		// console.log(payment);
+		dueDays(payment, setValue);		
 	}, [payment]);
 
 	useEffect(() => {
