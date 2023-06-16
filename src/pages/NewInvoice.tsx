@@ -20,7 +20,7 @@ const NewInvoice = (props: {
 	childInputRef: any;
 }) => {
 	const projectInit: ICosting = {
-		name: "",
+		name: "New Project",
 		quantity: 0,
 		price: 0.0,
 		total: 0.0,
@@ -39,7 +39,7 @@ const NewInvoice = (props: {
 		id: randomId(),
 		createdAt: format(new Date(), "yyyy-MM-dd"),
 		paymentDue: format(add(Date.now(), { days: 1 }), "yyyy-MM-dd"),
-		description: "",
+		description: "Project description",
 		paymentTerms: 1,
 		clientEmail: "ckmutezva@gmail.com",
 		clientName: "Chamu Mutezva",
@@ -182,7 +182,7 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		// update the days when payment terms have been selected
-		dueDays(payment, setValue);		
+		dueDays(payment, setValue);
 	}, [payment]);
 
 	useEffect(() => {
@@ -565,9 +565,9 @@ const NewInvoice = (props: {
 											},
 										}}
 									/>
-
-									{/* QUANTITY DETAILS */}
+									
 									<div className={`costing-line`}>
+										{/* QUANTITY DETAILS */}
 										<div className="quantity-line calculate-line-container">
 											<CustomInput
 												name={`items.${index}.quantity`}

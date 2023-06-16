@@ -1269,13 +1269,13 @@ span.container-img {
   position: relative;
 }
 
-@media screen and (min-width: 45rem) {
-  .item-line {
-    display: flex;
-    gap: 1rem;
-  }
-}
-
+/*
+.item-line {
+    @include utils.mQ(45rem) {
+        display: flex;
+        gap: 1rem;
+    }
+}*/
 @media screen and (min-width: 45rem) {
   .form-input-wrapper {
     flex: 1 1 35%;
@@ -1304,18 +1304,15 @@ span.container-img {
 }
 
 .costing-line {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   column-gap: 0.5rem;
   row-gap: 2rem;
   margin-block: 1.5rem;
-  flex-wrap: wrap;
 }
 @media screen and (min-width: 30rem) {
   .costing-line {
-    flex-direction: row;
-    align-items: center;
-    justify-items: center;
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media screen and (min-width: 45rem) {
@@ -1333,11 +1330,11 @@ span.container-img {
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.9375rem;
-}
-@media screen and (min-width: 45rem) {
-  .calculate-line {
-    max-width: 12rem;
-  }
+  /*
+     @include utils.mQ(45rem) {
+         max-width: 12rem;
+     }
+     */
 }
 
 .item-total:read-only {

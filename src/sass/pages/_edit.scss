@@ -41,13 +41,13 @@
     width: 100%;
     position: relative;
 }
-
+/*
 .item-line {
     @include utils.mQ(45rem) {
         display: flex;
         gap: 1rem;
     }
-}
+}*/
 
 //.edit-invoice-details {
 .form-input-wrapper {
@@ -79,17 +79,19 @@
 }
 
 .costing-line {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    // flex-direction: column;
     column-gap: calc(base.$spacer1 * 0.5);
     row-gap: calc(base.$spacer1 * 2);
     margin-block: calc(base.$spacer1 * 1.5);
-    flex-wrap: wrap;
+    //  flex-wrap: wrap;
 
     @include utils.mQ(30rem) {
-        flex-direction: row;
-        align-items: center;
-        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        // flex-direction: row;
+       //  align-items: center;
+       // justify-items: center;
     }
 
     @include utils.mQ(45rem) {
@@ -107,11 +109,11 @@
     border-radius: 8px;
     font-weight: 700;
     font-size: base.$fs-15;
-
-
+ /*
     @include utils.mQ(45rem) {
         max-width: 12rem;
     }
+    */
 }
 
 .item-total {
