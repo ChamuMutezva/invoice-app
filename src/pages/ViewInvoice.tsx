@@ -28,11 +28,9 @@ function ViewInvoice() {
 		if (isEditOverlayOpen) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-		console.log(isEditOverlayOpen);
 	}, [isEditOverlayOpen]);
 
-	function toggleOverlay() {
-		console.log(isEditOverlayOpen);
+	function toggleOverlay() {		
 		setIsEditOverlayOpen(!isEditOverlayOpen);
 	}
 

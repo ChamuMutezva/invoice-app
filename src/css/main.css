@@ -700,7 +700,7 @@ select:focus-within {
   top: 50%;
   margin-block-start: 0.75em;
 }
-.select-wrapper:has(select:active)::after {
+.select-wrapper:has(select:focus)::after {
   transform: rotate(180deg);
 }
 
@@ -1080,7 +1080,7 @@ span.container-img {
 
 @media screen and (min-width: 22.5rem) {
   .email-address {
-    grid-area: 4/1;
+    grid-area: 4/1/5/3;
   }
 }
 @media screen and (min-width: 45rem) {

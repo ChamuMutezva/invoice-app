@@ -5,6 +5,7 @@ import format from "date-fns/format";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
+import { DevTool } from "@hookform/devtools";
 import { updateInvoice } from "../hooks/useUpdateInvoice";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
@@ -78,13 +79,15 @@ function EditInvoice(props: {
 		watch,
 		setValue,
 		getValues,
+		setFocus,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "items",
 	});
-	// console.log(errors);
+
+	console.log(errors)
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
@@ -94,14 +97,14 @@ function EditInvoice(props: {
 	// the grandtotal should be recalculated
 	function calculateTotal(): number {
 		let total: number = 0;
+
 		try {
 			const totalArray = watchTotal[0].map(
 				(item: { total: number }) => item.total
 			);
-			console.log(totalArray);
+
 			total = totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 			setValue("total", total);
-			console.log(total);
 			return total;
 		} catch (error) {
 			console.log(error);
@@ -157,6 +160,13 @@ function EditInvoice(props: {
 			document.removeEventListener("click", () => props.toggleOverlay);
 		};
 	}, []);
+
+	useEffect(() => {
+		console.log(watchTotal[0]);
+		setFocus(`items.${watchTotal[0].length - 1}.name`, {
+			shouldSelect: true,
+		});
+	}, [watchTotal[0].length]);
 
 	useEffect(() => {
 		calculateTotal();
@@ -543,8 +553,7 @@ function EditInvoice(props: {
 								/>
 
 								<div className={`costing-line`}>
-									
-								{/* QUANTITY DETAILS */}
+									{/* QUANTITY DETAILS */}
 									<div className="quantity-line calculate-line-container">
 										<CustomInput
 											name={`items.${index}.quantity`}
@@ -763,6 +772,7 @@ function EditInvoice(props: {
 						</div>
 					</div>
 				</Form>
+				<DevTool control={control} />
 			</main>
 
 			<SaveEditedPageDialog showConfirmSave={showConfirmSave} />

@@ -22,3 +22,4 @@
 - floating numbers calculations error - new invoice (changed input number to text) @done
 - dropdown styling needs improvement
 - round off calculations to 2 decimal places @done
+- set focus to first element of the project items when a project has been added @done
