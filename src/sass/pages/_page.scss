@@ -11,6 +11,13 @@
     overflow: hidden;
 }
 
+.app-overlay {
+    @include utils.mQ(40rem) {
+        overflow-y: hidden;
+        height: 100vh;
+    }
+}
+
 .address-sender-details,
 .address-reciever-details {
     display: flex;

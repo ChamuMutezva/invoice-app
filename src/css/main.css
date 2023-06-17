@@ -926,6 +926,13 @@ input[type=date]::before {
   overflow: hidden;
 }
 
+@media screen and (min-width: 40rem) {
+  .app-overlay {
+    overflow-y: hidden;
+    height: 100vh;
+  }
+}
+
 .address-sender-details,
 .address-reciever-details {
   display: flex;
@@ -1390,11 +1397,10 @@ span.container-img {
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   left: 0;
   width: 100%;
   background-color: hsl(0, 0%, 100%);
-  box-shadow: 0px -20px 20px 1px hsl(231, 23%, 61%);
 }
 
 .footer-edit {
@@ -1524,6 +1530,8 @@ span.container-img {
     width: 80%;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    height: 100vh;
+    overflow: scroll;
   }
 }
 @media screen and (min-width: 64rem) {

@@ -17,19 +17,19 @@
   position: absolute;
   top: 72px;
   right: 0;
-  // bottom: 0;
   left: 0;
   margin: auto;
   z-index: 10;
   padding-inline: 30px;
   padding-block: 0;
- // width: fit-content;
 
   @include utils.mQ(40rem) {
     margin-inline-start: 0;
     width: 80%;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    height: 100vh;
+    overflow: scroll;
   }
 
   @include utils.mQ(64rem) {

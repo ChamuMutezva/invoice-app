@@ -20,6 +20,14 @@
     }
 }
 
+.main-new-invoice {
+    @include utils.mQ(40rem) {
+        // margin-inline: calc(base.$spacer1 * 3);
+        //  height: 100vh;
+        //  overflow-x: scroll;
+    }
+}
+
 .main-edit {
     margin-block: calc(base.$spacer1 * 1.5);
 }

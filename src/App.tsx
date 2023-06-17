@@ -45,7 +45,7 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<div
-				className={`app ${overlayControl} ${theme ? "" : "dark-mode"}`}
+				className={`app ${overlayControl ? "app-overlay" : ""} ${theme ? "" : "dark-mode"}`}
 			>
 				<header className="flex header">
 					<div className="flex controls">
