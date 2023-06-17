@@ -1268,14 +1268,6 @@ span.container-img {
   width: 100%;
   position: relative;
 }
-
-/*
-.item-line {
-    @include utils.mQ(45rem) {
-        display: flex;
-        gap: 1rem;
-    }
-}*/
 @media screen and (min-width: 45rem) {
   .form-input-wrapper {
     flex: 1 1 35%;
@@ -1331,10 +1323,10 @@ span.container-img {
   font-weight: 700;
   font-size: 0.9375rem;
   /*
-     @include utils.mQ(45rem) {
-         max-width: 12rem;
-     }
-     */
+  @include utils.mQ(45rem) {
+      max-width: 12rem;
+  }
+  */
 }
 
 .item-total:read-only {

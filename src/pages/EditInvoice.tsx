@@ -214,550 +214,570 @@ function EditInvoice(props: {
 						</span>
 					</h2>
 
-					{/* SENDER DETAILS */}
-					<fieldset className="edit-invoice-details">
-						<legend className="edit-field-title">Bill From</legend>
+					<div className="fieldset-container">
+						{/* SENDER DETAILS */}
+						<fieldset className="edit-invoice-details">
+							<legend className="edit-field-title">
+								Bill From
+							</legend>
 
-						{/* SENDER STREET DETAILS */}
-						<CustomInput
-							type="text"
-							name="senderAddress.street"
-							labelText="Street"
-							control={control}
-							className=""
-							disabled={false}
-							rules={{
-								required: "Sender street is required",
-								minLength: {
-									value: 3,
-									message:
-										"Sender street must be greater than 3",
-								},
-								maxLength: {
-									value: 40,
-									message:
-										"Sender street must be less than 40",
-								},
-							}}
-						/>
-
-						{/* SENDER CITY DETAILS */}
-						<div className="grid postal-city">
+							{/* SENDER STREET DETAILS */}
 							<CustomInput
 								type="text"
-								name="senderAddress.city"
-								labelText="City"
+								name="senderAddress.street"
+								labelText="Street"
 								control={control}
 								className=""
 								disabled={false}
 								rules={{
-									required: "Sender city is required",
+									required: "Sender street is required",
 									minLength: {
 										value: 3,
 										message:
-											"Sender city must be greater than 3",
+											"Sender street must be greater than 3",
 									},
 									maxLength: {
 										value: 40,
 										message:
-											"Sender city must be less than 40",
+											"Sender street must be less than 40",
 									},
 								}}
 							/>
 
-							{/* SENDER POSTAL CODE DETAILS */}
-							<CustomInput
-								type="text"
-								name="senderAddress.postCode"
-								labelText="Post Code"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Sender post code is required",
-									minLength: {
-										value: 4,
-										message:
-											"Sender post code must be greater than 4",
-									},
-									maxLength: {
-										value: 8,
-										message:
-											"Sender post code  must be less than 8",
-									},
-								}}
-							/>
-
-							{/* SENDER COUNTRY DETAILS */}
-							<CustomInput
-								type="text"
-								name="senderAddress.country"
-								labelText="Country"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Sender country is required",
-									minLength: {
-										value: 4,
-										message:
-											"Sender country must be greater than 4",
-									},
-									maxLength: {
-										value: 40,
-										message:
-											"Sender country must be less than 40",
-									},
-								}}
-							/>
-						</div>
-					</fieldset>
-
-					{/* CLIENT DETAILS */}
-					<fieldset className="edit-invoice-details">
-						<legend className="edit-field-title">Bill to</legend>
-
-						{/* CLIENT NAME DETAILS */}
-						<CustomInput
-							type="text"
-							name="clientName"
-							labelText="Client's name"
-							control={control}
-							className=""
-							disabled={false}
-							rules={{
-								required: "Client name is required",
-								minLength: {
-									value: 3,
-									message:
-										"Client name must be greater than 3",
-								},
-								maxLength: {
-									value: 40,
-									message: "Client name must be less than 40",
-								},
-							}}
-						/>
-
-						{/* CLIENT EMAIL DETAILS */}
-						<CustomInput
-							type="email"
-							name="clientEmail"
-							labelText="Client's email"
-							control={control}
-							className=""
-							disabled={false}
-							rules={{
-								required: "Email is required",
-								minLength: {
-									value: 3,
-									message:
-										"Client email must be greater than 3",
-								},
-								maxLength: {
-									value: 40,
-									message:
-										"Client email must be less than 40",
-								},
-							}}
-						/>
-
-						{/* CLIENT STREET DETAILS */}
-						<CustomInput
-							type="text"
-							name="clientAddress.street"
-							labelText="Street"
-							control={control}
-							className=""
-							disabled={false}
-							rules={{
-								required: "Client street is required",
-								minLength: {
-									value: 3,
-									message:
-										"Client street must be greater than 3",
-								},
-								maxLength: {
-									value: 40,
-									message:
-										"Client street must be less than 40",
-								},
-							}}
-						/>
-
-						<div className="grid postal-city">
-							{/* CLIENT CITY DETAILS */}
-							<CustomInput
-								type="text"
-								name="clientAddress.city"
-								labelText="City"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Client city is required",
-									minLength: {
-										value: 3,
-										message:
-											"Client city must be greater than 3",
-									},
-									maxLength: {
-										value: 40,
-										message:
-											"Client city must be less than 40",
-									},
-								}}
-							/>
-
-							{/* CLIENT POSTAL DETAILS */}
-							<CustomInput
-								type="text"
-								name="clientAddress.postCode"
-								labelText="Post code"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Client postal code is required",
-									minLength: {
-										value: 4,
-										message:
-											"Client postal code must be greater than 4",
-									},
-									maxLength: {
-										value: 8,
-										message:
-											"Client postal code  must be less than 8",
-									},
-								}}
-							/>
-
-							{/* CLIENT COUNTRY DETAILS */}
-							<CustomInput
-								type="text"
-								name="clientAddress.country"
-								labelText="Country"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Client country is required",
-									minLength: {
-										value: 4,
-										message:
-											"Client country must be greater than 4",
-									},
-									maxLength: {
-										value: 40,
-										message:
-											"Client country must be less than 40",
-									},
-								}}
-							/>
-						</div>
-					</fieldset>
-
-					{/* INVOICE DETAILS  */}
-					<fieldset className="edit-invoice-details">
-						<div className="grid">
-							<CustomInput
-								type="date"
-								name="createdAt"
-								labelText="Invoice Date"
-								control={control}
-								className=""
-								disabled={false}
-								rules={{
-									required: "Date is required",
-								}}
-							/>
-
-							{/* PAYMENT DETAILS */}
-							<CustomSelect
-								name="paymentTerms"
-								control={control}
-								rules={{
-									required: "Payment terms are required",
-								}}
-								options={[
-									{ value: 1, label: "Net 1 Day" },
-									{ value: 6, label: "Net 6 days" },
-									{ value: 7, label: "Net 7 days" },
-									{ value: 14, label: "Net 14 days" },
-									{ value: 30, label: "Net 30 days" },
-								]}
-							/>
-						</div>
-						<div className="sr-only">
-							{/* PAYMENT DUE DETAILS */}
-							<CustomInput
-								type="date"
-								name="paymentDue"
-								labelText="Due Date"
-								control={control}
-								className=""
-								disabled={true}
-								rules={{
-									required: "Date is required",
-								}}
-							/>
-						</div>
-						{/* PROJECT NAME DETAILS */}
-						<CustomInput
-							type="text"
-							name="description"
-							labelText="Project description"
-							control={control}
-							className=""
-							disabled={false}
-							rules={{
-								required: "Project description is required",
-								minLength: {
-									value: 4,
-									message: "must be greater than 4",
-								},
-								maxLength: {
-									value: 40,
-									message:
-										"Project description  must be less than 40",
-								},
-							}}
-						/>
-					</fieldset>
-
-					<fieldset className="edit-invoice-details">
-						<legend className="edit-field-title">Item list</legend>
-
-						{fields.map((field, index: number) => (
-							<div
-								className="item-line"
-								key={field.id}
-							>
+							{/* SENDER CITY DETAILS */}
+							<div className="grid postal-city">
 								<CustomInput
-									name={`items.${index}.name`}
+									type="text"
+									name="senderAddress.city"
+									labelText="City"
 									control={control}
-									labelText={"Project Name"}
-									type={"text"}
 									className=""
 									disabled={false}
 									rules={{
-										required: "Project name is required",
+										required: "Sender city is required",
 										minLength: {
-											value: 4,
+											value: 3,
 											message:
-												"Project name must be greater than 4",
+												"Sender city must be greater than 3",
 										},
 										maxLength: {
 											value: 40,
 											message:
-												"Project name  must be less than 40",
+												"Sender city must be less than 40",
 										},
 									}}
 								/>
 
-								<div className={`costing-line`}>
-									{/* QUANTITY DETAILS */}
-									<div className="quantity-line calculate-line-container">
-										<CustomInput
-											name={`items.${index}.quantity`}
-											control={control}
-											labelText={"Qty"}
-											type={"number"}
-											className={`qty input calculate-line`}
-											disabled={false}
-											rules={{
-												required:
-													"Quantity is required",
-												step: 1,
-												min: {
-													value: 1,
-													message:
-														"Quantity must be greater than 0",
-												},
-												max: {
-													value: 1000,
-													message:
-														"Quantity must be less than 1000",
-												},
-												onChange: (evt: {
-													target: { value: number };
-												}) => {
-													setValue(
-														`items.${index}.total`,
-														parseFloat(
-															(
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.price`
-																)
-															).toFixed(2)
-														)
-													);
-													setProject({
-														...project,
-														quantity:
-															evt.target.value,
-														total: parseFloat(
-															(
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.price`
-																)
-															).toFixed(2)
-														),
-													});
-													calculateTotal();
-												},
-											}}
-										/>
-									</div>
-									{/* PRICE DETAILS */}
-									<div
-										className={`price-line calculate-line-container`}
-									>
-										<CustomInput
-											name={`items.${index}.price`}
-											control={control}
-											labelText={"Price"}
-											type={"number"}
-											className={"price calculate-line"}
-											disabled={false}
-											rules={{
-												required: "Price is required",
-												step: 1,
-												min: {
-													value: 1,
-													message:
-														"Price must be greater than 0",
-												},
-												max: {
-													value: 1000000,
-													message:
-														"Price must be less than 1000000",
-												},
-												onChange: (evt: {
-													target: { value: number };
-												}) => {
-													setValue(
-														`items.${index}.total`,
-														parseFloat(
-															(
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.quantity`
-																)
-															).toFixed(2)
-														)
-													);
-													setProject({
-														...project,
-														price: evt.target.value,
-														total: parseFloat(
-															(
-																evt.target
-																	.value *
-																getValues(
-																	`items.${index}.quantity`
-																)
-															).toFixed(2)
-														),
-													});
-													calculateTotal();
-												},
-											}}
-										/>
-									</div>
+								{/* SENDER POSTAL CODE DETAILS */}
+								<CustomInput
+									type="text"
+									name="senderAddress.postCode"
+									labelText="Post Code"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required:
+											"Sender post code is required",
+										minLength: {
+											value: 4,
+											message:
+												"Sender post code must be greater than 4",
+										},
+										maxLength: {
+											value: 8,
+											message:
+												"Sender post code  must be less than 8",
+										},
+									}}
+								/>
 
-									{/* PROJECT TOTAL DETAILS */}
-									<div
-										className={`item-total-line calculate-line-container`}
-									>
-										<label
-											className="label"
-											htmlFor={`item-total${index}`}
-										>
-											Total
-										</label>
-										<input
-											type="text"
-											tabIndex={-1}
-											id={`item-total${index}`}
-											className={`item-total input calculate-line`}
-											placeholder={"200.00"}
-											readOnly={true}
-											disabled={true}
-											{...register(
-												`items.${index}.total`,
-												{
-													required: true,
-												}
-											)}
-										/>
-									</div>
+								{/* SENDER COUNTRY DETAILS */}
+								<CustomInput
+									type="text"
+									name="senderAddress.country"
+									labelText="Country"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required: "Sender country is required",
+										minLength: {
+											value: 4,
+											message:
+												"Sender country must be greater than 4",
+										},
+										maxLength: {
+											value: 40,
+											message:
+												"Sender country must be less than 40",
+										},
+									}}
+								/>
+							</div>
+						</fieldset>
 
-									{/* DELETE PROJECT */}
-									<div className="container-delete calculate-line-container">
-										<button
-											className="btn btn-delete calculate-line"
-											aria-label="delete product"
-											type="button"
-											onClick={() => [
-												calculateTotal(),
-												remove(index),
-											]}
-										>
-											<img
-												src={DeleteBtn}
-												alt=""
-												aria-hidden={true}
-												width={"13"}
-												height={"16"}
+						{/* CLIENT DETAILS */}
+						<fieldset className="edit-invoice-details">
+							<legend className="edit-field-title">
+								Bill to
+							</legend>
+
+							{/* CLIENT NAME DETAILS */}
+							<CustomInput
+								type="text"
+								name="clientName"
+								labelText="Client's name"
+								control={control}
+								className=""
+								disabled={false}
+								rules={{
+									required: "Client name is required",
+									minLength: {
+										value: 3,
+										message:
+											"Client name must be greater than 3",
+									},
+									maxLength: {
+										value: 40,
+										message:
+											"Client name must be less than 40",
+									},
+								}}
+							/>
+
+							{/* CLIENT EMAIL DETAILS */}
+							<CustomInput
+								type="email"
+								name="clientEmail"
+								labelText="Client's email"
+								control={control}
+								className=""
+								disabled={false}
+								rules={{
+									required: "Email is required",
+									minLength: {
+										value: 3,
+										message:
+											"Client email must be greater than 3",
+									},
+									maxLength: {
+										value: 40,
+										message:
+											"Client email must be less than 40",
+									},
+								}}
+							/>
+
+							{/* CLIENT STREET DETAILS */}
+							<CustomInput
+								type="text"
+								name="clientAddress.street"
+								labelText="Street"
+								control={control}
+								className=""
+								disabled={false}
+								rules={{
+									required: "Client street is required",
+									minLength: {
+										value: 3,
+										message:
+											"Client street must be greater than 3",
+									},
+									maxLength: {
+										value: 40,
+										message:
+											"Client street must be less than 40",
+									},
+								}}
+							/>
+
+							<div className="grid postal-city">
+								{/* CLIENT CITY DETAILS */}
+								<CustomInput
+									type="text"
+									name="clientAddress.city"
+									labelText="City"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required: "Client city is required",
+										minLength: {
+											value: 3,
+											message:
+												"Client city must be greater than 3",
+										},
+										maxLength: {
+											value: 40,
+											message:
+												"Client city must be less than 40",
+										},
+									}}
+								/>
+
+								{/* CLIENT POSTAL DETAILS */}
+								<CustomInput
+									type="text"
+									name="clientAddress.postCode"
+									labelText="Post code"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required:
+											"Client postal code is required",
+										minLength: {
+											value: 4,
+											message:
+												"Client postal code must be greater than 4",
+										},
+										maxLength: {
+											value: 8,
+											message:
+												"Client postal code  must be less than 8",
+										},
+									}}
+								/>
+
+								{/* CLIENT COUNTRY DETAILS */}
+								<CustomInput
+									type="text"
+									name="clientAddress.country"
+									labelText="Country"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required: "Client country is required",
+										minLength: {
+											value: 4,
+											message:
+												"Client country must be greater than 4",
+										},
+										maxLength: {
+											value: 40,
+											message:
+												"Client country must be less than 40",
+										},
+									}}
+								/>
+							</div>
+						</fieldset>
+
+						{/* INVOICE DETAILS  */}
+						<fieldset className="edit-invoice-details">
+							<div className="grid">
+								<CustomInput
+									type="date"
+									name="createdAt"
+									labelText="Invoice Date"
+									control={control}
+									className=""
+									disabled={false}
+									rules={{
+										required: "Date is required",
+									}}
+								/>
+
+								{/* PAYMENT DETAILS */}
+								<CustomSelect
+									name="paymentTerms"
+									control={control}
+									rules={{
+										required: "Payment terms are required",
+									}}
+									options={[
+										{ value: 1, label: "Net 1 Day" },
+										{ value: 6, label: "Net 6 days" },
+										{ value: 7, label: "Net 7 days" },
+										{ value: 14, label: "Net 14 days" },
+										{ value: 30, label: "Net 30 days" },
+									]}
+								/>
+							</div>
+							<div className="sr-only">
+								{/* PAYMENT DUE DETAILS */}
+								<CustomInput
+									type="date"
+									name="paymentDue"
+									labelText="Due Date"
+									control={control}
+									className=""
+									disabled={true}
+									rules={{
+										required: "Date is required",
+									}}
+								/>
+							</div>
+							{/* PROJECT NAME DETAILS */}
+							<CustomInput
+								type="text"
+								name="description"
+								labelText="Project description"
+								control={control}
+								className=""
+								disabled={false}
+								rules={{
+									required: "Project description is required",
+									minLength: {
+										value: 4,
+										message: "must be greater than 4",
+									},
+									maxLength: {
+										value: 40,
+										message:
+											"Project description  must be less than 40",
+									},
+								}}
+							/>
+						</fieldset>
+
+						<fieldset className="edit-invoice-details">
+							<legend className="edit-field-title">
+								Item list
+							</legend>
+
+							{fields.map((field, index: number) => (
+								<div
+									className="item-line"
+									key={field.id}
+								>
+									<CustomInput
+										name={`items.${index}.name`}
+										control={control}
+										labelText={"Project Name"}
+										type={"text"}
+										className=""
+										disabled={false}
+										rules={{
+											required:
+												"Project name is required",
+											minLength: {
+												value: 4,
+												message:
+													"Project name must be greater than 4",
+											},
+											maxLength: {
+												value: 40,
+												message:
+													"Project name  must be less than 40",
+											},
+										}}
+									/>
+
+									<div className={`costing-line`}>
+										{/* QUANTITY DETAILS */}
+										<div className="quantity-line calculate-line-container">
+											<CustomInput
+												name={`items.${index}.quantity`}
+												control={control}
+												labelText={"Qty"}
+												type={"number"}
+												className={`qty input calculate-line`}
+												disabled={false}
+												rules={{
+													required:
+														"Quantity is required",
+													step: 1,
+													min: {
+														value: 1,
+														message:
+															"Quantity must be greater than 0",
+													},
+													max: {
+														value: 1000,
+														message:
+															"Quantity must be less than 1000",
+													},
+													onChange: (evt: {
+														target: {
+															value: number;
+														};
+													}) => {
+														setValue(
+															`items.${index}.total`,
+															parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.price`
+																	)
+																).toFixed(2)
+															)
+														);
+														setProject({
+															...project,
+															quantity:
+																evt.target
+																	.value,
+															total: parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.price`
+																	)
+																).toFixed(2)
+															),
+														});
+														calculateTotal();
+													},
+												}}
 											/>
-										</button>
+										</div>
+										{/* PRICE DETAILS */}
+										<div
+											className={`price-line calculate-line-container`}
+										>
+											<CustomInput
+												name={`items.${index}.price`}
+												control={control}
+												labelText={"Price"}
+												type={"number"}
+												className={
+													"price calculate-line"
+												}
+												disabled={false}
+												rules={{
+													required:
+														"Price is required",
+													step: 1,
+													min: {
+														value: 1,
+														message:
+															"Price must be greater than 0",
+													},
+													max: {
+														value: 1000000,
+														message:
+															"Price must be less than 1000000",
+													},
+													onChange: (evt: {
+														target: {
+															value: number;
+														};
+													}) => {
+														setValue(
+															`items.${index}.total`,
+															parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.quantity`
+																	)
+																).toFixed(2)
+															)
+														);
+														setProject({
+															...project,
+															price: evt.target
+																.value,
+															total: parseFloat(
+																(
+																	evt.target
+																		.value *
+																	getValues(
+																		`items.${index}.quantity`
+																	)
+																).toFixed(2)
+															),
+														});
+														calculateTotal();
+													},
+												}}
+											/>
+										</div>
+
+										{/* PROJECT TOTAL DETAILS */}
+										<div
+											className={`item-total-line calculate-line-container`}
+										>
+											<label
+												className="label"
+												htmlFor={`item-total${index}`}
+											>
+												Total
+											</label>
+											<input
+												type="text"
+												tabIndex={-1}
+												id={`item-total${index}`}
+												className={`item-total input calculate-line`}
+												placeholder={"200.00"}
+												readOnly={true}
+												disabled={true}
+												{...register(
+													`items.${index}.total`,
+													{
+														required: true,
+													}
+												)}
+											/>
+										</div>
+
+										{/* DELETE PROJECT */}
+										<div className="container-delete calculate-line-container">
+											<button
+												className="btn btn-delete calculate-line"
+												aria-label="delete product"
+												type="button"
+												onClick={() => [
+													calculateTotal(),
+													remove(index),
+												]}
+											>
+												<img
+													src={DeleteBtn}
+													alt=""
+													aria-hidden={true}
+													width={"13"}
+													height={"16"}
+												/>
+											</button>
+										</div>
 									</div>
 								</div>
+							))}
+
+							<div className="sr-only grand-total-wrapper">
+								<label
+									htmlFor="grand-total"
+									className="label"
+								>
+									The grand total is
+									<input
+										id="grand-total"
+										type="text"
+										tabIndex={-1}
+										{...register("total")}
+									/>
+								</label>
 							</div>
-						))}
 
-						<div className="sr-only grand-total-wrapper">
-							<label
-								htmlFor="grand-total"
-								className="label"
+							<button
+								type="button"
+								className="btn btn-add-item"
+								disabled={!isDirty || !isValid}
+								onClick={() => [
+									append(projectInit),
+									calculateTotal,
+									addProject,
+								]}
 							>
-								The grand total is
-								<input
-									id="grand-total"
-									type="text"
-									tabIndex={-1}
-									{...register("total")}
+								<img
+									src={AddItemImg}
+									alt=""
+									aria-hidden={true}
+									width={"11"}
+									height={"11"}
 								/>
-							</label>
-						</div>
-
-						<button
-							type="button"
-							className="btn btn-add-item"
-							disabled={!isDirty || !isValid}
-							onClick={() => [
-								append(projectInit),
-								calculateTotal,
-								addProject,
-							]}
-						>
-							<img
-								src={AddItemImg}
-								alt=""
-								aria-hidden={true}
-								width={"11"}
-								height={"11"}
-							/>
-							Add new Item
-						</button>
-					</fieldset>
-
+								Add new Item
+							</button>
+						</fieldset>
+					</div>
 					<div className="footer flex">
 						<div className="flex footer-edit">
 							<button

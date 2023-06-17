@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { OverLayContext } from "../context/OverlayContext";
 
 function OverLay(props: {
-	isOverlayOpen: boolean;
+	
 	toggleOverlay: React.MouseEventHandler<HTMLButtonElement>;
 	children:
 		| React.ReactElement<any, string | React.JSXElementConstructor<any>>
@@ -9,6 +10,7 @@ function OverLay(props: {
 		| React.ReactPortal;
 }) {
 	const dialogRef = useRef<HTMLDivElement>(null);
+	const {overlayControl} = useContext(OverLayContext);
 
 	dialogRef.current?.addEventListener("click", (evt) => {
 		console.log("overlay button clicked");
@@ -16,7 +18,7 @@ function OverLay(props: {
 	});
 	return (
 		<div
-			className={props.isOverlayOpen ? "" : "hide-overlay"}
+			className={`overlay-dialog ${overlayControl ? "" : "hide-overlay"}`}
 			role="dialog"
 			aria-modal="true"
 		>

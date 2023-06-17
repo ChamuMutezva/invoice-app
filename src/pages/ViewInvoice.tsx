@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
 import PreviousPage from "../components/PreviousPage";
@@ -9,6 +9,7 @@ import { updateInvoice } from "../hooks/useUpdateInvoice";
 import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
+import { OverLayContext } from "../context/OverlayContext";
 import OverLay from "./OverLay";
 import EditInvoice from "./EditInvoice";
 import { Oval } from "react-loader-spinner";
@@ -23,15 +24,17 @@ function ViewInvoice() {
 	const { data } = useGetSingleInvoice(params.id);
 	const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
 	const childInputRef = useRef<HTMLInputElement>(null);
+	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
 	useEffect(() => {
-		if (isEditOverlayOpen) {
+		if (overlayControl) {
 			childInputRef.current && childInputRef.current.focus();
 		}
 	}, [isEditOverlayOpen]);
 
-	function toggleOverlay() {		
-		setIsEditOverlayOpen(!isEditOverlayOpen);
+	function toggleOverlay() {
+		//setIsEditOverlayOpen(!isEditOverlayOpen);
+		onChangeOverlay(overlayControl);
 	}
 
 	const handleDeleteInvoice = () => {
@@ -398,11 +401,8 @@ function ViewInvoice() {
 				</footer>
 			</div>
 
-			{isEditOverlayOpen === true && (
-				<OverLay
-					isOverlayOpen={isEditOverlayOpen}
-					toggleOverlay={toggleOverlay}
-				>
+			{overlayControl === true && (
+				<OverLay toggleOverlay={toggleOverlay}>
 					<EditInvoice
 						toggleOverlay={toggleOverlay}
 						childInputRef={childInputRef}

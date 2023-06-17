@@ -40,23 +40,11 @@
     flex: 1 1 100%;
     width: 100%;
     position: relative;
-}
-/*
-.item-line {
-    @include utils.mQ(45rem) {
-        display: flex;
-        gap: 1rem;
-    }
-}*/
 
-//.edit-invoice-details {
-.form-input-wrapper {
     @include utils.mQ(45rem) {
         flex: 1 1 35%;
     }
 }
-
-//}
 
 .label {
     @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
@@ -80,17 +68,17 @@
 
 .costing-line {
     display: grid;
-    grid-template-columns: 1fr 1fr;    
+    grid-template-columns: 1fr 1fr;
     column-gap: calc(base.$spacer1 * 0.5);
     row-gap: calc(base.$spacer1 * 2);
-    margin-block: calc(base.$spacer1 * 1.5);    
+    margin-block: calc(base.$spacer1 * 1.5);
 
     @include utils.mQ(30rem) {
-        grid-template-columns: 1fr 1fr 1fr;       
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
     @include utils.mQ(45rem) {
-        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 
@@ -99,11 +87,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-content: center;   
+    align-content: center;
     border-radius: 8px;
     font-weight: 700;
     font-size: base.$fs-15;
- /*
+    /*
     @include utils.mQ(45rem) {
         max-width: 12rem;
     }

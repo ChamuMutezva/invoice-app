@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
@@ -7,24 +7,23 @@ import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
 import OverLay from "./OverLay";
 import NewInvoice from "./NewInvoice";
+import { OverLayContext } from "../context/OverlayContext";
 import { Oval, Comment } from "react-loader-spinner";
 import axios from "axios";
 
 function HomePage() {
 	const [selectedValue, setSelectedValue] = useState("all");
-	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =
-		useState(false);
+	//const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =	useState(false);
 	let { isLoading, isError, invoices, error } = getInvoices(selectedValue);
 	const childInputRef = useRef<HTMLInputElement>(null);
+	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
 	useEffect(() => {
-		if (isNewInvoiceOverlayOpen) {
+		if (overlayControl) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-		console.log(
-			`new invoice and overlay opened: ${isNewInvoiceOverlayOpen}`
-		);
-	}, [isNewInvoiceOverlayOpen]);
+		// console.log(`new invoice and overlay opened: ${overlayControl}`);
+	}, [overlayControl]);
 
 	if (isLoading) {
 		return (
@@ -69,10 +68,8 @@ function HomePage() {
 	}
 
 	function toggleOverlay() {
-		console.log(
-			`new invoice and overlay opened: ${isNewInvoiceOverlayOpen}`
-		);
-		setIsNewInvoiceOverlayOpen(!isNewInvoiceOverlayOpen);
+		// console.log(`new invoice and overlay opened: ${overlayControl}`);
+		onChangeOverlay(overlayControl);
 	}
 
 	const noInvoices = () => {
@@ -286,11 +283,8 @@ function HomePage() {
 					)}
 				</div>
 			</main>
-			{isNewInvoiceOverlayOpen === true ? (
-				<OverLay
-					isOverlayOpen={isNewInvoiceOverlayOpen}
-					toggleOverlay={toggleOverlay}
-				>
+			{overlayControl === true ? (
+				<OverLay toggleOverlay={toggleOverlay}>
 					<NewInvoice
 						toggleOverlay={toggleOverlay}
 						childInputRef={childInputRef}

@@ -77,7 +77,7 @@ const NewInvoice = (props: {
 			name: `Project name${data.items.length + 1}`,
 		});
 		setData({ ...data, items: data.items.concat(project) });
-		console.log(evt);
+		// console.log(evt);
 	};
 
 	// load form with initialstate
@@ -91,7 +91,7 @@ const NewInvoice = (props: {
 		setFocus,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
-	console.log(errors);
+	//	console.log(errors);
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "items",
@@ -117,14 +117,13 @@ const NewInvoice = (props: {
 		const total: number =
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		setValue("total", totalArray.length > 0 ? total : 0);
-		console.log(totalArray);
+		// console.log(totalArray);
 
 		return parseFloat(total.toFixed(2));
 	}
 
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");
-	//console.log(watchTotal);
 
 	// Focus trap implementation inspired by Tediko from his solution - see link below
 	// https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF
@@ -163,7 +162,7 @@ const NewInvoice = (props: {
 	// projectInit: ICosting = {name: "", quantity: 0, price: 0.0, total: 0.0,};
 	// four fields are created and focus should be moved to the name field
 	useEffect(() => {
-		console.log(watchTotal[0]);
+		// console.log(watchTotal[0]);
 		setFocus(`items.${watchTotal[0].length - 1}.name`, {
 			shouldSelect: true,
 		});

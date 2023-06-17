@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,10 +9,12 @@ import Toggle from "./components/Toggle";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
+import { OverLayContext } from "./context/OverlayContext";
 
 const queryClient = new QueryClient();
 
 function App() {
+	const { overlayControl } = useContext(OverLayContext);
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -24,7 +26,6 @@ function App() {
 			element: <ViewInvoice />,
 			// loader: rootLoader,
 		},
-   
 	]);
 
 	const localstorage: boolean = JSON.parse(
@@ -43,7 +44,9 @@ function App() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className={`app ${theme ? "" : "dark-mode"}`}>
+			<div
+				className={`app ${overlayControl} ${theme ? "" : "dark-mode"}`}
+			>
 				<header className="flex header">
 					<div className="flex controls">
 						<div className="logo-container">
