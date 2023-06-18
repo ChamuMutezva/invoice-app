@@ -1,7 +1,6 @@
 import add from "date-fns/add";
 import format from "date-fns/format";
 import { UseFormSetValue } from "react-hook-form";
-import { InvoiceTypesID } from "../Types/DataTypes";
 
 // Select the number of days due for payment .
 // used with the select option in the NewInvoice and EditInvoice

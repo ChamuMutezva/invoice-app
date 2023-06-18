@@ -1,39 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { MouseEventHandler, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-function SaveEditedPageDialog(props: { showConfirmSave: boolean }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const linkRef = useRef<HTMLAnchorElement>(null);
+function SaveEditedPageDialog(props: {closeDialog: MouseEventHandler<HTMLButtonElement>; showConfirmSave: boolean }) {
+	const dialogRef = useRef<HTMLDialogElement>(null);
+	const btnRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const dialogNode = dialogRef.current;
+	useEffect(() => {
+		const dialogNode = dialogRef.current;
 
-    if (props.showConfirmSave) {
-      dialogNode?.showModal();
-      linkRef.current?.focus();
-    } else {
-      dialogNode?.close();
-    }
-  }, [props.showConfirmSave]);
+		if (props.showConfirmSave) {
+			dialogNode?.showModal();
+			btnRef.current?.focus();
+		} else {
+			dialogNode?.close();
+		}
+	}, [props.showConfirmSave]);
 
-  return (
-    <dialog
-      ref={dialogRef}
-      className={`modal-wrapper ${
-        props.showConfirmSave ? "show-modal show-dialog" : ""
-      }`}
-    >
-      {" "}
-      <div className="dialog-container">
-        <p id="modal-heading-text" className="modal-text">
-          The invoice has been updated!
-        </p>
-        <Link ref={linkRef} className={`btn btn-link-home`} to={`/`}>
-          Return to Homepage
-        </Link>
-      </div>
-    </dialog>
-  );
+	return (
+		<dialog
+			ref={dialogRef}
+			className={`modal-wrapper ${
+				props.showConfirmSave ? "show-modal show-dialog" : ""
+			}`}
+		>
+			{" "}
+			<div className="dialog-container">
+				<p
+					id="modal-heading-text"
+					className="modal-text"
+				>
+					The invoice has been updated!
+				</p>
+				<button
+					ref={btnRef}
+					onClick={props.closeDialog}
+					className={`btn btn-link-home`}
+				>
+					Return to Homepage
+				</button>
+			</div>
+		</dialog>
+	);
 }
 
 export default SaveEditedPageDialog;

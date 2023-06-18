@@ -68,7 +68,7 @@ function HomePage() {
 	}
 
 	function toggleOverlay() {
-		// console.log(`new invoice and overlay opened: ${overlayControl}`);
+		 console.log(`new invoice and overlay opened: ${overlayControl}`);
 		onChangeOverlay(overlayControl);
 	}
 

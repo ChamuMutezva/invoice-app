@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from "react";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
 import format from "date-fns/format";
 import DeleteBtn from "../assets/icon-delete.svg";
@@ -26,6 +26,7 @@ function EditInvoice(props: {
 		total: 0.0,
 	};
 
+	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
 	const [project, setProject] = useState(projectInit);
@@ -112,6 +113,10 @@ function EditInvoice(props: {
 		return parseFloat(total.toFixed(2));
 	}
 
+	function closeDialog() {
+		return navigate(0);
+	}
+
 	// Updates the array of projects ITEM by displaying .
 	// The obj has the following: name of project, quantity, price and total.
 	const addProject = () => {
@@ -188,8 +193,8 @@ function EditInvoice(props: {
 		calculateTotal();
 		console.log(invoice);
 		updateInvoiceMutation.mutate(invoice);
+		props.toggleOverlay;
 		setShowConfirmSave(true);
-		return props.toggleOverlay;
 	};
 
 	return (
@@ -799,10 +804,12 @@ function EditInvoice(props: {
 				{process.env.NODE_ENV !== "production" && (
 					<DevTool control={control} />
 				)}
-				
 			</main>
 
-			<SaveEditedPageDialog showConfirmSave={showConfirmSave} />
+			<SaveEditedPageDialog
+				showConfirmSave={showConfirmSave}
+				closeDialog={closeDialog}
+			/>
 		</>
 	);
 }

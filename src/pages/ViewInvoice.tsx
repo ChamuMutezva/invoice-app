@@ -29,6 +29,7 @@ function ViewInvoice() {
 		if (overlayControl) {
 			childInputRef.current && childInputRef.current.focus();
 		}
+		console.log(overlayControl);
 	}, [overlayControl]);
 
 	function toggleOverlay() {
