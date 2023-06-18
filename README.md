@@ -232,3 +232,6 @@ Application link ![Reusable overlay usage](src/pages/HomePage.tsx)
 - Twitter - [@ChamuMutezva](https://twitter.com/ChamuMutezva)
 
 ## Acknowledgments
+
+- Focus trap implementation inspired by Tediko from his solution - see link below
+[Tediko Invoice app - Focus trap implementation](https://www.frontendmentor.io/solutions/invoice-app-reactjs-styledcomponents-framer-motion-webpack-WVGeS4ShF)
