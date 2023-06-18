@@ -795,7 +795,11 @@ function EditInvoice(props: {
 						</div>
 					</div>
 				</Form>
-				<DevTool control={control} />
+
+				{process.env.NODE_ENV !== "production" && (
+					<DevTool control={control} />
+				)}
+				
 			</main>
 
 			<SaveEditedPageDialog showConfirmSave={showConfirmSave} />
