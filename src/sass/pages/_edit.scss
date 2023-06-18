@@ -1,8 +1,12 @@
 @use '../base';
 @use '../utils';
-
+/*
 .edit-form>*+* {
     padding-block-end: calc(base.$spacer1 * 2.5);
+}*/
+
+.fieldset-container {
+    margin-block-end: 8rem;
 }
 
 .edit-title {
@@ -159,11 +163,21 @@
 }
 
 .footer {
-    position: relative;
+    position: fixed;
     left: 0;
     width: 100%;
     background-color: base.$clr-white-100;
-  //  box-shadow: 0px -20px 20px 1px base.$clr-black-600;
+    bottom: 0;
+    box-shadow: 0px -20px 20px 1px base.$clr-black-600;
+
+    @include utils.mQ(40rem) {
+        width: 80%;
+    }
+
+    @include utils.mQ(64rem) {
+        width: 50%;
+        left: 84px;
+    }
 }
 
 .footer-edit {
