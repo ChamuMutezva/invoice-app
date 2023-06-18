@@ -22,7 +22,6 @@ function ViewInvoice() {
 		useState(false);
 	const { mutate } = useDeleteInvoice(setDeletionError);
 	const { data } = useGetSingleInvoice(params.id);
-	const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
 	const childInputRef = useRef<HTMLInputElement>(null);
 	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
@@ -30,10 +29,9 @@ function ViewInvoice() {
 		if (overlayControl) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-	}, [isEditOverlayOpen]);
+	}, [overlayControl]);
 
 	function toggleOverlay() {
-		//setIsEditOverlayOpen(!isEditOverlayOpen);
 		onChangeOverlay(overlayControl);
 	}
 
@@ -101,13 +99,7 @@ function ViewInvoice() {
 			});
 		}
 	}
-	/*
-	useEffect(() => {
-		if(isEditOverlayOpen) {
-			editRef.current?.focus()
-		}
-	}, [isEditOverlayOpen])
-*/
+
 	return (
 		<>
 			<div className="wrapper">
@@ -353,16 +345,17 @@ function ViewInvoice() {
 											)
 										)}
 									</tbody>
+									<tfoot className="grand-total-container">
+										<td className="grand-total-title">
+											Grand Total
+										</td>
+										<td className="grand-total">
+											{currencyFormatter.format(
+												grandTotal
+											)}
+										</td>
+									</tfoot>
 								</table>
-							</div>
-
-							<div className="grand-total-container">
-								<h3 className="grand-total-title">
-									Grand Total
-								</h3>
-								<p className="grand-total">
-									{currencyFormatter.format(grandTotal)}
-								</p>
 							</div>
 						</section>
 					</div>
