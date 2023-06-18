@@ -1235,10 +1235,6 @@ span.container-img {
   background-color: hsl(231, 20%, 27%);
 }
 
-/*
-.edit-form>*+* {
-    padding-block-end: calc(base.$spacer1 * 2.5);
-}*/
 .fieldset-container {
   margin-block-end: 8rem;
 }

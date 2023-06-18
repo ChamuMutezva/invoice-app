@@ -345,15 +345,17 @@ function ViewInvoice() {
 											)
 										)}
 									</tbody>
-									<tfoot className="grand-total-container">
-										<td className="grand-total-title">
-											Grand Total
-										</td>
-										<td className="grand-total">
-											{currencyFormatter.format(
-												grandTotal
-											)}
-										</td>
+									<tfoot>
+										<tr className="grand-total-container">
+											<td className="grand-total-title">
+												Grand Total
+											</td>
+											<td className="grand-total">
+												{currencyFormatter.format(
+													grandTotal
+												)}
+											</td>
+										</tr>
 									</tfoot>
 								</table>
 							</div>
