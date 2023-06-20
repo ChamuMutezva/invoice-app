@@ -11,9 +11,11 @@ import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
+import { Comment } from "react-loader-spinner";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 import dueDays from "../utilities/selectPaymentDue";
+import axios from "axios";
 
 function EditInvoice(props: {
 	childInputRef: any; // Ref<HTMLFormElement> | undefined;
@@ -33,7 +35,7 @@ function EditInvoice(props: {
 	const params = useParams();
 
 	// Fetch an invoice
-	const { data } = useGetSingleInvoice(params.id);
+	const { data, error, isError } = useGetSingleInvoice(params.id);
 	const invoice = data;
 
 	// load initial form data on first visit to site
@@ -196,6 +198,28 @@ function EditInvoice(props: {
 		props.toggleOverlay;
 		setShowConfirmSave(true);
 	};
+
+	if (isError) {
+		let errorMessage = "";
+		if (axios.isAxiosError(error)) {
+			errorMessage = error.message;
+		}
+		return (
+			<div className="flex loading">
+				<h2 className="pre-loading">Error: {errorMessage} </h2>
+				<Comment
+					visible={true}
+					height="80"
+					width="80"
+					ariaLabel="comment-loading"
+					wrapperStyle={{}}
+					wrapperClass="comment-wrapper"
+					color="#fff"
+					backgroundColor="#F4442E"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<>

@@ -12,7 +12,8 @@ import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
 import { OverLayContext } from "../context/OverlayContext";
 import OverLay from "./OverLay";
 import EditInvoice from "./EditInvoice";
-import { Oval } from "react-loader-spinner";
+import { Oval, Comment } from "react-loader-spinner";
+import axios from "axios";
 
 function ViewInvoice() {
 	const queryClient = useQueryClient();
@@ -21,7 +22,7 @@ function ViewInvoice() {
 	const [showDeleteInvoiceDialog, setShowDeleteInvoiceDialog] =
 		useState(false);
 	const { mutate } = useDeleteInvoice(setDeletionError);
-	const { data } = useGetSingleInvoice(params.id);
+	const { data, isError, error, isLoading } = useGetSingleInvoice(params.id);
 	const childInputRef = useRef<HTMLInputElement>(null);
 	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
@@ -65,7 +66,7 @@ function ViewInvoice() {
 		},
 	});
 
-	if (data === undefined) {
+	if (isLoading) {
 		return (
 			<div className="flex loading">
 				<h2 className="pre-loading">Loading...</h2>
@@ -80,6 +81,28 @@ function ViewInvoice() {
 					secondaryColor="#4fa94d"
 					strokeWidth={2}
 					strokeWidthSecondary={2}
+				/>
+			</div>
+		);
+	}
+
+	if (isError) {
+		let errorMessage = "";
+		if (axios.isAxiosError(error)) {
+			errorMessage = error.message;
+		}
+		return (
+			<div className="flex loading">
+				<h2 className="pre-loading">Error: {errorMessage} </h2>
+				<Comment
+					visible={true}
+					height="80"
+					width="80"
+					ariaLabel="comment-loading"
+					wrapperStyle={{}}
+					wrapperClass="comment-wrapper"
+					color="#fff"
+					backgroundColor="#F4442E"
 				/>
 			</div>
 		);
