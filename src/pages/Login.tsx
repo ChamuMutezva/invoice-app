@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function Signup() {
-	const [email, setEmail] = useState("");
+function Login() {
+    const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleSubmit = async (evt: { preventDefault: () => void }) => {
@@ -10,10 +10,10 @@ function Signup() {
 	};
 	return (
 		<form
-			className="signup"
+			className="login"
 			onSubmit={handleSubmit}
 		>
-			<h3>Sign up</h3>
+			<h3>Login</h3>
 			<label htmlFor="email">Email:</label>
 			<input
 				type="email"
@@ -26,9 +26,9 @@ function Signup() {
 				value={password}
 				onChange={(evt) => setPassword(evt.target.value)}
 			/>
-			<button>Sign up</button>
+			<button>Login</button>
 		</form>
 	);
 }
 
-export default Signup;
+export default Login;
