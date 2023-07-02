@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 import Logo from "./assets/logo.svg";
 import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
@@ -13,11 +14,15 @@ import LandingPage from "./pages/LandingPage";
 import InvoicesPage from "./pages/InvoicesPage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { useLogout } from "./hooks/useLogout";
 
 const queryClient = new QueryClient();
 
 function App() {
 	const { overlayControl } = useContext(OverLayContext);
+	const { logout } = useLogout();
+	const { state } = useAuthContext();
+	console.log(state.user?.email)
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -52,6 +57,10 @@ function App() {
 
 	const onChange = () => {
 		setTheme(() => !theme);
+	};
+
+	const handleLogout = () => {
+		logout();
 	};
 
 	useEffect(() => {
@@ -89,6 +98,9 @@ function App() {
 							theme={theme}
 							onChange={onChange}
 						/>
+					</div>
+					<div className="logout-container">
+						<button onClick={handleLogout}>Logout</button>
 					</div>
 					<div className="profile">
 						<a
