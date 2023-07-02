@@ -11,7 +11,7 @@ import { OverLayContext } from "../context/OverlayContext";
 import { Oval, Comment } from "react-loader-spinner";
 import axios from "axios";
 
-function HomePage() {
+function InvoicesPage() {
 	const [selectedValue, setSelectedValue] = useState("all");
 	//const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =	useState(false);
 	let { isLoading, isError, invoices, error } = getInvoices(selectedValue);
@@ -116,7 +116,7 @@ function HomePage() {
 			return (
 				<>
 					{" "}
-					<span className="mobile-hidden">There is</span>
+					<span className="mobile-hidden">There is </span>
 					{length} invoice
 				</>
 			);
@@ -295,4 +295,4 @@ function HomePage() {
 	);
 }
 
-export default HomePage;
+export default InvoicesPage;

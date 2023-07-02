@@ -1577,3 +1577,9 @@ span.container-img {
 .dark-mode .overlay-container {
   background-color: hsl(233, 30%, 11%);
 }
+
+.landing-page {
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}

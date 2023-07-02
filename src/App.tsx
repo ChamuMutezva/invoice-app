@@ -7,9 +7,10 @@ import Profile from "./assets/image-avatar.jpg";
 import "./sass/main.scss";
 import Toggle from "./components/Toggle";
 import ErrorPage from "./pages/ErrorPage";
-import HomePage from "./pages/HomePage";
 import ViewInvoice from "./pages/ViewInvoice";
 import { OverLayContext } from "./context/OverlayContext";
+import LandingPage from "./pages/LandingPage";
+import InvoicesPage from "./pages/InvoicesPage";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,12 @@ function App() {
 	const router = createBrowserRouter([
 		{
 			path: "/",
-			element: <HomePage />,
+			element: <LandingPage />,
+			errorElement: <ErrorPage />,
+		},
+		{
+			path: "/invoicespage",
+			element: <InvoicesPage />,
 			errorElement: <ErrorPage />,
 		},
 		{
@@ -45,7 +51,9 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<div
-				className={`app ${overlayControl ? "app-overlay" : ""} ${theme ? "" : "dark-mode"}`}
+				className={`app ${overlayControl ? "app-overlay" : ""} ${
+					theme ? "" : "dark-mode"
+				}`}
 			>
 				<header className="flex header">
 					<div className="flex controls">
@@ -74,7 +82,7 @@ function App() {
 					</div>
 					<div className="profile">
 						<a
-							href="#"
+							href="/"
 							className="btn btn-profile"
 						>
 							<img
