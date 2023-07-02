@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 function LandingPage() {
 	return (
 		<div className="flex landing-page">
-			<button>Sign up</button>
-			<button>Login </button>
+			<Link to={"/signup"}>Sign up</Link>
+			<Link to={"/login"}>Login </Link>
 			<Link to={`./invoicespage`}>Invoices page</Link>
 		</div>
 	);

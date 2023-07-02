@@ -11,6 +11,8 @@ import ViewInvoice from "./pages/ViewInvoice";
 import { OverLayContext } from "./context/OverlayContext";
 import LandingPage from "./pages/LandingPage";
 import InvoicesPage from "./pages/InvoicesPage";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,14 @@ function App() {
 			path: "/invoicespage",
 			element: <InvoicesPage />,
 			errorElement: <ErrorPage />,
+		},
+		{
+			path: "/signup",
+			element: <Signup />,
+		},
+		{
+			path: "/login",
+			element: <Login />,
 		},
 		{
 			path: "/viewInvoice/:id",

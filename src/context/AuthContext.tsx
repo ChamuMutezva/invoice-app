@@ -1,10 +1,11 @@
 import React, { createContext, useReducer } from "react";
 
 interface State {
-	isAuthenticated: boolean;
+	user: string | null;
 }
 
 interface Action {
+    payload: any;
 	type: "LOGIN" | "LOGOUT";
 }
 
@@ -12,16 +13,16 @@ export const AuthContext = createContext<{
 	state: State;
 	dispatch: React.Dispatch<Action>;
 }>({
-	state: { isAuthenticated: false },
+	state: { user: "" },
 	dispatch: () => null,
 });
 
 const authReducer = (state: State, action: Action) => {
 	switch (action.type) {
 		case "LOGIN":
-			return { isAuthenticated: true };
+			return { user: action.payload };
 		case "LOGOUT":
-			return { isAuthenticated: false };
+			return { user: null };
 		default:
 			return state;
 	}
@@ -29,8 +30,9 @@ const authReducer = (state: State, action: Action) => {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [state, dispatch] = useReducer(authReducer, {
-		isAuthenticated: false,
+		user: ""
 	});
+	console.log("Auth context: ", state);
 	return (
 		<AuthContext.Provider value={{ state, dispatch }}>
 			{children}

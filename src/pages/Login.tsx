@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = async (evt: { preventDefault: () => void }) => {
 		evt.preventDefault();
@@ -10,9 +12,16 @@ function Login() {
 	};
 	return (
 		<form
-			className="login"
+			className="flex login"
 			onSubmit={handleSubmit}
 		>
+			<button
+			type="button"
+				className="btn flex btn-return"
+				onClick={() => navigate(-1)}
+			>				
+				Go back				
+			</button>
 			<h3>Login</h3>
 			<label htmlFor="email">Email:</label>
 			<input
