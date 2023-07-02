@@ -51,6 +51,12 @@ span.container-img {
     display: none;
 }
 
+.logout-container {
+    @include utils.mQ(40rem) {
+        transform: rotate(270deg);
+    }
+}
+
 .filter {
     border: none;
     background-color: inherit;

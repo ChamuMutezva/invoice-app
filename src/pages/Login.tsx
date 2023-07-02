@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const { login, error, isLoading } = useLogin();
+	const { state } = useAuthContext();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (evt: { preventDefault: () => void }) => {
 		evt.preventDefault();
 		console.log(email, password);
+		console.log(state);
 		await login(email, password);
 	};
+	useEffect(() => {
+		if (state.user) {
+			navigate("/invoicespage");
+		}
+	}, [state.user]);
 	return (
 		<form
 			className="flex login"
@@ -26,6 +34,7 @@ function Login() {
 				Go back
 			</button>
 			<h3>Login</h3>
+
 			<label htmlFor="email">Email:</label>
 			<input
 				type="email"
@@ -39,6 +48,11 @@ function Login() {
 				onChange={(evt) => setPassword(evt.target.value)}
 			/>
 			<button disabled={isLoading}>Login</button>
+			<p className="flex test-data">
+				<span>Test data</span>
+				<span>email: test123@gmail.com</span>
+				<span>password: Test123!</span>
+			</p>
 			{error && <div className="error">{error}</div>}
 		</form>
 	);

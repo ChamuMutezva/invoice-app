@@ -38,7 +38,7 @@ function Signup() {
 				value={password}
 				onChange={(evt) => setPassword(evt.target.value)}
 			/>
-			<button>Sign up</button>
+			<button disabled={isLoading}>Sign up</button>
 			{error && <div className="error">{error}</div>}
 		</form>
 	);

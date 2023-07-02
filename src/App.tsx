@@ -22,7 +22,7 @@ function App() {
 	const { overlayControl } = useContext(OverLayContext);
 	const { logout } = useLogout();
 	const { state } = useAuthContext();
-	console.log(state.user?.email)
+	console.log(state.user?.email);
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -99,12 +99,23 @@ function App() {
 							onChange={onChange}
 						/>
 					</div>
-					<div className="logout-container">
-						<button onClick={handleLogout}>Logout</button>
-					</div>
+
+					{state.user && (
+						<div className="flex logout-container">
+							<a
+								className="btn-logout"
+								href="/"
+								onClick={handleLogout}
+							>
+								Logout
+							</a>
+						</div>
+					)}
+
 					<div className="profile">
 						<a
 							href="/"
+							onClick={handleLogout}
 							className="btn btn-profile"
 						>
 							<img
