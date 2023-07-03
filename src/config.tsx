@@ -4,5 +4,5 @@ export const API_ENDPOINT_PATH = process.env.NODE_ENV === 'production'
     console.log(process.env.NODE_ENV);
 
 export const API_AUTH_PATH = process.env.NODE_ENV === 'production'
-? "https://tasty-peplum-eel.cyclic.app/api/users"
+? "https://tasty-peplum-eel.cyclic.app/api/user"
 : "http://localhost:4000/api/user"
