@@ -1,7 +1,9 @@
 import React, { createContext, useEffect, useReducer } from "react";
 
 interface State {
-	user: { email: string | null; password: string | null };
+	user: {
+    token: any; email: string | null; password: string | null 
+};
 }
 
 interface Action {
@@ -13,7 +15,7 @@ export const AuthContext = createContext<{
 	state: State;
 	dispatch: React.Dispatch<Action>;
 }>({
-	state: { user: { email: null, password: null } },
+	state: { user: { email: null, password: null , token: null} },
 	dispatch: () => null,
 });
 
