@@ -1,4 +1,9 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, {
+	MouseEventHandler,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -14,6 +19,7 @@ import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 import dueDays from "../utilities/selectPaymentDue";
+import { OverLayContext } from "../context/OverlayContext";
 
 const NewInvoice = (props: {
 	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
@@ -32,6 +38,7 @@ const NewInvoice = (props: {
 	const [project, setProject] = useState(projectInit);
 	const [showCreateInvoiceDialog, setShowCreateInvoiceDialog] =
 		useState(false);
+	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
 	// load initial form data on first visit to site
 	// format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
@@ -63,7 +70,7 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	function closeDialog() {
-		return navigate(0);
+		return onChangeOverlay(overlayControl); //navigate("/invoicespage");
 	}
 
 	// Updates The obj which has the following
