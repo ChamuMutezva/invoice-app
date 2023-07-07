@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { useEffect, useRef, useState, useContext } from "react";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
 import PreviousPage from "../components/PreviousPage";
 import { reducer } from "../hooks/useReducer";
-import { updateInvoice } from "../hooks/useUpdateInvoice";
+import { useUpdateInvoice } from "../hooks/useUpdateInvoice";
 import { useDeleteInvoice } from "../hooks/useDeleteInvoice";
 import { useGetSingleInvoice } from "../hooks/useFetchInvoice";
 import DeleteInvoiceDialog from "../components/DeleteInvoiceDialog";
@@ -19,12 +19,15 @@ function ViewInvoice() {
 	const queryClient = useQueryClient();
 	let params = useParams();
 	const [deletionError, setDeletionError] = useState(null);
+	const [updateError, setUpdateError] = useState(null);
 	const [showDeleteInvoiceDialog, setShowDeleteInvoiceDialog] =
 		useState(false);
 	const { mutate } = useDeleteInvoice(setDeletionError);
+	const { mutate: mutateUpdate} = useUpdateInvoice(setUpdateError)
 	const { data, isError, error, isLoading } = useGetSingleInvoice(params.id);
 	const childInputRef = useRef<HTMLInputElement>(null);
 	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (overlayControl) {
@@ -41,13 +44,14 @@ function ViewInvoice() {
 		setShowDeleteInvoiceDialog(true);
 	};
 
-	const closeDialog = () => {
+	const cancelDelete = () => {
 		setShowDeleteInvoiceDialog(false);
 	};
 
 	const confirmDelete = () => {
 		mutate(data._id);
 		setShowDeleteInvoiceDialog(false);
+		navigate("/invoicespage");
 	};
 
 	const getStatus = (status: string) => {
@@ -59,13 +63,13 @@ function ViewInvoice() {
 			return "pending-status";
 		}
 	};
-
+/*
 	const updateInvoiceMutation = useMutation(updateInvoice, {
 		onSuccess: () => {
 			queryClient.invalidateQueries("invoices");
 		},
 	});
-
+*/
 	if (isLoading) {
 		return (
 			<div className="flex loading">
@@ -117,11 +121,12 @@ function ViewInvoice() {
 
 	function handleChangeStatus() {
 		if (data.status !== "paid") {
-			updateInvoiceMutation.mutate({
+			mutateUpdate({
 				...data,
 				status: "paid",
 			});
 		}
+		navigate("/invoicespage");
 	}
 
 	return (
@@ -387,7 +392,7 @@ function ViewInvoice() {
 					</div>
 					<DeleteInvoiceDialog
 						showDeleteInvoiceDialog={showDeleteInvoiceDialog}
-						closeDialog={closeDialog}
+						cancelDelete={cancelDelete}
 						invoiceID={data.id}
 						confirmDelete={confirmDelete}
 					/>

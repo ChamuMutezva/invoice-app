@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 function DeleteInvoiceDialog(props: {
   invoiceID: string;
   showDeleteInvoiceDialog: boolean;
-  closeDialog: React.MouseEventHandler<HTMLButtonElement>;
+  cancelDelete: React.MouseEventHandler<HTMLButtonElement>;
   confirmDelete: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -33,7 +33,7 @@ function DeleteInvoiceDialog(props: {
           cannot be undone.
         </p>
         <div className="flex button-container">
-          <button className="btn btn-cancel" onClick={props.closeDialog}>
+          <button className="btn btn-cancel" onClick={props.cancelDelete}>
             Cancel
           </button>
           <button className="btn btn-delete-view" onClick={props.confirmDelete}>

@@ -6,7 +6,7 @@ import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
 import { DevTool } from "@hookform/devtools";
-import { updateInvoice } from "../hooks/useUpdateInvoice";
+import { useUpdateInvoice} from "../hooks/useUpdateInvoice";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
@@ -28,11 +28,12 @@ function EditInvoice(props: {
 		total: 0.0,
 	};
 
-	const navigate = useNavigate();
-	const queryClient = useQueryClient();
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
 	const [project, setProject] = useState(projectInit);
+	const [updateError, setUpdateError] = useState(null);
+	const { mutate: mutateUpdate} = useUpdateInvoice(setUpdateError)
 	const params = useParams();
+	const navigate = useNavigate();
 
 	// Fetch an invoice
 	const { data, error, isError } = useGetSingleInvoice(params.id);
@@ -67,13 +68,13 @@ function EditInvoice(props: {
 		},
 		items: invoice.items,
 	};
-
+/*
 	const updateInvoiceMutation = useMutation(updateInvoice, {
 		onSuccess: () => {
 			queryClient.invalidateQueries("invoices");
 		},
 	});
-
+*/
 	// load form with initialstate
 	const {
 		register,
@@ -116,13 +117,14 @@ function EditInvoice(props: {
 	}
 
 	function closeDialog() {
-		return navigate(0);
+		setShowConfirmSave(!showConfirmSave)
+		 navigate("/viewInvoice");
 	}
 
 	// Updates the array of projects ITEM by displaying .
 	// The obj has the following: name of project, quantity, price and total.
 	const addProject = () => {
-		updateInvoiceMutation.mutate({
+		mutateUpdate({
 			...invoice,
 			items: invoice.items.concat(project),
 			total: calculateTotal(),
@@ -194,9 +196,9 @@ function EditInvoice(props: {
 		};
 		calculateTotal();
 		console.log(invoice);
-		updateInvoiceMutation.mutate(invoice);
-		props.toggleOverlay;
-		setShowConfirmSave(true);
+		mutateUpdate(invoice);
+		 props.toggleOverlay;
+		 setShowConfirmSave(true);
 	};
 
 	if (isError) {

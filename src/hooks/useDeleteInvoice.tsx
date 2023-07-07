@@ -19,7 +19,7 @@ export const useDeleteInvoice = (setDeletionError: (arg0: any) => void) => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(["invoices"]);
-				navigate("/");
+				navigate("/invoicespage");
 			},
 			onError: ({ message }: any) => {
 				setDeletionError(message);
