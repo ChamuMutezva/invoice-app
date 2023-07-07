@@ -50,7 +50,7 @@ function Login() {
 			<button disabled={isLoading}>Login</button>
 			<p className="flex test-data">
 				<span>Test data</span>
-				<span>email: test123@gmail.com</span>
+				<span>email: test@gmail.com</span>
 				<span>password: Test123!</span>
 			</p>
 			{error && <div className="error">{error}</div>}

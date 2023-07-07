@@ -6,8 +6,7 @@ function LandingPage() {
 		<div className="flex landing-page">
 			<p>authentication is down, use link to invoice page</p>
 			<Link to={"/signup"}>Sign up</Link>
-			<Link to={"/login"}>Login </Link>
-			<Link to={`./invoicespage`}>Invoices page</Link>
+			<Link to={"/login"}>Login </Link>			
 		</div>
 	);
 }
