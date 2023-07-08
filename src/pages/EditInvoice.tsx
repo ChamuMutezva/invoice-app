@@ -6,7 +6,7 @@ import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
 import { useMutation, useQueryClient } from "react-query";
 import { DevTool } from "@hookform/devtools";
-import { useUpdateInvoice} from "../hooks/useUpdateInvoice";
+import { useUpdateInvoice } from "../hooks/useUpdateInvoice";
 import { reducer } from "../hooks/useReducer";
 import SaveEditedPageDialog from "../components/SaveEditedPageDialog";
 import { ICosting, InvoiceTypesID } from "../Types/DataTypes";
@@ -31,7 +31,7 @@ function EditInvoice(props: {
 	const [showConfirmSave, setShowConfirmSave] = useState(false);
 	const [project, setProject] = useState(projectInit);
 	const [updateError, setUpdateError] = useState(null);
-	const { mutate: mutateUpdate} = useUpdateInvoice(setUpdateError)
+	const { mutate: mutateUpdate } = useUpdateInvoice(setUpdateError);
 	const params = useParams();
 	const navigate = useNavigate();
 
@@ -68,13 +68,7 @@ function EditInvoice(props: {
 		},
 		items: invoice.items,
 	};
-/*
-	const updateInvoiceMutation = useMutation(updateInvoice, {
-		onSuccess: () => {
-			queryClient.invalidateQueries("invoices");
-		},
-	});
-*/
+
 	// load form with initialstate
 	const {
 		register,
@@ -114,11 +108,6 @@ function EditInvoice(props: {
 			console.log(error);
 		}
 		return parseFloat(total.toFixed(2));
-	}
-
-	function closeDialog() {
-		setShowConfirmSave(!showConfirmSave)
-		 navigate("/viewInvoice");
 	}
 
 	// Updates the array of projects ITEM by displaying .
@@ -190,15 +179,20 @@ function EditInvoice(props: {
 		dueDays(payment, setValue);
 	}, [payment]);
 
+	function closeDialog() {
+		setShowConfirmSave(false);
+		props.toggleOverlay;
+		navigate("/invoicespage");
+	}
+
 	const handleSubmitForm = (data: InvoiceTypesID) => {
 		const invoice = {
 			...data,
 		};
 		calculateTotal();
-		console.log(invoice);
 		mutateUpdate(invoice);
-		 props.toggleOverlay;
-		 setShowConfirmSave(true);
+		props.toggleOverlay;
+		setShowConfirmSave(true);
 	};
 
 	if (isError) {

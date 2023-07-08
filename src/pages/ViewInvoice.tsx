@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
 import { useEffect, useRef, useState, useContext } from "react";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
@@ -16,14 +15,13 @@ import { Oval, Comment } from "react-loader-spinner";
 import axios from "axios";
 
 function ViewInvoice() {
-	const queryClient = useQueryClient();
 	let params = useParams();
 	const [deletionError, setDeletionError] = useState(null);
 	const [updateError, setUpdateError] = useState(null);
 	const [showDeleteInvoiceDialog, setShowDeleteInvoiceDialog] =
 		useState(false);
 	const { mutate } = useDeleteInvoice(setDeletionError);
-	const { mutate: mutateUpdate} = useUpdateInvoice(setUpdateError)
+	const { mutate: mutateUpdate } = useUpdateInvoice(setUpdateError);
 	const { data, isError, error, isLoading } = useGetSingleInvoice(params.id);
 	const childInputRef = useRef<HTMLInputElement>(null);
 	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
@@ -63,13 +61,7 @@ function ViewInvoice() {
 			return "pending-status";
 		}
 	};
-/*
-	const updateInvoiceMutation = useMutation(updateInvoice, {
-		onSuccess: () => {
-			queryClient.invalidateQueries("invoices");
-		},
-	});
-*/
+
 	if (isLoading) {
 		return (
 			<div className="flex loading">
@@ -114,6 +106,10 @@ function ViewInvoice() {
 
 	if (deletionError) {
 		return <h2>Error encountered, invoice cannot be deleted</h2>;
+	}
+
+	if (updateError) {
+		return <h2>Error: The update has failed</h2>;
 	}
 
 	const totalArray = data.items.map((item: { total: number }) => item.total);

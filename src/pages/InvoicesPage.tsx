@@ -13,7 +13,7 @@ import axios from "axios";
 
 function InvoicesPage() {
 	const [selectedValue, setSelectedValue] = useState("all");
-	//const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =	useState(false);
+	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =	useState(false);
 	let { isLoading, isError, invoices, error } = getInvoices(selectedValue);
 	const childInputRef = useRef<HTMLInputElement>(null);
 	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
