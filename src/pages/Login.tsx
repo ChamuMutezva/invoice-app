@@ -11,9 +11,15 @@ function Login() {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (evt: { preventDefault: () => void }) => {
-		evt.preventDefault();		
+		evt.preventDefault();
 		await login(email, password);
 	};
+
+	function handleGuestUser() {
+		setEmail("test@gmail.com");
+		setPassword("Test123!");
+	}
+
 	useEffect(() => {
 		if (state.user) {
 			navigate("/invoicespage");
@@ -26,31 +32,45 @@ function Login() {
 		>
 			<button
 				type="button"
-				className="btn flex btn-return"
+				className="btn  btn-return"
 				onClick={() => navigate(-1)}
 			>
 				Go back
 			</button>
 			<h3>Login</h3>
 
-			<label htmlFor="email">Email:</label>
-			<input
-				type="email"
-				value={email}
-				onChange={(evt) => setEmail(evt.target.value)}
-			/>
-			<label htmlFor="password">Password:</label>
-			<input
-				type="password"
-				value={password}
-				onChange={(evt) => setPassword(evt.target.value)}
-			/>
-			<button disabled={isLoading}>Login</button>
-			<p className="flex test-data">
-				<span>Test data</span>
-				<span>email: test@gmail.com</span>
-				<span>password: Test123!</span>
-			</p>
+			<div className="flex login-container">
+				<label htmlFor="email">Email:</label>
+				<input
+					type="email"
+					value={email}
+					className="input-login"
+					onChange={(evt) => setEmail(evt.target.value)}
+				/>
+			</div>
+
+			<div className="flex login-container">
+				<label htmlFor="password">Password:</label>
+				<input
+					type="password"
+					value={password}
+					className="input-login"
+					onChange={(evt) => setPassword(evt.target.value)}
+				/>
+			</div>
+			<button
+				disabled={isLoading}
+				className="btn btn-login"
+			>
+				Login
+			</button>
+			<button
+				onClick={handleGuestUser}
+				className="btn btn-login"
+			>
+				Guest
+			</button>
+
 			{error && <div className="error">{error}</div>}
 		</form>
 	);

@@ -10,6 +10,22 @@
     flex-direction: column;
 }
 
+.landing-page {
+    gap: 2.5rem;
+    text-align: center;
+}
+
+.login {
+    gap: 1rem;
+    padding-block: 6rem;
+}
+
 .test-data {
+    flex-direction: column;
+}
+
+.login-container,
+.container-signup,
+.container-login {
     flex-direction: column;
 }

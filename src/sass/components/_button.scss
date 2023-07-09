@@ -90,14 +90,16 @@
 }
 
 .btn-return {
-    gap: base.$spacer1;
-    padding-block: calc(base.$spacer1 / 2);
-    padding-inline-end: calc(base.$spacer1 / 2);
-    border-radius: 8px;
-    border: none;
-    justify-content: center;
-    // margin-bottom: calc(base.$spacer1 * 2);
-    background-color: inherit;
+    gap: base.$spacer1;       
+    padding: 0.5rem 4rem;
+    min-width: 13rem;
+    border: 2px solid transparent;
+    background-color: base.$clr-white-100;
+    outline: none;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
     @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 
 }
@@ -127,6 +129,23 @@
     &:hover,
     &:focus {
         outline-offset: -0.5em;
+    }
+}
+
+.btn-login {
+    padding: 0.5rem 4rem;
+    min-width: 13rem;
+    border: 2px solid transparent;
+    background-color: base.$clr-white-300;
+    outline: none;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        border: 2px solid base.$clr-pink-200;
     }
 }
 
@@ -237,6 +256,7 @@
 .dark-mode {
     .btn-return {
         color: base.$clr-white-100;
+        background-color: base.$clr-black-200;
     }
 
     .btn-delete {

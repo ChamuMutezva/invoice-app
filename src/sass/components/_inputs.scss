@@ -2,13 +2,14 @@
 @use '../base';
 @use '../utils';
 
-input[type="date"]::-webkit-calendar-picker-indicator {   
+input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
     display: block;
 }
 
 input[type="date"] {
     position: relative;
+
     &::before {
         content: url("./../assets/icon-calendar.svg");
         position: absolute;
@@ -18,4 +19,11 @@ input[type="date"] {
         height: 20px;
         margin-top: -10px;
     }
+}
+
+.input-login {
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid transparent;
+    background-color: base.$clr-white-300;
 }

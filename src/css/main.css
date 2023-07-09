@@ -231,12 +231,15 @@ select {
 
 .btn-return {
   gap: 1rem;
-  padding-block: 0.5rem;
-  padding-inline-end: 0.5rem;
-  border-radius: 8px;
-  border: none;
-  justify-content: center;
-  background-color: inherit;
+  padding: 0.5rem 4rem;
+  min-width: 13rem;
+  border: 2px solid transparent;
+  background-color: hsl(0, 0%, 100%);
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
   color: hsl(231, 28%, 7%);
   font-weight: 700;
   font-size: 0.9375rem;
@@ -270,6 +273,21 @@ select {
 .btn-add-project:hover,
 .btn-add-project:focus {
   outline-offset: -0.5em;
+}
+
+.btn-login {
+  padding: 0.5rem 4rem;
+  min-width: 13rem;
+  border: 2px solid transparent;
+  background-color: hsl(231, 75%, 93%);
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+.btn-login:hover, .btn-login:focus {
+  border: 2px solid hsl(0, 80%, 63%);
 }
 
 .btn-add-item {
@@ -375,6 +393,7 @@ select {
 
 .dark-mode .btn-return {
   color: hsl(0, 0%, 100%);
+  background-color: hsl(233, 31%, 17%);
 }
 .dark-mode .btn-delete {
   background-color: inherit;
@@ -743,6 +762,13 @@ input[type=date]::before {
   width: 20px;
   height: 20px;
   margin-top: -10px;
+}
+
+.input-login {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid transparent;
+  background-color: hsl(231, 75%, 93%);
 }
 
 .header {
@@ -1597,6 +1623,22 @@ span.container-img {
   flex-direction: column;
 }
 
+.landing-page {
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.login {
+  gap: 1rem;
+  padding-block: 6rem;
+}
+
 .test-data {
+  flex-direction: column;
+}
+
+.login-container,
+.container-signup,
+.container-login {
   flex-direction: column;
 }
