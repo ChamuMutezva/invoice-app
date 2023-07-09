@@ -1,14 +1,27 @@
+import gsap from "gsap";
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function LandingPage() {
-	const headingRef = useRef(null);
+	const landingRef = useRef(null);
 	useEffect(() => {
-		console.log(headingRef);
-	}, [headingRef]);
+		console.log(landingRef);
+		gsap.from(landingRef.current, {
+			duration: 2,
+			autoAlpha: 1,
+			ease: "none",
+			delay: 1,
+		});
+	}, [landingRef]);
 	return (
-		<div className="flex landing-page">
-			<h1 ref={headingRef}>Invoice creator</h1>
+		<div
+			ref={landingRef}
+			className="flex landing-page"
+		>
+			<div className="header-container">
+				<h1>Invoice creator</h1>
+			</div>
+
 			<div className="flex container-signup">
 				<p>Create an account if you do not have an account</p>
 				<Link
