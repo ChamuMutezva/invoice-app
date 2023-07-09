@@ -5,12 +5,11 @@ import { useAuthContext } from "./useAuthContext";
 
 export default function getInvoices(filters: string) {
 	const { state } = useAuthContext();
-	console.log(state.user?.token);
+
 	// if (state.user) {
 	const { isLoading, data, isError, error, isSuccess } = useQuery({
 		queryKey: ["invoices", filters],
-		queryFn: (filters) => {
-			console.log(filters);
+		queryFn: (filters) => {		
 			return axios.get(`${API_ENDPOINT_PATH}`, {
 				headers: {
 					Authorization: `Bearer ${state.user?.token}`,

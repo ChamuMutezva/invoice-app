@@ -31,7 +31,6 @@ function ViewInvoice() {
 		if (overlayControl) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-		console.log(overlayControl);
 	}, [overlayControl]);
 
 	function toggleOverlay() {
@@ -422,7 +421,10 @@ function ViewInvoice() {
 			</div>
 
 			{overlayControl === true && (
-				<OverLay toggleOverlay={toggleOverlay}>
+				<OverLay
+					toggleOverlay={toggleOverlay}
+					overlay={overlayControl}
+				>
 					<EditInvoice
 						toggleOverlay={toggleOverlay}
 						childInputRef={childInputRef}

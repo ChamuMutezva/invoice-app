@@ -1,9 +1,4 @@
-import React, {
-	MouseEventHandler,
-	useContext,
-	useEffect,
-	useState,
-} from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import add from "date-fns/add";
@@ -19,10 +14,9 @@ import { ICosting, InvoiceTypes } from "../Types/DataTypes";
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 import dueDays from "../utilities/selectPaymentDue";
-import { OverLayContext } from "../context/OverlayContext";
 
 const NewInvoice = (props: {
-	toggleOverlay: MouseEventHandler<HTMLButtonElement>;
+	closeNewInvoice: MouseEventHandler<HTMLButtonElement>;	
 	childInputRef: any;
 }) => {
 	const projectInit: ICosting = {
@@ -38,7 +32,6 @@ const NewInvoice = (props: {
 	const [project, setProject] = useState(projectInit);
 	const [showCreateInvoiceDialog, setShowCreateInvoiceDialog] =
 		useState(false);
-	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
 	// load initial form data on first visit to site
 	// format(new Date(invoice.createdAt), "yyyy-MM-dd"), new Date().toJSON().slice(0, 10),
@@ -70,7 +63,9 @@ const NewInvoice = (props: {
 	const [data, setData] = useState(initialState);
 
 	function closeDialog() {
-		return onChangeOverlay(overlayControl); //navigate("/invoicespage");
+		setShowCreateInvoiceDialog(false);
+		navigate("/invoicespage");
+		props.closeNewInvoice;
 	}
 
 	// Updates The obj which has the following
@@ -84,7 +79,6 @@ const NewInvoice = (props: {
 			name: `Project name${data.items.length + 1}`,
 		});
 		setData({ ...data, items: data.items.concat(project) });
-		// console.log(evt);
 	};
 
 	// load form with initialstate
@@ -110,10 +104,10 @@ const NewInvoice = (props: {
 			total: calculateTotal(),
 		});
 
-		console.log(data);
 		mutate(data);
-		props.toggleOverlay;
-		setShowCreateInvoiceDialog(true);
+		props.closeNewInvoice;
+		// setShowCreateInvoiceDialog(true);
+		navigate("/invoicespage");
 	};
 
 	function calculateTotal(): number {
@@ -124,8 +118,6 @@ const NewInvoice = (props: {
 		const total: number =
 			totalArray.length > 0 ? totalArray.reduce(reducer) : 0;
 		setValue("total", totalArray.length > 0 ? total : 0);
-		// console.log(totalArray);
-
 		return parseFloat(total.toFixed(2));
 	}
 
@@ -169,7 +161,6 @@ const NewInvoice = (props: {
 	// projectInit: ICosting = {name: "", quantity: 0, price: 0.0, total: 0.0,};
 	// four fields are created and focus should be moved to the name field
 	useEffect(() => {
-		// console.log(watchTotal[0]);
 		setFocus(`items.${watchTotal[0].length - 1}.name`, {
 			shouldSelect: true,
 		});
@@ -177,12 +168,12 @@ const NewInvoice = (props: {
 
 	useEffect(() => {
 		document.addEventListener("keydown", focusTrap);
-		document.addEventListener("click", () => props.toggleOverlay);
+		document.addEventListener("click", () => props.closeNewInvoice);
 		props.childInputRef.current.focus();
 		// Removing the event listener in the return function in order to avoid memory leaks.
 		return () => {
 			document.removeEventListener("keydown", focusTrap);
-			document.removeEventListener("click", () => props.toggleOverlay);
+			document.removeEventListener("click", () => props.closeNewInvoice);
 		};
 	}, []);
 
@@ -192,9 +183,6 @@ const NewInvoice = (props: {
 	}, [payment]);
 
 	useEffect(() => {
-		console.log(
-			`Is the create invoice dialog open: ${showCreateInvoiceDialog}`
-		);
 		if (showCreateInvoiceDialog) {
 			document.body.classList.add("body-size");
 		}
@@ -214,7 +202,7 @@ const NewInvoice = (props: {
 				<div className="tablet-hidden">
 					<button
 						className="btn flex btn-return"
-						onClick={props.toggleOverlay}
+						onClick={props.closeNewInvoice}
 					>
 						<img
 							src={BackImg}
@@ -817,7 +805,7 @@ const NewInvoice = (props: {
 						<div className="flex footer-edit">
 							<button
 								className="btn btn-cancel"
-								onClick={props.toggleOverlay}
+								onClick={props.closeNewInvoice}
 							>
 								Discard
 								<span className="sr-only">

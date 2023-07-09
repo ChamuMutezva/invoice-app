@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, Form } from "react-router-dom";
 import format from "date-fns/format";
 import { currencyFormatter } from "../hooks/useFormatter";
@@ -7,23 +7,24 @@ import EmptyInvoiceImg from "../assets/illustration-empty.svg";
 import getInvoices from "../hooks/useGetInvoices";
 import OverLay from "./OverLay";
 import NewInvoice from "./NewInvoice";
-import { OverLayContext } from "../context/OverlayContext";
 import { Oval, Comment } from "react-loader-spinner";
 import axios from "axios";
 
 function InvoicesPage() {
 	const [selectedValue, setSelectedValue] = useState("all");
-	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =	useState(false);
+	const [isNewInvoiceOverlayOpen, setIsNewInvoiceOverlayOpen] =
+		useState(false);
 	let { isLoading, isError, invoices, error } = getInvoices(selectedValue);
 	const childInputRef = useRef<HTMLInputElement>(null);
-	const { overlayControl, onChangeOverlay } = useContext(OverLayContext);
 
 	useEffect(() => {
-		if (overlayControl) {
+		if (isNewInvoiceOverlayOpen) {
 			childInputRef.current && childInputRef.current.focus();
 		}
-		// console.log(`new invoice and overlay opened: ${overlayControl}`);
-	}, [overlayControl]);
+		console.log(
+			`new invoice and overlay opened: ${isNewInvoiceOverlayOpen}`
+		);
+	}, [isNewInvoiceOverlayOpen]);
 
 	if (isLoading) {
 		return (
@@ -67,9 +68,12 @@ function InvoicesPage() {
 		);
 	}
 
-	function toggleOverlay() {
-		 console.log(`new invoice and overlay opened: ${overlayControl}`);
-		onChangeOverlay(overlayControl);
+	function closeNewInvoice() {
+		setIsNewInvoiceOverlayOpen(false);
+	}
+
+	function openNewInvoice() {
+		setIsNewInvoiceOverlayOpen(true);
 	}
 
 	const noInvoices = () => {
@@ -179,7 +183,7 @@ function InvoicesPage() {
 
 							<div className="btn-new-invoice-wrapper">
 								<button
-									onClick={toggleOverlay}
+									onClick={openNewInvoice}
 									className="btn flex btn-new-invoice"
 								>
 									<span className="container-img">
@@ -283,14 +287,17 @@ function InvoicesPage() {
 					)}
 				</div>
 			</main>
-			{overlayControl === true ? (
-				<OverLay toggleOverlay={toggleOverlay}>
+			{isNewInvoiceOverlayOpen === true && (
+				<OverLay
+					toggleOverlay={closeNewInvoice}
+					overlay={isNewInvoiceOverlayOpen}
+				>
 					<NewInvoice
-						toggleOverlay={toggleOverlay}
+						closeNewInvoice={closeNewInvoice}
 						childInputRef={childInputRef}
 					/>
 				</OverLay>
-			) : null}
+			)}
 		</>
 	);
 }

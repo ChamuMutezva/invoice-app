@@ -22,7 +22,7 @@ function App() {
 	const { overlayControl } = useContext(OverLayContext);
 	const { logout } = useLogout();
 	const { state } = useAuthContext();
-	console.log(state.user?.email);
+	
 	const router = createBrowserRouter([
 		{
 			path: "/",

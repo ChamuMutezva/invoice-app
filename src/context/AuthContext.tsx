@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			dispatch({ type: "LOGIN", payload: user });
 		}
 	}, []);
-	console.log("Auth context: ", state);
+
 	return (
 		<AuthContext.Provider value={{ state, dispatch }}>
 			{children}

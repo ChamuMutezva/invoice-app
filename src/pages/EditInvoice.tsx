@@ -4,7 +4,6 @@ import { useForm, useFieldArray } from "react-hook-form";
 import format from "date-fns/format";
 import DeleteBtn from "../assets/icon-delete.svg";
 import AddItemImg from "../assets/icon-plus.svg";
-import { useMutation, useQueryClient } from "react-query";
 import { DevTool } from "@hookform/devtools";
 import { useUpdateInvoice } from "../hooks/useUpdateInvoice";
 import { reducer } from "../hooks/useReducer";
@@ -85,7 +84,6 @@ function EditInvoice(props: {
 		name: "items",
 	});
 
-	console.log(errors);
 	// watch for changes , changes for items to be used to calculate the grandtotal
 	const watchTotal = watch(["items", "total"]);
 	const payment = watch("paymentTerms");

@@ -1,7 +1,9 @@
-import React, { MouseEventHandler, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { MouseEventHandler, useEffect, useRef } from "react";
 
-function SaveEditedPageDialog(props: {closeDialog: MouseEventHandler<HTMLButtonElement>; showConfirmSave: boolean }) {
+function SaveEditedPageDialog(props: {
+	closeDialog: MouseEventHandler<HTMLButtonElement>;
+	showConfirmSave: boolean;
+}) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const btnRef = useRef<HTMLButtonElement>(null);
 

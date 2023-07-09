@@ -11,9 +11,7 @@ function Login() {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (evt: { preventDefault: () => void }) => {
-		evt.preventDefault();
-		console.log(email, password);
-		console.log(state);
+		evt.preventDefault();		
 		await login(email, password);
 	};
 	useEffect(() => {
