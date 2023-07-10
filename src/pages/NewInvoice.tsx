@@ -16,7 +16,7 @@ import CustomSelect from "../components/CustomSelect";
 import dueDays from "../utilities/selectPaymentDue";
 
 const NewInvoice = (props: {
-	closeNewInvoice: any;
+	closeNewInvoice: () => void;
 	childInputRef: any;
 	formState: boolean;
 }) => {
@@ -66,7 +66,7 @@ const NewInvoice = (props: {
 	// return to invoice-list page
 	function closeDialog() {
 		setShowCreateInvoiceDialog(false);
-		props.closeNewInvoice(props.formState);
+		props.closeNewInvoice();
 		navigate("/invoicespage");
 	}
 

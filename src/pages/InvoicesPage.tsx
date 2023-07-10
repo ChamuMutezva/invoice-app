@@ -88,11 +88,11 @@ function InvoicesPage() {
 	};
 
 	function closeNewInvoice() {
-		setIsNewInvoiceOverlayOpen(false);
+		return setIsNewInvoiceOverlayOpen(false);
 	}
 
 	function openNewInvoice() {
-		setIsNewInvoiceOverlayOpen(true);
+		return setIsNewInvoiceOverlayOpen(true);
 	}
 
 	// the onchange triggers the backend to apply filters through the dependency used in
