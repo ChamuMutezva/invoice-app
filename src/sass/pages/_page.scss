@@ -52,7 +52,7 @@ span.container-img {
 }
 
 .logout-container {
-    @include utils.mQ(40rem) {
+    @include utils.mQ(64rem) {
         transform: rotate(270deg);
     }
 }

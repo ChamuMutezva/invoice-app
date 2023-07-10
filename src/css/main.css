@@ -155,12 +155,17 @@ select {
 }
 
 .btn-profile {
-  border-radius: 50%;
-  overflow: hidden;
-  display: block;
-  width: 80%;
-  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: hsl(0, 0%, 100%);
+}
+@media screen and (min-width: 64rem) {
+  .btn-profile {
+    transform: rotate(200deg);
+    padding-block: 0.5rem;
+  }
 }
 
 .btn-link {
@@ -998,7 +1003,7 @@ span.container-img {
   display: none;
 }
 
-@media screen and (min-width: 40rem) {
+@media screen and (min-width: 64rem) {
   .logout-container {
     transform: rotate(270deg);
   }

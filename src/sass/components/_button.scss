@@ -16,12 +16,16 @@
 }
 
 .btn-profile {
-    border-radius: 50%;
-    overflow: hidden;
-    display: block;
-    width: 80%;
-    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: base.$clr-white-100;
+
+    @include utils.mQ(64rem) {
+        transform: rotate(200deg);
+        padding-block: 0.5rem;
+    }
 }
 
 .btn-link {
@@ -90,7 +94,7 @@
 }
 
 .btn-return {
-    gap: base.$spacer1;       
+    gap: base.$spacer1;
     padding: 0.5rem 4rem;
     min-width: 13rem;
     border: 2px solid transparent;
