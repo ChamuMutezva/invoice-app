@@ -68,14 +68,6 @@ function InvoicesPage() {
 		);
 	}
 
-	function closeNewInvoice() {
-		setIsNewInvoiceOverlayOpen(false);
-	}
-
-	function openNewInvoice() {
-		setIsNewInvoiceOverlayOpen(true);
-	}
-
 	const noInvoices = () => {
 		return (
 			<div className="no-cards">
@@ -94,6 +86,14 @@ function InvoicesPage() {
 			</div>
 		);
 	};
+
+	function closeNewInvoice() {
+		setIsNewInvoiceOverlayOpen(false);
+	}
+
+	function openNewInvoice() {
+		setIsNewInvoiceOverlayOpen(true);
+	}
 
 	// the onchange triggers the backend to apply filters through the dependency used in
 	// the queryKey of the useGetInvoices hook. High five to React Query
@@ -295,6 +295,7 @@ function InvoicesPage() {
 					<NewInvoice
 						closeNewInvoice={closeNewInvoice}
 						childInputRef={childInputRef}
+						formState={isNewInvoiceOverlayOpen}
 					/>
 				</OverLay>
 			)}

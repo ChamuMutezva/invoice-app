@@ -16,8 +16,9 @@ import CustomSelect from "../components/CustomSelect";
 import dueDays from "../utilities/selectPaymentDue";
 
 const NewInvoice = (props: {
-	closeNewInvoice: MouseEventHandler<HTMLButtonElement>;	
+	closeNewInvoice: any;
 	childInputRef: any;
+	formState: boolean;
 }) => {
 	const projectInit: ICosting = {
 		name: "New Project",
@@ -62,14 +63,16 @@ const NewInvoice = (props: {
 
 	const [data, setData] = useState(initialState);
 
+	// return to invoice-list page
 	function closeDialog() {
 		setShowCreateInvoiceDialog(false);
+		props.closeNewInvoice(props.formState);
 		navigate("/invoicespage");
-		props.closeNewInvoice;
 	}
 
 	// Updates The obj which has the following
 	// Name of project, quantity, price and total.
+	// That is: add a project to the invoice
 	const updateProjects = (
 		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
@@ -92,22 +95,20 @@ const NewInvoice = (props: {
 		setFocus,
 		formState: { errors, isDirty, isValid },
 	} = useForm({ defaultValues: initialState });
-	//	console.log(errors);
+	console.log(errors);
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "items",
 	});
 
+	// submit the form, a confirmation dialog will open
 	const handleSubmitForm = (data: any) => {
 		setData({
 			...data,
 			total: calculateTotal(),
 		});
-
 		mutate(data);
-		props.closeNewInvoice;
-		// setShowCreateInvoiceDialog(true);
-		navigate("/invoicespage");
+		setShowCreateInvoiceDialog(true);
 	};
 
 	function calculateTotal(): number {

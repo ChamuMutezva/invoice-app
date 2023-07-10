@@ -35,7 +35,7 @@ function CreateInvoiceDialog(props: {
 
 				<button
 					ref={btnRef}
-					onClick={() => props.closeDialog}
+					onClick={props.closeDialog}
 					className={`btn btn-link-home`}
 				>
 					Return to Homepage
