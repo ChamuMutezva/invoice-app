@@ -23,7 +23,7 @@ function LandingPage() {
 			</div>
 
 			<div className="flex container-signup">
-				<p>Create an account if you do not have an account</p>
+				<p>Create an account if you do not have one</p>
 				<Link
 					to={"/signup"}
 					className="btn btn-login"
