@@ -1508,6 +1508,10 @@ span.container-img {
   z-index: 1;
 }
 
+.error {
+  color: hsl(0, 80%, 63%);
+}
+
 .show-dialog {
   position: fixed;
   flex-direction: column;
