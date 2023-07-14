@@ -1,97 +1,96 @@
-@use '../base';
-@use '../utils';
+@use "../base";
+@use "../utils";
 
 .fieldset-container {
-    margin-block-end: 8rem;
+  margin-block-end: 4rem;
 }
 
 .edit-title {
-    font-size: base.$fs-24;
-    padding-inline: base.$spacer1;
+  font-size: base.$fs-24;
+  padding-inline: base.$spacer1;
 }
 
 .invoice-num-edit {
-    display: inline;
-    margin-inline-start: calc(base.$spacer1 * 1.5);
-    font-size: inherit;
+  display: inline;
+  margin-inline-start: calc(base.$spacer1 * 1.5);
+  font-size: inherit;
 
-    &::before {
-        top: -6px;
-        left: -1rem;
-    }
+  &::before {
+    top: -6px;
+    left: -1rem;
+  }
 }
 
 .edit-invoice-details {
-    border: none;
-    display: grid;
-    gap: base.$spacer1;
+  border: none;
+  display: grid;
+  gap: base.$spacer1;
 }
 
 .edit-field-title {
-    @include utils.fonts(base.$clr-blue-400, base.$fs-15, 700);
-    padding-block-start: 1.5rem;
+  @include utils.fonts(base.$clr-blue-400, base.$fs-15, 700);
+  padding-block-start: 1.5rem;
 }
 
 .form-input-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    flex: 1 1 100%;
-    width: 100%;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  flex: 1 1 100%;
+  width: 100%;
+  position: relative;
 
-    @include utils.mQ(45rem) {
-        flex: 1 1 35%;
-    }
+  @include utils.mQ(45rem) {
+    flex: 1 1 35%;
+  }
 }
 
 .label {
-    @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
-    padding-block: calc(base.$spacer1 * 0.75);
+  @include utils.fonts(base.$clr-blue-100, base.$fs-13, 500);
+  padding-block: calc(base.$spacer1 * 0.75);
 }
 
 .input {
+  &:hover,
+  &:focus {
+    outline: dashed currentColor 1px;
+    outline-offset: -0.5em;
+  }
 
-    &:hover,
-    &:focus {
-        outline: dashed currentColor 1px;
-        outline-offset: -0.5em;
-    }
-
-    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
-    border: 1px solid base.$clr-white-300;
-    border-radius: 4px;
-    padding: 1rem;
-    width: 100%;
+  @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
+  border: 1px solid base.$clr-white-300;
+  border-radius: 4px;
+  padding: 1rem;
+  width: 100%;
 }
 
 .costing-line {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: calc(base.$spacer1 * 0.5);
-    row-gap: calc(base.$spacer1 * 2);
-    margin-block: calc(base.$spacer1 * 1.5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: calc(base.$spacer1 * 0.5);
+  row-gap: calc(base.$spacer1 * 2);
+  margin-block: calc(base.$spacer1 * 1.5);
 
-    @include utils.mQ(30rem) {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+  @include utils.mQ(30rem) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
-    @include utils.mQ(45rem) {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
+  @include utils.mQ(45rem) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .calculate-line {
-    padding: base.$spacer1 calc(base.$spacer1 * 0.5);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: base.$fs-15;
-    /*
+  padding: base.$spacer1 calc(base.$spacer1 * 0.5);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: base.$fs-15;
+  /*
     @include utils.mQ(45rem) {
         max-width: 12rem;
     }
@@ -99,118 +98,103 @@
 }
 
 .item-total {
-    &:read-only {
-        background: inherit;
-        border: none;
-        outline: none;
-    }
+  &:read-only {
+    background: inherit;
+    border: none;
+    outline: none;
+  }
 }
 
 .calculate-line-container {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
 
-    @include utils.mQ(30rem) {
-        align-self: flex-end;
-    }
+  @include utils.mQ(30rem) {
+    align-self: flex-end;
+  }
 }
 
 .quantity-line {
-    flex: 1 1 15%;
+  flex: 1 1 15%;
 }
 
 .price-line {
-    flex: 1 1 30%;
+  flex: 1 1 30%;
 }
 
 .container-delete {
-    flex: 1 1 12%;
+  flex: 1 1 12%;
 }
 
 .item-total-line {
-    flex: 1 1 30%;
-    align-self: flex-start;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  flex: 1 1 30%;
+  align-self: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-    @include utils.mQ(30rem) {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  @include utils.mQ(30rem) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .total-line {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .price-line,
 .qty-line {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .postal-city {
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 }
 
 .footer {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    background-color: base.$clr-white-100;
-    bottom: 0;
-    box-shadow: 0px -20px 20px 1px base.$clr-black-600;
-
-    @include utils.mQ(40rem) {
-        width: 80%;
-    }
-
-    @include utils.mQ(64rem) {
-        width: 50%;
-        left: 84px;
-    }
+  background-color: base.$clr-white-100;
+  box-shadow: 0px -20px 20px 1px base.$clr-black-600;
 }
 
 .footer-edit {
-    justify-content: flex-end;
-    padding: calc(base.$spacer1 * 1.5);
-    width: 100%;
-    max-width: 45.6rem;
+  justify-content: flex-end;
+  padding: calc(base.$spacer1 * 1.5);
+  width: 100%;
+  max-width: 45.6rem;
 }
 
 .form-errors {
-    color: base.$clr-pink-300;
-    font-size: base.$fs-13;
+  color: base.$clr-pink-300;
+  font-size: base.$fs-13;
 }
 
 .input-error {
-    position: absolute;
-    bottom: -2rem;
+  position: absolute;
+  bottom: -2rem;
 }
 
 .dark-mode {
+  .input {
+    background-color: base.$clr-black-400;
+    color: base.$clr-white-100;
+  }
 
-    .input {
-        background-color: base.$clr-black-400;
-        color: base.$clr-white-100
+  .footer {
+    background-color: base.$clr-black-200;
+    box-shadow: none;
+  }
+
+  .item-total {
+    &:read-only {
+      background: inherit;
+      border: none;
+      outline: none;
     }
-
-    .footer {
-        background-color: base.$clr-black-200;
-        box-shadow: none;
-    }
-
-    .item-total {
-        &:read-only {
-            background: inherit;
-            border: none;
-            outline: none;
-        }
-    }
-
+  }
 }
