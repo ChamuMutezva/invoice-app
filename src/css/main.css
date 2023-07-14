@@ -1637,8 +1637,9 @@ span.container-img {
   text-align: center;
 }
 
-.login {
-  gap: 1rem;
+.login,
+.signup {
+  gap: 2rem;
   padding-block: 6rem;
 }
 

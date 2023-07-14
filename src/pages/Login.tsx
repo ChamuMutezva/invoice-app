@@ -4,76 +4,74 @@ import { useLogin } from "../hooks/useLogin";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 function Login() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const { login, error, isLoading } = useLogin();
-	const { state } = useAuthContext();
-	const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, error, isLoading } = useLogin();
+  const { state } = useAuthContext();
+  const navigate = useNavigate();
 
-	const handleSubmit = async (evt: { preventDefault: () => void }) => {
-		evt.preventDefault();
-		await login(email, password);
-	};
+  const handleSubmit = async (evt: { preventDefault: () => void }) => {
+    evt.preventDefault();
+    await login(email, password);
+  };
 
-	function handleGuestUser() {
-		setEmail("test@gmail.com");
-		setPassword("Test123!");
-	}
+  console.log(error);
 
-	useEffect(() => {
-		if (state.user) {
-			navigate("/invoicespage");
-		}
-	}, [state.user]);
-	return (
-		<form
-			className="flex login"
-			onSubmit={handleSubmit}
-		>
-			<button
-				type="button"
-				className="btn  btn-return"
-				onClick={() => navigate(-1)}
-			>
-				Go back
-			</button>
-			<h3>Login</h3>
+  function handleGuestUser() {
+    setEmail("test@gmail.com");
+    setPassword("Test123!");
+  }
 
-			<div className="flex login-container">
-				<label htmlFor="email">Email:</label>
-				<input
-					type="email"
-					value={email}
-					className="input-login"
-					onChange={(evt) => setEmail(evt.target.value)}
-				/>
-			</div>
+  useEffect(() => {
+    if (state.user) {
+      navigate("/invoicespage");
+    }
+  }, [state.user]);
+  return (
+    <form className="flex login" onSubmit={handleSubmit}>
+      <button
+        type="button"
+        className="btn  btn-return"
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </button>
+      <h3>Login</h3>
 
-			<div className="flex login-container">
-				<label htmlFor="password">Password:</label>
-				<input
-					type="password"
-					value={password}
-					className="input-login"
-					onChange={(evt) => setPassword(evt.target.value)}
-				/>
-			</div>
-			<button
-				disabled={isLoading}
-				className="btn btn-login"
-			>
-				Login
-			</button>
-			<button
-				onClick={handleGuestUser}
-				className="btn btn-login"
-			>
-				Guest
-			</button>
+      <div className="flex login-container">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          value={email}
+          className="input-login"
+          onChange={(evt) => setEmail(evt.target.value)}
+        />
+      </div>
 
-			{error && <div className="error">{error}</div>}
-		</form>
-	);
+      <div className="flex login-container">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          value={password}
+          className="input-login"
+          onChange={(evt) => setPassword(evt.target.value)}
+        />
+      </div>
+      <button disabled={isLoading} className="btn btn-login">
+        Login
+      </button>
+      <p>Login with our credentials</p>
+      <button
+        disabled={isLoading}
+        onClick={handleGuestUser}
+        className="btn btn-login"
+      >
+        Guest
+      </button>
+
+      {error && <div className="error">{error}</div>}
+    </form>
+  );
 }
 
 export default Login;

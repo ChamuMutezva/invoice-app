@@ -1,31 +1,32 @@
-@use '../base';
-@use '../utils';
+@use "../base";
+@use "../utils";
 
 .landing-page,
 .login,
 .signup {
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .landing-page {
-    gap: 2.5rem;
-    text-align: center;
+  gap: 2.5rem;
+  text-align: center;
 }
 
-.login {
-    gap: 1rem;
-    padding-block: 6rem;
+.login,
+.signup {
+  gap: 2rem;
+  padding-block: 6rem;
 }
 
 .test-data {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .login-container,
 .container-signup,
 .container-login {
-    flex-direction: column;
+  flex-direction: column;
 }
