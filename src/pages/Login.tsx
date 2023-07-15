@@ -28,49 +28,54 @@ function Login() {
     }
   }, [state.user]);
   return (
-    <form className="flex login" onSubmit={handleSubmit}>
-      <button
-        type="button"
-        className="btn  btn-return"
-        onClick={() => navigate(-1)}
-      >
-        Go back
-      </button>
-      <h3>Login</h3>
+    <div className="flex container">
+      <form className="flex login" onSubmit={handleSubmit}>
+        <button
+          type="button"
+          className="btn  btn-return"
+          onClick={() => navigate(-1)}
+        >
+          Go back
+        </button>
+        <h3>Login</h3>
 
-      <div className="flex login-container">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          value={email}
-          className="input-login"
-          onChange={(evt) => setEmail(evt.target.value)}
-        />
-      </div>
+        <div className="flex login-container">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            value={email}
+            className="input-login"
+            onChange={(evt) => setEmail(evt.target.value)}
+          />
+        </div>
 
-      <div className="flex login-container">
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          value={password}
-          className="input-login"
-          onChange={(evt) => setPassword(evt.target.value)}
-        />
-      </div>
-      <button disabled={isLoading} className="btn btn-login">
-        Login
-      </button>
-      <p>Login with our credentials</p>
-      <button
-        disabled={isLoading}
-        onClick={handleGuestUser}
-        className="btn btn-login"
-      >
-        Guest
-      </button>
+        <div className="flex login-container">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            value={password}
+            className="input-login"
+            onChange={(evt) => setPassword(evt.target.value)}
+          />
+        </div>
+        <button disabled={isLoading} className="btn btn-login">
+          Login
+        </button>
+        <p>
+          Login with our{" "}
+          <button
+            disabled={isLoading}
+            onClick={handleGuestUser}
+            className="btn-link-signin"
+          >
+            Guest
+          </button>{" "}
+          credentials
+        </p>
 
-      {error && <div className="error">{error}</div>}
-    </form>
+        {error && <div className="error">{error}</div>}
+      </form>
+    </div>
   );
 }
 

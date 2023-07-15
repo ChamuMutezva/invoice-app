@@ -19,6 +19,7 @@
 .signup {
   gap: 2rem;
   padding-block: 6rem;
+  max-width: 24rem;
 }
 
 .test-data {
@@ -29,4 +30,8 @@
 .container-signup,
 .container-login {
   flex-direction: column;
+}
+
+.container {
+	justify-content: center;
 }

@@ -32,7 +32,7 @@ function LandingPage() {
 				</Link>
 			</div>
 			<div className="flex container-login">
-				<p>Visit the login page</p>
+				<h2>Visit the login page</h2>
 				<p>You can sign in as guest if you do not have login details</p>
 				<Link
 					to={"/login"}

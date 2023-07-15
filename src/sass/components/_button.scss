@@ -1,299 +1,311 @@
-@use 'sass:color';
-@use '../base';
-@use '../utils';
+@use "sass:color";
+@use "../base";
+@use "../utils";
 
 .btn {
+  &:hover,
+  &:focus {
+    outline: dashed currentColor 1px;
+    outline-offset: 0.35em;
+  }
 
-    &:hover,
-    &:focus {
-        outline: dashed currentColor 1px;
-        outline-offset: .35em;
-    }
-
-    &:disabled {
-        opacity: 0.5;
-    }
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .btn-profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: base.$clr-white-100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: base.$clr-white-100;
 
-    @include utils.mQ(64rem) {
-        transform: rotate(200deg);
-        padding-block: 0.5rem;
-    }
+  @include utils.mQ(64rem) {
+    transform: rotate(200deg);
+    padding-block: 0.5rem;
+  }
 }
 
 .btn-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    text-transform: capitalize;
-    text-decoration: none;
-    overflow: hidden;
-    padding-block: calc(base.$spacer1 / 2);
-    z-index: 0;
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  text-transform: capitalize;
+  text-decoration: none;
+  overflow: hidden;
+  padding-block: calc(base.$spacer1 / 2);
+  z-index: 0;
+  @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 
-    &::before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-    }
+  &::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 
-    @include utils.mQ(40rem) {
-        padding-block: calc(base.$spacer1 * 0.75);
-    }
+  @include utils.mQ(40rem) {
+    padding-block: calc(base.$spacer1 * 0.75);
+  }
+}
 
+.btn-link-signin {
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid base.$clr-blue-400;
+  color: base.$clr-pink-300;
+  padding: 0px;
+  margin: 0;
+  outline: none;
+  font-weight: 500;
+  background-color: inherit;
+
+  &:hover,
+  &:focus {
+    border-bottom: 2px dashed base.$clr-pink-300;   
+  }
 }
 
 .btn-link-home {
-    background-color: base.$clr-black-200;
-    padding: base.$spacer1;
-    color: base.$clr-white-200;
-    font-size: base.$fs-20;
-    border-radius: 6px;
-    text-align: center;
-    text-decoration: none;
+  background-color: base.$clr-black-200;
+  padding: base.$spacer1;
+  color: base.$clr-white-200;
+  font-size: base.$fs-20;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
 
-    &:hover,
-    &:focus {
-        outline: dashed base.$clr-pink-300 1px;
-        outline-offset: .35em;
-    }
+  &:hover,
+  &:focus {
+    outline: dashed base.$clr-pink-300 1px;
+    outline-offset: 0.35em;
+  }
 }
 
 .btn-new-invoice {
-    border: none;
-    min-width: 6rem;
-    background-color: base.$clr-blue-400;
-    border-radius: 24px;
-    padding: calc(base.$spacer1 / 2);
-    gap: calc(base.$spacer1 / 2);
-    padding-inline-end: base.$spacer1;
-    text-decoration: none;
+  border: none;
+  min-width: 6rem;
+  background-color: base.$clr-blue-400;
+  border-radius: 24px;
+  padding: calc(base.$spacer1 / 2);
+  gap: calc(base.$spacer1 / 2);
+  padding-inline-end: base.$spacer1;
+  text-decoration: none;
 }
 
 .btn-new-invoice-wrapper {
-    flex: 1 1 50%;
-    display: flex;
-    justify-content: flex-end;
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .btn-label {
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
-    gap: 0.5rem;
+  @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+  gap: 0.5rem;
 }
 
 .btn-return {
-    gap: base.$spacer1;
-    padding: 0.5rem 4rem;
-    min-width: 13rem;
-    border: 2px solid transparent;
-    background-color: base.$clr-white-100;
-    outline: none;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
-
+  gap: base.$spacer1;
+  padding: 0.5rem 4rem;
+  min-width: 13rem;
+  border: 2px solid transparent;
+  background-color: base.$clr-white-100;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  @include utils.fonts(base.$clr-black-100, base.$fs-15, 700);
 }
 
 .btn-cancel {
-    background-color: base.$clr-white-400;
-    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
-    border-radius: 24px;
-    border: none;
-    text-decoration: none;
-    @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
+  background-color: base.$clr-white-400;
+  padding: base.$spacer1 calc(base.$spacer1 * 1.5);
+  border-radius: 24px;
+  border: none;
+  text-decoration: none;
+  @include utils.fonts(base.$clr-blue-100, base.$fs-15, 700);
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+  }
 }
 
 .btn-save,
 .btn-add-project {
-    background-color: base.$clr-blue-400;
-    padding: base.$spacer1;
-    border-radius: 24px;
-    border: none;
-    @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
+  background-color: base.$clr-blue-400;
+  padding: base.$spacer1;
+  border-radius: 24px;
+  border: none;
+  @include utils.fonts(base.$clr-white-100, base.$fs-15, 700);
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+  }
 }
 
 .btn-login {
-    padding: 0.5rem 4rem;
-    min-width: 13rem;
-    border: 2px solid transparent;
-    background-color: base.$clr-white-300;
-    outline: none;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
+  padding: 0.5rem 4rem;
+  width: 100%;
+  border: 2px solid transparent;
+  background-color: base.$clr-white-300;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 
-    &:hover,
-    &:focus {
-        border: 2px solid base.$clr-pink-200;
-    }
+  &:hover,
+  &:focus {
+    border: 2px solid base.$clr-pink-200;
+  }
 }
 
 .btn-add-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: base.$spacer1;
-    border-radius: 10px;
-    border: none;
-    background-color: base.$clr-white-300;
-    gap: base.$spacer1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: base.$spacer1;
+  border-radius: 10px;
+  border: none;
+  background-color: base.$clr-white-300;
+  gap: base.$spacer1;
 }
 
 .btn-edit {
-    background-color: base.$clr-white-400;
-    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
-    border-radius: 24px;
-    text-decoration: none;
-    border: none;
-    @include utils.fonts(base.$clr-blue-100, base.$fs-16, 700);
+  background-color: base.$clr-white-400;
+  padding: base.$spacer1 calc(base.$spacer1 * 1.5);
+  border-radius: 24px;
+  text-decoration: none;
+  border: none;
+  @include utils.fonts(base.$clr-blue-100, base.$fs-16, 700);
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+  }
 }
 
 .btn-delete-view {
-    background-color: base.$clr-pink-200;
-    padding: base.$spacer1 calc(base.$spacer1 * 1.5);
-    text-decoration: none;
-    border: none;
-    border-radius: 24px;
-    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
+  background-color: base.$clr-pink-200;
+  padding: base.$spacer1 calc(base.$spacer1 * 1.5);
+  text-decoration: none;
+  border: none;
+  border-radius: 24px;
+  @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+  }
 }
 
 .btn-mark {
-    background-color: base.$clr-blue-400;
-    padding: 1rem;
-    border-radius: 24px;
-    border: none;
-    @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
+  background-color: base.$clr-blue-400;
+  padding: 1rem;
+  border-radius: 24px;
+  border: none;
+  @include utils.fonts(base.$clr-white-100, base.$fs-16, 700);
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+  }
 }
 
 .nav-view-btns {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: calc(base.$spacer1 * 0.75);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: calc(base.$spacer1 * 0.75);
 
-    @include utils.mQ(40rem) {
-        flex: 1 1 70%;
-        justify-content: flex-end;
-        gap: base.$spacer1;
-    }
+  @include utils.mQ(40rem) {
+    flex: 1 1 70%;
+    justify-content: flex-end;
+    gap: base.$spacer1;
+  }
 }
 
 .btn-delete-close {
-    background-color: base.$clr-black-100;
-    border: transparent;
-    padding: calc(base.$spacer1 * 0.45);
-    border-radius: 5px;
-    align-self: flex-end;
+  background-color: base.$clr-black-100;
+  border: transparent;
+  padding: calc(base.$spacer1 * 0.45);
+  border-radius: 5px;
+  align-self: flex-end;
 }
 
 .btn-delete {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 
-    &:hover,
-    &:focus {
-        outline-offset: -0.5em;
-        outline: dashed base.$clr-pink-300 1px;
-    }
+  &:hover,
+  &:focus {
+    outline-offset: -0.5em;
+    outline: dashed base.$clr-pink-300 1px;
+  }
 }
 
 .btn-overlay-close {
-    opacity: 0;
+  opacity: 0;
 
-    &::before {
-        display: block;
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        cursor: pointer;
-    }
-
+  &::before {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
 }
 
 .btn-logout {
-    color: base.$clr-white-100;
+  color: base.$clr-white-100;
 }
 
 .dark-mode {
-    .btn-return {
-        color: base.$clr-white-100;
-        background-color: base.$clr-black-200;
+  .btn-return {
+    color: base.$clr-white-100;
+    background-color: base.$clr-black-200;
+  }
+
+  .btn-delete {
+    background-color: inherit;
+
+    &:hover,
+    &:focus {
+      outline: dashed base.$clr-white-100;
     }
+  }
 
-    .btn-delete {
-        background-color: inherit;
+  .btn-delete-close {
+    background-color: base.$clr-blue-100;
+    color: base.$clr-white-200;
+  }
 
-        &:hover,
-        &:focus {
-            outline: dashed base.$clr-white-100;
-        }
-    }
+  .btn-add-item {
+    background-color: base.$clr-black-400;
+    color: base.$clr-white-100;
+  }
 
-    .btn-delete-close {
-        background-color: base.$clr-blue-100;
-        color: base.$clr-white-200;
-    }
+  .btn-edit {
+    background-color: base.$clr-black-700;
+    color: base.$clr-white-100;
+  }
 
-    .btn-add-item {
-        background-color: base.$clr-black-400;
-        color: base.$clr-white-100;
-    }
+  .btn-cancel {
+    background-color: base.$clr-black-400;
+    color: base.$clr-white-100;
+  }
 
-    .btn-edit {
-        background-color: base.$clr-black-700;
-        color: base.$clr-white-100;
-    }
-
-    .btn-cancel {
-        background-color: base.$clr-black-400;
-        color: base.$clr-white-100;
-    }
-
-
-    .btn-new-invoice {
-        color: base.$clr-white-100;
-    }
+  .btn-new-invoice {
+    color: base.$clr-white-100;
+  }
 }
