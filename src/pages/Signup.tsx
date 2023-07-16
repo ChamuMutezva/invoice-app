@@ -24,6 +24,21 @@ function Signup() {
           Go back
         </button>
         <h3>Sign up</h3>
+        <h4>Rules for creating credentials</h4>
+        <ol className="rules">
+          <li className="rule-item">
+            The email doesn't have to be your real one , any unique one will do.
+            Even this one can do{" "}
+            <span className="rule-email">fakeem@gmail.com</span>
+          </li>
+          <li className="rule-item">
+            If the email exists in our storage, it will be rejected
+          </li>
+          <li className="rule-item">
+            Password should contain at least a Capital letter, small letter ,
+            number and any speacial character
+          </li>
+        </ol>
         <div className="flex login-container">
           <label htmlFor="email">Email:</label>
           <input

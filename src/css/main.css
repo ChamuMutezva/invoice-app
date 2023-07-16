@@ -196,6 +196,21 @@ select {
   }
 }
 
+.btn-link-signin {
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid hsl(252, 94%, 67%);
+  color: hsl(0, 100%, 80%);
+  padding: 0px;
+  margin: 0;
+  outline: none;
+  font-weight: 500;
+  background-color: inherit;
+}
+.btn-link-signin:hover, .btn-link-signin:focus {
+  border-bottom: 2px dashed hsl(0, 100%, 80%);
+}
+
 .btn-link-home {
   background-color: hsl(233, 31%, 17%);
   padding: 1rem;
@@ -282,7 +297,7 @@ select {
 
 .btn-login {
   padding: 0.5rem 4rem;
-  min-width: 13rem;
+  width: 100%;
   border: 2px solid transparent;
   background-color: hsl(231, 75%, 93%);
   outline: none;
@@ -1277,7 +1292,7 @@ span.container-img {
 }
 
 .fieldset-container {
-  margin-block-end: 8rem;
+  margin-block-end: 4rem;
 }
 
 .edit-title {
@@ -1372,10 +1387,10 @@ span.container-img {
   font-weight: 700;
   font-size: 0.9375rem;
   /*
-  @include utils.mQ(45rem) {
-      max-width: 12rem;
-  }
-  */
+    @include utils.mQ(45rem) {
+        max-width: 12rem;
+    }
+    */
 }
 
 .item-total:read-only {
@@ -1439,23 +1454,8 @@ span.container-img {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  width: 100%;
   background-color: hsl(0, 0%, 100%);
-  bottom: 0;
   box-shadow: 0px -20px 20px 1px hsl(231, 23%, 61%);
-}
-@media screen and (min-width: 40rem) {
-  .footer {
-    width: 80%;
-  }
-}
-@media screen and (min-width: 64rem) {
-  .footer {
-    width: 50%;
-    left: 84px;
-  }
 }
 
 .footer-edit {
@@ -1635,12 +1635,14 @@ span.container-img {
 .landing-page {
   gap: 2.5rem;
   text-align: center;
+  padding-inline: 1rem;
 }
 
 .login,
 .signup {
   gap: 2rem;
   padding-block: 6rem;
+  max-width: 24rem;
 }
 
 .test-data {
@@ -1651,4 +1653,18 @@ span.container-img {
 .container-signup,
 .container-login {
   flex-direction: column;
+}
+
+.rule-item {
+  list-style: decimal;
+}
+
+.container-signup,
+.container-login {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.container {
+  justify-content: center;
 }

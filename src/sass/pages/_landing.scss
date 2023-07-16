@@ -13,6 +13,7 @@
 .landing-page {
   gap: 2.5rem;
   text-align: center;
+  padding-inline: base.$spacer1;
 }
 
 .login,
@@ -31,7 +32,15 @@
 .container-login {
   flex-direction: column;
 }
+.rule-item {
+	list-style: decimal;
+}
+.container-signup,
+.container-login {
+  width: 100%;
+  max-width: 24rem;
+}
 
 .container {
-	justify-content: center;
+  justify-content: center;
 }
