@@ -24,6 +24,8 @@ Users should be able to:
 
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
+- create login details
+- sign in to proceed
 - Create, read, update, and delete invoices
 - Receive form validations when trying to create/edit an invoice
 - Save draft invoices, and mark pending invoices as paid
@@ -32,10 +34,13 @@ Users should be able to:
 - **Bonus**: full-stack app
 
 ### Screenshot
-
+- **Invoice list page**
 ![Homepage](src/assets/screenshots/homepage.png)
+- **View Invoice details page**
 ![View invoice page](src/assets/screenshots/viewInvoice.png)
+- **Edit Invoice page**
 ![Edit invoice page](src/assets/screenshots/editinvoice.png)
+- **New Invoice page**
 ![New invoice page](src/assets/screenshots/newinvoice.png)
 
 ### Links
