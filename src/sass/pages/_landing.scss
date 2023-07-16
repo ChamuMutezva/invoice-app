@@ -21,6 +21,7 @@
   gap: 2rem;
   padding-block: 6rem;
   max-width: 24rem;
+  padding-inline: 1rem;
 }
 
 .test-data {
@@ -31,9 +32,14 @@
 .container-signup,
 .container-login {
   flex-direction: column;
+  width: 100%;
+  max-width: 24rem;
 }
 .rule-item {
-	list-style: decimal;
+  list-style: decimal;
+}
+.rule-item-email {
+  color: base.$clr-pink-200;
 }
 .container-signup,
 .container-login {

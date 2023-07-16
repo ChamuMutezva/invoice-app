@@ -29,7 +29,7 @@ function Signup() {
           <li className="rule-item">
             The email doesn't have to be your real one , any unique one will do.
             Even this one can do{" "}
-            <span className="rule-email">fakeem@gmail.com</span>
+            <span className="rule-item-email">fakeem@gmail.com</span>
           </li>
           <li className="rule-item">
             If the email exists in our storage, it will be rejected

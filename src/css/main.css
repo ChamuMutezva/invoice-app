@@ -789,6 +789,7 @@ input[type=date]::before {
   outline: none;
   border: 1px solid transparent;
   background-color: hsl(231, 75%, 93%);
+  width: 100%;
 }
 
 .header {
@@ -1643,6 +1644,7 @@ span.container-img {
   gap: 2rem;
   padding-block: 6rem;
   max-width: 24rem;
+  padding-inline: 1rem;
 }
 
 .test-data {
@@ -1653,10 +1655,16 @@ span.container-img {
 .container-signup,
 .container-login {
   flex-direction: column;
+  width: 100%;
+  max-width: 24rem;
 }
 
 .rule-item {
   list-style: decimal;
+}
+
+.rule-item-email {
+  color: hsl(0, 80%, 63%);
 }
 
 .container-signup,
