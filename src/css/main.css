@@ -938,7 +938,7 @@ input[type=date]::before {
 .filter-new {
   width: 100%;
 }
-@media screen and (min-width: 22.5rem) {
+@media screen and (min-width: 24rem) {
   .filter-new {
     flex: 1 1 50%;
   }
@@ -952,7 +952,7 @@ input[type=date]::before {
   flex-direction: column;
   align-items: baseline;
 }
-@media screen and (min-width: 22.5rem) {
+@media screen and (min-width: 24rem) {
   .summary {
     flex-direction: row;
   }

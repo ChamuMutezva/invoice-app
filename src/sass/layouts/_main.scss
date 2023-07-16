@@ -44,7 +44,7 @@
 .filter-new {
     width: 100%;
 
-    @include utils.mQ(22.5rem) {
+    @include utils.mQ(24rem) {
         flex: 1 1 50%;
     }
 }
@@ -57,7 +57,7 @@
     flex-direction: column;
     align-items: baseline;
 
-    @include utils.mQ(22.5rem) {
+    @include utils.mQ(24rem) {
         flex-direction: row;
     }
 }
