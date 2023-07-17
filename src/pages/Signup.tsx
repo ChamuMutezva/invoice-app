@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Tooltip } from "react-tooltip";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 
@@ -24,21 +25,28 @@ function Signup() {
           Go back
         </button>
         <h3>Sign up</h3>
-        <h4>Rules for creating credentials</h4>
-        <ol className="rules">
-          <li className="rule-item">
-            The email doesn't have to be your real one , any unique one will do.
-            Even this one can do{" "}
-            <span className="rule-item-email">fakeem@gmail.com</span>
-          </li>
-          <li className="rule-item">
-            If the email exists in our storage, it will be rejected
-          </li>
-          <li className="rule-item">
-            Password should contain at least a Capital letter, small letter ,
-            number and any speacial character
-          </li>
-        </ol>
+        <Tooltip anchorSelect="#tooltip" place="top">
+          <ol className="rules">
+            <li className="rule-item">
+              The email doesn't have to be your real one
+            </li>            
+            <li className="rule-item">
+              Email must be unique
+            </li>
+            <li className="rule-item">
+              Password should contain at least:
+              <ul>
+                <li>Capital letter</li>
+                <li>Small letter</li>
+                <li>Number</li>
+                <li>Special character</li>
+              </ul>
+            </li>
+          </ol>
+        </Tooltip>
+        <a id="tooltip" href="">
+          Rules for creating credentials
+        </a>
         <div className="flex login-container">
           <label htmlFor="email">Email:</label>
           <input

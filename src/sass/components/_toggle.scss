@@ -16,6 +16,9 @@
         outline: dashed currentColor 1px;
         outline-offset: -0.65em;
     }
+    @include utils.mQ(64rem) {    
+        margin-inline: calc(base.$spacer2 * 3);
+      }
 }
 
 .theme-img {
@@ -32,23 +35,8 @@
     border-radius: 50%;
     background-color: #151619;
     transition: transform .25s;
-
-    @include utils.mQ(64rem) {
-        transform: rotate(180deg);
-    }
 }
 
 .hide-theme-img {
     display: none;
-}
-
-
-
-.light-mode {
-    .check {
-        transform: rotate(10deg);
-        @include utils.mQ(64rem) {
-            transform: rotate(280deg);
-        }
-    }
 }

@@ -159,12 +159,13 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: hsl(0, 0%, 100%);
+  color: hsl(231, 28%, 7%);
+  background-color: hsl(0, 0%, 100%);
+  padding: 0.5rem 1rem;
 }
 @media screen and (min-width: 64rem) {
   .btn-profile {
-    transform: rotate(200deg);
-    padding-block: 0.5rem;
+    padding: 0.5rem 2.5rem;
   }
 }
 
@@ -455,6 +456,11 @@ select {
   outline: dashed currentColor 1px;
   outline-offset: -0.65em;
 }
+@media screen and (min-width: 64rem) {
+  .btn-theme-control {
+    margin-inline: 3.6rem;
+  }
+}
 
 .theme-img {
   transform: scale(1.5);
@@ -471,23 +477,9 @@ select {
   background-color: #151619;
   transition: transform 0.25s;
 }
-@media screen and (min-width: 64rem) {
-  .check {
-    transform: rotate(180deg);
-  }
-}
 
 .hide-theme-img {
   display: none;
-}
-
-.light-mode .check {
-  transform: rotate(10deg);
-}
-@media screen and (min-width: 64rem) {
-  .light-mode .check {
-    transform: rotate(280deg);
-  }
 }
 
 .cards {
@@ -798,17 +790,17 @@ input[type=date]::before {
   position: fixed;
   width: 100%;
   z-index: 100;
-}
-@media screen and (min-width: 64rem) {
-  .header {
-    transform-origin: top left;
-    left: 6.5rem;
-    top: 0;
-    transform: rotate(90deg);
-    width: 100vh;
-    border-radius: 20px 20px 0 0;
-    overflow: hidden;
-  }
+  /*
+    @include utils.mQ(64rem) {
+      transform-origin: top left;
+      left: 6.5rem;
+      top: 0;
+      transform: rotate(90deg);
+      width: 100vh;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+    }
+    */
 }
 
 .controls {
@@ -818,6 +810,7 @@ input[type=date]::before {
 
 .profile {
   padding: 0.5rem;
+  flex: 1 1 25%;
   position: relative;
   display: flex;
   justify-content: center;
@@ -837,6 +830,10 @@ input[type=date]::before {
     padding-inline: 1rem;
     padding-block: 0;
   }
+}
+
+.profile-email {
+  color: hsl(240, 27%, 98%);
 }
 
 .logo-container {
@@ -902,7 +899,6 @@ input[type=date]::before {
 }
 @media screen and (min-width: 64rem) {
   .main {
-    margin-block: 0;
     padding-block: 3.6rem;
   }
 }
@@ -1645,6 +1641,12 @@ span.container-img {
   padding-block: 6rem;
   max-width: 24rem;
   padding-inline: 1rem;
+}
+@media screen and (min-width: 64rem) {
+  .login,
+  .signup {
+    padding-block: 7.5rem;
+  }
 }
 
 .test-data {

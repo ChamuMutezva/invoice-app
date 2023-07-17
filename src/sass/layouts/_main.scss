@@ -1,76 +1,73 @@
-@use '../base';
-@use '../utils';
+@use "../base";
+@use "../utils";
 
 .main {
-    margin-inline: calc(base.$spacer1 * 1.5);
-    margin-block: calc(base.$spacer1 * 6);
-    max-width: 45.6rem;
+  margin-inline: calc(base.$spacer1 * 1.5);
+  margin-block: calc(base.$spacer1 * 6);
+  max-width: 45.6rem;
 
-    @include utils.mQ(40rem) {
-        margin-inline: calc(base.$spacer1 * 3);
-    }
+  @include utils.mQ(40rem) {
+    margin-inline: calc(base.$spacer1 * 3);
+  }
 
-    @include utils.mQ(48rem) {
-        margin-inline: auto;
-    }
+  @include utils.mQ(48rem) {
+    margin-inline: auto;
+  }
 
-    @include utils.mQ(64rem) {
-        margin-block: 0;
-        padding-block: calc(base.$spacer2 * 3)
-    }
+  @include utils.mQ(64rem) {    
+    padding-block: calc(base.$spacer2 * 3);
+  }
 }
 
 .main-edit {
-    margin-block: calc(base.$spacer1 * 1.5);
+  margin-block: calc(base.$spacer1 * 1.5);
 }
 
 .summary-title {
-    @include utils.fonts(base.$clr-black-100, base.$fs-24, 700);
+  @include utils.fonts(base.$clr-black-100, base.$fs-24, 700);
 
-    @include utils.mQ(40rem) {
-        font-size: base.$fs-36;
-    }
+  @include utils.mQ(40rem) {
+    font-size: base.$fs-36;
+  }
 }
 
 .invoice-total-num {
-    @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
+  @include utils.fonts(base.$clr-blue-200, base.$fs-13, 500);
 }
 
 .filter-label {
-    @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
-    line-height: 1;
+  @include utils.fonts(base.$clr-black-100, base.$fs-16, 700);
+  line-height: 1;
 }
 
 .filter-new {
-    width: 100%;
+  width: 100%;
 
-    @include utils.mQ(24rem) {
-        flex: 1 1 50%;
-    }
+  @include utils.mQ(24rem) {
+    flex: 1 1 50%;
+  }
 }
 
 .wrapper-intro {
-    padding-block: 2rem;
+  padding-block: 2rem;
 }
 
 .summary {
-    flex-direction: column;
-    align-items: baseline;
+  flex-direction: column;
+  align-items: baseline;
 
-    @include utils.mQ(24rem) {
-        flex-direction: row;
-    }
+  @include utils.mQ(24rem) {
+    flex-direction: row;
+  }
 }
 
 .summary-headings {
-    flex: 1 1 50%;
+  flex: 1 1 50%;
 }
 
 .dark-mode {
-
-    .summary-title,
-    .filter-label {
-        color: base.$clr-white-100;
-    }
-
+  .summary-title,
+  .filter-label {
+    color: base.$clr-white-100;
+  }
 }

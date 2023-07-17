@@ -22,6 +22,9 @@
   padding-block: 6rem;
   max-width: 24rem;
   padding-inline: 1rem;
+  @include utils.mQ(64rem) {    
+    padding-block: 7.5rem;
+  }
 }
 
 .test-data {

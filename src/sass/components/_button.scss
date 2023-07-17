@@ -19,11 +19,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: base.$clr-white-100;
+  color: base.$clr-black-100;
+  background-color: base.$clr-white-100;
+  padding: 0.5rem 1rem;
 
   @include utils.mQ(64rem) {
-    transform: rotate(200deg);
-    padding-block: 0.5rem;
+    padding: 0.5rem 2.5rem;
   }
 }
 
@@ -66,7 +67,7 @@
 
   &:hover,
   &:focus {
-    border-bottom: 2px dashed base.$clr-pink-300;   
+    border-bottom: 2px dashed base.$clr-pink-300;
   }
 }
 
