@@ -35,7 +35,7 @@ function Login() {
           className="btn  btn-return"
           onClick={() => navigate(-1)}
         >
-          Go back
+          Return to <span>Landing page</span>
         </button>
         <h3>Login</h3>
 

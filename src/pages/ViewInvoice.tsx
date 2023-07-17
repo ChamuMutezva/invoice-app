@@ -133,6 +133,7 @@ function ViewInvoice() {
 				>
 					<PreviousPage
 						title={`Complete invoice details of ${data.clientName}`}
+						page={`invoices list page`}
 					/>
 
 					<div className="main-container">

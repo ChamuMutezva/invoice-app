@@ -1665,6 +1665,10 @@ span.container-img {
   list-style: decimal;
 }
 
+.pass-rule-item {
+  list-style: circle;
+}
+
 .rule-item-email {
   color: hsl(0, 80%, 63%);
 }
@@ -1673,6 +1677,10 @@ span.container-img {
 .container-login {
   width: 100%;
   max-width: 24rem;
+}
+
+.tooltip {
+  color: hsl(0, 80%, 63%);
 }
 
 .container {

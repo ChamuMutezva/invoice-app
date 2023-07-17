@@ -22,7 +22,7 @@
   padding-block: 6rem;
   max-width: 24rem;
   padding-inline: 1rem;
-  @include utils.mQ(64rem) {    
+  @include utils.mQ(64rem) {
     padding-block: 7.5rem;
   }
 }
@@ -41,6 +41,9 @@
 .rule-item {
   list-style: decimal;
 }
+.pass-rule-item {
+  list-style: circle;
+}
 .rule-item-email {
   color: base.$clr-pink-200;
 }
@@ -48,6 +51,10 @@
 .container-login {
   width: 100%;
   max-width: 24rem;
+}
+
+.tooltip {
+  color: base.$clr-pink-200;
 }
 
 .container {

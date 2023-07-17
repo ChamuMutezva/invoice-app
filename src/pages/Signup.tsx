@@ -22,29 +22,27 @@ function Signup() {
           className="btn flex btn-return"
           onClick={() => navigate(-1)}
         >
-          Go back
+          Return to Landing page
         </button>
         <h3>Sign up</h3>
-        <Tooltip anchorSelect="#tooltip" place="top">
+        <Tooltip anchorSelect="#tooltip" place="bottom-end">
           <ol className="rules">
             <li className="rule-item">
               The email doesn't have to be your real one
-            </li>            
-            <li className="rule-item">
-              Email must be unique
             </li>
+            <li className="rule-item">Email must be unique</li>
             <li className="rule-item">
               Password should contain at least:
               <ul>
-                <li>Capital letter</li>
-                <li>Small letter</li>
-                <li>Number</li>
-                <li>Special character</li>
+                <li className="pass-rule-item">Capital letter</li>
+                <li className="pass-rule-item">Small letter</li>
+                <li className="pass-rule-item">Number</li>
+                <li className="pass-rule-item">Special character</li>
               </ul>
             </li>
           </ol>
         </Tooltip>
-        <a id="tooltip" href="">
+        <a href="#" className="tooltip" data-tooltip-id="tooltip">
           Rules for creating credentials
         </a>
         <div className="flex login-container">
@@ -53,6 +51,7 @@ function Signup() {
             type="email"
             value={email}
             className="input-login"
+            aria-describedby="error"
             onChange={(evt) => setEmail(evt.target.value)}
           />
         </div>
@@ -62,13 +61,18 @@ function Signup() {
             type="password"
             value={password}
             className="input-login"
+            aria-describedby="error"
             onChange={(evt) => setPassword(evt.target.value)}
           />
         </div>
         <button disabled={isLoading} className="btn btn-login">
           Sign up
         </button>
-        {error && <div className="error">{error}</div>}
+        {error && (
+          <div id="error" className="error">
+            {error}
+          </div>
+        )}
       </form>
     </div>
   );
