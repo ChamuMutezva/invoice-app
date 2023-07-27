@@ -42,7 +42,7 @@ function Signup() {
             </li>
           </ol>
         </Tooltip>
-        <a href="#" className="tooltip" data-tooltip-id="tooltip">
+        <a href="#" className="tooltip" id="tooltip">
           Rules for creating credentials
         </a>
         <div className="flex login-container">
